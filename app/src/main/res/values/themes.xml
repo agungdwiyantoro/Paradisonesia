@@ -1,0 +1,254 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Paradisonesia" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_0063a7</item>
+        <item name="colorPrimaryVariant">@color/blue_0063a7</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/backgroundGrey</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="badgeStyle">@style/CustomBadge</item>
+    </style>
+
+    <!--    Style For Badge     -->
+    <style name="CustomBadge" parent="@style/Widget.MaterialComponents.Badge">
+        <item name="backgroundColor">@color/yellow_ffa216</item>
+    </style>
+
+    <!--    Style For Dialog    -->
+    <style name="DialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="dialogCornerRadius">@dimen/_16sdp</item>
+        <item name="android:padding">@dimen/_8sdp</item>
+    </style>
+
+    <!--    Style For Image     -->
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Shape.Rounded.10" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
+    
+    <!--    Style For Button    -->
+    <style name="Button.Filled.Blue.Rounded" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">@dimen/_20sdp</item>
+        <item name="backgroundTint">@color/blue_0063a7</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Button.Filled.Yellow.Rounded" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">@dimen/_20sdp</item>
+        <item name="backgroundTint">@color/yellow_ffa216</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Button.Stroke.Blue.Rounded" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">@dimen/_20sdp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/blue_0063a7</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="strokeColor">@color/blue_0063a7</item>
+        <item name="strokeWidth">@dimen/_1sdp</item>
+    </style>
+
+    <!--    Style For Input -->
+    <style name="EditText" parent="Text.Medium.Light">
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:singleLine">true</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorControlNormal">@color/backgroundGrey</item>
+    </style>
+
+    <style name="InputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="hintTextColor">@color/black</item>
+    </style>
+
+    <!--    Style For Search    -->
+    <style name="TextInputLayoutAppearance.Search" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="endIconTint">@color/grey_strong</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="hintEnabled">false</item>
+        <item name="hintTextColor">@color/grey</item>
+        <item name="android:background">@drawable/background_searchbox_rounded_corner</item>
+        <item name="startIconDrawable">@drawable/ic_search</item>
+        <item name="startIconTint">@color/grey_strong</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+
+    <!--    Style For Filter Category   -->
+    <style name="Chip.Category.Filter" parent="">
+        <item name="android:paddingStart">@dimen/_8sdp</item>
+        <item name="android:paddingEnd">@dimen/_4sdp</item>
+        <item name="android:paddingTop">@dimen/_8sdp</item>
+        <item name="android:paddingBottom">@dimen/_8sdp</item>
+        <item name="android:layout_margin">@dimen/_1sdp</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!--    Style Bottom Sheet  -->
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_top_corner</item>
+    </style>
+
+    <!--    Style For Text  -->
+    <style name="Text.Small" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
+    <style name="Text.Medium" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="Text.Large" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+
+    <style name="Text.Big" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="Text.Small.White" parent="Text.Small">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Medium.White" parent="Text.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Large.White" parent="Text.Large">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Big.White" parent="Text.Big">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Small.Light" parent="Text.Small">
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="Text.Medium.Light" parent="Text.Medium">
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="Text.Large.Light" parent="Text.Large">
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="Text.Big.Light" parent="Text.Big">
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="Text.Small.Light.Blue" parent="Text.Small.Light">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Medium.Light.Blue" parent="Text.Medium.Light">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Large.Light.Blue" parent="Text.Large.Light">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Big.Light.Blue" parent="Text.Big.Light">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Small.Medium" parent="Text.Small">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Text.Medium.Medium" parent="Text.Medium">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Text.Large.Medium" parent="Text.Large">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Text.Big.Medium" parent="Text.Big">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Text.Small.Medium.Blue" parent="Text.Small.Medium">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Medium.Medium.Blue" parent="Text.Medium.Medium">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Large.Medium.Blue" parent="Text.Large.Medium">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Big.Medium.Blue" parent="Text.Big.Medium">
+        <item name="android:textColor">@color/blue_0063a7</item>
+    </style>
+
+    <style name="Text.Small.Medium.White" parent="Text.Small.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Medium.Medium.White" parent="Text.Medium.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Large.Medium.White" parent="Text.Large.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Big.Medium.White" parent="Text.Big.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Small.Bold" parent="Text.Small">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="Text.Medium.Bold" parent="Text.Medium">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="Text.Large.Bold" parent="Text.Large">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="Text.Big.Bold" parent="Text.Big">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="Text.Small.Bold.White" parent="Text.Small.Bold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Medium.Bold.White" parent="Text.Medium.Bold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Large.Bold.White" parent="Text.Large.Bold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Big.Bold.White" parent="Text.Big.Bold">
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

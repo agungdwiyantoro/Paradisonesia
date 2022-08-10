@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.fragments.inbox.InboxFragment">
+
+    <ViewFlipper
+        android:id="@+id/vf_inbox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Inbox" />
+
+        <include
+            android:id="@+id/included_non_login"
+            layout="@layout/layout_non_login" />
+    </ViewFlipper>
+
+</FrameLayout>

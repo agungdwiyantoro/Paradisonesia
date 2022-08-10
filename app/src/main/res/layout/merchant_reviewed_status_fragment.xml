@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.fragments.merchant_reviewed_status.MerchantReviewedStatusFragment">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/layout_appbar" />
+
+    <ViewFlipper
+        android:id="@+id/vf_merchant_submission_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_review"
+            layout="@layout/layout_merchant_submission_review" />
+
+        <include
+            android:id="@+id/layout_rejected"
+            layout="@layout/layout_merchant_submission_rejected" />
+
+        <include
+            android:id="@+id/layout_accepted"
+            layout="@layout/layout_merchant_submission_accepted" />
+    </ViewFlipper>
+</androidx.appcompat.widget.LinearLayoutCompat>

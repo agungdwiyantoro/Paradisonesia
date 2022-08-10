@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeCustomerFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/label_home" />
+    <item
+        android:id="@+id/bookingFragment"
+        android:icon="@drawable/ic_booking"
+        android:title="@string/label_booking" />
+    <item
+        android:id="@+id/inboxFragment"
+        android:icon="@drawable/ic_inbox"
+        android:title="@string/label_inbox" />
+    <item
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/ic_account"
+        android:title="@string/label_account" />
+</menu>
+
+

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.fragments.merchant_register.MerchantRegisterFragment">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/layout_appbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_8sdp">
+
+                <TextView
+                    style="@style/Text.Small.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/label_fill_data_forms_merchant" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_merchant_name"
+                    style="@style/InputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_merchant_name"
+                        style="@style/EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/label_merchant_name" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_merchant_address"
+                    style="@style/InputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_merchant_address"
+                        style="@style/EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/merchant_address" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Text.Medium.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_identity_card_mandatory" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_identity_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/backgroundGrey"
+                        android:src="@drawable/ic_photo"
+                        app:shapeAppearanceOverlay="@style/Shape.Rounded.10" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/black" />
+
+                    <TextView
+                        style="@style/Text.Medium.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="NPWP" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_npwp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/backgroundGrey"
+                        android:src="@drawable/ic_photo"
+                        app:shapeAppearanceOverlay="@style/Shape.Rounded.10" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/black" />
+
+                    <TextView
+                        style="@style/Text.Medium.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="SIUP" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_siup"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/backgroundGrey"
+                        android:src="@drawable/ic_photo"
+                        app:shapeAppearanceOverlay="@style/Shape.Rounded.10" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@color/black" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <TextView
+                    android:id="@+id/tv_legal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:gravity="center"
+                    android:text="@string/label_legal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_submit"
+                    style="@style/Button.Filled.Yellow.Rounded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_64sdp"
+                    android:text="@string/label_submit" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

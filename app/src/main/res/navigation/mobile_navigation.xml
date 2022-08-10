@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.devfutech.paradisonesia.presentation.SplashScreenFragment"
+        android:label="splash_screen_fragment"
+        tools:layout="@layout/splash_screen_fragment">
+
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeCustomerFragment"
+            app:destination="@id/homeCustomerFragment"
+            app:popUpTo="@id/homeCustomerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_dialog_messgae"
+        app:destination="@id/dialogMessageFragment" />
+
+    <dialog
+        android:id="@+id/dialogMessageFragment"
+        android:name="com.devfutech.paradisonesia.presentation.dialog.DialogMessageFragment"
+        android:label="dialog_message_fragment"
+        tools:layout="@layout/dialog_message_fragment">
+        <argument
+            android:name="body"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="animation"
+            app:argType="integer" />
+    </dialog>
+    <fragment
+        android:id="@+id/signinFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.signin.SigninFragment"
+        android:label="signin_fragment"
+        tools:layout="@layout/signin_fragment">
+        <action
+            android:id="@+id/action_signinFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_signinFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.signup.SignupFragment"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeCustomerFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragment"
+        android:label="@string/label_home"
+        tools:layout="@layout/home_customer_fragment">
+        <action
+            android:id="@+id/action_homeCustomerFragment_to_signinFragment"
+            app:destination="@id/signinFragment" />
+        <action
+            android:id="@+id/action_homeCustomerFragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment" />
+        <action
+            android:id="@+id/action_homeCustomerFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.booking.BookingFragment"
+        android:label="@string/label_booking"
+        tools:layout="@layout/booking_fragment" >
+        <action
+            android:id="@+id/action_bookingFragment_to_signinFragment"
+            app:destination="@id/signinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inboxFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.inbox.InboxFragment"
+        android:label="@string/label_inbox"
+        tools:layout="@layout/inbox_fragment" >
+        <action
+            android:id="@+id/action_inboxFragment_to_signinFragment"
+            app:destination="@id/signinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.account.AccountFragment"
+        android:label="@string/label_account"
+        tools:layout="@layout/account_fragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_emailVerificationFragment"
+            app:destination="@id/emailVerificationFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_merchantRegisterFragment"
+            app:destination="@id/merchantRegisterFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_merchantReviewedStatusFragment"
+            app:destination="@id/merchantReviewedStatusFragment"
+            app:popUpTo="@id/accountFragment"/>
+        <action
+            android:id="@+id/action_accountFragment_to_signinFragment"
+            app:destination="@id/signinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.forgot_password.ForgotPasswordFragment"
+        android:label="forgot_password_fragment"
+        tools:layout="@layout/forgot_password_fragment" />
+    <fragment
+        android:id="@+id/emailVerificationFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.email_verifivcation.EmailVerificationFragment"
+        android:label="email_verification_fragment"
+        tools:layout="@layout/email_verification_fragment" />
+    <fragment
+        android:id="@+id/merchantRegisterFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_register.MerchantRegisterFragment"
+        android:label="merchant_register_fragment"
+        tools:layout="@layout/merchant_register_fragment" />
+    <fragment
+        android:id="@+id/merchantReviewedStatusFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_reviewed_status.MerchantReviewedStatusFragment"
+        android:label="merchant_reviewed_status_fragment"
+        tools:layout="@layout/merchant_reviewed_status_fragment" >
+        <argument
+            android:name="status"
+            app:argType="com.devfutech.paradisonesia.domain.model.merchant.MerchantStatus"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment"
+        android:label="product_fragment"
+        tools:layout="@layout/product_fragment" />
+
+</navigation>

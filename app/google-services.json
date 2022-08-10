@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "985578882631",
+    "project_id": "paradisonesia-a3c51",
+    "storage_bucket": "paradisonesia-a3c51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985578882631:android:bfed0c9f291ac7f9231362",
+        "android_client_info": {
+          "package_name": "com.devfutech.paradisonesia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985578882631-fg76urtc9b8v6er76cr4ck4rsbd9m1gr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devfutech.paradisonesia",
+            "certificate_hash": "5fe19eea57ec0d5b3002d8593f120f3045aef045"
+          }
+        },
+        {
+          "client_id": "985578882631-qvqubd1nu29tnfhbe9tujfk4qpa5p9pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo72AwSZmWCFFhRQ8TiR-dcYUXXZPauM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985578882631-qvqubd1nu29tnfhbe9tujfk4qpa5p9pe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
