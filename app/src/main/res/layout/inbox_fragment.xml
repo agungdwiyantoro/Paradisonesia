@@ -20,6 +20,11 @@
         <include
             android:id="@+id/included_non_login"
             layout="@layout/layout_non_login" />
+
+        <include
+            android:id="@+id/included_empty_inbox"
+            layout="@layout/layout_empty_inbox"/>
+
     </ViewFlipper>
 
 </FrameLayout>
