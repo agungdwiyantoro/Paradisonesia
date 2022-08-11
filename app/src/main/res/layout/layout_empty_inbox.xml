@@ -16,20 +16,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        android:text="@string/label_cant_accessed" />
+        android:text="@string/you_dont_have_any_message_yet" />
 
     <TextView
         style="@style/Text.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/label_sub_title_cant_access" />
+        android:text="@string/your_message_will_appear" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_go_to_login_page"
-        style="@style/Button.Filled.Yellow.Rounded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:text="@string/label_go_to_login_page" />
 </androidx.appcompat.widget.LinearLayoutCompat>

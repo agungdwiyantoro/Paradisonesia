@@ -13,13 +13,13 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.devfutech.paradisonesia"
         minSdk = 21
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 2
         versionName = "1.1.0"
 
@@ -48,7 +48,7 @@ android {
 
     tasks {
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.jvmTarget = "11"
         }
     }
 
@@ -61,33 +61,33 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.31")
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.10")
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.fragment:fragment-ktx:1.3.6")
+    implementation("androidx.fragment:fragment-ktx:1.5.1")
 
     //Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     //Livedata
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
 
     // Room
-    implementation("androidx.room:room-runtime:2.3.0")
-    implementation("androidx.room:room-ktx:2.3.0")
-    kapt("androidx.room:room-compiler:2.3.0")
+    implementation("androidx.room:room-runtime:2.4.3")
+    implementation("androidx.room:room-ktx:2.4.3")
+    kapt("androidx.room:room-compiler:2.4.3")
 
     // Paging 3
-    implementation("androidx.paging:paging-runtime-ktx:3.0.1")
+    implementation("androidx.paging:paging-runtime-ktx:3.1.1")
 
     // Retrofit + GSON
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -98,14 +98,14 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
     //Firebase
-    implementation("com.google.firebase:firebase-analytics-ktx:19.0.2")
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.2.3")
-    implementation("com.google.firebase:firebase-auth-ktx:21.0.1")
-    implementation("com.google.firebase:firebase-perf-ktx:20.0.3")
-    implementation("com.google.firebase:firebase-messaging-ktx:22.0.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.2.12")
+    implementation("com.google.firebase:firebase-auth-ktx:21.0.7")
+    implementation("com.google.firebase:firebase-perf-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
 
     //Google Auth
-    implementation("com.google.android.gms:play-services-auth:19.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
 
     //Datetime
     implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")

@@ -78,4 +78,8 @@
     <string name="label_location_count">Location (%1$d)</string>
     <string name="label_search_city_or_product">Search city or product</string>
     <string name="label_rating">Rating</string>
+
+    <!-- Inbox -->
+    <string name="you_dont_have_any_message_yet">You don\'t have any message yet</string>
+    <string name="your_message_will_appear">Your message will appear here automatically</string>
 </resources>
