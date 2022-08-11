@@ -5,6 +5,58 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.booking.BookingFragment">
 
+    <TableLayout
+        android:id="@+id/tb_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_process"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/completed"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/canceled"/>
+
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/iv_booking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_ticket_booking_empty"
+        android:contentDescription="@string/cd_icon_booking_empty" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/you_dont_have_any_booking_yet"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_booking_will_appear"/>
+
+    <TextView
+        android:id="@+id/tv_selected_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/included_non_login"
+        layout="@layout/layout_non_login"
+        android:visibility="invisible"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--
     <ViewFlipper
         android:id="@+id/vf_booking"
         android:layout_width="match_parent"
@@ -22,4 +74,4 @@
             layout="@layout/layout_non_login" />
     </ViewFlipper>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+-->

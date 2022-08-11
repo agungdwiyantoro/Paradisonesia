@@ -8,7 +8,8 @@
     <ViewFlipper
         android:id="@+id/vf_inbox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="invisible">
 
         <TextView
             android:layout_width="match_parent"
@@ -21,10 +22,13 @@
             android:id="@+id/included_non_login"
             layout="@layout/layout_non_login" />
 
-        <include
-            android:id="@+id/included_empty_inbox"
-            layout="@layout/layout_empty_inbox"/>
+
 
     </ViewFlipper>
+
+    <include
+        android:id="@+id/included_empty_inbox"
+        layout="@layout/layout_empty_inbox"
+        android:visibility="invisible"/>
 
 </FrameLayout>

@@ -45,6 +45,7 @@ class InboxFragment : BaseFragment() {
     private fun setupView() {
         binding.apply {
             vfInbox.displayedChild = if (Firebase.auth.currentUser == null) 1 else 0
+            includedEmptyInbox.root.visibility = View.VISIBLE
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.devfutech.paradisonesia.R
@@ -11,6 +12,8 @@ import com.devfutech.paradisonesia.databinding.BookingFragmentBinding
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.android.material.tabs.TabLayout
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +33,7 @@ class BookingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView()
+       // setupView()
         setupAction()
     }
 
@@ -44,8 +47,14 @@ class BookingFragment : BaseFragment() {
 
     private fun setupView() {
         binding.apply {
-            vfBooking.displayedChild = if (Firebase.auth.currentUser == null) 1 else 0
+           // vfBooking.displayedChild = if (Firebase.auth.currentUser == null) 1 else 0
         }
+    }
+
+    private fun setupTabLayout(){
+        val selectedPosition = binding.tbLayout.selectedTabPosition
+        binding.tbLayout.addOnLayoutChangeListener(selectedPosition)
+
     }
 
 }

@@ -79,7 +79,15 @@
     <string name="label_search_city_or_product">Search city or product</string>
     <string name="label_rating">Rating</string>
 
-    <!-- Inbox -->
+    <!-- Inbox Fragment -->
     <string name="you_dont_have_any_message_yet">You don\'t have any message yet</string>
     <string name="your_message_will_appear">Your message will appear here automatically</string>
+
+    <!-- Booking Fragment -->
+    <string name="in_process">In Process</string>
+    <string name="completed">Completed</string>
+    <string name="canceled">Canceled</string>
+    <string name="you_dont_have_any_booking_yet">You don\'t have any booking yet</string>
+    <string name="your_booking_will_appear">Your bookings will appear here automatically</string>
+    <string name="cd_icon_booking_empty">Icon Booking Empty</string>
 </resources>
