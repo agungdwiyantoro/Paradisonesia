@@ -1,7 +1,10 @@
 package com.devfutech.paradisonesia.external.adapter
 
+import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -20,27 +23,29 @@ class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(POST_C
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Banner) {
             binding.apply {
-                ivBanner.load(ltrim(item.image.toString())) {
-                    crossfade(true)
-                    Timber.tag("ASSSX").d(item.image.toString())
-                    error(R.drawable.ic_image_not_available)
-                }
+            ivBanner.load(ltrim(item.image.toString())) {
+                crossfade(true)
+                Timber.tag("ASSSX").d(item.image.toString())
+                error(R.drawable.ic_image_not_available)
+            }
 
-                ivBanner.setOnClickListener{
-                    Timber.tag("Banner Adapter Link").d(item.title.toString())
-                }
+            ivBanner.setOnClickListener{
+                Timber.tag("Banner Adapter Link").d(item.title.toString())
+            }
+
 
                 /*
-                root.apply {
-                    setOnClickListener {
-                        findNavController().navigate(
-                            ShopFragmentDirections.actionShopFragmentToProductFragment(
-                                item
-                            )
+
+            root.apply {
+                setOnClickListener {
+                    findNavController().navigate(
+                        ShopFragmentDirections.actionShopFragmentToProductFragment(
+                            item
                         )
-                    }
+                    )
                 }
-                */
+            }
+            */
             }
         }
     }

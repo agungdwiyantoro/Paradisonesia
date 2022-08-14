@@ -53,7 +53,7 @@ class BookingFragment : BaseFragment() {
 
     private fun setupTabLayout(){
         val selectedPosition = binding.tbLayout.selectedTabPosition
-        binding.tbLayout.addOnLayoutChangeListener(selectedPosition)
+
 
     }
 
