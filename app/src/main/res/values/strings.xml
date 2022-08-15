@@ -90,4 +90,7 @@
     <string name="you_dont_have_any_booking_yet">You don\'t have any booking yet</string>
     <string name="your_booking_will_appear">Your bookings will appear here automatically</string>
     <string name="cd_icon_booking_empty">Icon Booking Empty</string>
+
+    <!-- Account Fragment -->
+    <string name="sign_out">Sign Out</string>
 </resources>

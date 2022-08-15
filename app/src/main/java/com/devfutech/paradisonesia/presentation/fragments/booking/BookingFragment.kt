@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.BookingFragmentBinding
+
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,8 +50,14 @@ class BookingFragment : BaseFragment() {
     }
 
     private fun setupTabLayout(){
-        val selectedPosition = binding.tbLayout.selectedTabPosition
-        binding.tbLayout.addOnLayoutChangeListener(selectedPosition)
+        binding.apply {
+          //  val fragmentList = arrayListOf(
+
+          //  )
+          //  vp2Viewpager.adapter = BookingAdapter(this, fragmentList)
+          //  TabLayoutMediator(tbLayout, vp2Viewpager) {_,_ ->}.attach()
+
+        }
 
     }
 

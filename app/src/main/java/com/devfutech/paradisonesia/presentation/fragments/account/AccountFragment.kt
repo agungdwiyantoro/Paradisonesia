@@ -16,6 +16,7 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.extension.toast
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,6 +84,11 @@ class AccountFragment : BaseFragment() {
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
             }
+
+            llSignOut.setOnClickListener(View.OnClickListener {
+                Firebase.auth.signOut()
+                findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
+            })
         }
     }
 
