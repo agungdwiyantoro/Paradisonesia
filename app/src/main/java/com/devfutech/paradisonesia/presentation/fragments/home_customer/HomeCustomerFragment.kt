@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
@@ -106,12 +107,27 @@ class HomeCustomerFragment : BaseFragment() {
                     is Resource.Success -> {
                         binding.vfBanner.displayedChild = 1
                         bannerAdapter.submitList(result.data)
-                        Timber.tag("HAXIMXXX").d(result.data?.get(0)?.image.toString())
+                        slideBanners(result.data!!.size)
+                        Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
                     }
                 }
             }
         }
     }
+
+    private fun slideBanners(bannerSize : Int){
+        var currentItem = binding.vpBanner.currentItem
+        lifecycleScope.launchWhenCreated {
+            while (true) {
+                delay(3000L)
+                if (currentItem == bannerSize) {
+                    currentItem = 0
+                }
+                binding.vpBanner.setCurrentItem(currentItem++, true)
+            }
+        }
+    }
+
 
     private fun setupAction() {
         binding.apply {
