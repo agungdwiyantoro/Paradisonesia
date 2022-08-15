@@ -6,6 +6,7 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +17,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class GoogleSignInModule {
-
 
     @Singleton
     @Provides
@@ -35,6 +35,7 @@ class GoogleSignInModule {
 
 
 
+    /*
     @Singleton
     @Provides
     fun provideSignInRequest(@ApplicationContext context: Context, googleSignInOptions: GoogleSignInOptions):
@@ -47,5 +48,7 @@ class GoogleSignInModule {
                 .build()
         )
 
+
+     */
 
 }

@@ -1,6 +1,5 @@
 package com.devfutech.paradisonesia.presentation.fragments.signin
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -30,27 +29,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
-
-import com.midtrans.sdk.corekit.BuildConfig.BASE_URL
-
 import com.midtrans.sdk.corekit.models.snap.TransactionResult
-
-import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
-
-import com.google.android.gms.common.internal.service.Common.CLIENT_KEY
 import com.midtrans.sdk.corekit.core.MidtransSDK
-
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import com.midtrans.sdk.corekit.models.BillingAddress
 import com.midtrans.sdk.corekit.models.CustomerDetails
-
 import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.models.ItemDetails
-import android.widget.Toast
+import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 @AndroidEntryPoint
@@ -66,6 +57,8 @@ class SigninFragment : BaseFragment() {
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
+
+    val firebaseAuth = FirebaseAuth.getInstance()
 
     @Inject
     lateinit var authPreference: AuthPreference
@@ -156,8 +149,8 @@ class SigninFragment : BaseFragment() {
                 resultLauncher.launch(googleSignInClient.signInIntent)
             }
             btnLogin.setOnClickListener {
-                //                loginRequest()
-                mPermissionResult.launch(Manifest.permission.READ_PHONE_STATE)
+                loginRequest()
+                //mPermissionResult.launch(Manifest.permission.READ_PHONE_STATE)
             }
 
             tvSignup.setOnClickListener {
@@ -325,14 +318,33 @@ class SigninFragment : BaseFragment() {
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            val account = completedTask.getResult(ApiException::class.java)
-            viewModel.firebaseAuthWithProvider(
-                idToken = account.idToken!!,
-                isGoogle = true
-            )
+            val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
+            if(account!=null) {
+                UpdateUI(account)
+                /*
+                viewModel.firebaseAuthWithProvider(
+                    idToken = account.idToken!!,
+                    isGoogle = true
+                )
+                 */
+                UpdateUI(account)
+            }
         } catch (e: ApiException) {
             binding.root.snackBar(e.message)
         }
+    }
+
+    private fun UpdateUI(account: GoogleSignInAccount){
+        val credential = GoogleAuthProvider.getCredential(account.idToken,null)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(OnCompleteListener {
+                task ->
+                if(task.isSuccessful){
+                    SavedPreference.setEmail(requireContext(), account.email.toString())
+                    SavedPreference.setUsername(requireContext(), account.displayName.toString())
+                    binding.root.snackBar("LOGIN SUCCESSFULL")
+                }
+            })
     }
 
 }

@@ -9,7 +9,7 @@ import java.net.SocketTimeoutException
 abstract class BaseViewModel : ViewModel() {
 
     fun onError(t: Throwable) {
-        Timber.e(t)
+        Timber.e("throwxx" + t)
     }
 
     fun defaultError(t: Throwable): String {
