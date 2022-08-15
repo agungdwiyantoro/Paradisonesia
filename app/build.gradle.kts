@@ -75,6 +75,7 @@ dependencies {
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation("com.google.firebase:firebase-auth:21.0.7")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     //Livedata
@@ -103,6 +104,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:21.0.7")
     implementation("com.google.firebase:firebase-perf-ktx:20.1.0")
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
+    implementation("com.google.firebase:firebase-bom:30.3.2")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.2.2")
 
     //Google Auth
     implementation("com.google.android.gms:play-services-auth:20.2.0")
