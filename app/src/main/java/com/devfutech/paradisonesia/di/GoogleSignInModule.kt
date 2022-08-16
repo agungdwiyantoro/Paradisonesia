@@ -32,9 +32,6 @@ class GoogleSignInModule {
             .requestIdToken(context.resources.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
-
-
     /*
     @Singleton
     @Provides
@@ -50,5 +47,4 @@ class GoogleSignInModule {
 
 
      */
-
 }

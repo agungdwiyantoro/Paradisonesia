@@ -16,9 +16,6 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.extension.toast
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,11 +25,10 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class AccountFragment : BaseFragment() {
 
-    lateinit var googleSignInClient: GoogleSignInClient
-
     private val binding: AccountFragmentBinding by lazy {
         AccountFragmentBinding.inflate(layoutInflater)
     }
+
     private val viewModel by viewModels<AccountViewModel>()
 
     override fun onCreateView(
@@ -90,9 +86,10 @@ class AccountFragment : BaseFragment() {
             }
 
             llSignOut.setOnClickListener({
-                //Firebase.auth.signOut()
-                googleSignInClient.signOut().addOnCompleteListener(){
+                Firebase.auth.signOut().also {
                     findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
+                }.also {
+                    requireContext().toast(getString(R.string.signed_out))
                 }
             })
         }
@@ -119,6 +116,6 @@ class AccountFragment : BaseFragment() {
         }
     }
 
-    
+
 
 }

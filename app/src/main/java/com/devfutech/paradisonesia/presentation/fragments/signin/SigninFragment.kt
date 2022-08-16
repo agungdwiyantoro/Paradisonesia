@@ -39,6 +39,7 @@ import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.models.ItemDetails
 import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
+import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -327,7 +328,6 @@ class SigninFragment : BaseFragment() {
                     isGoogle = true
                 )
                  */
-                UpdateUI(account)
             }
         } catch (e: ApiException) {
             binding.root.snackBar(e.message)
@@ -342,7 +342,10 @@ class SigninFragment : BaseFragment() {
                 if(task.isSuccessful){
                     SavedPreference.setEmail(requireContext(), account.email.toString())
                     SavedPreference.setUsername(requireContext(), account.displayName.toString())
-                    binding.root.snackBar("LOGIN SUCCESSFULL")
+                    requireContext().toast(getString(R.string.signed_in)).also {
+                        //findNavController().navigate(R.id.action_signinFragment_to_accountFragment)
+                        findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)
+                    }
                 }
             })
     }

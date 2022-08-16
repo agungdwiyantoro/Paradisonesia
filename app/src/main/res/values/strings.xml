@@ -93,4 +93,11 @@
 
     <!-- Account Fragment -->
     <string name="sign_out">Sign Out</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="sign_in">Sign In</string>
+    <string name="signed_in">Signed In</string>
+
+    <!-- Sign In Fragment -->
+    <string name="does_not_have_an_account">Doesn\'t have an account?</string>
+    <string name="register_here">Register here</string>
 </resources>
