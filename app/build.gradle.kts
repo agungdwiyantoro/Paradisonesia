@@ -13,13 +13,13 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 32
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.devfutech.paradisonesia"
         minSdk = 21
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 2
         versionName = "1.1.0"
 

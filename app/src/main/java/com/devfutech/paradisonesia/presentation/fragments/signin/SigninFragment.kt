@@ -322,12 +322,12 @@ class SigninFragment : BaseFragment() {
             val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
             if(account!=null) {
                 UpdateUI(account)
-                /*
+
                 viewModel.firebaseAuthWithProvider(
                     idToken = account.idToken!!,
                     isGoogle = true
                 )
-                 */
+
             }
         } catch (e: ApiException) {
             binding.root.snackBar(e.message)

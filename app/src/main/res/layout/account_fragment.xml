@@ -326,7 +326,8 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_weight="1"
-                            android:text="@string/sign_out" />
+                            android:text="@string/sign_out"
+                            android:textColor="@color/pale_red"/>
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="@dimen/_10sdp"
