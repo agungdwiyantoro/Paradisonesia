@@ -6,6 +6,7 @@ import com.devfutech.paradisonesia.domain.model.user.Customer
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -30,11 +31,11 @@ class SigninViewModel @Inject constructor(
         get() = _googleSignIn
 
     fun firebaseAuthWithProvider(idToken: String, isGoogle: Boolean) {
-        _googleSignIn.value = Resource.Loading()
+        //_googleSignIn.value = Resource.Loading()
         val credential = if (isGoogle) GoogleAuthProvider.getCredential(
             idToken,
             null
-        ) else FacebookAuthProvider.getCredential(idToken)
+        )  else FacebookAuthProvider.getCredential(idToken)
         Firebase.auth
             .signInWithCredential(credential)
             .addOnSuccessListener { task ->

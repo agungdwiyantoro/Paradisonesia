@@ -89,7 +89,7 @@ class AccountFragment : BaseFragment() {
                 Firebase.auth.signOut().also {
                     findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
                 }.also {
-                    requireContext().toast(getString(R.string.signed_out))
+                    requireContext().toast(getString(R.string.signed_out) + " " + Firebase.auth.currentUser)
                 }
             })
         }
@@ -98,7 +98,7 @@ class AccountFragment : BaseFragment() {
     private fun setupView() {
         binding.apply {
             vfAccount.displayedChild = if (Firebase.auth.currentUser == null) 1 else 0
-            appBar.tvTitle.text = resources.getString(R.string.label_account)
+            titleBar.tvTitle.text = resources.getString(R.string.label_account)
             Firebase.auth.currentUser?.let { account ->
                 ivProfile.load(account.photoUrl) {
                     crossfade(true)

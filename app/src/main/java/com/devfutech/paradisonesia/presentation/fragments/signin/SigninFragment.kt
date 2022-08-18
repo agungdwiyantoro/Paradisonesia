@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -39,7 +41,10 @@ import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.models.ItemDetails
 import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
+import com.devfutech.paradisonesia.external.utils.FileUtils.reloadFragment
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
+import com.devfutech.paradisonesia.presentation.MainActivity
+import com.devfutech.paradisonesia.presentation.fragments.account.AccountFragment
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -321,13 +326,17 @@ class SigninFragment : BaseFragment() {
         try {
             val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
             if(account!=null) {
-                UpdateUI(account)
-
+                //UpdateUI(account)
                 viewModel.firebaseAuthWithProvider(
                     idToken = account.idToken!!,
                     isGoogle = true
-                )
-
+                ).also {
+                    reloadFragment(parentFragmentManager.beginTransaction(), AccountFragment::class.java.newInstance())
+                }.also {
+                    requireContext().toast(resources.getString(R.string.signed_in))
+                }.also {
+                    findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)
+                }
             }
         } catch (e: ApiException) {
             binding.root.snackBar(e.message)
@@ -337,7 +346,7 @@ class SigninFragment : BaseFragment() {
     private fun UpdateUI(account: GoogleSignInAccount){
         val credential = GoogleAuthProvider.getCredential(account.idToken,null)
         firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(OnCompleteListener {
+            .addOnCompleteListener({
                 task ->
                 if(task.isSuccessful){
                     SavedPreference.setEmail(requireContext(), account.email.toString())
@@ -349,5 +358,4 @@ class SigninFragment : BaseFragment() {
                 }
             })
     }
-
 }

@@ -21,6 +21,9 @@ import android.net.Uri
 import android.os.Environment
 
 import android.webkit.MimeTypeMap
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import com.devfutech.paradisonesia.BuildConfig.DEBUG
 import timber.log.Timber
@@ -330,5 +333,11 @@ object FileUtils {
         currentDestination?.getAction(direction)?.run {
             navigate(direction)
         }
+    }
+
+    fun reloadFragment(fragmentTransaction: FragmentTransaction, fragment_replaced : Fragment){
+        fragmentTransaction.detach(fragment_replaced)
+        fragmentTransaction.attach(fragment_replaced)
+        fragmentTransaction.commit()
     }
 }

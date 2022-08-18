@@ -31,7 +31,7 @@ class BookingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // setupView()
+        setupView()
         setupAction()
     }
 
@@ -45,6 +45,7 @@ class BookingFragment : BaseFragment() {
 
     private fun setupView() {
         binding.apply {
+            titleBar.tvTitle.setText(resources.getString(R.string.label_booking))
            // vfBooking.displayedChild = if (Firebase.auth.currentUser == null) 1 else 0
         }
     }
