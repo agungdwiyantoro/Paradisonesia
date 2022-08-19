@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.devfutech.paradisonesia.BuildConfig
 import com.devfutech.paradisonesia.R
@@ -41,17 +42,13 @@ import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.models.ItemDetails
 import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
-import com.devfutech.paradisonesia.external.utils.FileUtils.reloadFragment
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
-import com.devfutech.paradisonesia.presentation.MainActivity
-import com.devfutech.paradisonesia.presentation.fragments.account.AccountFragment
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 
 @AndroidEntryPoint
-class SigninFragment : BaseFragment() {
+class SigninFragment : BaseFragment(){
 
     private val binding: SigninFragmentBinding by lazy {
         SigninFragmentBinding.inflate(layoutInflater)
@@ -331,8 +328,6 @@ class SigninFragment : BaseFragment() {
                     idToken = account.idToken!!,
                     isGoogle = true
                 ).also {
-                    reloadFragment(parentFragmentManager.beginTransaction(), AccountFragment::class.java.newInstance())
-                }.also {
                     requireContext().toast(resources.getString(R.string.signed_in))
                 }.also {
                     findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)

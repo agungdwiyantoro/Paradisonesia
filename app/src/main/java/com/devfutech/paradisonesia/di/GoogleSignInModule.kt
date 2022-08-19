@@ -2,11 +2,10 @@ package com.devfutech.paradisonesia.di
 
 import android.content.Context
 import com.devfutech.paradisonesia.R
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.Task
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

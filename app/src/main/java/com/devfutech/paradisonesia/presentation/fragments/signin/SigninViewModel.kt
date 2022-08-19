@@ -6,7 +6,6 @@ import com.devfutech.paradisonesia.domain.model.user.Customer
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +14,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,7 +55,7 @@ class SigninViewModel @Inject constructor(
     }
 
     fun signInAuth(email: String, password: String) {
-        _googleSignIn.value = Resource.Loading()
+        //_googleSignIn.value = Resource.Loading()
         Firebase.auth
             .signInWithEmailAndPassword(email, password)
             .addOnSuccessListener { task ->

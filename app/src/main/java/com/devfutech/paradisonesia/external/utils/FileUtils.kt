@@ -334,10 +334,4 @@ object FileUtils {
             navigate(direction)
         }
     }
-
-    fun reloadFragment(fragmentTransaction: FragmentTransaction, fragment_replaced : Fragment){
-        fragmentTransaction.detach(fragment_replaced)
-        fragmentTransaction.attach(fragment_replaced)
-        fragmentTransaction.commit()
-    }
 }
