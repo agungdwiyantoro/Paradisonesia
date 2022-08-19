@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "985578882631",
-    "project_id": "paradisonesia-a3c51",
-    "storage_bucket": "paradisonesia-a3c51.appspot.com"
+    "project_number": "372987563158",
+    "project_id": "paradisonesia-1660201508982",
+    "storage_bucket": "paradisonesia-1660201508982.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:985578882631:android:bfed0c9f291ac7f9231362",
+        "mobilesdk_app_id": "1:372987563158:android:f9a064b86c91a6681e06b7",
         "android_client_info": {
           "package_name": "com.devfutech.paradisonesia"
         }
       },
       "oauth_client": [
         {
-          "client_id": "985578882631-fg76urtc9b8v6er76cr4ck4rsbd9m1gr.apps.googleusercontent.com",
+          "client_id": "372987563158-2ifq6d4mlhkbhtdmgqmkttu97nrjafom.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.devfutech.paradisonesia",
-            "certificate_hash": "5fe19eea57ec0d5b3002d8593f120f3045aef045"
+            "certificate_hash": "698e05bf9496184daada2cc5572957a93262f746"
           }
         },
         {
-          "client_id": "985578882631-qvqubd1nu29tnfhbe9tujfk4qpa5p9pe.apps.googleusercontent.com",
+          "client_id": "372987563158-18ogp082q0nbjoiup79cllbccimcn89r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCo72AwSZmWCFFhRQ8TiR-dcYUXXZPauM0"
+          "current_key": "AIzaSyAXfMQEwXQY9YdyrKY7jVOVdFq7gxoirOY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "985578882631-qvqubd1nu29tnfhbe9tujfk4qpa5p9pe.apps.googleusercontent.com",
+              "client_id": "372987563158-18ogp082q0nbjoiup79cllbccimcn89r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

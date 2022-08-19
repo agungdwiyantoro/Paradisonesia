@@ -21,6 +21,10 @@ import android.net.Uri
 import android.os.Environment
 
 import android.webkit.MimeTypeMap
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
 import com.devfutech.paradisonesia.BuildConfig.DEBUG
 import timber.log.Timber
 import java.io.File
@@ -323,5 +327,11 @@ object FileUtils {
     fun ltrim(str: String): String {
         val toDrop = "https://paradisonesia-assets.coretanstudio.com/"
         return "https://paradisonesia-assets.coretanstudio.com/"+str.replace(toDrop.toRegex(), "")
+    }
+
+    fun NavController.safeNavigate(direction: Int) {
+        currentDestination?.getAction(direction)?.run {
+            navigate(direction)
+        }
     }
 }

@@ -12,22 +12,32 @@ import coil.load
 import com.devfutech.paradisonesia.BuildConfig
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.AccountFragmentBinding
+import com.devfutech.paradisonesia.di.GoogleSignInModule
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.extension.toast
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.Component
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AccountFragment : BaseFragment() {
 
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
+
     private val binding: AccountFragmentBinding by lazy {
         AccountFragmentBinding.inflate(layoutInflater)
     }
+
     private val viewModel by viewModels<AccountViewModel>()
 
     override fun onCreateView(
@@ -83,13 +93,26 @@ class AccountFragment : BaseFragment() {
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
             }
+
+            llSignOut.setOnClickListener({
+                Firebase.auth.signOut()
+                    .also {
+                        googleSignInClient.signOut()
+                    }
+                    .also {
+                        findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
+                    }.also {
+                        requireContext().toast(getString(R.string.signed_out))
+                }
+            })
         }
     }
 
     private fun setupView() {
+        Timber.tag("CurrentPengguna").d("XOmP" + FirebaseAuth.getInstance().currentUser)
         binding.apply {
             vfAccount.displayedChild = if (Firebase.auth.currentUser == null) 1 else 0
-            appBar.tvTitle.text = resources.getString(R.string.label_account)
+            titleBar.tvTitle.text = resources.getString(R.string.label_account)
             Firebase.auth.currentUser?.let { account ->
                 ivProfile.load(account.photoUrl) {
                     crossfade(true)
@@ -106,5 +129,4 @@ class AccountFragment : BaseFragment() {
             }
         }
     }
-
 }

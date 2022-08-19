@@ -14,7 +14,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,11 +29,11 @@ class SigninViewModel @Inject constructor(
         get() = _googleSignIn
 
     fun firebaseAuthWithProvider(idToken: String, isGoogle: Boolean) {
-        _googleSignIn.value = Resource.Loading()
+        //_googleSignIn.value = Resource.Loading()
         val credential = if (isGoogle) GoogleAuthProvider.getCredential(
             idToken,
             null
-        ) else FacebookAuthProvider.getCredential(idToken)
+        )  else FacebookAuthProvider.getCredential(idToken)
         Firebase.auth
             .signInWithCredential(credential)
             .addOnSuccessListener { task ->
@@ -56,7 +55,7 @@ class SigninViewModel @Inject constructor(
     }
 
     fun signInAuth(email: String, password: String) {
-        _googleSignIn.value = Resource.Loading()
+        //_googleSignIn.value = Resource.Loading()
         Firebase.auth
             .signInWithEmailAndPassword(email, password)
             .addOnSuccessListener { task ->

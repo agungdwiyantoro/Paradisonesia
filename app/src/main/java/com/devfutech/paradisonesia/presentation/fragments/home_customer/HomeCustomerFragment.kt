@@ -1,18 +1,14 @@
 package com.devfutech.paradisonesia.presentation.fragments.home_customer
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.HomeCustomerFragmentBinding
-import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.BannerAdapter
 import com.devfutech.paradisonesia.external.adapter.CategoryProductAdapter
@@ -27,9 +23,7 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -114,27 +108,26 @@ class HomeCustomerFragment : BaseFragment() {
                         binding.vfBanner.displayedChild = 1
                         bannerAdapter.submitList(result.data)
                         slideBanners(result.data!!.size)
-                        Timber.tag("HAXIMXXX_CC").d(result.data?.size.toString())
+                        Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
                     }
                 }
             }
         }
     }
 
-    private fun slideBanners(length : Int){
-        var currentPage = binding.vpBanner.currentItem
+    private fun slideBanners(bannerSize : Int){
+        var currentItem = binding.vpBanner.currentItem
         lifecycleScope.launchWhenCreated {
             while (true) {
                 delay(3000L)
-
-                if (currentPage == length) {
-                    currentPage = 0
+                if (currentItem == bannerSize) {
+                    currentItem = 0
                 }
-                Timber.tag("PUSSYNIGGA").d("H$currentPage")
-                binding.vpBanner.setCurrentItem(currentPage++, true)
+                binding.vpBanner.setCurrentItem(currentItem++, true)
             }
         }
     }
+
 
     private fun setupAction() {
         binding.apply {
@@ -167,7 +160,6 @@ class HomeCustomerFragment : BaseFragment() {
             }
             vpBanner.adapter = bannerAdapter
             vpBanner.isSaveEnabled = false
-
             TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()
 
             rvProductCategory.adapter = categoryProductAdapter

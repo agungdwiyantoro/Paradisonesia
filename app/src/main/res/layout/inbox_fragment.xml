@@ -5,16 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.inbox.InboxFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_inbox"
-        android:gravity="center"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:padding="20dp"
-        android:background="@color/blue_bar"/>
+    <include android:id="@+id/title_bar" layout="@layout/title_bar"/>
 
     <ViewFlipper
         android:id="@+id/vf_inbox"
