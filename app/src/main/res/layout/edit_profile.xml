@@ -72,22 +72,50 @@
         app:layout_constraintTop_toBottomOf="@+id/vw_line_2"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_full_name_value"
+    <EditText
+        android:id="@+id/et_full_name_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hint_full_name"
+        android:inputType="textPersonName"
         style="@style/Text.Big.Medium"
 
         app:layout_constraintTop_toBottomOf="@+id/tv_full_name" />
+
+    <TextView
+        android:id="@+id/tv_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gender"
+
+        app:layout_constraintTop_toBottomOf="@+id/et_full_name_value"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Spinner
         android:id="@+id/sp_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@+id/tv_full_name_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gender"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/birthday"
+
+        app:layout_constraintTop_toBottomOf="@+id/sp_gender"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Spinner
+        android:id="@+id/calendar_pick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_birthday"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <TextView
         android:id="@+id/tv_address"
@@ -95,7 +123,7 @@
         android:layout_height="wrap_content"
         android:text="@string/billing_address"
 
-        app:layout_constraintTop_toBottomOf="@+id/sp_gender"/>
+        app:layout_constraintTop_toBottomOf="@+id/calendar_pick"/>
 
     <EditText
         android:id="@+id/et_address"
@@ -116,7 +144,7 @@
         android:id="@+id/et_email_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
 
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
@@ -132,7 +160,7 @@
         android:id="@+id/et_phone_number_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="phone"
 
         app:layout_constraintTop_toBottomOf="@+id/tv_phone_number" />
 

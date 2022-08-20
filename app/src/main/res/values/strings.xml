@@ -103,4 +103,6 @@
     
     <!-- Edit Profile -->
     <string name="save">Save</string>
+    <string name="gender">Gender</string>
+    <string name="birthday">Birthday</string>
 </resources>
