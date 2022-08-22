@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.account.AccountFragment"
     android:paddingStart="@dimen/_10sdp"
     android:paddingEnd="@dimen/_10sdp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".presentation.edit_profile.EditProfile">
 
     <include
         android:id="@+id/title_bar"
@@ -109,22 +109,36 @@
         app:layout_constraintTop_toBottomOf="@+id/sp_gender"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <Spinner
-        android:id="@+id/calendar_pick"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_calendar_pick"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_date"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/_10sdp"
 
         app:layout_constraintTop_toBottomOf="@+id/tv_birthday"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <DatePicker
+        android:id="@+id/dp_birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/tv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/billing_address"
+        android:text="@string/address"
 
-        app:layout_constraintTop_toBottomOf="@+id/calendar_pick"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_calendar_pick"/>
 
     <EditText
         android:id="@+id/et_address"
