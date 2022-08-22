@@ -16,6 +16,7 @@ import com.devfutech.paradisonesia.di.GoogleSignInModule
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.extension.toast
+import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
@@ -104,6 +105,10 @@ class AccountFragment : BaseFragment() {
                     }.also {
                         requireContext().toast(getString(R.string.signed_out))
                 }
+            })
+
+            llEditProfile.setOnClickListener({
+                findNavController().safeNavigate(R.id.)
             })
         }
     }

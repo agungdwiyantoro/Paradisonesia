@@ -100,4 +100,10 @@
     <!-- Sign In Fragment -->
     <string name="does_not_have_an_account">Doesn\'t have an account?</string>
     <string name="register_here">Register here</string>
+    
+    <!-- Edit Profile -->
+    <string name="save">Save</string>
+    <string name="gender">Gender</string>
+    <string name="birthday">Birthday</string>
+    <string name="address">Address</string>
 </resources>
