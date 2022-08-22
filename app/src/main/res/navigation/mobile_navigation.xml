@@ -117,6 +117,10 @@
         <action
             android:id="@+id/action_accountFragment_to_signinFragment"
             app:destination="@id/signinFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_editProfile"
+            app:destination="@id/editProfile" />
+
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -149,5 +153,11 @@
         android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment"
         android:label="product_fragment"
         tools:layout="@layout/product_fragment" />
+
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.edit_profile.EditProfile"
+        android:label="edit_profile"
+        tools:layout="@layout/edit_profile" />
 
 </navigation>

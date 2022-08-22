@@ -106,4 +106,9 @@
     <string name="gender">Gender</string>
     <string name="birthday">Birthday</string>
     <string name="address">Address</string>
+    <string name="confirm">Confirm</string>
+    <string-array name="gender_spinner">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.fragments.booking.BookingFragment">
 
-    <TableLayout
+    <include android:id="@+id/title_bar" layout="@layout/title_bar"/>
+
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -25,29 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/canceled"/>
 
-    </TableLayout>
-
-    <ImageView
-        android:id="@+id/iv_booking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_ticket_booking_empty"
-        android:contentDescription="@string/cd_icon_booking_empty" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/you_dont_have_any_booking_yet"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/your_booking_will_appear"/>
-
-    <TextView
-        android:id="@+id/tv_selected_tab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    </com.google.android.material.tabs.TabLayout>
 
     <include
         android:id="@+id/included_non_login"

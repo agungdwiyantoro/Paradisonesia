@@ -92,7 +92,8 @@ class AccountFragment : BaseFragment() {
                 }
             }
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
-                findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
+                //findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
+                findNavController().navigate(R.id.action_accountFragment_to_editProfile)
             }
 
             llSignOut.setOnClickListener({
@@ -108,7 +109,7 @@ class AccountFragment : BaseFragment() {
             })
 
             llEditProfile.setOnClickListener({
-                findNavController().safeNavigate(R.id.)
+                findNavController().safeNavigate(R.id.action_accountFragment_to_editProfile)
             })
         }
     }

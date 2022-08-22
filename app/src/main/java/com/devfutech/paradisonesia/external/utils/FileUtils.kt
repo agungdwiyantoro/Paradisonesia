@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.external.utils
 
+import android.R
 import android.content.Intent
 
 import android.provider.MediaStore
@@ -17,20 +18,26 @@ import android.database.Cursor
 import android.os.Build
 
 import android.database.DatabaseUtils
+import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Environment
 
 import android.webkit.MimeTypeMap
+import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import com.devfutech.paradisonesia.BuildConfig.DEBUG
+import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
 import java.lang.Exception
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.Comparator
 
 
 /**
@@ -333,5 +340,22 @@ object FileUtils {
         currentDestination?.getAction(direction)?.run {
             navigate(direction)
         }
+    }
+
+    fun simpleSpinnerAdapter(context: Context, items: Array<String>) : ArrayAdapter<String>? {
+        return ArrayAdapter(context,
+            R.layout.simple_spinner_dropdown_item,
+            items)
+    }
+
+    fun DatePicker.getDate() : Date {
+        val calendar = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Calendar.getInstance()
+        } else {
+            TODO("VERSION.SDK_INT < N")
+           // java.util.Calendar.getInstance()
+        }
+        calendar.set(year, month, dayOfMonth)
+        return calendar.time
     }
 }
