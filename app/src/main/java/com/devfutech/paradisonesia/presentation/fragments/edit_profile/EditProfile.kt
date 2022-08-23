@@ -44,9 +44,10 @@ class EditProfile : BaseFragment(){
 
     fun setupAction(){
         binding.apply {
-          etCalendarPick.setOnClickListener{
-              llcompDatePicker.visibility = View.VISIBLE
-          }
+            etCalendarPick.setOnClickListener({
+
+            })
+
             btConfirm.setOnClickListener({
                 etCalendarPick.setText(dpBirthdate.getDate().toString())
                 llcompDatePicker.visibility = View.GONE
