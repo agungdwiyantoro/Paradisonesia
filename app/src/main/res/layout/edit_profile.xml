@@ -23,24 +23,19 @@
 
         app:layout_constraintTop_toBottomOf="@+id/title_bar"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_profile"
             android:layout_width="@dimen/_64sdp"
             android:layout_height="@dimen/_64sdp"
-            android:layout_gravity="center"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@color/backgroundGrey"
             android:src="@drawable/ic_image_not_available"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:shapeAppearanceOverlay="@style/circleImageView" />
 
 
         <TextView
@@ -49,23 +44,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="@string/label_account_greetings"
+            android:text="@string/label_account_greetings" />
 
-            app:layout_constraintStart_toEndOf="@+id/iv_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/vw_line_2"
-            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <View
-            android:id="@+id/vw_line_2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:background="@color/backgroundGrey"
+    <View
+        android:id="@+id/vw_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@color/backgroundGrey"
 
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile"/>
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp">
+
 
 
         <TextView
@@ -74,7 +71,7 @@
             android:layout_height="wrap_content"
             android:text="@string/hint_full_name"
 
-            app:layout_constraintTop_toBottomOf="@+id/vw_line_2"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <EditText
@@ -116,49 +113,11 @@
             android:id="@+id/et_calendar_pick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:drawableEnd="@drawable/ic_date"
             android:paddingStart="0dp"
             android:paddingEnd="@dimen/_10sdp"
-
-            app:layout_constraintTop_toBottomOf="@+id/tv_birthday"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/llcomp_date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Button
-                android:id="@+id/bt_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="X"
-                android:textColor="@color/red"
-                android:background="@android:color/transparent"
-                android:layout_gravity="end"/>
-
-            <DatePicker
-                android:id="@+id/dp_birthdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/navy_blue.primary"
-                />
-
-            <Button
-                android:id="@+id/bt_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/confirm"
-                android:layout_gravity="end"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            app:layout_constraintTop_toBottomOf="@+id/tv_birthday"/>
 
         <TextView
             android:id="@+id/tv_address"
@@ -218,6 +177,43 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llcomp_date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/bt_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:textColor="@color/red"
+                android:background="@android:color/transparent"
+                android:layout_gravity="end"/>
+
+            <DatePicker
+                android:id="@+id/dp_birthdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/navy_blue.primary"
+                />
+
+            <Button
+                android:id="@+id/bt_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm"
+                android:layout_gravity="end"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

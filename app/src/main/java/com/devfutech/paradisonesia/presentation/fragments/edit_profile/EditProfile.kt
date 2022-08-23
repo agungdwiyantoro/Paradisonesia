@@ -1,7 +1,6 @@
 package com.devfutech.paradisonesia.presentation.fragments.edit_profile
 
 import android.os.Bundle
-import com.devfutech.paradisonesia.databinding.EditProfileBinding
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.get
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.databinding.EditProfileBinding
 import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
 import com.devfutech.paradisonesia.external.utils.FileUtils.simpleSpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,18 +44,15 @@ class EditProfile : BaseFragment(){
 
     fun setupAction(){
         binding.apply {
-            etCalendarPick.setOnClickListener{
-                llcompDatePicker.visibility = View.VISIBLE
+          etCalendarPick.setOnClickListener{
+              llcompDatePicker.visibility = View.VISIBLE
+          }
+            btConfirm.setOnClickListener({
+                etCalendarPick.setText(dpBirthdate.getDate().toString())
+                llcompDatePicker.visibility = View.GONE
             }
-
-            btConfirm.setOnClickListener(
-                {
-                    etCalendarPick.setText(dpBirthdate.getDate().toString())
-                    llcompDatePicker.visibility = View.GONE
-                }
-            )
-
-        }
+        )
     }
+}
 
 }
