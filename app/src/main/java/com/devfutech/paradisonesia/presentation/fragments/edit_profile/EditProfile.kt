@@ -44,8 +44,8 @@ class EditProfile : BaseFragment(){
 
     fun setupAction(){
         binding.apply {
-            etCalendarPick.setOnClickListener({
-
+            ivIcCalendar.setOnClickListener({
+                llcompDatePicker.visibility = View.VISIBLE
             })
 
             btConfirm.setOnClickListener({

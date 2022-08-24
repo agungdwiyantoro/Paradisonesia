@@ -111,12 +111,26 @@
 
         <EditText
             android:id="@+id/et_calendar_pick"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_date"
-            android:paddingStart="0dp"
-            android:paddingEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_birthday"/>
+            app:layout_constraintHorizontal_weight="2"
+            android:enabled="false"
+
+            app:layout_constraintTop_toBottomOf="@+id/tv_birthday"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_ic_calendar"
+            />
+
+        <ImageView
+            android:id="@+id/iv_ic_calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_date"
+            app:layout_constraintHorizontal_weight="1"
+
+            app:layout_constraintTop_toTopOf="@+id/et_calendar_pick"
+            app:layout_constraintBottom_toBottomOf="@+id/et_calendar_pick"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/tv_address"

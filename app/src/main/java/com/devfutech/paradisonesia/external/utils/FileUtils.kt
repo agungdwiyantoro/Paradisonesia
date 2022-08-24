@@ -36,6 +36,7 @@ import java.io.File
 import java.io.FileFilter
 import java.lang.Exception
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.Comparator
 
@@ -355,7 +356,9 @@ object FileUtils {
             TODO("VERSION.SDK_INT < N")
            // java.util.Calendar.getInstance()
         }
-        calendar.set(year, month, dayOfMonth)
-        return calendar.time
+       // calendar.set(year, month, dayOfMonth)
+        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        val formatedDate = ""+dayOfMonth + " - " + month + " - " + year
+        return formatedDate!!
     }
 }
