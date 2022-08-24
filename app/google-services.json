@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "372987563158-095aq63070b1a81g5ptnh793grbmspvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devfutech.paradisonesia",
+            "certificate_hash": "5b55f6f598b30b824f52657784f5b9c20eb820be"
+          }
+        },
+        {
           "client_id": "372987563158-2ifq6d4mlhkbhtdmgqmkttu97nrjafom.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
