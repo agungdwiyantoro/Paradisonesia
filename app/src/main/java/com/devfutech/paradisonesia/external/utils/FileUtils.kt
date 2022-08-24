@@ -1,43 +1,27 @@
 package com.devfutech.paradisonesia.external.utils
 
 import android.R
-import android.content.Intent
-
-import android.provider.MediaStore
-
 import android.content.ContentResolver
-
-import android.graphics.Bitmap
-
-import android.provider.DocumentsContract
-
 import android.content.ContentUris
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
-
-import android.os.Build
-
 import android.database.DatabaseUtils
-import android.icu.util.Calendar
+import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
-
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import com.devfutech.paradisonesia.BuildConfig.DEBUG
-import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
-import java.lang.Exception
 import java.text.DecimalFormat
-import java.util.*
-import kotlin.Comparator
 
 
 /**
@@ -348,7 +332,8 @@ object FileUtils {
             items)
     }
 
-    fun DatePicker.getDate() : Date {
+    fun DatePicker.getDate(): String {
+        /*
         val calendar = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Calendar.getInstance()
         } else {
@@ -356,6 +341,21 @@ object FileUtils {
            // java.util.Calendar.getInstance()
         }
         calendar.set(year, month, dayOfMonth)
-        return calendar.time
+
+
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        val formatedDate: String = sdf.format(calendar.time)
+        return sdf.parse(formatedDate)
+         */
+
+        val str_day = checkDigit(dayOfMonth)
+        val str_month = checkDigit(month)
+        val str_year = year.toString()
+
+        return str_day + "-" + str_month + "-" + str_year
+    }
+
+    fun checkDigit(number: Int): String? {
+        return if (number <= 9) "0$number" else number.toString()
     }
 }

@@ -102,13 +102,16 @@
     <string name="register_here">Register here</string>
     
     <!-- Edit Profile -->
+    <string name="edit_profile_data">Edit Profile Data</string>
     <string name="save">Save</string>
     <string name="gender">Gender</string>
-    <string name="birthday">Birthday</string>
+    <string name="birthdate">Birthdate</string>
     <string name="address">Address</string>
     <string name="confirm">Confirm</string>
     <string-array name="gender_spinner">
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string name="dd_mm_yyyy">dd-mm-yyyy</string>
+    <string name="customize_your_paradisonesia">Customize your paradisonesia profile data by clicking the icon the icon</string>
 </resources>

@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".presentation.fragments.edit_profile.EditProfile">
 
     <include
         android:id="@+id/title_bar"
-        layout="@layout/title_bar"
+        layout="@layout/layout_appbar"
 
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <View
-        android:id="@+id/vw_line_1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:background="@color/backgroundGrey"
-
-        app:layout_constraintTop_toBottomOf="@+id/title_bar"/>
-
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_compat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+
+        app:layout_constraintTop_toBottomOf="@+id/title_bar">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_profile"
@@ -44,26 +40,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/label_account_greetings" />
+            android:text="@string/customize_your_paradisonesia"
+
+            android:layout_marginStart="@dimen/_25sdp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <View
         android:id="@+id/vw_line_2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_8sdp"
+        android:layout_height="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:background="@color/backgroundGrey"
 
-        app:layout_constraintTop_toBottomOf="@+id/iv_profile"/>
+        app:layout_constraintTop_toBottomOf="@+id/ll_compat"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp">
+        android:paddingEnd="@dimen/_10sdp"
 
-
+        app:layout_constraintTop_toBottomOf="@+id/vw_line_2">
 
         <TextView
             android:id="@+id/tv_full_name"
@@ -74,14 +72,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/et_full_name_value"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_full_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            style="@style/Text.Big.Medium"
+            style="@style/InputLayout"
 
-            app:layout_constraintTop_toBottomOf="@+id/tv_full_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_full_name" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_full_name_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                style="@style/EditText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_gender"
@@ -89,34 +95,71 @@
             android:layout_height="wrap_content"
             android:text="@string/gender"
 
-            app:layout_constraintTop_toBottomOf="@+id/et_full_name_value"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/til_full_name"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
-        <Spinner
-            android:id="@+id/sp_gender"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_gender"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            style="@style/InputLayout"
 
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintEnd_toStartOf="@+id/til_calendar_pick"
             app:layout_constraintTop_toBottomOf="@+id/tv_gender"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Spinner
+                android:id="@+id/sp_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/birthday"
+            android:text="@string/birthdate"
 
-            app:layout_constraintTop_toBottomOf="@+id/sp_gender"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/til_full_name"
+            app:layout_constraintStart_toStartOf="@+id/til_calendar_pick" />
 
-        <EditText
-            android:id="@+id/et_calendar_pick"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_calendar_pick"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_date"
-            android:paddingStart="0dp"
-            android:paddingEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_birthday"/>
+            style="@style/InputLayout"
+
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintEnd_toStartOf="@+id/iv_ic_date"
+            app:layout_constraintStart_toEndOf="@+id/til_gender"
+            app:layout_constraintTop_toBottomOf="@+id/tv_birthday">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_calendar_pick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dd_mm_yyyy"
+                android:gravity="center"
+                style="@style/EditText"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_ic_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_date"
+            app:layout_constraintHorizontal_weight="1"
+
+            app:layout_constraintVertical_bias="0.75"
+            app:layout_constraintBottom_toBottomOf="@+id/til_calendar_pick"
+            app:layout_constraintTop_toBottomOf="@+id/tv_birthday"
+            app:layout_constraintStart_toEndOf="@+id/til_calendar_pick"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/tv_address"
@@ -124,15 +167,24 @@
             android:layout_height="wrap_content"
             android:text="@string/address"
 
-            app:layout_constraintTop_toBottomOf="@+id/et_calendar_pick"/>
+            app:layout_constraintTop_toBottomOf="@+id/til_calendar_pick"/>
 
-        <EditText
-            android:id="@+id/et_address"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            style="@style/InputLayout"
 
-            app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_address" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_email"
@@ -140,15 +192,24 @@
             android:layout_height="wrap_content"
             android:text="@string/label_email"
 
-            app:layout_constraintTop_toBottomOf="@+id/et_address"/>
+            app:layout_constraintTop_toBottomOf="@+id/til_address"/>
 
-        <EditText
-            android:id="@+id/et_email_value"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            style="@style/InputLayout"
 
-            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_email" >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_phone_number"
@@ -156,15 +217,24 @@
             android:layout_height="wrap_content"
             android:text="@string/hint_phone_number"
 
-            app:layout_constraintTop_toBottomOf="@+id/et_email_value"/>
+            app:layout_constraintTop_toBottomOf="@+id/til_email"/>
 
-        <EditText
-            android:id="@+id/et_phone_number_value"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            style="@style/InputLayout"
 
-            app:layout_constraintTop_toBottomOf="@+id/tv_phone_number" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_phone_number" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone_number_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             style="@style/Button.Filled.Yellow.Rounded"
@@ -173,47 +243,75 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
 
-            app:layout_constraintTop_toBottomOf="@+id/et_phone_number_value"
+            app:layout_constraintTop_toBottomOf="@+id/til_phone_number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llcomp_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semi_transparent"
+        android:gravity="center"
+        android:visibility="gone">
+
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/llcomp_date_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_50sdp">
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Button
-                android:id="@+id/bt_cancel"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="X"
-                android:textColor="@color/red"
-                android:background="@android:color/transparent"
-                android:layout_gravity="end"/>
+                android:background="@color/navy_blue.primary"
+                android:gravity="end"
+
+                android:paddingStart="0dp"
+                android:paddingEnd="@dimen/_20sdp">
+
+                <Button
+                    android:id="@+id/bt_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:textColor="@color/red"
+                    android:layout_gravity="end"
+                    android:background="@android:color/transparent" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <DatePicker
                 android:id="@+id/dp_birthdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/navy_blue.primary"
+                android:headerBackground="@color/navy_blue.primary"
+                android:background="@color/aquamarine.primary"
                 />
 
-            <Button
-                android:id="@+id/bt_confirm"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/confirm"
-                android:layout_gravity="end"/>
+                android:background="@color/aquamarine.primary"
+                android:gravity="end"
 
+                android:paddingStart="0dp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_10sdp">
+
+                <Button
+                    android:id="@+id/bt_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Button.Filled.Yellow.Rounded"
+                    android:text="@string/confirm" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>
