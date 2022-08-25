@@ -22,6 +22,14 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.time.DateTimeException
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import java.util.*
+import kotlin.Comparator
 
 
 /**
@@ -355,7 +363,19 @@ object FileUtils {
         return str_day + "-" + str_month + "-" + str_year
     }
 
-    fun checkDigit(number: Int): String? {
+    fun checkDigit(number: Int): String {
         return if (number <= 9) "0$number" else number.toString()
+    }
+
+    fun isDateValidFormat(format: String, value: String) : Boolean {
+        val ldt: LocalDateTime
+        val formatter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            DateTimeFormatter.ofPattern(format, Locale.ENGLISH).parse(value).equals(value)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+
+        return formatter
     }
 }

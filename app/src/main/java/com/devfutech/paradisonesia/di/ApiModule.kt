@@ -5,10 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.devfutech.paradisonesia.BuildConfig
-import com.devfutech.paradisonesia.data.network.service.CustomerService
-import com.devfutech.paradisonesia.data.network.service.MerchantService
-import com.devfutech.paradisonesia.data.network.service.ProductService
-import com.devfutech.paradisonesia.data.network.service.WishlistService
+import com.devfutech.paradisonesia.data.network.service.*
 import com.devfutech.paradisonesia.external.config.BaseConfig
 import com.devfutech.paradisonesia.external.network.RequestInterceptor
 import dagger.Module
@@ -60,6 +57,11 @@ class ApiModule {
             })
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideCustomerProfileService(retrofit: Retrofit) : CustomerProfileService =
+        retrofit.create(CustomerProfileService::class.java)
 
     @Provides
     @Singleton

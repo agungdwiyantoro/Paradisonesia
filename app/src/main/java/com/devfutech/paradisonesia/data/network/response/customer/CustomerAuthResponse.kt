@@ -22,4 +22,5 @@ data class CustomerAuthResponse(
         statusId = user?.statusId,
         apiToken = apiToken
     )
+
 }

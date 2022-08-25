@@ -26,6 +26,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled = true
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildTypes {
