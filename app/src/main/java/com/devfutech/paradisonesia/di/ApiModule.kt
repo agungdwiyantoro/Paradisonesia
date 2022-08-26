@@ -97,6 +97,7 @@ class ApiModule {
             .build()
     }
 
+
     @Singleton
     @Provides
     fun provideChuckerCollector(@ApplicationContext context: Context): ChuckerCollector {

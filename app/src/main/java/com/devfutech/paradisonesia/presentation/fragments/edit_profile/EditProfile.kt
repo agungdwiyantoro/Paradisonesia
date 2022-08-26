@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.get
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.databinding.EditProfileBinding
 import com.devfutech.paradisonesia.domain.model.user.Customer
 import com.devfutech.paradisonesia.external.extension.inputError
@@ -20,11 +22,17 @@ import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
 import com.devfutech.paradisonesia.external.utils.FileUtils.isDateValidFormat
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.devfutech.paradisonesia.external.utils.FileUtils.simpleSpinnerAdapter
+import com.devfutech.paradisonesia.presentation.fragments.signin.SigninViewModel
+import com.facebook.CallbackManager
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class EditProfile : BaseFragment(){
@@ -32,6 +40,19 @@ class EditProfile : BaseFragment(){
     private val binding: EditProfileBinding by lazy{
         EditProfileBinding.inflate(layoutInflater)
     }
+
+    private val viewModel by viewModels<EditProfileViewModel>()
+    private val callbackManager by lazy {
+        CallbackManager.Factory.create()
+    }
+
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
+
+    val firebaseAuth = FirebaseAuth.getInstance()
+
+    @Inject
+    lateinit var authPreference: AuthPreference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +76,8 @@ class EditProfile : BaseFragment(){
 
             titleBar.ivBack.visibility = View.VISIBLE
             titleBar.tvTitle.setText(resources.getString(R.string.edit_profile_data))
+
+            Timber.tag("GORILLA").d("TO " + AuthPreference.TOKEN)
         }
     }
 
@@ -184,8 +207,17 @@ class EditProfile : BaseFragment(){
                 )
 
                  */
+                viewModel.checkUserToServer(
+                    name = "fuck",
+                    email = "sjdjfksj@gmail.com",
+                    phone = "082147139485",
+                    address = "SMMM",
+                    gender = "1",
+                    birth_date = "30-04-1993",
+                    image = "jskdjlfdjf"
+                )
 
-                root.snackBar("AMAN")
+                root.snackBar("AMAN " +  authPreference.getToken())
             }
         }
     }

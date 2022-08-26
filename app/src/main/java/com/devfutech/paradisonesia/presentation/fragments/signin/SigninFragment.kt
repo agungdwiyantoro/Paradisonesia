@@ -42,6 +42,7 @@ import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -325,7 +326,10 @@ class SigninFragment : BaseFragment(){
                     idToken = account.idToken!!,
                     isGoogle = true
                 ).also {
-                    requireContext().toast(resources.getString(R.string.signed_in))
+                    authPreference.setToken(account.idToken!!)
+                    Timber.tag("JANCOOOK").d("acc " + account.idToken)
+                    Timber.tag("JANCOOOK").d("lolok")
+                    //requireContext().toast(resources.getString(R.string.signed_in) + authPreference.getToken())
                 }.also {
                     findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)
                 }

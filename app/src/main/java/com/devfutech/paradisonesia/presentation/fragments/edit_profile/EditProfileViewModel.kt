@@ -1,31 +1,37 @@
 package com.devfutech.paradisonesia.presentation.fragments.edit_profile
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.domain.model.banner.Banner
+import com.devfutech.paradisonesia.domain.model.user.Customer
 import com.devfutech.paradisonesia.domain.model.user.CustomerProfile
 import com.devfutech.paradisonesia.domain.usecase.CustomerProfileUseCase
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
+@HiltViewModel
 class EditProfileViewModel @Inject constructor(
-    private val customerProfileUseCase: CustomerProfileUseCase
+    private val customerProfileUseCase: CustomerProfileUseCase,
+    private val authPreference: AuthPreference
+) : BaseViewModel() {
 
-) : BaseViewModel(){
-    private val _getCustomerProfile: MutableStateFlow<Resource<List<CustomerProfile>>> =
-        MutableStateFlow(Resource.Success(emptyList()))
-
-    val getCustomerProfile: MutableStateFlow<Resource<List<CustomerProfile>>>
-        get() = _getCustomerProfile
+    private val _googleSignIn: MutableStateFlow<Resource<CustomerProfile>> =
+        MutableStateFlow(Resource.Success())
+    val googleSignIn: MutableStateFlow<Resource<CustomerProfile>>
+        get() = _googleSignIn
 
 
-    private fun checkUserProfileToServer(
+    fun checkUserToServer(
         name: String,
         email: String,
         phone: String,
@@ -33,7 +39,6 @@ class EditProfileViewModel @Inject constructor(
         gender: String,
         birth_date: String,
         image: String
-
     ) {
         viewModelScope.launch {
             customerProfileUseCase.profileCustomer(
@@ -48,12 +53,15 @@ class EditProfileViewModel @Inject constructor(
                 )
             ).catch { error ->
                 onError(error)
-            }.collect{
-                customerProfileUseCase.apply {
+            }.collect {
+                _googleSignIn.value = Resource.Success(it)
+               authPreference.apply {
+                    setToken(it?.apiToken.toString())
+                }.also {
+                    Timber.tag("SHIT token").d(authPreference.getToken() )
+               }
 
-                }
             }
         }
-
     }
 }
