@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -99,6 +100,7 @@ class SigninViewModel @Inject constructor(
                 authPreference.apply {
                     setToken(it?.apiToken.toString())
                 }
+                Timber.tag("SignInToken").d(it?.apiToken.toString())
             }
         }
     }

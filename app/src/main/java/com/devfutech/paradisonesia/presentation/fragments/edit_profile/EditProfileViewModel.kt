@@ -56,9 +56,9 @@ class EditProfileViewModel @Inject constructor(
             }.collect {
                 _googleSignIn.value = Resource.Success(it)
                authPreference.apply {
-                    setToken(it?.apiToken.toString())
+                    setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiMTkyZWVmMmE2NDZkOTA5ZGZjZDU1YzNkM2Q4NWJhYWY4ZTM5MGNhYjEzN2U5MWVjYjgyYjdhYjYzYmQwOTZmMDM4MjM1NWZiNzBhYzlkZTMiLCJpYXQiOjE2NjE0ODUzMzIsIm5iZiI6MTY2MTQ4NTMzMiwiZXhwIjoxNjYxNDg4OTMwLCJzdWIiOiIyMCIsInNjb3BlcyI6W119.TFpCL8dq8_R22XrYXM_oadtgDKwu_QDa-o4XfdGNgKxMKL-r2oiZmNddVZWlVlLDa9eXTn6XZG9e7_IEBe1daxVAn6_tf5sxgF-6xxtHUgJMgNeJaUhRiYKHgx7wbWku9UVXcn5M5DnDW5XDnzhZeGjhY_M8Ff9q7AnLRyeevqD2QY81EHac8-RayIJrXggjBwHy7OMe0t_9E5fh5psjjrjsem3fbIUpqMWqo_jtHkrP8IB0nX3LEz8e2HYJxmJ79zPmlz4nRDe8tUM7L5TNCpmVmluZtHCuzkUGZQEMucW0lhIH840iyBYs0rBOIcnbE6wQQuo7kthGrjvSQX7LNwz2CB6EzdMRjROriRYlFXfwuFZGDpv5jre7pnujVW41eJRwt5MkILdjUa_enGQVqr6Tik7d1FH895AJqP1KBSf4vJzdDhn2V6S0908xzABB1_0FjUAGx2XFZQZEZumNgiNUbVtxyT4v2goSdzH28OPP-HxlzP-LNjloe2p328MNizXVnjTj_lIL4Bd2fNNhBGvpKPrY2U05aMFkU8FmkKSjCyOqO6AycoKCX-T0T2bkxFGnBhNU5yBhBbmdEoUJx4VftvXfd0Z7stbZGa47M1Q8OkjpCdc3KqrEpxtJwTUTkhecVa2MDAN75FpNASaabveG4UxeVfHQp_gkegHFalU")
                 }.also {
-                    Timber.tag("SHIT token").d(authPreference.getToken() )
+                    Timber.tag("SHIT token").d(it?.getToken() )
                }
 
             }

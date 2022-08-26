@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.presentation.fragments.edit_profile
 
+import android.content.Intent
 import android.os.Bundle
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import android.view.LayoutInflater
@@ -9,12 +10,14 @@ import android.widget.ArrayAdapter
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.databinding.EditProfileBinding
 import com.devfutech.paradisonesia.domain.model.user.Customer
+import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.inputError
 import com.devfutech.paradisonesia.external.extension.isEmailValid
 import com.devfutech.paradisonesia.external.extension.snackBar
@@ -54,6 +57,7 @@ class EditProfile : BaseFragment(){
     @Inject
     lateinit var authPreference: AuthPreference
 
+    lateinit var email: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,7 +70,7 @@ class EditProfile : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setupAction()
-
+        setupObserve()
     }
 
     fun setupView(){
@@ -80,6 +84,42 @@ class EditProfile : BaseFragment(){
             Timber.tag("GORILLA").d("TO " + AuthPreference.TOKEN)
         }
     }
+
+    private fun setupObserve() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.googleSignIn.collect { result ->
+                when (result) {
+                    is Resource.Loading -> dialogLoading.show()
+                    is Resource.Failure -> {
+                        dialogLoading.dismiss()
+                        navigationTo(
+                            R.id.action_global_dialog_messgae,
+                            argsBundleDialog(result.error, "Failure Signin", R.raw.error)
+                        )
+                    }
+                    is Resource.Success -> {
+                        dialogLoading.dismiss()
+                        result.data?.let {
+                            binding.apply {
+                                tieFullNameValue.text?.clear()
+                                tieCalendarPickValue.text?.clear()
+                                tieEmailValue.text?.clear()
+                                tieAddressValue.text?.clear()
+                                tiePhoneNumberValue.text?.clear()
+                            }
+                            findNavController().navigateUp()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        
+    }
+
 
     fun setupAction(){
         binding.apply {
@@ -109,6 +149,7 @@ class EditProfile : BaseFragment(){
                 }
 
                 tieEmailValue.setText(account.email)
+                email = account.email!!
             }
 
 
@@ -208,16 +249,16 @@ class EditProfile : BaseFragment(){
 
                  */
                 viewModel.checkUserToServer(
-                    name = "fuck",
-                    email = "sjdjfksj@gmail.com",
-                    phone = "082147139485",
-                    address = "SMMM",
-                    gender = "1",
-                    birth_date = "30-04-1993",
+                    name = tieFullNameValue.text.toString(),
+                    email = email,
+                    phone = tiePhoneNumberValue.text.toString(),
+                    address = tieAddressValue.text.toString(),
+                    gender = spGender.selectedItemPosition.toString(),
+                    birth_date = tieCalendarPickValue.text.toString(),
                     image = "jskdjlfdjf"
                 )
 
-                root.snackBar("AMAN " +  authPreference.getToken())
+                //root.snackBar("AMAN " +  authPreference.getToken())
             }
         }
     }

@@ -3,10 +3,11 @@ package com.devfutech.paradisonesia.domain.savedPreference
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import javax.inject.Inject
+import javax.inject.Named
 
 object SavedPreference {
-    const val EMAIL = "email"
-    const val USERNAME = "username"
+    const val TOKEN = "TOKEN"
 
     private fun getSharedPreference(ctx: Context?) :
             SharedPreferences?{
@@ -19,27 +20,27 @@ object SavedPreference {
         )?.edit()?.putString(key, value)?.apply()
     }
 
-    fun getEmail(ctx: Context)= getSharedPreference(
+    fun getToken(ctx: Context)= getSharedPreference(
         ctx
-    )?.getString(EMAIL,"")
+    )?.getString(TOKEN,"")
 
-    fun setEmail(ctx: Context, email:String){
+    fun setToken(ctx: Context, tokenValue:String){
         editor(
             ctx,
-            EMAIL,
-            email
+            TOKEN,
+            tokenValue
         )
     }
+}
 
-    fun setUsername(ctx: Context, username:String){
-        editor(
-            ctx,
-            USERNAME,
-            username
-        )
+class AuthPreference @Inject constructor(
+    @Named("AuthDataPrefs") private val sharedPreferences: SharedPreferences
+) {
+    companion object {
+        const val TOKEN = "token"
     }
 
-    fun getUsername(ctx: Context) = getSharedPreference(
-        ctx
-    )?.getString(USERNAME,"")
+    fun getToken(): String = sharedPreferences.getString(TOKEN, "") ?: ""
+
+    fun setToken(token: String) = sharedPreferences.edit().putString(TOKEN, token).apply()
 }

@@ -327,8 +327,9 @@ class SigninFragment : BaseFragment(){
                     isGoogle = true
                 ).also {
                     authPreference.setToken(account.idToken!!)
+                    SavedPreference.setToken(requireContext(), account.idToken.toString())
                     Timber.tag("JANCOOOK").d("acc " + account.idToken)
-                    Timber.tag("JANCOOOK").d("lolok")
+                    Timber.tag("JANCOOOK").d("lolok" + SavedPreference.getToken(requireContext()))
                     //requireContext().toast(resources.getString(R.string.signed_in) + authPreference.getToken())
                 }.also {
                     findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)
@@ -345,8 +346,8 @@ class SigninFragment : BaseFragment(){
             .addOnCompleteListener({
                 task ->
                 if(task.isSuccessful){
-                    SavedPreference.setEmail(requireContext(), account.email.toString())
-                    SavedPreference.setUsername(requireContext(), account.displayName.toString())
+                   // SavedPreference.setEmail(requireContext(), account.email.toString())
+                   // SavedPreference.setUsername(requireContext(), account.displayName.toString())
                     requireContext().toast(getString(R.string.signed_in)).also {
                         //findNavController().navigate(R.id.action_signinFragment_to_accountFragment)
                         findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)
