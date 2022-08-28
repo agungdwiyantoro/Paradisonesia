@@ -1,11 +1,8 @@
 package com.devfutech.paradisonesia.external.adapter
 
-import android.content.Context
-import android.media.Image
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView

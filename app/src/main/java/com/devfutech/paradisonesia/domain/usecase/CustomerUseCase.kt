@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.domain.usecase
 
 import com.devfutech.paradisonesia.domain.model.user.Customer
+import com.devfutech.paradisonesia.domain.model.user.CustomerProfile
 import com.devfutech.paradisonesia.domain.repository.CustomerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -14,4 +15,6 @@ class CustomerUseCase @Inject constructor(
     suspend fun authCustomer(payload: Map<String,String>): Flow<Customer?> {
         return repository.authCustomer(payload)
     }
+
+    suspend fun profileCustomer(): Flow<List<Customer>> = repository.profileCustomer()
 }

@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.domain.repository
 
 import com.devfutech.paradisonesia.domain.model.user.Customer
+import com.devfutech.paradisonesia.domain.model.user.CustomerProfile
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -9,4 +10,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CustomerRepository {
     suspend fun authCustomer(payload: Map<String,String>): Flow<Customer?>
+    suspend fun profileCustomer() : Flow<List<Customer>>
 }

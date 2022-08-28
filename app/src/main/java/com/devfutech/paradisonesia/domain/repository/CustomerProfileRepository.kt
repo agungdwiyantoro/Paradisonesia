@@ -5,5 +5,5 @@ import com.devfutech.paradisonesia.domain.model.user.CustomerProfile
 import kotlinx.coroutines.flow.Flow
 
 interface CustomerProfileRepository {
-    suspend fun profileCustomer(payload: Map<String, String>) : Flow<CustomerProfile?>
+    suspend fun profileCustomer() : Flow<List<CustomerProfile?>>
 }
