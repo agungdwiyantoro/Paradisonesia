@@ -97,10 +97,44 @@ class SigninViewModel @Inject constructor(
                 onError(error)
             }.collect {
                 _googleSignIn.value = Resource.Success(it)
+                /*
                 authPreference.apply {
                     setToken(it?.apiToken.toString())
                 }
-                Timber.tag("SignInToken").d(it?.apiToken.toString())
+
+                 */
+                Timber.tag("UserID").d(it?.id.toString())
+                Timber.tag("UserName").d(it?.name.toString())
+                Timber.tag("UserEmail").d(it?.email.toString())
+                Timber.tag("UserPhone").d(it?.phone.toString())
+                Timber.tag("UserEmaiilVerified").d(it?.is_email_verified.toString())
+                Timber.tag("UserIsNewMember").d(it?.is_new_member.toString())
+                Timber.tag("UserNote").d(it?.note.toString())
+
+                Timber.tag("ProfileID").d(it?.profile?.id.toString())
+                Timber.tag("ProfileUserID").d(it?.profile?.user_id.toString())
+                Timber.tag("ProfileBirthDate").d(it?.profile?.birth_date.toString())
+                Timber.tag("ProfileGender").d(it?.profile?.gender.toString())
+                Timber.tag("ProfileAddress").d(it?.profile?.address.toString())
+                Timber.tag("ProfileImage").d(it?.profile?.image)
+
+                Timber.tag("StatusID").d(it?.status?.id.toString())
+                Timber.tag("StatusName").d(it?.status?.name.toString())
+
+                Timber.tag("CustomerLevelID").d(it?.customer_level?.id.toString())
+                Timber.tag("CustomerLevelName").d(it?.customer_level?.name.toString())
+                Timber.tag("CustomerLevelIcon").d(it?.customer_level?.icon.toString())
+
+                Timber.tag("TokenToken_type").d(it?.token_type.toString())
+                Timber.tag("TokenExpires_in").d(it?.expires_in.toString())
+                Timber.tag("TokenAccess_token").d(it?.access_token.toString())
+                Timber.tag("TokenRefresh_token").d(it?.refresh_token.toString())
+
+                authPreference.apply {
+                    setToken(it?.access_token.toString())
+                }
+
+                Timber.tag("AuthPrefGetToken").d(authPreference.getToken())
             }
         }
     }

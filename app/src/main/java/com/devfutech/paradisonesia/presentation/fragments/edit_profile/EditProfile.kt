@@ -258,7 +258,7 @@ class EditProfile : BaseFragment(){
                     image = "jskdjlfdjf"
                 )
 
-                //root.snackBar("AMAN " +  authPreference.getToken())
+                root.snackBar("PROFILE UPDATED")
             }
         }
     }

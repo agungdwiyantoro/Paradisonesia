@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
+import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,12 +22,14 @@ class RequestInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         synchronized(this) {
-            val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZmU1MzlkMTVkMzQwNGZhYWY5NTg5MDgzYzY5NmRhMTE4MDE1NzE3YTIzYTgzMWQzMWIwZTg1NGVmMzBmY2VkNDdiNzc2NTc5MzA0OGNmMzAiLCJpYXQiOjE2NjE0OTM0MzMsIm5iZiI6MTY2MTQ5MzQzMywiZXhwIjoxNjYxNDk3MDMzLCJzdWIiOiIyMCIsInNjb3BlcyI6W119.RhcgXvnEmevh38DYPSNS8Go3KC8IuSqTR-_i-hLf-sHbJ5fIESSkanH2FVJE0CGyxq7U9_aM4iWfw6t8-kBkJiWk_ulfEeDy9p6BVGnAlOZknEvzrCtrwYY_U71HAw1-B6lX5JF7pl7R4uiKf0Fdc86ubMci5R5-PXaVJ5A1DziPtlhzOAF-hdoS19Rzxvrax2qKwHk7nN75R3vXWWpwqPEJfnOqATmGj0FFAnRWD8iODK0aUg0aVLm5nL6o5I9Og0Nl2lcSRv5G4yczgbx9c5qBIKeldQLgoJWObh-pAVXUh-h5Cm-uuCxa1iKGgvof47YAlFIdwyALb6rbodRvFI9i5FAsq3WbX_AANwmIgMyCBdCt4SE2WFWQUwdC1JUxGDOpklBGWnS_-v8VsUNbXekUR2sq8tQ1fj7BSrNBggWi543YVbc0kTrVTgvnBkOUV642zS5_Q28NMlSoMB2ps5UAl0UZ5PgW7KTsNk1sdrMqMCUxHbS5QktNF_a5cyyDeu14E6pC699sYvFcvmT5CcJdCRFNzTTtP5yOiHJkTMrQwlsSa7jCwMe3QLg1e2_skG5D7153oSVMs4MsadGjgioQ_E7NDh3UWa0YtFvzF2EyNa33Oj2c4eER4d7D93oIR06w_Qr5eixTGF_hF4zoFmp_fHBsHXwxW-MgKtKs3co"
+
+            //val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZDU3MDI2MjQ3MDdmNDE1ZmJmOGViYzY1YzNjNzQzNDA4MzkyMzllNGM5NWZkZGYyNjk0OGRlMjhmMzk2NzExYTk2MjkwMTc0ZDFiYzIzM2QiLCJpYXQiOjE2NjE1MTk3MjQsIm5iZiI6MTY2MTUxOTcyNCwiZXhwIjoxNjYxNTIzMzIzLCJzdWIiOiIyMCIsInNjb3BlcyI6W119.Peydox8P7kdKQ8DSZnQVikV3lG8albIQkaYZqdXoMjxduYat5uKqCTN2qNokwzhwpeF3REkzAK1cW_Pb4Kiklcj5v6bkVWLD8gO-IOcnKiTvSJ8dLQWNUWdznIhpu_o1Gwkh8gMir-RQg6T8_AsH_SyryyTE8I2V5T9FqjduHrpvtIldIvSJhTasVRquZQVp1O2670s_Mc_ovI6AjoFF02d9IHApVLqYnnKGnlm8lYQ8Kw8Ycbg6_X4E7tzRrpFnNZgSIuaXNT0XmTWu5JBSy_P1Lr6-u_MtYYjlW9avfFk52mKwH_MrPh6RqgOMeP2iOrzpSOEwh40z2-19IJbYXDgDheWDwU4lKrbR_WsA0eO8z1ulCC0_lQFopERw7MZ4KGm18jRRgDn1-kP-Tt-Ss692uPE3-F94AZpkOdn3fa-FjeIQV8biBA5Rbl2M3Nosv4JABvdeV7DqW2MbNtzpGHTKN8NDxSFtJ8zPy-0Jjd7Udbfd-DlqcgYyUY1McRoFyn4whJv9JDqVOSr__VF9i3GLRK3zXGUqIhGofj_iSR8Cwq_8GRY3di7ngR8VwBhuHdhO2fCqX7JF_3w3jMMPuIXWRdfgNBYI7i24IoYERriYSSHjg8ZXOOIScOrFBvAFJX3gy1KkdPj-F7xJO6QjoyuG4_r5GfcE6E9bVneMDXA"
             val originalRequest = chain.request()
-            val authenticationRequest = setHeader(originalRequest, SavedPreference.getToken(context))//token)authPreference.getToken())
+            val authenticationRequest = setHeader(originalRequest,authPreference.getToken())
             val initialResponse = chain.proceed(authenticationRequest)
 
-            Timber.tag("GGGXXX").d(SavedPreference.getToken(context))
+
+            Timber.tag("GGGXXX").d(authPreference.getToken())
 
             return when (initialResponse.code) {
                 401 -> {
@@ -54,4 +57,5 @@ class RequestInterceptor @Inject constructor(
             .header("platform","android")
             .build()
     }
+
 }

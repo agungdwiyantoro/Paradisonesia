@@ -329,7 +329,7 @@ class SigninFragment : BaseFragment(){
                     authPreference.setToken(account.idToken!!)
                     SavedPreference.setToken(requireContext(), account.idToken.toString())
                     Timber.tag("JANCOOOK").d("acc " + account.idToken)
-                    Timber.tag("JANCOOOK").d("lolok" + SavedPreference.getToken(requireContext()))
+                    Timber.tag("JANCOOOK2").d("lolok" + SavedPreference.getToken(requireContext()))
                     //requireContext().toast(resources.getString(R.string.signed_in) + authPreference.getToken())
                 }.also {
                     findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)

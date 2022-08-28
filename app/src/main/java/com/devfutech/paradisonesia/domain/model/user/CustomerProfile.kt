@@ -11,5 +11,4 @@ data class CustomerProfile(
     val birth_date: String?,
     val image: String?,
     val apiToken:String?,
-
 )
