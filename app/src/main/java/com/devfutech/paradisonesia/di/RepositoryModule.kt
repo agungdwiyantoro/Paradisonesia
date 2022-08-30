@@ -1,17 +1,8 @@
 package com.devfutech.paradisonesia.di
 
-import com.devfutech.paradisonesia.data.network.service.CustomerProfileService
-import com.devfutech.paradisonesia.data.network.service.CustomerService
-import com.devfutech.paradisonesia.data.network.service.MerchantService
-import com.devfutech.paradisonesia.data.network.service.ProductService
-import com.devfutech.paradisonesia.data.repository.CustomerProfileRepositoryImpl
-import com.devfutech.paradisonesia.data.repository.CustomerRepositoryImpl
-import com.devfutech.paradisonesia.data.repository.MerchantRepositoryImpl
-import com.devfutech.paradisonesia.data.repository.ProductRepositoryImpl
-import com.devfutech.paradisonesia.domain.repository.CustomerProfileRepository
-import com.devfutech.paradisonesia.domain.repository.CustomerRepository
-import com.devfutech.paradisonesia.domain.repository.MerchantRepository
-import com.devfutech.paradisonesia.domain.repository.ProductRepository
+import com.devfutech.paradisonesia.data.network.service.*
+import com.devfutech.paradisonesia.data.repository.*
+import com.devfutech.paradisonesia.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,12 +16,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
+
     @Provides
     @Singleton
-    fun provideCustomerProfileRepository(
-        remoteDataSource: CustomerProfileService,
-    ) : CustomerProfileRepository {
-        return CustomerProfileRepositoryImpl(remoteDataSource)
+    fun provideTokenRefreshRepository(
+        remoteDataSource: TokenRefreshService,
+    ): TokenRefreshRepository {
+        return TokenRefreshRepositoryImpl(remoteDataSource)
     }
 
     @Provides

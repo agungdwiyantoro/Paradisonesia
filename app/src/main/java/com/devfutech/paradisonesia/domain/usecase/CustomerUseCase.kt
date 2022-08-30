@@ -1,7 +1,6 @@
 package com.devfutech.paradisonesia.domain.usecase
 
 import com.devfutech.paradisonesia.domain.model.user.Customer
-import com.devfutech.paradisonesia.domain.model.user.CustomerProfile
 import com.devfutech.paradisonesia.domain.repository.CustomerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

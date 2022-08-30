@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.domain.model.user.Customer
 
 
-class ProfileAdapter : ListAdapter<Customer, ProfileAdapter.ProfileViewHolder>(POST_COMPARATOR) {
+class ProfileAdapter{
+
+}
+/*: ListAdapter<Customer, ProfileAdapter.ProfileViewHolder>(POST_COMPARATOR) {
 
     inner class ProfileViewHolder() :
 
@@ -21,3 +24,5 @@ class ProfileAdapter : ListAdapter<Customer, ProfileAdapter.ProfileViewHolder>(P
         }
     }
 }
+
+ */

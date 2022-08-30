@@ -44,7 +44,7 @@ class EditProfile : BaseFragment(){
         EditProfileBinding.inflate(layoutInflater)
     }
 
-    private val viewModel by viewModels<EditProfileViewModel>()
+    //private val viewModel by viewModels<EditProfileViewModel>()
     private val callbackManager by lazy {
         CallbackManager.Factory.create()
     }
@@ -70,7 +70,7 @@ class EditProfile : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setupAction()
-        setupObserve()
+       // setupObserve()
     }
 
     fun setupView(){
@@ -85,6 +85,7 @@ class EditProfile : BaseFragment(){
         }
     }
 
+    /*
     private fun setupObserve() {
         lifecycleScope.launchWhenStarted {
             viewModel.googleSignIn.collect { result ->
@@ -115,12 +116,14 @@ class EditProfile : BaseFragment(){
         }
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
-        
+
     }
 
-
+*/
     fun setupAction(){
         binding.apply {
             ivIcDate.setOnClickListener({
@@ -247,7 +250,7 @@ class EditProfile : BaseFragment(){
                     password = etPassword.text.toString().trim()
                 )
 
-                 */
+
                 viewModel.checkUserToServer(
                     name = tieFullNameValue.text.toString(),
                     email = email,
@@ -257,7 +260,7 @@ class EditProfile : BaseFragment(){
                     birth_date = tieCalendarPickValue.text.toString(),
                     image = "jskdjlfdjf"
                 )
-
+  */
                 root.snackBar("PROFILE UPDATED")
             }
         }

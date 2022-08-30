@@ -2,9 +2,16 @@ package com.devfutech.paradisonesia.external.network
 
 import android.content.Context
 import android.text.TextUtils
+import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
-import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
+import com.devfutech.paradisonesia.domain.usecase.RefreshTokenUseCase
+import com.facebook.AccessToken
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -27,18 +34,26 @@ class RequestInterceptor @Inject constructor(
             val originalRequest = chain.request()
             val authenticationRequest = setHeader(originalRequest,authPreference.getToken())
             val initialResponse = chain.proceed(authenticationRequest)
-
-
+           //AccessToken.refreshCurrentAccessTokenAsync()
             Timber.tag("GGGXXX").d(authPreference.getToken())
 
             return when (initialResponse.code) {
                 401 -> {
-//                    userPreference.clearData()
+                    //AccessToken.refreshCurrentAccessTokenAsync()
+                    //runBlocking {
+
+                   // }
+                   // initialResponse.close()
+                   // setHeader(originalRequest, authPreference.getRefreshToken())
+
+//                   userPreference.clearData()
 //                    Firebase.auth.signOut()
 //                    val intent = Intent(context, LoginActivity::class.java).apply {
 //                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
 //                    }
 //                    context.startActivity(intent)
+                    //initialResponse.close()
+                    //authenticationRequest.newBuilder().addHeader()
                     initialResponse
                 }
                 else -> initialResponse
@@ -57,5 +72,4 @@ class RequestInterceptor @Inject constructor(
             .header("platform","android")
             .build()
     }
-
 }

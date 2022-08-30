@@ -1,7 +1,6 @@
 package com.devfutech.paradisonesia.data.network.service
 
 import com.devfutech.paradisonesia.data.network.response.BaseResponse
-import com.devfutech.paradisonesia.data.network.response.banner.BannerResponse
 import com.devfutech.paradisonesia.data.network.response.customer.CustomerAuthResponse
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded

@@ -1,10 +1,10 @@
 package com.devfutech.paradisonesia.di
 
 import android.content.Context
+import androidx.viewbinding.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
-import com.devfutech.paradisonesia.BuildConfig
 import com.devfutech.paradisonesia.data.network.service.*
 import com.devfutech.paradisonesia.external.config.BaseConfig
 import com.devfutech.paradisonesia.external.network.RequestInterceptor
@@ -60,9 +60,9 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideCustomerProfileService(retrofit: Retrofit) : CustomerProfileService =
-        retrofit.create(CustomerProfileService::class.java)
-
+    fun provideTokenRefreshService(retrofit: Retrofit) : TokenRefreshService =
+        retrofit.create(TokenRefreshService::class.java)
+    
     @Provides
     @Singleton
     fun provideCustomerService(retrofit: Retrofit): CustomerService =

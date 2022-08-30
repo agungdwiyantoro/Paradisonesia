@@ -1,13 +1,8 @@
 package com.devfutech.paradisonesia.presentation.fragments.edit_profile
 
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
-import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.user.Customer
-import com.devfutech.paradisonesia.domain.model.user.CustomerProfile
-import com.devfutech.paradisonesia.domain.usecase.CustomerProfileUseCase
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
@@ -21,16 +16,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditProfileViewModel @Inject constructor(
-    private val customerProfileUseCase: CustomerProfileUseCase,
+    private val customerUseCase: CustomerUseCase,
     private val authPreference: AuthPreference
 ) : BaseViewModel() {
 
-    private val _googleSignIn: MutableStateFlow<Resource<CustomerProfile>> =
+    private val _googleSignIn: MutableStateFlow<Resource<Customer>> =
         MutableStateFlow(Resource.Success())
-    val googleSignIn: MutableStateFlow<Resource<CustomerProfile>>
+    val googleSignIn: MutableStateFlow<Resource<Customer>>
         get() = _googleSignIn
 
 
+    /*
     fun checkUserToServer(
         name: String,
         email: String,
@@ -64,4 +60,6 @@ class EditProfileViewModel @Inject constructor(
             }
         }
     }
+
+     */
 }

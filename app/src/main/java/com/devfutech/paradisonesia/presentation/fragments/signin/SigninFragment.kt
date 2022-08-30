@@ -38,7 +38,6 @@ import com.midtrans.sdk.corekit.models.CustomerDetails
 import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.models.ItemDetails
-import com.devfutech.paradisonesia.domain.savedPreference.SavedPreference
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -327,9 +326,9 @@ class SigninFragment : BaseFragment(){
                     isGoogle = true
                 ).also {
                     authPreference.setToken(account.idToken!!)
-                    SavedPreference.setToken(requireContext(), account.idToken.toString())
+                    //SavedPreference.setToken(requireContext(), account.idToken.toString())
                     Timber.tag("JANCOOOK").d("acc " + account.idToken)
-                    Timber.tag("JANCOOOK2").d("lolok" + SavedPreference.getToken(requireContext()))
+                   // Timber.tag("JANCOOOK2").d("lolok" + SavedPreference.getToken(requireContext()))
                     //requireContext().toast(resources.getString(R.string.signed_in) + authPreference.getToken())
                 }.also {
                     findNavController().safeNavigate(R.id.action_signinFragment_to_accountFragment)

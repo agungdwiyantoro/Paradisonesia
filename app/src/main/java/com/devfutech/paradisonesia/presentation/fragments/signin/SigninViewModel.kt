@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.domain.model.user.Customer
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
+import com.devfutech.paradisonesia.domain.usecase.RefreshTokenUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
 import com.google.firebase.auth.FacebookAuthProvider
@@ -21,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SigninViewModel @Inject constructor(
     private val customerUseCase: CustomerUseCase,
-    private val authPreference: AuthPreference
+    private val authPreference: AuthPreference,
+    private val refreshTokenUseCase: RefreshTokenUseCase
 ) : BaseViewModel() {
 
     private val _googleSignIn: MutableStateFlow<Resource<Customer>> =

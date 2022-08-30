@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.data.network.service
 
+import com.devfutech.paradisonesia.data.network.response.BaseResponse
 import com.devfutech.paradisonesia.data.network.response.RefreshToken.TokenRefreshResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -10,5 +11,5 @@ interface TokenRefreshService {
     @FormUrlEncoded
     suspend fun authRefreshToken(
         @Field("refresh_token") refreshToken: String?
-    ): TokenRefreshResponse
+    ): BaseResponse<TokenRefreshResponse>
 }
