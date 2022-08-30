@@ -16,4 +16,8 @@ class CustomerRepositoryImpl(
         val response =  remoteDataSource.authCustomer(payload).data?.toCustomer()
         emit(response)
     }
+
+    override suspend fun profileCustomer(): Flow<List<Customer>> {
+        TODO("Not yet implemented")
+    }
 }

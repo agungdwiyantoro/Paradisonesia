@@ -132,9 +132,11 @@ class SigninViewModel @Inject constructor(
 
                 authPreference.apply {
                     setToken(it?.access_token.toString())
+                    setRefreshToken(it?.refresh_token.toString())
                 }
 
                 Timber.tag("AuthPrefGetToken").d(authPreference.getToken())
+                Timber.tag("AuthRefreshToken").d(authPreference.getRefreshToken())
             }
         }
     }
