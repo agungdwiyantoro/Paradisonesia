@@ -17,4 +17,7 @@ interface ProductRepository {
     suspend fun listProvinces(): Flow<List<Province>>
 
     suspend fun listProduct(map: Map<String,String>): Flow<List<Product>>
+
+    suspend fun listProduct(): Flow<List<Product>>
+
 }

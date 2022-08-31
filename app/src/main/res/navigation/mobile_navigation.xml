@@ -152,7 +152,11 @@
         android:id="@+id/productFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment"
         android:label="product_fragment"
-        tools:layout="@layout/product_fragment" />
+        tools:layout="@layout/product_fragment">
+        <action
+            android:id="@+id/productFragment_to_filterFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/editProfile"
@@ -163,5 +167,4 @@
             android:id="@+id/action_editProfile_to_accountFragment"
             app:destination="@id/accountFragment" />
     </fragment>
-
 </navigation>

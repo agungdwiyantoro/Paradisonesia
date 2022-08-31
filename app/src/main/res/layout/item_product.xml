@@ -8,38 +8,119 @@
     app:cardCornerRadius="@dimen/_8sdp"
     app:cardElevation="@dimen/_8sdp">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
 
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_name"/>
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            style="@style/Text.Medium.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Product Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_location"/>
+
+        <TextView
+            android:id="@+id/tv_product_location"
+            style="@style/Text.Small.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_discounted_price"
+            app:drawableStartCompat="@drawable/ic_map" />
+
+        <TextView
+            android:id="@+id/tv_product_rating"
+            style="@style/Text.Small.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="4.6"
+            android:textColor="@color/star_color"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_location"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_discounted_price"
+            app:drawableStartCompat="@drawable/ic_rating_star" />
+
+        <TextView
+            android:id="@+id/tv_product_reviews"
+            style="@style/Text.Small.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="4.6"
+            android:textColor="@color/gray.primary_dark"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_rating"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_discounted_price" />
+
+        <TextView
+            android:id="@+id/tv_product_discounted_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/discounted_price"
+            android:textColor="@color/gray.primary_dark"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_discount"
+            app:layout_constraintEnd_toStartOf="@+id/tv_product_per_pax"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_final_price" />
+
+        <TextView
+            android:id="@+id/tv_product_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disc 20%"
+            android:textColor="@color/white"
+            android:background="@color/disc_color"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_final_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 2.000.000"
+            android:textColor="@color/aquamarine.primary_dark"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_discount"
+            app:layout_constraintEnd_toStartOf="@+id/tv_product_per_pax"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_product_per_pax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/pax"
+            android:textColor="@color/gray.primary_dark"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/_5sdp"/>
+
+        <!--
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/_8sdp">
 
-            <TextView
-                android:id="@+id/tv_product_name"
-                style="@style/Text.Medium.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Product Name" />
 
-            <TextView
-                android:id="@+id/tv_product_description"
-                style="@style/Text.Small.Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                tools:text="Product Description" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

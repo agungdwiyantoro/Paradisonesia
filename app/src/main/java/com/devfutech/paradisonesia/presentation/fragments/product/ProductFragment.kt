@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
@@ -15,10 +16,12 @@ import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ProductFragment : BaseFragment() {
@@ -58,6 +61,10 @@ class ProductFragment : BaseFragment() {
                 val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION)
                 filter.show(parentFragmentManager, filter.tag)
             }
+
+            llFilterItem.setOnClickListener({
+                   // findNavController().safeNavigate(R.id.action_Product)
+            })
 
 
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
@@ -104,6 +111,7 @@ class ProductFragment : BaseFragment() {
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
+                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         productAdapter.submitList(result.data)
                     }
                 }

@@ -13,4 +13,8 @@
     <color name="pale_red">#EC6565</color>
 
     <color name="semi_transparent">#F24E4C4C</color>
+
+    <color name="disc_color">#F04461</color>
+
+    <color name="star_color">#EC8423</color>
 </resources>

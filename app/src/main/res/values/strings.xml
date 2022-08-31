@@ -119,4 +119,12 @@
     </string-array>
     <string name="dd_mm_yyyy">dd-mm-yyyy</string>
     <string name="customize_your_paradisonesia">Customize your paradisonesia profile data by clicking the icon the icon</string>
+
+    <!-- Filter Fragment -->
+    <string name="price_limit">Price Limit (Rp)</string>
+    <string name="rating">Rating</string>
+    <string name="availability_date">Availability Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="apply">Apply</string>
+    <string name="discounted_price"> <strike>Rp. 1.900.000</strike> </string>
 </resources>

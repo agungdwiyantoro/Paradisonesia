@@ -22,8 +22,20 @@ interface ProductService {
     @GET("provinces")
     suspend fun provinces(): BaseResponse<List<ProvinceResponse>>
 
+    /*
     @GET("products")
     suspend fun products(
         @QueryMap map: Map<String, String>
     ): BaseResponse<ProductResponse>
+
+     */
+
+    @GET("products")
+    suspend fun products(
+        @QueryMap map: Map<String, String>
+    ): BaseResponse<List<ProductResponse>>
+
+    @GET("products")
+    suspend fun products(): BaseResponse<List<ProductResponse>>
+
 }

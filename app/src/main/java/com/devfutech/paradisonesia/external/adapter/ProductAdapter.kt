@@ -25,7 +25,9 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                     error(R.drawable.ic_image_not_available)
                 }
                 tvProductName.text = item.name
-                tvProductDescription.text = item.description
+                tvProductFinalPrice.text = item.price.toString()
+                tvProductDiscountedPrice.text = item.net_price.toString()
+                //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {
 //                        findNavController().navigate(ShopFragmentDirections.actionShopFragmentToProductFragment(item))
