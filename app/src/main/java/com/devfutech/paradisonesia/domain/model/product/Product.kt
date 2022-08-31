@@ -4,20 +4,52 @@ package com.devfutech.paradisonesia.domain.model.product
  * Created by devfutech on 10/5/2021.
  */
 data class Product(
-    val address: String?,
-    val avgRating: String?,
-    val cityCode: Int?,
-    val description: String?,
-    val discount: Int?,
-    val duration: Int?,
-    val endDate: String?,
     val id: Int?,
-    val isHiglight: Int?,
+    val merchant_id: Int?,
+    val product_sub_category_id: Int?,
+    val status_id: Int?,
+    val name: String?,
+    val description: String?,
+    val address: String?,
+    val coordinate: String?,
+    val cityCode: Int?,
+    val duration: Int?,
+    val start_date: String?,
+    val end_date: String?,
+    val net_price: Int?,
+    val price: Int?,
+    val unit: String?,
+    val thumbnail: String?,
     val maxPerson: String?,
     val minPerson: String?,
-    val name: String?,
-    val netPrice: Int?,
-    val price: Int?,
-    val thumbnail: String?,
-    val unit: String?,
-)
+    val note: String?,
+    val isHiglight: Int?,
+    val updated_at: String?,
+    val rating_average: String?,
+    val review_count: Int?,
+    val city : City?,
+    val sub_category: Sub_category?,
+) {
+    data class City(
+        val code: Int?,
+        val name: String?,
+        val province_code: Int?,
+        val image: String?,
+        val is_highlight: Int?
+    )
+
+    data class Sub_category(
+        val id: Int?,
+        val product_sub_category_id: Int?,
+        val name: String?,
+        val icon: String?,
+        val category: Category?
+    ) {
+        data class Category(
+            val id: Int?,
+            val payment_type_id: Int?,
+            val name: String?,
+            val icon: String?
+        )
+    }
+}

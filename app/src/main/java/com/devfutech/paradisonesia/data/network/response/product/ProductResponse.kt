@@ -9,10 +9,10 @@ data class ProductResponse(
     val products: List<DataProductResponse>? = listOf(),
     @SerializedName("city_code")
     val cityCode: String?,
+   // @SerializedName("product_sub_category_id")
+   // val productSubCategoryId: String?,
     @SerializedName("page")
     val page: String?,
-    @SerializedName("product_sub_category_id")
-    val productSubCategoryId: String?,
     @SerializedName("show")
     val show: String?,
     @SerializedName("sort_by")
@@ -22,6 +22,9 @@ data class ProductResponse(
 ) {
     fun toProduct() = products?.map { product ->
         Product(
+            id = product.id,
+            merchant_id = product.merchantId,
+            product_sub_category = product.productSubCategoryId
             address = product.address,
             avgRating = product.avgRating,
             cityCode = product.cityCode,
@@ -29,7 +32,7 @@ data class ProductResponse(
             discount = product.discount,
             duration = product.duration,
             endDate = product.endDate,
-            id = product.id,
+
             isHiglight = product.isHiglight,
             maxPerson = product.maxPerson,
             minPerson = product.minPerson,
