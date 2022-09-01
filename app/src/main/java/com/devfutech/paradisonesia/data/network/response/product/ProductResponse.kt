@@ -56,8 +56,8 @@ data class ProductResponse(
     val updated_at: String?,
     @SerializedName("rating_average")
     val rating_average: String?,
-    @SerializedName("review_count")
-    val review_count: Int?,
+    @SerializedName("reviews_count")
+    val reviews_count: Int?,
     @SerializedName("city")
     val city : Product.City?,
     @SerializedName("sub_category")
@@ -98,7 +98,7 @@ data class ProductResponse(
         isHiglight = isHiglight,
         updated_at = updated_at,
         rating_average = rating_average,
-        review_count = review_count,
+        reviews_count = reviews_count,
         city = city,
         sub_category = sub_category
         /*

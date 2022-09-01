@@ -26,7 +26,7 @@ data class Product(
     val isHiglight: Int?,
     val updated_at: String?,
     val rating_average: String?,
-    val review_count: Int?,
+    val reviews_count: Int?,
     val city : City?,
     val sub_category: Sub_category?,
 ) {

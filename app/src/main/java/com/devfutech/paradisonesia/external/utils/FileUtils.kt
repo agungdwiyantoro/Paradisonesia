@@ -22,14 +22,10 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
-import java.time.DateTimeException
-import java.time.LocalDate
+import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
 import java.util.*
-import kotlin.Comparator
 
 
 /**
@@ -377,5 +373,13 @@ object FileUtils {
 
 
         return formatter
+    }
+
+    fun convertToCurrency(nominal: Int?): String{
+        val format: NumberFormat = NumberFormat.getCurrencyInstance()
+        format.setMaximumFractionDigits(0)
+        format.setCurrency(Currency.getInstance("IDR"))
+
+        return format.format(nominal).replace("IDR","").replace(",",".")
     }
 }

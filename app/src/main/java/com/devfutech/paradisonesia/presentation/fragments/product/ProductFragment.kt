@@ -66,7 +66,6 @@ class ProductFragment : BaseFragment() {
                    // findNavController().safeNavigate(R.id.action_Product)
             })
 
-
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
                 val result: ArrayList<Filter> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()

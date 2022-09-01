@@ -1,5 +1,7 @@
 package com.devfutech.paradisonesia.external.adapter
 
+import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +12,8 @@ import coil.loadAny
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductBinding
 import com.devfutech.paradisonesia.domain.model.product.Product
+import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
+import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment
 
 /**
  * Created by devfutech on 10/5/2021.
@@ -22,11 +26,25 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
             binding.apply {
                 ivProduct.loadAny(item.thumbnail?:""){
                     crossfade(true)
-                    error(R.drawable.ic_image_not_available)
+                    error(R.drawable.object_wisata_lombok)
+                    //error(R.drawable.ic_image_not_available)
                 }
+
                 tvProductName.text = item.name
-                tvProductFinalPrice.text = item.price.toString()
-                tvProductDiscountedPrice.text = item.net_price.toString()
+
+                tvProductFinalPrice.text =   this@ProductViewHolder.itemView.context.resources.getString(
+                    R.string.final_price, convertToCurrency(item.price)
+                )
+                tvProductRating.text = item.rating_average
+
+                tvProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(
+                    R.string.reviews_w_value, item.reviews_count.toString()
+                )
+
+                tvProductDiscountedPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                tvProductDiscountedPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
+                    R.string.discounted_price, convertToCurrency(item.net_price)
+                )
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {

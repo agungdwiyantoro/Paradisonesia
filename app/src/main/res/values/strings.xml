@@ -126,5 +126,11 @@
     <string name="availability_date">Availability Date</string>
     <string name="start_date">Start Date</string>
     <string name="apply">Apply</string>
-    <string name="discounted_price"> <strike>Rp. 1.900.000</strike> </string>
+
+    <!-- Product Fragment -->
+    <string name="final_price">Rp. %1$s</string>
+    <string name="discounted_price"> <strike>Rp. %1$s</strike> </string>
+    <string name="promo">Promo</string>
+    <string name="per_pax">/pax</string>
+    <string name="reviews_w_value">(%1$s reviews)</string>
 </resources>

@@ -52,8 +52,8 @@ data class DataProductResponse(
     val updated_at: String?,
     @SerializedName("rating_average")
     val rating_average: String?,
-    @SerializedName("review_count")
-    val review_count: Int?,
+    @SerializedName("reviews_count")
+    val reviews_count: Int?,
     @SerializedName("city")
     val city : Product.City?,
     @SerializedName("sub_category")

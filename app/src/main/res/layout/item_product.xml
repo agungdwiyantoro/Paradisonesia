@@ -15,10 +15,37 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_product"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:src="@drawable/object_wisata_lombok"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            app:layout_constraintBottom_toTopOf="@+id/tv_product_name"/>
+        <TextView
+            android:id="@+id/tv_product_promo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/promo"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/disc_color"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_love"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_product_promo"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_product_promo"/>
 
         <TextView
             android:id="@+id/tv_product_name"
@@ -26,8 +53,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Product Name"
+
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+
+            app:layout_constraintTop_toBottomOf="@+id/iv_product"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_product_location"/>
+             />
 
         <TextView
             android:id="@+id/tv_product_location"
@@ -35,8 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Location"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_product_discounted_price"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_product_name"
             app:drawableStartCompat="@drawable/ic_map" />
 
         <TextView
@@ -46,8 +78,10 @@
             android:layout_height="wrap_content"
             tools:text="4.6"
             android:textColor="@color/star_color"
+
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
             app:layout_constraintStart_toEndOf="@+id/tv_product_location"
-            app:layout_constraintBottom_toTopOf="@+id/tv_product_discounted_price"
             app:drawableStartCompat="@drawable/ic_rating_star" />
 
         <TextView
@@ -57,60 +91,69 @@
             android:layout_height="wrap_content"
             tools:text="4.6"
             android:textColor="@color/gray.primary_dark"
-            app:layout_constraintStart_toEndOf="@+id/tv_product_rating"
-            app:layout_constraintBottom_toTopOf="@+id/tv_product_discounted_price" />
+
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_rating" />
 
         <TextView
             android:id="@+id/tv_product_discounted_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="@string/discounted_price"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/gray.primary_dark"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toEndOf="@+id/tv_product_discount"
-            app:layout_constraintEnd_toStartOf="@+id/tv_product_per_pax"
-            app:layout_constraintBottom_toTopOf="@+id/tv_product_final_price" />
+
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_location"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_final_price"
+            app:layout_constraintStart_toStartOf="@+id/tv_product_final_price" />
 
         <TextView
             android:id="@+id/tv_product_discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Disc 20%"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:background="@color/disc_color"
             android:padding="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/tv_product_final_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rp 2.000.000"
+
+            android:text="@string/final_price"
+            android:textSize="@dimen/_20sdp"
             android:textColor="@color/aquamarine.primary_dark"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:textStyle="bold"
+
             app:layout_constraintHorizontal_bias="1"
+
             app:layout_constraintStart_toEndOf="@+id/tv_product_discount"
             app:layout_constraintEnd_toStartOf="@+id/tv_product_per_pax"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/tv_product_discount"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_discount" />
 
         <TextView
             android:id="@+id/tv_product_per_pax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/pax"
-            android:textColor="@color/gray.primary_dark"
-            android:padding="@dimen/_5sdp"
+
+            android:text="@string/per_pax"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp"
+
             android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!--
         <androidx.appcompat.widget.LinearLayoutCompat
