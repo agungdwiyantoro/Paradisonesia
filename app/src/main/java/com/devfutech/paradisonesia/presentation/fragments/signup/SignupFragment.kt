@@ -107,6 +107,7 @@ class SignupFragment : BaseFragment() {
                             }
                         }
                     }
+                    else -> {}
                 }
             }
         }
@@ -128,6 +129,7 @@ class SignupFragment : BaseFragment() {
                             findNavController().navigateUp()
                         }
                     }
+                    else -> {}
                 }
             }
         }

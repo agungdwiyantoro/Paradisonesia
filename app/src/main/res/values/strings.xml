@@ -105,7 +105,7 @@
     <!-- Sign In Fragment -->
     <string name="does_not_have_an_account">Doesn\'t have an account?</string>
     <string name="register_here">Register here</string>
-    
+
     <!-- Edit Profile -->
     <string name="edit_profile_data">Edit Profile Data</string>
     <string name="save">Save</string>

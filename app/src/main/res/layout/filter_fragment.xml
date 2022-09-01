@@ -17,14 +17,17 @@
             android:id="@+id/tv_price_limit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Text.Medium.Bold"
             android:text="@string/price_limit"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_price_minim"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="1"
+
             app:layout_constraintTop_toBottomOf="@+id/tv_price_limit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tl_price_max">
@@ -57,12 +60,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@+id/tl_price_max" />
 
         <View
             android:id="@+id/v_garis_1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
+            android:background="@color/dark_gray"
+
+            android:layout_marginTop="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/sb_price"/>
 
         <TextView
@@ -70,7 +77,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/rating"
-            app:layout_constraintTop_toBottomOf="@+id/v_garis_1"/>
+            style="@style/Text.Medium.Bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/v_garis_1" />
 
         <RatingBar
             android:id="@+id/rb_rating"
@@ -78,7 +87,6 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             app:layout_constraintTop_toBottomOf="@+id/tv_rating"/>
-
 
         <View
             android:id="@+id/v_garis_2"
@@ -91,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/availability_date"
+            style="@style/Text.Medium.Bold"
             app:layout_constraintTop_toBottomOf="@+id/v_garis_2"/>
 
         <TextView
@@ -98,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start_date"
+            style="@style/Text.Medium"
             app:layout_constraintTop_toBottomOf="@+id/tv_availablity_date"/>
 
 
@@ -134,6 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/start_date"
+            style="@style/Text.Medium"
             app:layout_constraintTop_toBottomOf="@+id/tl_start_date"/>
 
 

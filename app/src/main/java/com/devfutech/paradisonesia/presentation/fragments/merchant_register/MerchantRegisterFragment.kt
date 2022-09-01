@@ -77,6 +77,7 @@ class MerchantRegisterFragment : BaseFragment() {
                             findNavController().navigateUp()
                         }
                     }
+                    else -> {}
                 }
             }
         }

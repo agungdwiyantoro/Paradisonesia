@@ -59,6 +59,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                     is Resource.Success -> {
                         filterAdapter.submitList(result.data)
                     }
+                    else -> {}
                 }
             }
         }

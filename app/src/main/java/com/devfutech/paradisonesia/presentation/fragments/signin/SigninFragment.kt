@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.devfutech.paradisonesia.BuildConfig
+import com.chuckerteam.chucker.BuildConfig
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.databinding.SigninFragmentBinding
@@ -134,6 +134,7 @@ class SigninFragment : BaseFragment(){
                             findNavController().navigateUp()
                         }
                     }
+                    else -> {}
                 }
             }
         }

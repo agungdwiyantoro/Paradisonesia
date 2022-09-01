@@ -72,6 +72,7 @@ class HomeCustomerFragment : BaseFragment() {
                         binding.vfPopularDestination.displayedChild = 1
                         cityAdapter.submitList(result.data)
                     }
+                    else -> {}
                 }
             }
         }
@@ -90,6 +91,7 @@ class HomeCustomerFragment : BaseFragment() {
                         binding.vfCategoryProduct.displayedChild = 1
                         categoryProductAdapter.submitList(result.data)
                     }
+                    else -> {}
                 }
             }
         }
@@ -110,6 +112,7 @@ class HomeCustomerFragment : BaseFragment() {
                         slideBanners(result.data!!.size)
                         Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
                     }
+                    else -> {}
                 }
             }
         }

@@ -77,6 +77,7 @@ class AccountFragment : BaseFragment() {
                             )
                         }
                     }
+                    else -> {}
                 }
             }
         }.launchIn(lifecycleScope)

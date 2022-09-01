@@ -113,6 +113,7 @@ class ProductFragment : BaseFragment() {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         productAdapter.submitList(result.data)
                     }
+                    else -> {}
                 }
             }
         }

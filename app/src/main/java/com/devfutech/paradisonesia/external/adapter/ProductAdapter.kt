@@ -35,6 +35,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                 tvProductFinalPrice.text =   this@ProductViewHolder.itemView.context.resources.getString(
                     R.string.final_price, convertToCurrency(item.price)
                 )
+
                 tvProductRating.text = item.rating_average
 
                 tvProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(
