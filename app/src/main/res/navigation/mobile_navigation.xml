@@ -148,15 +148,7 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-    <fragment
-        android:id="@+id/productFragment"
-        android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment"
-        android:label="product_fragment"
-        tools:layout="@layout/product_fragment">
-        <action
-            android:id="@+id/productFragment_to_filterFragment"
-            app:destination="@id/accountFragment" />
-    </fragment>
+
 
     <fragment
         android:id="@+id/editProfile"
@@ -166,5 +158,31 @@
         <action
             android:id="@+id/action_editProfile_to_accountFragment"
             app:destination="@id/accountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailFragment"
+        android:label="product_detail_fragment"
+        tools:layout="@layout/product_detail_fragment" >
+
+        <argument
+            android:name="detailProduct"
+            app:argType="com.devfutech.paradisonesia.domain.model.product.ProductParcelable" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment"
+        android:label="product_fragment"
+        tools:layout="@layout/product_fragment">
+        <action
+            android:id="@+id/productFragment_to_filterFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+
     </fragment>
 </navigation>
