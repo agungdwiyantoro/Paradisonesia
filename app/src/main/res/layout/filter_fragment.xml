@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include android:id="@+id/tv_title_bar" layout="@layout/title_bar"/>
+    <include android:id="@+id/tv_title_bar" layout="@layout/title_bar"
+
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp">
+        android:paddingEnd="@dimen/_10sdp"
+
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_bar">
 
         <TextView
             android:id="@+id/tv_price_limit"
@@ -26,32 +30,50 @@
             android:id="@+id/tl_price_minim"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintHorizontal_weight="2"
+            app:boxBackgroundMode="none"
 
             app:layout_constraintTop_toBottomOf="@+id/tv_price_limit"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tl_price_max">
+            app:layout_constraintEnd_toStartOf="@+id/v_garis_conjunction">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_price_minim"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border_grey"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/v_garis_conjunction"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/dark_gray"
+            app:layout_constraintHorizontal_weight="1"
+
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="@+id/tl_price_minim"
+            app:layout_constraintBottom_toBottomOf="@+id/tl_price_minim"
+            app:layout_constraintStart_toEndOf="@+id/tl_price_minim"
+            app:layout_constraintEnd_toStartOf="@+id/tl_price_max"/>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_price_max"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintHorizontal_weight="2"
+            app:boxBackgroundMode="none"
             app:layout_constraintTop_toBottomOf="@+id/tv_price_limit"
-            app:layout_constraintStart_toEndOf="@+id/tl_price_minim"
+            app:layout_constraintStart_toEndOf="@+id/v_garis_conjunction"
             app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_price_max"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border_grey"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +100,7 @@
             android:layout_height="wrap_content"
             android:text="@string/rating"
             style="@style/Text.Medium.Bold"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/v_garis_1" />
 
         <RatingBar
@@ -92,6 +114,9 @@
             android:id="@+id/v_garis_2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
+            android:background="@color/dark_gray"
+
+            android:layout_marginTop="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/rb_rating"/>
 
         <TextView
@@ -100,6 +125,8 @@
             android:layout_height="wrap_content"
             android:text="@string/availability_date"
             style="@style/Text.Medium.Bold"
+
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@+id/v_garis_2"/>
 
         <TextView
@@ -116,6 +143,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_date"
+
             app:layout_constraintTop_toBottomOf="@+id/tl_start_date"
             app:layout_constraintBottom_toTopOf="@+id/tl_start_date"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,16 +154,19 @@
             android:id="@+id/tl_start_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
             app:layout_constraintTop_toBottomOf="@+id/tv_start_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_calendar_start_date"
-            app:layout_constraintHorizontal_weight="6"
-            android:hint="@string/dd_mm_yyyy">
+            app:layout_constraintHorizontal_weight="6">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_start_date"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/dd_mm_yyyy"
+                android:padding="@dimen/_15sdp"
+                android:background="@drawable/rounded_border_grey"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,6 +176,8 @@
             android:layout_height="wrap_content"
             android:text="@string/start_date"
             style="@style/Text.Medium"
+
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@+id/tl_start_date"/>
 
 
@@ -153,6 +186,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_date"
+
             app:layout_constraintTop_toBottomOf="@+id/tl_end_date"
             app:layout_constraintBottom_toTopOf="@+id/tl_end_date"
             app:layout_constraintStart_toStartOf="parent"
@@ -163,16 +197,19 @@
             android:id="@+id/tl_end_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:boxBackgroundMode="none"
             app:layout_constraintTop_toBottomOf="@+id/tv_end_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_calendar_end_date"
-            app:layout_constraintHorizontal_weight="6"
-            android:hint="@string/dd_mm_yyyy">
+            app:layout_constraintHorizontal_weight="6">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tie_end_date"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border_grey"
+                android:hint="@string/dd_mm_yyyy"
+                android:padding="@dimen/_15sdp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -180,11 +217,13 @@
             android:id="@+id/bt_apply"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintTop_toBottomOf="@+id/tl_end_date"
             android:text="@string/apply"
-            style="@style/Button.Filled.Yellow.Rounded"
-            />
+            style="@style/Button.Filled.Yellow.Rounded" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <include android:id="@+id/layout_calendar" layout="@layout/layout_calendar"
+        android:visibility="gone"/>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

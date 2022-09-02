@@ -13,6 +13,7 @@
 
         app:layout_constraintTop_toTopOf="parent"/>
 
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_compat"
         android:layout_width="match_parent"
@@ -228,68 +229,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/llcomp_date_picker"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/semi_transparent"
-        android:visibility="gone"
-        android:gravity="center">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/_50sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/navy_blue.primary"
-                android:gravity="end"
-
-                android:paddingStart="0dp"
-                android:paddingEnd="@dimen/_20sdp">
-
-                <Button
-                    android:id="@+id/bt_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="X"
-                    android:textColor="@color/red"
-                    android:layout_gravity="end"
-                    android:background="@android:color/transparent" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <DatePicker
-                android:id="@+id/dp_birthdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:headerBackground="@color/navy_blue.primary"
-                android:background="@color/white"
-                />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="end"
-
-                android:paddingStart="0dp"
-                android:paddingEnd="@dimen/_20sdp"
-                android:paddingBottom="@dimen/_10sdp">
-
-                <Button
-                    android:id="@+id/bt_confirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Button.Filled.Yellow.Rounded"
-                    android:text="@string/confirm" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
+    <include android:id="@+id/layout_calendar" layout="@layout/layout_calendar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

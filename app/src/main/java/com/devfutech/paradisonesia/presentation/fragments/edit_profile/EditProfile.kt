@@ -127,13 +127,13 @@ class EditProfile : BaseFragment(){
     fun setupAction(){
         binding.apply {
             ivIcDate.setOnClickListener({
-                llcompDatePicker.visibility = View.VISIBLE
+                layoutCalendar.llcompDatePicker.visibility = View.VISIBLE
             })
 
-            btConfirm.setOnClickListener({
-                tieCalendarPickValue.setText(dpBirthdate.getDate())
+            layoutCalendar.btConfirm.setOnClickListener({
+                tieCalendarPickValue.setText( layoutCalendar.dpBirthdate.getDate())
                 tieCalendarPickValue.setHint("")
-                llcompDatePicker.visibility = View.GONE
+                layoutCalendar.llcompDatePicker.visibility = View.GONE
             })
 
             titleBar.ivBack.setOnClickListener({

@@ -62,9 +62,11 @@ class ProductFragment : BaseFragment() {
                 filter.show(parentFragmentManager, filter.tag)
             }
 
-            llFilterItem.setOnClickListener({
+            llFilterItem.setOnClickListener{
                    // findNavController().safeNavigate(R.id.action_Product)
-            })
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION)
+                filter.show(parentFragmentManager, filter.tag)
+            }
 
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
