@@ -10,6 +10,7 @@ data class ProductParcelable(
     val coordinate : String?,
     val rating_average : String?,
     val reviews_count : Int?,
-    val description : String?
+    val description : String?,
+    val sub_category_name : String?
 
 ) : Parcelable

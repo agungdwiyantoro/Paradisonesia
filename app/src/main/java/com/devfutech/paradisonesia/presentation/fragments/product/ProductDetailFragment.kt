@@ -141,7 +141,10 @@ class ProductDetailFragment : BaseFragment(){
             tvDetailProduct.text = user.name
             tvDetailProductDescription.text = user.description
             tvDetailProductRating.text = user.rating_average
-            tvDetailProductReviews.text = user.reviews_count.toString()
+            tvDetailProductReviews.text = resources.getString(
+                R.string.reviews_w_value, user.reviews_count.toString()
+            )
+            tvDetailCategoryProduct.text = user.sub_category_name
         }
     }
 }

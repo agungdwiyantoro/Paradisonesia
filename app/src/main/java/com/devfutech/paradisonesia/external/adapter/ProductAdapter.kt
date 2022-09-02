@@ -53,6 +53,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                 tvProductDiscountedPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
                     R.string.discounted_price, convertToCurrency(item.net_price)
                 )
+
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {
@@ -78,7 +79,8 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                     item.coordinate,
                     item.rating_average,
                     item.reviews_count,
-                    item.description)
+                    item.description,
+                    item.sub_category?.name)
 
                 val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
                 root.setOnClickListener{

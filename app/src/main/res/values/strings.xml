@@ -133,4 +133,5 @@
     <string name="promo">Promo</string>
     <string name="per_pax">/pax</string>
     <string name="reviews_w_value">(%1$s reviews)</string>
+    <string name="description">Description</string>
 </resources>

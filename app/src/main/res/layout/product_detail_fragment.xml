@@ -52,6 +52,7 @@
 
     </com.google.android.material.appbar.MaterialToolbar>
 
+    <!--
     <ViewFlipper
         android:id="@+id/vf_banner"
         android:layout_width="match_parent"
@@ -86,6 +87,19 @@
         </RelativeLayout>
     </ViewFlipper>
 
+    -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tour_backpacker_mandalika"
+
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_action_bar"
+        app:layout_constraintBottom_toTopOf="@+id/tv_product_promo"/>
+
 
     <TextView
         android:id="@+id/tv_product_promo"
@@ -93,14 +107,14 @@
         android:layout_height="wrap_content"
         android:text="@string/promo"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@color/disc_color"
+        style="@style/Text.Medium.Bold"
+        android:background="@color/red"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:paddingTop="@dimen/_5sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/vf_banner"
+        app:layout_constraintTop_toBottomOf="@+id/iv_product"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -112,8 +126,10 @@
         style="@style/Text.Medium.Bold"
 
 
-        app:layout_constraintTop_toBottomOf="@+id/vf_banner"
-        app:layout_constraintStart_toEndOf="@+id/tv_product_promo"/>
+        app:layout_constraintTop_toTopOf="@+id/tv_product_promo"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_product_promo"
+        app:layout_constraintStart_toEndOf="@+id/tv_product_promo"
+        android:layout_marginStart="@dimen/_10sdp"/>
 
     <TextView
         android:id="@+id/tv_detail_product"
@@ -122,6 +138,8 @@
         android:text="@string/promo"
         style="@style/Text.Medium.Bold"
 
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_promo"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -131,6 +149,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location"
+
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_product"
         app:layout_constraintStart_toStartOf="parent"
         app:drawableStartCompat="@drawable/ic_map" />
@@ -143,6 +164,8 @@
         android:text="4.6"
         android:textColor="@color/star_color"
 
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_product_location"
         app:layout_constraintStart_toStartOf="parent"
         app:drawableStartCompat="@drawable/ic_rating_star" />
@@ -152,10 +175,10 @@
         style="@style/Text.Small.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4.6"
         android:textColor="@color/gray.primary_dark"
 
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_product_location"
         app:layout_constraintStart_toEndOf="@+id/tv_detail_product_rating" />
 
@@ -167,7 +190,9 @@
 
         android:background="@drawable/ic_favorite"
         android:textColor="@color/gray.primary_dark"
-        android:layout_marginStart="@dimen/_5sdp"
+
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_product_location"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -175,9 +200,11 @@
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/promo"
+        android:text="@string/description"
         style="@style/Text.Large"
 
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_product_rating"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -188,6 +215,9 @@
         android:text="@string/promo"
         style="@style/Text.Medium"
 
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
