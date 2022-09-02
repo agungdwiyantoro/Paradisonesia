@@ -10,6 +10,7 @@ import android.database.DatabaseUtils
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
@@ -17,7 +18,9 @@ import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import com.devfutech.paradisonesia.BuildConfig.DEBUG
+import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
@@ -329,6 +332,8 @@ object FileUtils {
             navigate(direction)
         }
     }
+
+
 
     fun simpleSpinnerAdapter(context: Context, items: Array<String>) : ArrayAdapter<String>? {
         return ArrayAdapter(context,

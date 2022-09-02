@@ -1,19 +1,26 @@
 package com.devfutech.paradisonesia.external.adapter
 
-import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation.findNavController
+//import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import coil.loadAny
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductBinding
 import com.devfutech.paradisonesia.domain.model.product.Product
+import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
+import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
+import com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailFragmentArgs
 import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment
+import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
 
 /**
  * Created by devfutech on 10/5/2021.
@@ -52,6 +59,32 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
 //                        findNavController().navigate(ShopFragmentDirections.actionShopFragmentToProductFragment(item))
 //                    }
 //                }
+
+                /*
+
+
+
+                val bundle  = Bundle()
+                bundle.putString("name", item.name)
+                bundle.putString("rating_average", item.rating_average)
+                bundle.putString("reviews_count", item.reviews_count.toString())
+                bundle.putString("reviews_count", item.description)
+
+                val bundle = bundleOf("name", bundle)
+                */
+
+                val productParcelable = ProductParcelable(
+                    item.name,
+                    item.coordinate,
+                    item.rating_average,
+                    item.reviews_count,
+                    item.description)
+
+                val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
+                root.setOnClickListener{
+                    findNavController(it).navigate(action)
+                }
+
             }
         }
     }

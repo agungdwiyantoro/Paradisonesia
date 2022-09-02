@@ -1,50 +1,58 @@
 package com.devfutech.paradisonesia.presentation.fragments.product
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+
+import androidx.navigation.fragment.navArgs
+
 import com.devfutech.paradisonesia.R
-import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
-import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
+
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
-import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
+
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
+
+import com.facebook.CallbackManager
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-@AndroidEntryPoint
-class ProductFragment : BaseFragment() {
 
-    private val binding: ProductFragmentBinding by lazy {
-        ProductFragmentBinding.inflate(layoutInflater)
+@AndroidEntryPoint
+class ProductDetailFragment : BaseFragment(){
+    private val binding: ProductDetailFragmentBinding by lazy{
+        ProductDetailFragmentBinding.inflate(layoutInflater)
     }
-    private val viewModel: ProductViewModel by viewModels()
-    private val productAdapter by lazy {
-        ProductAdapter()
+    private val viewModel: ProductDetailViewModel by viewModels()
+
+    private val callbackManager by lazy {
+        CallbackManager.Factory.create()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupView()
         setAction()
         setProducts()
+
+
+
     }
 
     private fun setAction() {
@@ -52,6 +60,9 @@ class ProductFragment : BaseFragment() {
             "show" to "5"
         ))
         binding.apply {
+
+
+            /*
             llFilterCategory.setOnClickListener {
                 val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY)
                 filter.show(parentFragmentManager, filter.tag)
@@ -62,7 +73,7 @@ class ProductFragment : BaseFragment() {
             }
 
             llFilterItem.setOnClickListener({
-                   // findNavController().safeNavigate(R.id.action_Product)
+                // findNavController().safeNavigate(R.id.action_Product)
             })
 
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
@@ -93,6 +104,8 @@ class ProductFragment : BaseFragment() {
                     }
                 }
             }
+
+            */
         }
     }
 
@@ -110,7 +123,8 @@ class ProductFragment : BaseFragment() {
                     }
                     is Resource.Success -> {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
-                        productAdapter.submitList(result.data)
+                       // productDetailAdapter.submitList(result.data)
+                        //setupView(result.data!!)
                     }
                     else -> {}
                 }
@@ -119,16 +133,15 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupView() {
+        val args : ProductDetailFragmentArgs by navArgs()
+        val user = args.detailProduct
+        //bundle?.getParcelable<ProductParcelable>("SHIT")
         binding.apply {
-            rvProduct.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                adapter = productAdapter
-            }
 
-            rvProduct.setOnClickListener{
-
-            }
+            tvDetailProduct.text = user.name
+            tvDetailProductDescription.text = user.description
+            tvDetailProductRating.text = user.rating_average
+            tvDetailProductReviews.text = user.reviews_count.toString()
         }
     }
-
 }
