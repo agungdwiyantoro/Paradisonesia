@@ -5,9 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include android:id="@+id/tv_title_bar" layout="@layout/title_bar"
-
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +12,7 @@
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
 
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_bar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_price_limit"
@@ -32,7 +29,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintHorizontal_weight="2"
             app:boxBackgroundMode="none"
-
             app:layout_constraintTop_toBottomOf="@+id/tv_price_limit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/v_garis_conjunction">
@@ -41,7 +37,8 @@
                 android:id="@+id/tie_price_minim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border_grey"/>
+                android:background="@drawable/rounded_border_grey"
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +70,8 @@
                 android:id="@+id/tie_price_max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_border_grey"/>
+                android:background="@drawable/rounded_border_grey"
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,10 +103,12 @@
 
         <RatingBar
             android:id="@+id/rb_rating"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
-            app:layout_constraintTop_toBottomOf="@+id/tv_rating"/>
+
+            style="@style/RatingBar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rating"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <View
             android:id="@+id/v_garis_2"
@@ -213,17 +213,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/bt_apply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintTop_toBottomOf="@+id/tl_end_date"
-            android:text="@string/apply"
-            style="@style/Button.Filled.Yellow.Rounded" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <include android:id="@+id/layout_calendar" layout="@layout/layout_calendar"
-        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

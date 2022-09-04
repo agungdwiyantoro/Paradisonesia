@@ -18,6 +18,7 @@ import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.devfutech.paradisonesia.presentation.bottomsheet.advance_filter.AdvanceFilterBottomSheet
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -63,7 +64,7 @@ class ProductFragment : BaseFragment() {
 
             llFilterItem.setOnClickListener{
                    // findNavController().safeNavigate(R.id.action_Product)
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_ADVANCE)
                 filter.show(parentFragmentManager, filter.tag)
             }
 

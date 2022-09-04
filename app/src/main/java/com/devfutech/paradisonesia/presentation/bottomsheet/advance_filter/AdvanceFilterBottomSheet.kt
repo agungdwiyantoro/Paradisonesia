@@ -1,4 +1,4 @@
-package com.devfutech.paradisonesia.presentation.bottomsheet.filter
+package com.devfutech.paradisonesia.presentation.bottomsheet.advance_filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,28 +8,29 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.devfutech.paradisonesia.databinding.BottomSheetAdvanceFilterBinding
 import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
+import com.devfutech.paradisonesia.databinding.FilterFragmentBinding
+import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.FilterAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
-import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.presentation.base.BaseBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
+class AdvanceFilterBottomSheet() : BaseBottomSheet() {
 
-    private val binding: BottomSheetFilterBinding by lazy {
-        BottomSheetFilterBinding.inflate(layoutInflater)
+    private val binding: BottomSheetAdvanceFilterBinding by lazy {
+        BottomSheetAdvanceFilterBinding.inflate(layoutInflater)
     }
-    private val viewModel: FilterBottomSheetViewModel by viewModels()
-    private var itemSelected = listOf<Filter>()
+   // private val viewModel: FilterBottomSheetViewModel by viewModels()
+    private var itemSelected = listOf<AdvanceFilter>()
     private val filterAdapter by lazy {
-        FilterAdapter(this::onItemSelected)
+       // AdvanceFilter(this::onItemSelected)
     }
 
     override fun onCreateView(
@@ -43,13 +44,24 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setupAction()
-        setProvince()
+      //  setProvince()
     }
 
-    private fun onItemSelected(items: List<Filter>) {
+    private fun setupView() {
+        binding.apply {
+
+        }
+    }
+
+    private fun setupAction() {
+        binding.apply {
+            tvFilterCategory.text = "Advance Filter"
+        }
+    }
+    private fun onItemSelected(items: List<AdvanceFilter>) {
         itemSelected = items
     }
-
+/*
     private fun setProvince() {
         lifecycleScope.launchWhenStarted {
             viewModel.filter.collect { result ->
@@ -74,8 +86,6 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
             else -> {
 
             }
-
-
         }
         binding.apply {
             btnApplyFilter.setOnClickListener {
@@ -87,14 +97,6 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                 )
                 dismiss()
             }
-
-            binding.filterFragment.ivCalendarStartDate.setOnClickListener({
-                filterFragment.layoutCalendar.root.visibility = View.VISIBLE
-            })
-
-            binding.filterFragment.ivCalendarEndDate.setOnClickListener({
-                filterFragment.layoutCalendar.root.visibility = View.VISIBLE
-            })
         }
     }
 
@@ -103,13 +105,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
             tvFilterCategory.text = when (type) {
                 1 -> "Category"
                 2 -> "Location"
-                3 -> "Advance Filter"
                 else -> "Rating"
-            }
-
-            if(type==3){
-                filterFragment.root.visibility = View.VISIBLE
-                rvFilter.visibility = View.GONE
             }
 
             rvFilter.apply {
@@ -119,13 +115,14 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
         }
     }
 
+
+ */
     companion object {
         const val ACTION_FILTER = "ation_filter"
         const val ITEM_FILTER = "item_key"
         const val ITEM_TYPE = "item_type"
         const val FILTER_CATEGORY = 1
         const val FILTER_LOCATION = 2
-        const val FILTER_ADVANCE = 3
         const val FILTER_RATING = 3
     }
 }

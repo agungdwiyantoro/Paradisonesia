@@ -30,17 +30,7 @@
         android:orientation="vertical"
         android:background="@color/white">
 
-        <include android:id="@+id/filter_fragment" layout="@layout/filter_fragment" android:visibility="gone"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_filter"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="@dimen/_8sdp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:listitem="@layout/item_filter" />
+      <include layout="@layout/filter_fragment" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_apply_filter"
