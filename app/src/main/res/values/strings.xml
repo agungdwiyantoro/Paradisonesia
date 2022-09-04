@@ -127,6 +127,12 @@
     <string name="start_date">Start Date</string>
     <string name="apply">Apply</string>
 
+    <!-- Sort Filter -->
+    <string name="lowest_price">Lowest Price</string>
+    <string name="highest_price">Highest Price</string>
+    <string name="highest_rating">Highest Rating</string>
+
+
     <!-- Product Fragment -->
     <string name="final_price">Rp. %1$s</string>
     <string name="discounted_price"> <strike>Rp. %1$s</strike> </string>

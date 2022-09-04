@@ -25,11 +25,11 @@ class AdvanceFilterAdapter(
         fun bind(item: AdvanceFilter) {
             binding.apply {
                 ivCalendarStartDate.setOnClickListener(View.OnClickListener {
-                    layoutCalendar.llcompDatePicker.visibility = View.VISIBLE
+                    //layoutCalendar.llcompDatePicker.visibility = View.VISIBLE
                 })
 
                 ivCalendarEndDate.setOnClickListener(View.OnClickListener {
-                    layoutCalendar.llcompDatePicker.visibility = View.VISIBLE
+                    //layoutCalendar.llcompDatePicker.visibility = View.VISIBLE
                 })
 
                 /*

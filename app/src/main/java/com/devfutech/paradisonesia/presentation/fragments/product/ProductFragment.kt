@@ -68,6 +68,11 @@ class ProductFragment : BaseFragment() {
                 filter.show(parentFragmentManager, filter.tag)
             }
 
+            llFilterSorting.setOnClickListener{
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_SORTING)
+                filter.show(parentFragmentManager, filter.tag)
+            }
+
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
                 val result: ArrayList<Filter> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()

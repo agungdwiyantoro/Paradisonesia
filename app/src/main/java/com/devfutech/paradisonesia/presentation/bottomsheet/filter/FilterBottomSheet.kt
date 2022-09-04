@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -89,11 +90,11 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
             }
 
             binding.filterFragment.ivCalendarStartDate.setOnClickListener({
-                filterFragment.layoutCalendar.root.visibility = View.VISIBLE
+               // filterFragment.layoutCalendar.root.visibility = View.VISIBLE
             })
 
             binding.filterFragment.ivCalendarEndDate.setOnClickListener({
-                filterFragment.layoutCalendar.root.visibility = View.VISIBLE
+               // filterFragment.layoutCalendar.root.visibility = View.VISIBLE
             })
         }
     }
@@ -103,8 +104,9 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
             tvFilterCategory.text = when (type) {
                 1 -> "Category"
                 2 -> "Location"
-                3 -> "Advance Filter"
-                else -> "Rating"
+                3 -> "Advance filter"
+                4 -> "Sort by"
+                else -> "Sorting"
             }
 
             if(type==3){
@@ -112,9 +114,17 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                 rvFilter.visibility = View.GONE
             }
 
-            rvFilter.apply {
-                adapter = filterAdapter
-                layoutManager = GridLayoutManager(requireContext(), 2)
+            if(type==4){
+                sortFilterFragment.root.visibility = View.VISIBLE
+                rvFilter.visibility = View.GONE
+
+            }
+
+            if(rvFilter.isVisible) {
+                rvFilter.apply {
+                    adapter = filterAdapter
+                    layoutManager = GridLayoutManager(requireContext(), 2)
+                }
             }
         }
     }
@@ -126,6 +136,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
         const val FILTER_CATEGORY = 1
         const val FILTER_LOCATION = 2
         const val FILTER_ADVANCE = 3
+        const val FILTER_SORTING = 4
         const val FILTER_RATING = 3
     }
 }
