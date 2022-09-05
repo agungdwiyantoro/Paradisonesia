@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListAdapter
+import android.widget.ExpandableListView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 
@@ -12,8 +14,11 @@ import androidx.navigation.fragment.navArgs
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
+import com.devfutech.paradisonesia.domain.model.expandable_list_data.ExpandableListData.data
 
 import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.external.adapter.CustomExpandableListAdapter
+import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
@@ -25,6 +30,11 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class ProductDetailFragment : BaseFragment(){
+
+    //private var expandableListView: ExpandableListView? = null
+    private var adapter: ExpandableListAdapter? = null
+    private var titleList: List<String>? = null
+
     private val binding: ProductDetailFragmentBinding by lazy{
         ProductDetailFragmentBinding.inflate(layoutInflater)
     }
@@ -137,7 +147,6 @@ class ProductDetailFragment : BaseFragment(){
         val user = args.detailProduct
         //bundle?.getParcelable<ProductParcelable>("SHIT")
         binding.apply {
-
             tvDetailProduct.text = user.name
             tvDetailProductDescription.text = user.description
             tvDetailProductRating.text = user.rating_average
@@ -145,6 +154,40 @@ class ProductDetailFragment : BaseFragment(){
                 R.string.reviews_w_value, user.reviews_count.toString()
             )
             tvDetailCategoryProduct.text = user.sub_category_name
+
+
+
+            val listData = data
+
+            titleList = ArrayList(listData.keys)
+
+            adapter = CustomExpandableListAdapter(requireContext(), titleList as ArrayList<String>, listData)
+
+            elvProductDetail.setAdapter(adapter)
+
+            elvProductDetail.setOnGroupExpandListener { groupPosition ->
+
+                root.snackBar("List Expanded")
+
+
+            }
+
+            elvProductDetail.setOnGroupCollapseListener { groupPosition ->
+
+                root.snackBar("List Collapsed")
+
+            }
+
+            elvProductDetail.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
+
+                root.snackBar("Child Clicked")
+
+                true
+
+            }
+
+
         }
     }
 }
+

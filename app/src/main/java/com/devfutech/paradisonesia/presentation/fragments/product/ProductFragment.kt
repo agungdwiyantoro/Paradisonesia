@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
@@ -29,6 +30,8 @@ class ProductFragment : BaseFragment() {
     private val binding: ProductFragmentBinding by lazy {
         ProductFragmentBinding.inflate(layoutInflater)
     }
+//    private val ss: ArrayList<Product> = TODO()
+
     private val viewModel: ProductViewModel by viewModels()
     private val productAdapter by lazy {
         ProductAdapter()
@@ -96,6 +99,11 @@ class ProductFragment : BaseFragment() {
                         tvFilterLocation.setTextColor(ContextCompat.getColor(requireContext(),color))
                         ivFilterLocation.setColorFilter(ContextCompat.getColor(requireContext(),color))
                     }
+                    FilterBottomSheet.FILTER_SORTING -> {
+                        rvProduct.apply {
+
+                        }
+                    }
                     else -> {
 
                     }
@@ -119,6 +127,7 @@ class ProductFragment : BaseFragment() {
                     is Resource.Success -> {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         productAdapter.submitList(result.data)
+
                     }
                     else -> {}
                 }

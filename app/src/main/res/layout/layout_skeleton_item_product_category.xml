@@ -8,11 +8,12 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_category_prouduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="@dimen/_54sdp"
+        app:shapeAppearanceOverlay="@style/circleImageView"
         android:layout_gravity="center"
-
-        android:src="@drawable/ic_tour"
+        android:src="@drawable/rounded_grey"
+        android:background="@color/grey"
      />
 
     <TextView
@@ -23,6 +24,5 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center"
-        android:text="Tour"
         android:background="@drawable/rounded_grey" />
 </androidx.appcompat.widget.LinearLayoutCompat>
