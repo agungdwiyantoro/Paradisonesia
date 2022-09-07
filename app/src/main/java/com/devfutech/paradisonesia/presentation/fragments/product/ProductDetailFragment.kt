@@ -7,22 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-
 import androidx.navigation.fragment.navArgs
-
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
 import com.devfutech.paradisonesia.domain.model.expandable_list_data.ExpandableListData.data
-
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.CustomExpandableListAdapter
-import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
-
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-
 import com.facebook.CallbackManager
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -155,8 +150,6 @@ class ProductDetailFragment : BaseFragment(){
             )
             tvDetailCategoryProduct.text = user.sub_category_name
 
-
-
             val listData = data
 
             titleList = ArrayList(listData.keys)
@@ -165,22 +158,48 @@ class ProductDetailFragment : BaseFragment(){
 
             elvProductDetail.setAdapter(adapter)
 
+/*
+            elvProductDetail.setOnGroupClickListener {
+                    parent, v, groupPosition, id ->  setListViewHeight(parent, groupPosition)
+                //svProductDetailScrollView.refreshDrawableState()
+                false
+            }
+
+ */
+
+
+/*
             elvProductDetail.setOnGroupExpandListener { groupPosition ->
 
-                root.snackBar("List Expanded")
+                //root.snackBar("List Expanded")
+
+
+                val param = elvProductDetail.getLayoutParams()
+                param.height =  elvProductDetail.getHeight()
+                elvProductDetail.setLayoutParams(param)
+                elvProductDetail.refreshDrawableState()
+              //  svProductDetailScrollView.refreshDrawableState()
+
 
 
             }
 
             elvProductDetail.setOnGroupCollapseListener { groupPosition ->
 
-                root.snackBar("List Collapsed")
+               // root.snackBar("List Collapsed")
+                val param = elvProductDetail.getLayoutParams()
+                param.height = LinearLayout.LayoutParams.WRAP_CONTENT
+                elvProductDetail.setLayoutParams(param)
+                elvProductDetail.refreshDrawableState()
+               // svProductDetailScrollView.refreshDrawableState()
 
             }
 
+
+ */
             elvProductDetail.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
 
-                root.snackBar("Child Clicked")
+               // root.snackBar("Child Clicked")
 
                 true
 
@@ -188,6 +207,39 @@ class ProductDetailFragment : BaseFragment(){
 
 
         }
+    }
+
+    private fun setListViewHeight(listView: ExpandableListView, group: Int) {
+        val listAdapter = listView.expandableListAdapter as ExpandableListAdapter
+        var totalHeight = 0
+        val desiredWidth: Int = View.MeasureSpec.makeMeasureSpec(
+            listView.width,
+            View.MeasureSpec.EXACTLY
+        )
+        for (i in 0 until listAdapter.groupCount) {
+            val groupItem: View = listAdapter.getGroupView(i, false, null, listView)
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
+            totalHeight += groupItem.getMeasuredHeight()
+            if (listView.isGroupExpanded(i) && i != group
+                || !listView.isGroupExpanded(i) && i == group
+            ) {
+                for (j in 0 until listAdapter.getChildrenCount(i)) {
+                    val listItem: View = listAdapter.getChildView(
+                        i, j, false, null,
+                        listView
+                    )
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED)
+                    totalHeight += listItem.getMeasuredHeight()
+                }
+            }
+        }
+        val params = listView.layoutParams
+        var height = (totalHeight
+                + listView.dividerHeight * (listAdapter.groupCount - 1))
+        if (height < 10) height = 200
+        params.height = height
+        listView.layoutParams = params
+        listView.requestLayout()
     }
 }
 
