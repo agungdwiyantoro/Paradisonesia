@@ -86,6 +86,13 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                         ITEM_TYPE to type
                     )
                 )
+
+                setFragmentResult(
+                    ACTION_SORT, bundleOf(
+                        ITEM_FILTER to type,
+                    )
+                )
+
                 dismiss()
             }
 
@@ -131,6 +138,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
 
     companion object {
         const val ACTION_FILTER = "ation_filter"
+        const val ACTION_SORT = "action_sort"
         const val ITEM_FILTER = "item_key"
         const val ITEM_TYPE = "item_type"
         const val FILTER_CATEGORY = 1

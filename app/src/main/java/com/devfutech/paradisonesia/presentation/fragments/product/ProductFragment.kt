@@ -22,6 +22,7 @@ import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.bottomsheet.advance_filter.AdvanceFilterBottomSheet
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.toList
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -99,15 +100,14 @@ class ProductFragment : BaseFragment() {
                         tvFilterLocation.setTextColor(ContextCompat.getColor(requireContext(),color))
                         ivFilterLocation.setColorFilter(ContextCompat.getColor(requireContext(),color))
                     }
-                    FilterBottomSheet.FILTER_SORTING -> {
-                        rvProduct.apply {
 
-                        }
-                    }
-                    else -> {
-
-                    }
                 }
+            }
+
+            setFragmentResultListener(FilterBottomSheet.ACTION_SORT) { _, bundle ->
+                val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
+                Timber.tag("ACTION SORT").d("ACTION_SORT" + type)
+
             }
         }
     }
@@ -127,6 +127,28 @@ class ProductFragment : BaseFragment() {
                     is Resource.Success -> {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         productAdapter.submitList(result.data)
+
+                        //productAdapter.submitList(result.data?.sortedBy { it.price })
+
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun setProducts(compData: String?) {
+        lifecycleScope.launchWhenStarted {
+            viewModel.product.collect { result ->
+                when (result) {
+                    is Resource.Loading -> println("Loading")
+                    is Resource.Failure -> {
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
+                        //productAdapter.submitList(result.data)
+                        productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
 
                     }
                     else -> {}
