@@ -90,6 +90,8 @@ class ProductFragment : BaseFragment() {
                         llFilterCategory.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
                         tvFilterCategory.setTextColor(ContextCompat.getColor(requireContext(),color))
                         ivFilterCategory.setColorFilter(ContextCompat.getColor(requireContext(),color))
+                        Timber.tag("ACTION SORT").d("ACTION_FILTER_CAT" + result)
+
                     }
                     FilterBottomSheet.FILTER_LOCATION -> {
                         tvFilterLocation.text =
@@ -106,7 +108,9 @@ class ProductFragment : BaseFragment() {
 
             setFragmentResultListener(FilterBottomSheet.ACTION_SORT) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
-                Timber.tag("ACTION SORT").d("ACTION_SORT" + type)
+                val result: ArrayList<Filter> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
+
+                Timber.tag("ACTION SORT").d("ACTION_SORT" + result)
 
             }
         }

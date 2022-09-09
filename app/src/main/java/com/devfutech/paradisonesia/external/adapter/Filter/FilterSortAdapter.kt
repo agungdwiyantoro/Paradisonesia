@@ -1,44 +1,52 @@
-package com.devfutech.paradisonesia.external.adapter
+package com.devfutech.paradisonesia.external.adapter.Filter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.databinding.ItemFilterBinding
+import com.devfutech.paradisonesia.databinding.SortItemBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import timber.log.Timber
 
 /**
  * Created by devfutech on 10/8/2021.
  */
-class FilterAdapter(
+class FilterSortAdapter(
     private val onItemSelected: (List<Filter>) -> Unit,
-) : ListAdapter<Filter, FilterAdapter.FilterViewHolder>(POST_COMPARATOR) {
+) : ListAdapter<Filter, FilterSortAdapter.FilterViewHolder>(POST_COMPARATOR) {
 
     private val itemSelected = mutableListOf<Filter>()
 
-    inner class FilterViewHolder(private val binding: ItemFilterBinding) :
+    inner class FilterViewHolder(private val binding: SortItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Filter) {
             binding.apply {
-                cbItem.apply {
-                    text = item.name
-                    setOnCheckedChangeListener { _, isChecked ->
-                        if (isChecked) {
+                rgSortFilter.apply {
+
+                    setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+                        Timber.tag("FILTERSORTADAPTER").d("JOJON " + item)
+                        if(radBHighestPrice.isSelected){
                             itemSelected.add(item)
-                        } else {
+
+                        }
+                        else {
                             itemSelected.remove(item)
                         }
                         onItemSelected(itemSelected)
-                    }
+                    })
                 }
+
+
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
         return FilterViewHolder(
-            ItemFilterBinding.inflate(
+            SortItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

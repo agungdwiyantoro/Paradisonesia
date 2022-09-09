@@ -30,7 +30,6 @@
         android:orientation="vertical"
         android:background="@color/white">
 
-        <include android:id="@+id/sort_filter_fragment" layout="@layout/sort_filter_fragment" android:visibility="gone"/>
         <include android:id="@+id/filter_fragment" layout="@layout/filter_fragment" android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -40,8 +39,12 @@
             android:layout_weight="1"
             android:padding="@dimen/_8sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            />
+            <!--
+                   <include android:id="@+id/sort_filter_fragment" layout="@layout/sort_item" android:visibility="gone"/>
+
             app:spanCount="2"
-            tools:listitem="@layout/item_filter" />
+            tools:listitem="@layout/sort_item" -->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_apply_filter"

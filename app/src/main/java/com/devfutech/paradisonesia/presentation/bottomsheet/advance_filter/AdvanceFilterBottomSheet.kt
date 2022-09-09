@@ -4,22 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import com.devfutech.paradisonesia.databinding.BottomSheetAdvanceFilterBinding
-import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
-import com.devfutech.paradisonesia.databinding.FilterFragmentBinding
 import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
-import com.devfutech.paradisonesia.domain.model.filter.Filter
-import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.FilterAdapter
-import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AdvanceFilterBottomSheet() : BaseBottomSheet() {
