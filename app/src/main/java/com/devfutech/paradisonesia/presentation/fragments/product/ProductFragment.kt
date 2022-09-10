@@ -9,6 +9,7 @@ import androidx.core.view.get
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
@@ -49,7 +50,7 @@ class ProductFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setAction()
-        setProducts()
+        //setProducts()
     }
 
     private fun setAction() {
@@ -141,7 +142,7 @@ class ProductFragment : BaseFragment() {
         }
     }
 
-    private fun setProducts(compData: String?) {
+    private fun setProducts(id: Int?) {
         lifecycleScope.launchWhenStarted {
             viewModel.product.collect { result ->
                 when (result) {
@@ -152,8 +153,10 @@ class ProductFragment : BaseFragment() {
                     is Resource.Success -> {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         //productAdapter.submitList(result.data)
-                        productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
+                        //productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
 
+                        productAdapter.submitList(result.data?.filter { (result.data)
+                            (it.sub_category?.category?.id==id)})
                     }
                     else -> {}
                 }
@@ -162,6 +165,8 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupView() {
+        val args : ProductFragmentArgs by navArgs()
+        val id = args.categoryProductID
         binding.apply {
             rvProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -171,6 +176,10 @@ class ProductFragment : BaseFragment() {
             rvProduct.setOnClickListener{
 
             }
+
+            setProducts(id)
+
+            Timber.tag("CategoryProduct").d("categoryProd id " + id)
         }
     }
 

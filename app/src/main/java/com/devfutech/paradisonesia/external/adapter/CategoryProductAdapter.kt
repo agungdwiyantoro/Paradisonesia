@@ -3,6 +3,7 @@ package com.devfutech.paradisonesia.external.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,9 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductCategoryBinding
 import com.devfutech.paradisonesia.domain.model.category_product.CategoryProduct
 import com.devfutech.paradisonesia.external.utils.FileUtils.ltrim
+import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragment
+import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragmentDirections
+import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
 import timber.log.Timber
 
 class CategoryProductAdapter :
@@ -29,6 +33,17 @@ class CategoryProductAdapter :
                     error(R.drawable.ic_image_not_available)
                 }
                 tvCategoryProduct.text = item.name
+
+
+
+                root.setOnClickListener{
+                    val action = HomeCustomerFragmentDirections.actionHomeCustomerFragmentToProductFragment(item.id!!)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
+                    root.setOnClickListener{
+                        Navigation.findNavController(it).navigate(action)
+                    }
+                }
+
+
 //                root.apply {
 //                    setOnClickListener {
 //                        findNavController().navigate(ShopFragmentDirections.actionShopFragmentToProductFragment(item))

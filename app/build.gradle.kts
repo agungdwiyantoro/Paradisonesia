@@ -13,13 +13,13 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.devfutech.paradisonesia"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 2
         versionName = "1.1.0"
 
@@ -37,15 +37,15 @@ android {
                 "proguard-rules.pro"
             )
         }
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
     }
     buildFeatures {
         viewBinding = true
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+
 
     tasks {
         withType<KotlinCompile> {
@@ -58,25 +58,26 @@ android {
             path = file("src/main/jni/Android.mk")
         }
     }
+    ndkVersion = "25.0.8775105"
 
 }
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.10")
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.5.0")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.fragment:fragment-ktx:1.5.2")
 
     //Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.2")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
-    implementation("com.google.firebase:firebase-auth:21.0.7")
+    implementation("com.google.firebase:firebase-auth:21.0.8")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     //Livedata
@@ -100,16 +101,16 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
     //Firebase
-    implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.2.12")
-    implementation("com.google.firebase:firebase-auth-ktx:21.0.7")
-    implementation("com.google.firebase:firebase-perf-ktx:20.1.0")
-    implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
-    implementation("com.google.firebase:firebase-bom:30.3.2")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.2.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.1.1")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.2.13")
+    implementation("com.google.firebase:firebase-auth-ktx:21.0.8")
+    implementation("com.google.firebase:firebase-perf-ktx:20.1.1")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.8")
+    implementation("com.google.firebase:firebase-bom:30.4.1")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.3.0")
 
     //Google Auth
-    implementation("com.google.android.gms:play-services-auth:20.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.3.0")
 
     //Datetime
     implementation("com.jakewharton.threetenabp:threetenabp:1.3.1")

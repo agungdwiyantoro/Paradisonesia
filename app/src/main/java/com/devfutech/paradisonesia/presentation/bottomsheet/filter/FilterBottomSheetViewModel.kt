@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.presentation.bottomsheet.filter
 
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.domain.model.filter.SortFilter
 import com.devfutech.paradisonesia.domain.usecase.ProductUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -23,6 +25,11 @@ class FilterBottomSheetViewModel @Inject constructor(
     private val _filter: MutableStateFlow<Resource<List<Filter>>> = MutableStateFlow(Resource.Success(listOf()))
     val filter: MutableStateFlow<Resource<List<Filter>>>
         get() = _filter
+
+    private val _SortFilter: MutableStateFlow<Resource<List<SortFilter>>> = MutableStateFlow(Resource.Success(listOf()))
+    val SortFilter: MutableStateFlow<Resource<List<SortFilter>>>
+        get() = _SortFilter
+
 
     fun getProvince(){
         _filter.value = Resource.Loading()
@@ -39,6 +46,7 @@ class FilterBottomSheetViewModel @Inject constructor(
         }
     }
 
+    /*
     fun getCategory(){
         _filter.value = Resource.Loading()
         viewModelScope.launch {
@@ -51,6 +59,41 @@ class FilterBottomSheetViewModel @Inject constructor(
                 }.collect {
                     _filter.value = Resource.Success(it)
                 }
+        }
+    }
+     */
+
+    fun getCategory(id: Int?){
+        _filter.value = Resource.Loading()
+        viewModelScope.launch {
+            productUseCase.getListCategoryProduct()
+                .catch { error->
+                    onError(error)
+                    _filter.value = Resource.Failure(defaultError(error))
+                }.map {filters ->
+                    filters.flatMap { it.toFilter()?: listOf() }
+                }.collect {
+                    /*
+                    _filter.value = Resource.Success(it.filter {
+                        it
+                        (it.id==id)
+                    })
+
+                     */
+
+                    _filter.value = Resource.Success(it)
+                }
+        }
+    }
+
+    fun getSortList() {
+
+        viewModelScope.launch {
+            val listSortFilter: List<SortFilter> = mutableListOf(SortFilter(1, 2, 3, 4))
+            _SortFilter.value = Resource.Success(listSortFilter)
+
+            Timber.tag("FBSVModel").d("value " + _SortFilter.value)
+
         }
     }
 }

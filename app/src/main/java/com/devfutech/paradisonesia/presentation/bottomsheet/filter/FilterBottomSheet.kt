@@ -12,12 +12,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.domain.model.filter.SortFilter
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapter
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterSortAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
@@ -27,7 +29,8 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
     }
     private val viewModel: FilterBottomSheetViewModel by viewModels()
     private var itemSelected = listOf<Filter>()
-    private var itemSortSelected = listOf<Filter>()
+    private var itemSortSelected =mutableListOf(SortFilter(1, 2000, 3000, 4000))//mutableListOf<SortFilter>()
+    //listOf<SortFilter>()
 
     private val filterAdapter by lazy {
         FilterAdapter(this::onItemSelected)
@@ -55,8 +58,8 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
         itemSelected = items
     }
 
-    private fun onItemSortSelected(items: List<Filter>){
-        itemSortSelected = items
+    private fun onItemSortSelected(items: List<SortFilter>){
+       // itemSortSelected = mutableListOf(items)
     }
 
     private fun setProvince() {
@@ -71,6 +74,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                         filterAdapter.submitList(result.data)
                     }
                     else -> {}
+
                 }
             }
         }
@@ -78,15 +82,18 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
 
     private fun setupAction() {
         when (type) {
-            1 -> viewModel.getCategory()
+            1 -> viewModel.getCategory(0)
             2 -> viewModel.getProvince()
-            4 -> viewModel.getProvince()
+           // 4 -> viewModel.getSortList()
+
             else -> {
 
             }
 
 
         }
+        //Timber.tag("type").d("john" + viewModel.getSortList())
+        //Timber.tag("type").d("john" + viewModel.getProvince())
         binding.apply {
             btnApplyFilter.setOnClickListener {
                 setFragmentResult(
@@ -134,7 +141,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
             if(type==4){
                 if (rvFilter.isVisible) {
                     rvFilter.apply {
-                        adapter = filterAdapter
+                        adapter = filterSortAdapter
                         layoutManager = GridLayoutManager(requireContext(), 1)
                     }
                 }

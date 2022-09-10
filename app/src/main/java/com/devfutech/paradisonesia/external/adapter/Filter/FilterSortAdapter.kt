@@ -9,20 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.databinding.ItemFilterBinding
 import com.devfutech.paradisonesia.databinding.SortItemBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.domain.model.filter.SortFilter
 import timber.log.Timber
 
 /**
  * Created by devfutech on 10/8/2021.
  */
 class FilterSortAdapter(
-    private val onItemSelected: (List<Filter>) -> Unit,
-) : ListAdapter<Filter, FilterSortAdapter.FilterViewHolder>(POST_COMPARATOR) {
+    private val onItemSelected: (List<SortFilter>) -> Unit,
+) : ListAdapter<SortFilter, FilterSortAdapter.FilterViewHolder>(POST_COMPARATOR) {
 
-    private val itemSelected = mutableListOf<Filter>()
+    private val itemSelected = mutableListOf(SortFilter(1, 2000, 3000, 4000))//mutableListOf<SortFilter>()
 
     inner class FilterViewHolder(private val binding: SortItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Filter) {
+        fun bind(item: SortFilter) {
             binding.apply {
                 rgSortFilter.apply {
 
@@ -59,15 +60,15 @@ class FilterSortAdapter(
     }
 
     companion object {
-        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Filter>() {
+        val POST_COMPARATOR = object : DiffUtil.ItemCallback<SortFilter>() {
             override fun areContentsTheSame(
-                oldItem: Filter,
-                newItem: Filter
+                oldItem: SortFilter,
+                newItem: SortFilter
             ): Boolean = oldItem == newItem
 
             override fun areItemsTheSame(
-                oldItem: Filter,
-                newItem: Filter
+                oldItem: SortFilter,
+                newItem: SortFilter
             ): Boolean =
                 oldItem.id == newItem.id
         }

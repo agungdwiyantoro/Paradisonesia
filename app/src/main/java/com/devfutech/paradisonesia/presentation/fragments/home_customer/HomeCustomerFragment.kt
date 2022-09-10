@@ -142,6 +142,7 @@ class HomeCustomerFragment : BaseFragment() {
                 }
             }
             tvSearchProduct.setOnClickListener { findNavController().navigate(R.id.action_homeCustomerFragment_to_productFragment) }
+
         }
     }
 

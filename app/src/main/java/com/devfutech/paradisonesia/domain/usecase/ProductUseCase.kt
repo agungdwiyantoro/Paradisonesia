@@ -4,6 +4,7 @@ import com.devfutech.paradisonesia.domain.repository.ProductRepository
 import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.category_product.CategoryProduct
 import com.devfutech.paradisonesia.domain.model.city.City
+import com.devfutech.paradisonesia.domain.model.filter.SortFilter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.model.province.Province
 import kotlinx.coroutines.CoroutineScope
@@ -24,5 +25,4 @@ class ProductUseCase @Inject constructor(
     suspend fun getListProduct(map: Map<String,String>): Flow<List<Product>>  = repository.listProduct(map)
 
     suspend fun getListProduct(): Flow<List<Product>>  = repository.listProduct()
-
 }
