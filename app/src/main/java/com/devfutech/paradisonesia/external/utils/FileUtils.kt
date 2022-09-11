@@ -1,6 +1,6 @@
 package com.devfutech.paradisonesia.external.utils
 
-import android.R
+
 import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
@@ -10,25 +10,31 @@ import android.database.DatabaseUtils
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import com.devfutech.paradisonesia.BuildConfig.DEBUG
-import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
+import androidx.viewbinding.BuildConfig.DEBUG
+import com.devfutech.paradisonesia.R
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import java.time.format.ResolverStyle
 import java.util.*
+import kotlin.Comparator
 
 
 /**
@@ -337,7 +343,7 @@ object FileUtils {
 
     fun simpleSpinnerAdapter(context: Context, items: Array<String>) : ArrayAdapter<String>? {
         return ArrayAdapter(context,
-            R.layout.simple_spinner_dropdown_item,
+            android.R.layout.simple_spinner_dropdown_item,
             items)
     }
 
@@ -387,4 +393,78 @@ object FileUtils {
 
         return format.format(nominal).replace("IDR","").replace(",",".")
     }
+
+    fun dateMask(editText: TextInputEditText, editTextLayout: TextInputLayout){
+        editText.addTextChangedListener(object : TextWatcher {
+
+            var sb : StringBuilder = StringBuilder("")
+
+            var _ignore = false
+
+            override fun afterTextChanged(s: Editable?) {
+                if(editText.text.toString().length==10&&!dateValidator().isValid(editText.text.toString())){
+                    editTextLayout.error = "Invalid Date"
+                    return
+                }
+                editTextLayout.error = null
+
+                Timber.tag("FileUtils").d(dateValidator().isValid(editText.text.toString()).toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if(_ignore){
+                    _ignore = false
+                    return
+                }
+
+                sb.clear()
+                sb.append(if(s!!.length > 10){ s.subSequence(0,10) }else{ s })
+
+                if(sb.lastIndex == 2){
+                    if(sb[2] != '/'){
+                        sb.insert(2,"/")
+                    }
+                } else if(sb.lastIndex == 5){
+                    if(sb[5] != '/'){
+                        sb.insert(5,"/")
+                    }
+                }
+
+                _ignore = true
+                editText.setText(sb.toString())
+                editText.setSelection(sb.length)
+
+            }
+
+        })
+    }
+
+    class dateValidator {
+        fun isValid(date: String?): Boolean {
+            var valid = false
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                valid = try {
+
+                    // ResolverStyle.STRICT for 30, 31 days checking, and also leap year.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        LocalDate.parse(
+                            date,
+                            DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                                .withResolverStyle(ResolverStyle.STRICT)
+                        )
+                    }
+                    true
+                } catch (e: DateTimeParseException) {
+                    e.printStackTrace()
+                    false
+                }
+            }
+            return valid
+        }
+
+    }
+
 }

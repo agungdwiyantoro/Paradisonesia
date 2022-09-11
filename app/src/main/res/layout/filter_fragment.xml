@@ -79,7 +79,6 @@
             android:id="@+id/sb_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@+id/tl_price_max" />
 
@@ -166,6 +165,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/dd_mm_yyyy"
                 android:padding="@dimen/_15sdp"
+                android:inputType="date"
                 android:background="@drawable/rounded_border_grey"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -209,6 +209,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_border_grey"
                 android:hint="@string/dd_mm_yyyy"
+                android:inputType="date"
                 android:padding="@dimen/_15sdp"/>
 
         </com.google.android.material.textfield.TextInputLayout>

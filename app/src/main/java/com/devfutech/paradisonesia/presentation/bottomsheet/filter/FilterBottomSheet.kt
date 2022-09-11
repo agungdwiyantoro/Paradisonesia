@@ -17,6 +17,7 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapter
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterSortAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -113,7 +114,10 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                 dismiss()
             }
 
+            FileUtils.dateMask(binding.filterFragment.tieStartDate, binding.filterFragment.tlStartDate)
+            FileUtils.dateMask(binding.filterFragment.tieEndDate, binding.filterFragment.tlEndDate)
             binding.filterFragment.ivCalendarStartDate.setOnClickListener({
+
                // filterFragment.layoutCalendar.root.visibility = View.VISIBLE
             })
 
