@@ -1,10 +1,12 @@
 package com.devfutech.paradisonesia.presentation.bottomsheet.filter
 
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.domain.model.filter.SortFilter
 import com.devfutech.paradisonesia.domain.usecase.ProductUseCase
 import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,7 +48,6 @@ class FilterBottomSheetViewModel @Inject constructor(
         }
     }
 
-    /*
     fun getCategory(){
         _filter.value = Resource.Loading()
         viewModelScope.launch {
@@ -57,30 +58,6 @@ class FilterBottomSheetViewModel @Inject constructor(
                 }.map {filters ->
                    filters.flatMap { it.toFilter()?: listOf() }
                 }.collect {
-                    _filter.value = Resource.Success(it)
-                }
-        }
-    }
-     */
-
-    fun getCategory(id: Int?){
-        _filter.value = Resource.Loading()
-        viewModelScope.launch {
-            productUseCase.getListCategoryProduct()
-                .catch { error->
-                    onError(error)
-                    _filter.value = Resource.Failure(defaultError(error))
-                }.map {filters ->
-                    filters.flatMap { it.toFilter()?: listOf() }
-                }.collect {
-                    /*
-                    _filter.value = Resource.Success(it.filter {
-                        it
-                        (it.id==id)
-                    })
-
-                     */
-
                     _filter.value = Resource.Success(it)
                 }
         }

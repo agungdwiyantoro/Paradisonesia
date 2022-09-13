@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.presentation.bottomsheet.filter
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.domain.model.filter.SortFilter
@@ -19,6 +21,8 @@ import com.devfutech.paradisonesia.external.adapter.Filter.FilterSortAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseBottomSheet
+import com.google.android.material.slider.LabelFormatter
+import com.google.android.material.slider.RangeSlider
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -83,9 +87,9 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
 
     private fun setupAction() {
         when (type) {
-            1 -> viewModel.getCategory(0)
+            1 -> viewModel.getCategory()
             2 -> viewModel.getProvince()
-           // 4 -> viewModel.getSortList()
+            3 -> viewModel.getSortList()
 
             else -> {
 
@@ -111,6 +115,8 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                     )
                 )
 
+
+
                 dismiss()
             }
 
@@ -123,6 +129,71 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
 
             binding.filterFragment.ivCalendarEndDate.setOnClickListener({
                // filterFragment.layoutCalendar.root.visibility = View.VISIBLE
+            })
+
+            filterFragment.tiePriceMinim.setText(resources.getString(R.string.final_price, FileUtils.convertToCurrency(filterFragment.sbPrice.valueFrom.toInt())))
+            filterFragment.tiePriceMax.setText(resources.getString(R.string.final_price, FileUtils.convertToCurrency(filterFragment.sbPrice.valueTo.toInt())))
+
+            filterFragment.sbPrice.labelBehavior = LabelFormatter.LABEL_GONE
+
+            filterFragment.sbPrice.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
+                override fun onStartTrackingTouch(slider: RangeSlider) {
+                    val values = slider.values
+                    Timber.tag("FilterBottomSheet").d(values[0].toString())
+                    Timber.tag("FilterBottomSheet").d(values[1].toString())
+
+                    var minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(values[0].toInt()))
+                    var maxPrice = resources.getString(R.string.final_price,  FileUtils.convertToCurrency(values[1].toInt()))
+
+                    if(values[0]==1.0E7.toFloat()||values[1]==1.0E7.toFloat()){
+                        val minPriceConverted = String.format("%.0f", values[0])
+                        val maxPriceConverted = String.format("%.0f", values[1])
+                        minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(minPriceConverted.toInt()))
+                        maxPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(maxPriceConverted.toInt()))
+                    }
+
+                    filterFragment.tiePriceMinim.setText(minPrice)
+                    filterFragment.tiePriceMax.setText(maxPrice)
+                }
+
+                override fun onStopTrackingTouch(slider: RangeSlider) {
+                    val values = slider.values
+                    Timber.tag("FilterBottomSheet").d(values[0].toString())
+                    Timber.tag("FilterBottomSheet").d(values[1].toString())
+
+                    var minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(values[0].toInt()))
+                    var maxPrice = resources.getString(R.string.final_price,  FileUtils.convertToCurrency(values[1].toInt()))
+
+                    if(values[0]==1.0E7.toFloat()||values[1]==1.0E7.toFloat()){
+                        val minPriceConverted = String.format("%.0f", values[0])
+                        val maxPriceConverted = String.format("%.0f", values[1])
+                        minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(minPriceConverted.toInt()))
+                        maxPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(maxPriceConverted.toInt()))
+                    }
+
+                    filterFragment.tiePriceMinim.setText(minPrice)
+                    filterFragment.tiePriceMax.setText(maxPrice)
+                }
+            })
+
+            filterFragment.sbPrice.addOnChangeListener(RangeSlider.OnChangeListener { slider, value, fromUser ->
+
+                val values = slider.values
+                Timber.tag("FilterBottomSheet").d(values[0].toString())
+                Timber.tag("FilterBottomSheet").d(values[1].toString())
+
+                var minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(values[0].toInt()))
+                var maxPrice = resources.getString(R.string.final_price,  FileUtils.convertToCurrency(values[1].toInt()))
+
+                if(values[0]==1.0E7.toFloat()||values[1]==1.0E7.toFloat()){
+                    val minPriceConverted = String.format("%.0f", values[0])
+                    val maxPriceConverted = String.format("%.0f", values[1])
+                    minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(minPriceConverted.toInt()))
+                    maxPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(maxPriceConverted.toInt()))
+                }
+
+                filterFragment.tiePriceMinim.setText(minPrice)
+                filterFragment.tiePriceMax.setText(maxPrice)
             })
         }
     }
