@@ -48,8 +48,8 @@ class ProductRepositoryImpl(
         emit(response)
     }
 
-    override suspend fun listProduct(mapQx: Map<String, String>): Flow<List<Product>> = flow {
-        val response = remoteDataSource.products(mapQx).data?.map {
+    override suspend fun listProduct(map: Map<String, String>): Flow<List<Product>> = flow {
+        val response = remoteDataSource.products(map).data?.map {
             it.toProduct()
         }?: listOf()
         emit(response)

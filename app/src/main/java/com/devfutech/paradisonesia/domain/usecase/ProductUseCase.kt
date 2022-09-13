@@ -4,10 +4,8 @@ import com.devfutech.paradisonesia.domain.repository.ProductRepository
 import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.category_product.CategoryProduct
 import com.devfutech.paradisonesia.domain.model.city.City
-import com.devfutech.paradisonesia.domain.model.filter.SortFilter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.model.province.Province
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
