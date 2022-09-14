@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.di
 
 import com.devfutech.paradisonesia.data.network.service.*
 import com.devfutech.paradisonesia.data.repository.*
+import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
 import com.devfutech.paradisonesia.domain.repository.*
 import dagger.Module
 import dagger.Provides
@@ -47,5 +48,13 @@ class RepositoryModule {
         remoteDataSource: ProductService
     ): ProductRepository {
         return ProductRepositoryImpl(remoteDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductDetailRepository(
+        remoteDataSource: ProductDetailService
+    ) : ProductDetailRepository {
+        return ProductDetailRepositoryImpl(remoteDataSource)
     }
 }

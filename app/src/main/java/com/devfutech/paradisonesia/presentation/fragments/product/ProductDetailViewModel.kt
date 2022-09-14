@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.product.Product
+import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
+import com.devfutech.paradisonesia.domain.usecase.ProductDetailUseCase
 import com.devfutech.paradisonesia.domain.usecase.ProductUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
@@ -17,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
-    private val productUseCase: ProductUseCase
+    private val productDetailUseCase: ProductDetailUseCase
 ) : BaseViewModel() {
 
     /*
@@ -26,20 +28,24 @@ class ProductDetailViewModel @Inject constructor(
         get() = _product
      */
 
-    private val _product: MutableStateFlow<Resource<List<Product>>> =
+    private val _product: MutableStateFlow<Resource<List<ProductDetail>>> =
         MutableStateFlow(Resource.Success(emptyList()))
-    val product: MutableStateFlow<Resource<List<Product>>>
+    val product: MutableStateFlow<Resource<List<ProductDetail>>>
         get() = _product
 
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
-        getProducts()
+        //getProducts()
+        val map = mapOf("2" to "")
+
+        getProducts(map)
     }
 
+    /*
     fun getProducts(){
         _product.value = Resource.Loading()
         viewModelScope.launch {
-            productUseCase.getListProduct()
+            productDetailUseCase.getListProductDetail()
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
@@ -52,10 +58,12 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 
+     */
+
     fun getProducts(map:Map<String,String>){
         _product.value = Resource.Loading()
         viewModelScope.launch {
-            productUseCase.getListProduct(map)
+            productDetailUseCase.getListProductDetail(map)
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))

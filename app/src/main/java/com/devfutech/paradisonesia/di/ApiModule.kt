@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -57,6 +58,11 @@ class ApiModule {
             })
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideProductDetailService(retrofit: Retrofit) : ProductDetailService =
+        retrofit.create(ProductDetailService::class.java)
 
     @Provides
     @Singleton
