@@ -72,7 +72,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                 bundle.putString("reviews_count", item.description)
 
                 val bundle = bundleOf("name", bundle)
-                */
+
 
                 val productParcelable = ProductParcelable(
                     item.name,
@@ -82,7 +82,9 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                     item.description,
                     item.sub_category?.name)
 
-                val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
+                 */
+
+                val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(item.id!!)
                 root.setOnClickListener{
                     findNavController(it).navigate(action)
                 }

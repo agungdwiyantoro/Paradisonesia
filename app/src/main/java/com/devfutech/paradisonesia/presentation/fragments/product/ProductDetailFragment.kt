@@ -65,16 +65,19 @@ class ProductDetailFragment : BaseFragment(){
 
         setupView()
         setAction()
-        setProductsDetail()
+       // setProductsDetail()
 
 
 
     }
 
     private fun setAction() {
+        /*
         viewModel.getProducts(mapOf(
             "show" to "5"
         ))
+
+         */
         binding.apply {
 
 
@@ -129,17 +132,18 @@ class ProductDetailFragment : BaseFragment(){
         return if (isSelected) R.drawable.background_filter_selected else R.drawable.background_filter_unselected
     }
 
-    private fun setProductsDetail() {
+    private fun setProductsDetail(index: String) {
         lifecycleScope.launchWhenStarted {
             viewModel.product.collect { result ->
                 when (result) {
                     is Resource.Loading -> println("Loading")
                     is Resource.Failure -> {
+                        Timber.tag("FRAGMENT_DATA").d("ProductDetailFragmentX " + result.error)
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        Timber.tag("FRAGMENT_DATA").d("ProductDetailFragment " + result.data)
-                        productDetailAdapter.submitList(result.data)
+                        Timber.tag("FRAGMENT_DATA").d("ProductDetailFragmentX " + result.data)
+                        productDetailAdapter.submitList(mutableListOf(result.data))
                         //setupView(result.data!!)
                     }
                     else -> {}
@@ -149,54 +153,56 @@ class ProductDetailFragment : BaseFragment(){
     }
 
     private fun setupView() {
-        /*
+
         val args : ProductDetailFragmentArgs by navArgs()
         val user = args.detailProduct
+        setProductsDetail(user.toString())
         //bundle?.getParcelable<ProductParcelable>("SHIT")
-        binding.apply {
-            tvDetailProduct.text = user.name
-            tvDetailProductDescription.text = user.description
-            tvDetailProductRating.text = user.rating_average
-            tvDetailProductReviews.text = resources.getString(
-                R.string.reviews_w_value, user.reviews_count.toString()
-            )
-            tvDetailCategoryProduct.text = user.sub_category_name
+        /*
+         binding.apply {
+             tvDetailProduct.text = user.name
+             tvDetailProductDescription.text = user.description
+             tvDetailProductRating.text = user.rating_average
+             tvDetailProductReviews.text = resources.getString(
+                 R.string.reviews_w_value, user.reviews_count.toString()
+             )
+             tvDetailCategoryProduct.text = user.sub_category_name
 
 
 
 
 
-            val listData = data
+             val listData = data
 
-            titleList = ArrayList(listData.keys)
+             titleList = ArrayList(listData.keys)
 
-            adapter = CustomExpandableListAdapter(requireContext(), titleList as ArrayList<String>, listData)
+             adapter = CustomExpandableListAdapter(requireContext(), titleList as ArrayList<String>, listData)
 
-            elvProductDetail.setAdapter(adapter)
+             elvProductDetail.setAdapter(adapter)
 
-            elvProductDetail.setOnGroupExpandListener { groupPosition ->
+             elvProductDetail.setOnGroupExpandListener { groupPosition ->
 
-                root.snackBar("List Expanded")
+                 root.snackBar("List Expanded")
 
 
-            }
+             }
 
-            elvProductDetail.setOnGroupCollapseListener { groupPosition ->
+             elvProductDetail.setOnGroupCollapseListener { groupPosition ->
 
-                root.snackBar("List Collapsed")
+                 root.snackBar("List Collapsed")
 
-            }
+             }
 
-            elvProductDetail.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
+             elvProductDetail.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
 
-                root.snackBar("Child Clicked")
+                 root.snackBar("Child Clicked")
 
-                true
+                 true
 
-            }
-        }
+             }
+         }
 
-         */
+          */
     }
 }
 

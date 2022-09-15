@@ -19,8 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeCustomerViewModel @Inject constructor(
-    private val productUseCase: ProductUseCase,
-    private val productDetailUseCase: ProductDetailUseCase
+    private val productUseCase: ProductUseCase
 ) : BaseViewModel() {
     private val _banner: MutableStateFlow<Resource<List<Banner>>> =
         MutableStateFlow(Resource.Success(emptyList()))
@@ -42,7 +41,7 @@ class HomeCustomerViewModel @Inject constructor(
         getBanners()
         getListCategory()
         getListCity()
-        getProductDetail("8")
+       // getProductDetail("8")
     }
 
     private fun getListCity() {
@@ -84,6 +83,7 @@ class HomeCustomerViewModel @Inject constructor(
         }
     }
 
+    /*
     private fun getProductDetail(index: String) {
          _productDetail.value = Resource.Loading()
         viewModelScope.launch {
@@ -97,4 +97,6 @@ class HomeCustomerViewModel @Inject constructor(
                 }
         }
     }
+
+    */
 }

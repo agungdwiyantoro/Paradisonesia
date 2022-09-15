@@ -168,10 +168,10 @@
         android:name="com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailFragment"
         android:label="product_detail_fragment"
         tools:layout="@layout/product_detail_fragment" >
-
         <argument
             android:name="detailProduct"
-            app:argType="com.devfutech.paradisonesia.domain.model.product.ProductParcelable" />
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 
 

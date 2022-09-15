@@ -63,7 +63,7 @@ class HomeCustomerFragment : BaseFragment() {
         getBanners()
         getCategoryProduct()
         getPopularDestination()
-        getProductDetail()
+        //getProductDetail()
     }
 
     private fun getPopularDestination() {
@@ -125,6 +125,7 @@ class HomeCustomerFragment : BaseFragment() {
         }
     }
 
+    /*
     private fun getProductDetail() {
         lifecycleScope.launchWhenCreated {
             viewModel.productDetail.collect { result ->
@@ -144,6 +145,8 @@ class HomeCustomerFragment : BaseFragment() {
             }
         }
     }
+
+     */
 
     private fun slideBanners(bannerSize : Int){
         var currentItem = binding.vpBanner.currentItem

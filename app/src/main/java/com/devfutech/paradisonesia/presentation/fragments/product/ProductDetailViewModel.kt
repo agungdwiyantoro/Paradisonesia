@@ -28,9 +28,9 @@ class ProductDetailViewModel @Inject constructor(
         get() = _product
      */
 
-    private val _product: MutableStateFlow<Resource<List<ProductDetail>>> =
-        MutableStateFlow(Resource.Success(emptyList()))
-    val product: MutableStateFlow<Resource<List<ProductDetail>>>
+    private val _product: MutableStateFlow<Resource<ProductDetail>> =
+        MutableStateFlow(Resource.Success(null))
+    val product: MutableStateFlow<Resource<ProductDetail>>
         get() = _product
 
     init {
@@ -38,7 +38,7 @@ class ProductDetailViewModel @Inject constructor(
         //getProducts()
         //val map = mapOf("2" to "")
 
-        getProducts("8")
+        getProducts("9")
     }
 
     /*
@@ -58,7 +58,7 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 
-     */
+
 
     fun getProducts(map:Map<String,String>){
         _product.value = Resource.Loading()
@@ -75,7 +75,7 @@ class ProductDetailViewModel @Inject constructor(
                 }
         }
     }
-
+*/
     fun getProducts(index : String){
         _product.value = Resource.Loading()
         viewModelScope.launch {
@@ -86,7 +86,7 @@ class ProductDetailViewModel @Inject constructor(
                     Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
-                    //_product.value = Resource.Success(it)
+                    _product.value = Resource.Success(it)
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
