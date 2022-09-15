@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.presentation.fragments.product
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.domain.model.banner.Banner
@@ -19,8 +20,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
-    private val productDetailUseCase: ProductDetailUseCase
+    private val productDetailUseCase: ProductDetailUseCase,
+    private val state: SavedStateHandle
 ) : BaseViewModel() {
+
 
     /*
     private val _product: MutableStateFlow<Resource<List<Product>>> = MutableStateFlow(Resource.Success(listOf()))
@@ -38,7 +41,7 @@ class ProductDetailViewModel @Inject constructor(
         //getProducts()
         //val map = mapOf("2" to "")
 
-        getProducts("9")
+        getProducts(state.get<String>("detailProduct").toString())
     }
 
     /*

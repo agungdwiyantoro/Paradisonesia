@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.loadAny
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductBinding
+import com.devfutech.paradisonesia.databinding.ItemProductDetailDescBinding
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
@@ -30,20 +31,23 @@ import timber.log.Timber
  */
 class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.ProductViewHolder>(POST_COMPARATOR) {
 
-    inner class ProductViewHolder(private val binding: ProductDetailFragmentBinding) :
+    inner class ProductViewHolder(private val binding: ItemProductDetailDescBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail) {
             binding.apply {
+               /*
                 ivProduct.loadAny(item.thumbnail?:""){
                     crossfade(true)
                     error(R.drawable.object_wisata_lombok)
                     //error(R.drawable.ic_image_not_available)
                 }
-
+*/
                 Timber.tag("PDA").d("PDAs" + item.wishlist_count)
-               // tvDetailCategoryProduct.text = item.sub_category?.name
+                tvDetailProductName.text = item.name
+                tvDetailCategoryProduct.text = item.sub_category?.name
                 tvDetailProductRating.text = item.rating_average
-                tvDescription.text = item.description
+                tvDetailProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.reviews_w_value, item.reviews_count.toString())
+                tvDetailProductDescription.text = item.description
                 tvDetailProductFavorit.text = item.wishlist_count.toString()
 
 
@@ -88,7 +92,7 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
-            ProductDetailFragmentBinding.inflate(
+            ItemProductDetailDescBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

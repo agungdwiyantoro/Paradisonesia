@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
+import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
 import com.devfutech.paradisonesia.domain.model.expandable_list_data.ExpandableListData.data
 
 import com.devfutech.paradisonesia.external.Resource
@@ -32,13 +33,14 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class ProductDetailFragment : BaseFragment(){
-
+   // val args : ProductDetailFragmentArgs by navArgs()
+    //args.detailProduct
     //private var expandableListView: ExpandableListView? = null
     private var adapter: ExpandableListAdapter? = null
     private var titleList: List<String>? = null
 
-    private val binding: ProductDetailFragmentBinding by lazy{
-        ProductDetailFragmentBinding.inflate(layoutInflater)
+    private val binding: ProductDetailFragmentRealBinding by lazy{
+        ProductDetailFragmentRealBinding.inflate(layoutInflater)
     }
     private val viewModel: ProductDetailViewModel by viewModels()
 
@@ -65,7 +67,7 @@ class ProductDetailFragment : BaseFragment(){
 
         setupView()
         setAction()
-       // setProductsDetail()
+        setProductsDetail()
 
 
 
@@ -132,16 +134,18 @@ class ProductDetailFragment : BaseFragment(){
         return if (isSelected) R.drawable.background_filter_selected else R.drawable.background_filter_unselected
     }
 
-    private fun setProductsDetail(index: String) {
+    private fun setProductsDetail() {
         lifecycleScope.launchWhenStarted {
             viewModel.product.collect { result ->
                 when (result) {
-                    is Resource.Loading -> println("Loading")
+                    is Resource.Loading -> binding.vfProductDetailDesc.displayedChild = 0
                     is Resource.Failure -> {
+                        binding.vfProductDetailDesc.displayedChild = 1
                         Timber.tag("FRAGMENT_DATA").d("ProductDetailFragmentX " + result.error)
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
+                        binding.vfProductDetailDesc.displayedChild = 1
                         Timber.tag("FRAGMENT_DATA").d("ProductDetailFragmentX " + result.data)
                         productDetailAdapter.submitList(mutableListOf(result.data))
                         //setupView(result.data!!)
@@ -154,9 +158,11 @@ class ProductDetailFragment : BaseFragment(){
 
     private fun setupView() {
 
-        val args : ProductDetailFragmentArgs by navArgs()
-        val user = args.detailProduct
-        setProductsDetail(user.toString())
+        binding.apply {
+            rvProductDetailDesc.adapter = productDetailAdapter
+        }
+
+        //setProductsDetail(user.toString())
         //bundle?.getParcelable<ProductParcelable>("SHIT")
         /*
          binding.apply {

@@ -171,7 +171,7 @@
         <argument
             android:name="detailProduct"
             app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="0" />
     </fragment>
 
 
