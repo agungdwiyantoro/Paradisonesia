@@ -1,7 +1,5 @@
 package com.devfutech.paradisonesia.domain.model.product.product_detail
 
-import com.devfutech.paradisonesia.domain.model.product.Product
-
 data class ProductDetail (
     val id: Int?,
     val merchant_id: Int?,
@@ -29,14 +27,14 @@ data class ProductDetail (
     val rating_average: String?,
     val share_url: String?,
     val sub_category: Sub_Category?,
-    val images: Images?,
+    val images: List<Images?>,
     val status: Status?,
     val city :City?,
-    val facilities: Facilities?,
-    val schedules: Schedules?,
-    val include_excludes: Include_Excludes?,
-    val faqs: Faqs?,
-    val terms: Terms?
+    val facilities: List<Facilities?>,
+    val schedules: List<Schedules?>,
+    val include_excludes: List<Include_Excludes?>,
+    val faqs: List<Faqs?>,
+    val terms: List<Terms?>
     ) {
     data class Sub_Category(
         val id: Int?,
@@ -79,7 +77,7 @@ data class ProductDetail (
         val created_at: String?,
         val updated_at: String?,
         val deleted_at: String?,
-        val facility: Facility?
+        val facility: List<Facility?>
     ) {
         data class Facility(
             val id: Int?,

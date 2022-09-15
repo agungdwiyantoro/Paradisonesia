@@ -13,6 +13,7 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.BannerAdapter
 import com.devfutech.paradisonesia.external.adapter.CategoryProductAdapter
 import com.devfutech.paradisonesia.external.adapter.CityAdapter
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.MainActivity
@@ -33,6 +34,7 @@ class HomeCustomerFragment : BaseFragment() {
         HomeCustomerFragmentBinding.inflate(layoutInflater)
     }
     private val viewModel: HomeCustomerViewModel by viewModels()
+
     private val bannerAdapter by lazy {
         BannerAdapter()
     }
@@ -41,6 +43,10 @@ class HomeCustomerFragment : BaseFragment() {
     }
     private val cityAdapter by lazy {
         CityAdapter()
+    }
+
+    private val productDetailAdapter by lazy{
+        ProductDetailAdapter()
     }
 
     override fun onCreateView(
@@ -57,6 +63,7 @@ class HomeCustomerFragment : BaseFragment() {
         getBanners()
         getCategoryProduct()
         getPopularDestination()
+        getProductDetail()
     }
 
     private fun getPopularDestination() {
@@ -111,6 +118,26 @@ class HomeCustomerFragment : BaseFragment() {
                         bannerAdapter.submitList(result.data)
                         slideBanners(result.data!!.size)
                         Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun getProductDetail() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.productDetail.collect { result ->
+                when (result) {
+                    is Resource.Loading -> print("loading") //binding.vfBanner.displayedChild = 0
+                    is Resource.Failure -> {
+                        Timber.tag("productDetailFUK").d("HOX" + result.error)
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        //productDetailAdapter.submitList(result.data)
+                       // slideBanners(result.data!!.size)
+                        Timber.tag("productDetailFUK").d("HOX" + result.data!!)
                     }
                     else -> {}
                 }

@@ -127,9 +127,6 @@ data class ProductResponse(
        review_count = product?.review_count,
        city = product?.city,
        sub_category = product?.sub_category
-
          */
     )
-
-
 }

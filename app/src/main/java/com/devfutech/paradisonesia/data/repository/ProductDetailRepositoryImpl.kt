@@ -8,11 +8,17 @@ import kotlinx.coroutines.flow.flow
 
 class ProductDetailRepositoryImpl(
     private val remoteDataSource: ProductDetailService
-): ProductDetailRepository{
+):
+    ProductDetailRepository{
     override suspend fun productDetail(map: Map<String, String>): Flow<List<ProductDetail>> = flow{
         val response = remoteDataSource.productsDetail(map).data?.map {
             it.toProductDetail()
         }?: listOf()
         emit(response)
+    }
+
+    override suspend fun productDetail(index: String): Flow<ProductDetail> = flow{
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()
+        emit(response!!)
     }
 }

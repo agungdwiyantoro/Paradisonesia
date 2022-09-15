@@ -57,21 +57,21 @@ data class ProductDetailResponse (
     @SerializedName("sub_category")
     val sub_category: ProductDetail.Sub_Category?,
     @SerializedName("images")
-    val images: ProductDetail.Images?,
+    val images: List<ProductDetail.Images?>,
     @SerializedName("status")
     val status: ProductDetail.Status?,
     @SerializedName("city")
     val city : ProductDetail.City?,
     @SerializedName("facilities")
-    val facilities: ProductDetail.Facilities?,
+    val facilities: List<ProductDetail.Facilities?>,
     @SerializedName("schedules")
-    val schedules: ProductDetail.Schedules?,
+    val schedules: List<ProductDetail.Schedules?>,
     @SerializedName("include_excludes")
-    val include_excludes: ProductDetail.Include_Excludes?,
+    val include_excludes: List<ProductDetail.Include_Excludes?>,
     @SerializedName("faqs")
-    val faqs: ProductDetail.Faqs?,
+    val faqs: List<ProductDetail.Faqs?>,
     @SerializedName("terms")
-    val terms: ProductDetail.Terms?
+    val terms: List<ProductDetail.Terms?>
     ) {
 
     fun toProductDetail() = ProductDetail(

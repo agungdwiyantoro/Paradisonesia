@@ -17,8 +17,10 @@ import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
 import com.devfutech.paradisonesia.domain.model.expandable_list_data.ExpandableListData.data
 
 import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.external.adapter.CategoryProductAdapter
 import com.devfutech.paradisonesia.external.adapter.CustomExpandableListAdapter
 import com.devfutech.paradisonesia.external.adapter.ProductAdapter
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
@@ -40,6 +42,10 @@ class ProductDetailFragment : BaseFragment(){
     }
     private val viewModel: ProductDetailViewModel by viewModels()
 
+    private val productDetailAdapter by lazy {
+        ProductDetailAdapter()
+    }
+
     private val callbackManager by lazy {
         CallbackManager.Factory.create()
     }
@@ -59,7 +65,7 @@ class ProductDetailFragment : BaseFragment(){
 
         setupView()
         setAction()
-        setProducts()
+        setProductsDetail()
 
 
 
@@ -123,7 +129,7 @@ class ProductDetailFragment : BaseFragment(){
         return if (isSelected) R.drawable.background_filter_selected else R.drawable.background_filter_unselected
     }
 
-    private fun setProducts() {
+    private fun setProductsDetail() {
         lifecycleScope.launchWhenStarted {
             viewModel.product.collect { result ->
                 when (result) {
@@ -132,8 +138,8 @@ class ProductDetailFragment : BaseFragment(){
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
-                       // productDetailAdapter.submitList(result.data)
+                        Timber.tag("FRAGMENT_DATA").d("ProductDetailFragment " + result.data)
+                        productDetailAdapter.submitList(result.data)
                         //setupView(result.data!!)
                     }
                     else -> {}
@@ -143,6 +149,7 @@ class ProductDetailFragment : BaseFragment(){
     }
 
     private fun setupView() {
+        /*
         val args : ProductDetailFragmentArgs by navArgs()
         val user = args.detailProduct
         //bundle?.getParcelable<ProductParcelable>("SHIT")
@@ -154,6 +161,8 @@ class ProductDetailFragment : BaseFragment(){
                 R.string.reviews_w_value, user.reviews_count.toString()
             )
             tvDetailCategoryProduct.text = user.sub_category_name
+
+
 
 
 
@@ -185,9 +194,9 @@ class ProductDetailFragment : BaseFragment(){
                 true
 
             }
-
-
         }
+
+         */
     }
 }
 
