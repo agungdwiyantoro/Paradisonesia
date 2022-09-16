@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
@@ -46,7 +47,7 @@ class ProductFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setAction()
-        setProducts()
+
     }
 
     private fun setAction() {
@@ -222,13 +223,21 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupView() {
+        val args : ProductFragmentArgs by navArgs()
+        val id = args.categoryProductID
         binding.apply {
             rvProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = productAdapter
             }
 
-
+        }
+        Timber.tag("NIGERITOS").d("XHIT " + id.toString())
+        if(id<=5) {
+            setProducts(id.toString())
+        }
+        else{
+            setProducts()
         }
     }
 

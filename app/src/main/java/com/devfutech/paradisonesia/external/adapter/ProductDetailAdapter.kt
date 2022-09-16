@@ -35,13 +35,13 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail) {
             binding.apply {
-               /*
+
                 ivProduct.loadAny(item.thumbnail?:""){
                     crossfade(true)
                     error(R.drawable.object_wisata_lombok)
                     //error(R.drawable.ic_image_not_available)
                 }
-*/
+
                 Timber.tag("PDA").d("PDAs" + item.wishlist_count)
                 tvDetailProductName.text = item.name
                 tvDetailCategoryProduct.text = item.sub_category?.name
@@ -49,7 +49,6 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
                 tvDetailProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.reviews_w_value, item.reviews_count.toString())
                 tvDetailProductDescription.text = item.description
                 tvDetailProductFavorit.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.favorite, item.wishlist_count.toString())
-
 
                 //tvProductRating.text = item.
 //                root.apply {
