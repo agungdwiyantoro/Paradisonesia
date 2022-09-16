@@ -143,4 +143,5 @@
 
     <!-- Product Detail Fragment -->
     <string name="favorite">%1$s favorites</string>
+    <string name="pesan_sekarang">Pesan Sekarang</string>
 </resources>
