@@ -36,7 +36,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_search"
+                    android:id="@+id/tie_search"
                     style="@style/Text.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

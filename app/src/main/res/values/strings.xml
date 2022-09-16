@@ -140,4 +140,7 @@
     <string name="per_pax">/pax</string>
     <string name="reviews_w_value">(%1$s reviews)</string>
     <string name="description">Description</string>
+
+    <!-- Product Detail Fragment -->
+    <string name="favorite">%1$s favorites</string>
 </resources>

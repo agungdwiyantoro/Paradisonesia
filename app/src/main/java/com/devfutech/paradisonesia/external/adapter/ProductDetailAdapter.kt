@@ -48,7 +48,7 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
                 tvDetailProductRating.text = item.rating_average
                 tvDetailProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.reviews_w_value, item.reviews_count.toString())
                 tvDetailProductDescription.text = item.description
-                tvDetailProductFavorit.text = item.wishlist_count.toString()
+                tvDetailProductFavorit.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.favorite, item.wishlist_count.toString())
 
 
                 //tvProductRating.text = item.

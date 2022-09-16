@@ -30,6 +30,10 @@ class ProductDetailViewModel @Inject constructor(
     val product:MutableStateFlow<Resource<List<Product>>>
         get() = _product
      */
+    private val _banner: MutableStateFlow<Resource<List<Banner>>> =
+        MutableStateFlow(Resource.Success(emptyList()))
+    val banner: MutableStateFlow<Resource<List<Banner>>>
+        get() = _banner
 
     private val _product: MutableStateFlow<Resource<ProductDetail>> =
         MutableStateFlow(Resource.Success(null))
@@ -42,6 +46,7 @@ class ProductDetailViewModel @Inject constructor(
         //val map = mapOf("2" to "")
 
         getProducts(state.get<String>("detailProduct").toString())
+
     }
 
     /*
@@ -79,6 +84,7 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 */
+
     fun getProducts(index : String){
         _product.value = Resource.Loading()
         viewModelScope.launch {

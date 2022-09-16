@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.data.repository
 
 import com.devfutech.paradisonesia.data.network.service.ProductDetailService
+import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
 import com.devfutech.paradisonesia.domain.repository.ProductDetailRepository
 import kotlinx.coroutines.flow.Flow

@@ -13,13 +13,13 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 32
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.devfutech.paradisonesia"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 32
         versionCode = 2
         versionName = "1.1.0"
 
@@ -64,7 +64,7 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.10")
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -106,8 +106,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:21.0.8")
     implementation("com.google.firebase:firebase-perf-ktx:20.1.1")
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.8")
-    implementation("com.google.firebase:firebase-bom:30.4.1")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.3.0")
+    implementation("com.google.firebase:firebase-bom:30.5.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.3.1")
 
     //Google Auth
     implementation("com.google.android.gms:play-services-auth:20.3.0")

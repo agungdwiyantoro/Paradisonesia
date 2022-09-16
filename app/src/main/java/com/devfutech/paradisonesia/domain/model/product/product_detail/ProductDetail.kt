@@ -94,8 +94,19 @@ data class ProductDetail (
         val created_at: String?,
         val updated_at: String?,
         val deleted_at: String?,
-        val days: ArrayList<String>?
-    )
+        val days: List<Days>?
+    ) {
+        data class Days(
+            val id: Int?,
+            val schedule_id: Int?,
+            val start_time: String?,
+            val end_time: String?,
+            val description: String?,
+            val created_at: String?,
+            val updated_at: String?,
+            val deleted_at: String?
+        )
+    }
 
     data class Include_Excludes(
         val id: Int?,

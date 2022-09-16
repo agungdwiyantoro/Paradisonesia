@@ -18,15 +18,13 @@ import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
 import com.devfutech.paradisonesia.domain.model.expandable_list_data.ExpandableListData.data
 
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.CategoryProductAdapter
-import com.devfutech.paradisonesia.external.adapter.CustomExpandableListAdapter
-import com.devfutech.paradisonesia.external.adapter.ProductAdapter
-import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
+import com.devfutech.paradisonesia.external.adapter.*
 import com.devfutech.paradisonesia.external.extension.snackBar
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 
 import com.facebook.CallbackManager
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -48,6 +46,10 @@ class ProductDetailFragment : BaseFragment(){
         ProductDetailAdapter()
     }
 
+    private val productDetailBannerAdapter by lazy {
+        BannerAdapter()
+    }
+
     private val callbackManager by lazy {
         CallbackManager.Factory.create()
     }
@@ -67,6 +69,7 @@ class ProductDetailFragment : BaseFragment(){
 
         setupView()
         setAction()
+
         setProductsDetail()
 
 
@@ -156,10 +159,34 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
+    private fun getBanners() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.banner.collect { result ->
+                when (result) {
+                    is Resource.Loading -> binding.vfBanner.displayedChild = 0
+                    is Resource.Failure -> {
+                        binding.vfBanner.displayedChild = 1
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        binding.vfBanner.displayedChild = 1
+                        productDetailBannerAdapter.submitList(result.data)
+                        //slideBanners(result.data!!.size)
+                        Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
     private fun setupView() {
 
         binding.apply {
             rvProductDetailDesc.adapter = productDetailAdapter
+          //  vpBanner.adapter = productDetailBannerAdapter
+          //  vpBanner.isSaveEnabled = false
+          //  TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()
         }
 
         //setProductsDetail(user.toString())

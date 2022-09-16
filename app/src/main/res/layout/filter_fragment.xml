@@ -82,8 +82,13 @@
             android:valueFrom="0"
             android:valueTo="10000000"
             android:stepSize="1000000"
-            app:values="@array/initial_range_slider_values"
             android:layout_marginTop="@dimen/_10sdp"
+            app:thumbColor="@color/white"
+
+            app:tickVisible="false"
+            app:trackColorActive="@color/dark_blue"
+            app:trackColorInactive="@color/gray_bd"
+            app:values="@array/initial_range_slider_values"
             app:layout_constraintTop_toBottomOf="@+id/tl_price_max" />
 
         <View
