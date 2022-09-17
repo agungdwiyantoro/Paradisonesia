@@ -159,31 +159,11 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
-    private fun getBanners() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.banner.collect { result ->
-                when (result) {
-                    is Resource.Loading -> binding.vfBanner.displayedChild = 0
-                    is Resource.Failure -> {
-                        binding.vfBanner.displayedChild = 1
-                        binding.root.snackBar(result.error)
-                    }
-                    is Resource.Success -> {
-                        binding.vfBanner.displayedChild = 1
-                        productDetailBannerAdapter.submitList(result.data)
-                        //slideBanners(result.data!!.size)
-                        Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
-                    }
-                    else -> {}
-                }
-            }
-        }
-    }
 
     private fun setupView() {
 
         binding.apply {
-            rvProductDetailDesc.adapter = productDetailAdapter
+            rvProductDetailExpandable.adapter = productDetailAdapter
           //  vpBanner.adapter = productDetailBannerAdapter
           //  vpBanner.isSaveEnabled = false
           //  TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()

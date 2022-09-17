@@ -144,4 +144,14 @@
     <!-- Product Detail Fragment -->
     <string name="favorite">%1$s favorites</string>
     <string name="pesan_sekarang">Pesan Sekarang</string>
+
+    <string name="tanggal_pelaksanaan">Tanggal Pelaksanaan</string>
+    <string name="rencana_perjalanan">Rencana Perjalanan</string>
+    <string name="include">Include</string>
+    <string name="exclude">Exclude</string>
+    <string name="fasilitas_layanan">Fasilitas &amp; Layanan</string>
+    <string name="faq">FAQ</string>
+    <string name="syarat_ketentuan">Syarat &amp; Ketentuan</string>
+    <string name="penilaian_produk">Penilaian Produk</string>
+    <string name="paket_lainnya">Paket Lainnya</string>
 </resources>
