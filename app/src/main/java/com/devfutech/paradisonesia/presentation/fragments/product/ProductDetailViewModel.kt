@@ -30,10 +30,10 @@ class ProductDetailViewModel @Inject constructor(
     val product:MutableStateFlow<Resource<List<Product>>>
         get() = _product
      */
-    private val _banner: MutableStateFlow<Resource<List<Banner>>> =
+    private val _productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>> =
         MutableStateFlow(Resource.Success(emptyList()))
-    val banner: MutableStateFlow<Resource<List<Banner>>>
-        get() = _banner
+    val productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>>
+        get() = _productDetailReviews
 
     private val _product: MutableStateFlow<Resource<ProductDetail>> =
         MutableStateFlow(Resource.Success(null))
@@ -47,6 +47,7 @@ class ProductDetailViewModel @Inject constructor(
 
         getProducts(state.get<String>("detailProduct").toString())
 
+        ProductReviews(state.get<String>("detailProduct").toString())
     }
 
     /*
@@ -97,6 +98,21 @@ class ProductDetailViewModel @Inject constructor(
                 }.collect {
                     _product.value = Resource.Success(it)
                     Timber.tag("AnjingProduct").d("Success" + it)
+                }
+        }
+    }
+
+    fun ProductReviews(index: String){
+        _productDetailReviews.value = Resource.Loading()
+        viewModelScope.launch {
+            productDetailUseCase.getListProductDetailReviews(index)
+                .catch { error->
+                    onError(error)
+                    _productDetailReviews.value = Resource.Failure(defaultError(error))
+                    Timber.tag("Product Detail Reviews").d("error")
+                }.collect{
+                    _productDetailReviews.value = Resource.Success(it)
+                    Timber.tag("Product Detail Reviews").d("Success " + it)
                 }
         }
     }

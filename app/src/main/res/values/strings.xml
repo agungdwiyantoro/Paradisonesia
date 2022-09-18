@@ -144,7 +144,6 @@
     <!-- Product Detail Fragment -->
     <string name="favorite">%1$s favorites</string>
     <string name="pesan_sekarang">Pesan Sekarang</string>
-
     <string name="tanggal_pelaksanaan">Tanggal Pelaksanaan</string>
     <string name="rencana_perjalanan">Rencana Perjalanan</string>
     <string name="include">Include</string>
@@ -154,4 +153,11 @@
     <string name="syarat_ketentuan">Syarat &amp; Ketentuan</string>
     <string name="penilaian_produk">Penilaian Produk</string>
     <string name="paket_lainnya">Paket Lainnya</string>
+    <string name="question_answer"><![CDATA[<b>Question %1$s :</b> <br> %2$s <br><b>Answer %3$s :</b> <br>  %4$s <br>]]> </string>
+    <string name="terms">%1$d . %2$s \n</string>
+
+    <!-- penilaian produk -->
+    <string name="rb_rating_num">%1$d/5 (%2$d ulasan)</string>
+    <string name="lihat_semua">Lihat Semua</string>
+    <string name="anonymous">Anonymous</string>
 </resources>

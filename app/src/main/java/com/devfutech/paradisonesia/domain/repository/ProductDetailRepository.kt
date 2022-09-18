@@ -8,4 +8,6 @@ interface ProductDetailRepository {
     suspend fun productDetail(map: Map<String,String>): Flow<List<ProductDetail>>
 
     suspend fun productDetail(index: String): Flow<ProductDetail>
+
+    suspend fun productDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?>
 }

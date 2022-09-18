@@ -34,7 +34,8 @@ data class ProductDetail (
     val schedules: List<Schedules?>,
     val include_excludes: List<Include_Excludes?>,
     val faqs: List<Faqs?>,
-    val terms: List<Terms?>
+    val terms: List<Terms?>,
+    val reviews: List<Reviews?>
     ) {
     data class Sub_Category(
         val id: Int?,
@@ -136,6 +137,14 @@ data class ProductDetail (
         val is_global: Int?,
         val created_at: String?,
         val updated_at: String?,
+        val deleted_at: String?
+    )
+
+    data class Reviews(
+        val item_id: Int?,
+        val product_id: Int?,
+        val review: String?,
+        val rating: Int?,
         val deleted_at: String?
     )
 }

@@ -1,7 +1,6 @@
 package com.devfutech.paradisonesia.data.repository
 
 import com.devfutech.paradisonesia.data.network.service.ProductDetailService
-import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
 import com.devfutech.paradisonesia.domain.repository.ProductDetailRepository
 import kotlinx.coroutines.flow.Flow
@@ -22,4 +21,10 @@ class ProductDetailRepositoryImpl(
         val response = remoteDataSource.productsDetail(index).data?.toProductDetail()
         emit(response!!)
     }
+
+    override suspend fun productDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?> = flow {
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.reviews
+        emit(response)
+    }
+
 }

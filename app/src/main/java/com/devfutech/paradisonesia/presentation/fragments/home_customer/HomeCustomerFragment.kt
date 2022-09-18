@@ -13,7 +13,7 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.BannerAdapter
 import com.devfutech.paradisonesia.external.adapter.CategoryProductAdapter
 import com.devfutech.paradisonesia.external.adapter.CityAdapter
-import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapter
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.MainActivity
@@ -23,7 +23,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 
@@ -116,7 +115,7 @@ class HomeCustomerFragment : BaseFragment() {
                     is Resource.Success -> {
                         binding.vfBanner.displayedChild = 1
                         bannerAdapter.submitList(result.data)
-                        slideBanners(result.data!!.size)
+                       // slideBanners(result.data!!.size)
                         Timber.tag("HAXIMXXX").d(result.data!!.size.toString())
                     }
                     else -> {}

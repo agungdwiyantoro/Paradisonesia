@@ -2,30 +2,29 @@ package com.devfutech.paradisonesia.presentation.fragments.product
 
 
 import android.os.Bundle
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListAdapter
-import android.widget.ExpandableListView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 
-import androidx.navigation.fragment.navArgs
-
 import com.devfutech.paradisonesia.R
-import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
-import com.devfutech.paradisonesia.domain.model.expandable_list_data.ExpandableListData.data
 
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.*
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapter
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapterReviews
 import com.devfutech.paradisonesia.external.extension.snackBar
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 
 import com.facebook.CallbackManager
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 
@@ -42,6 +41,9 @@ class ProductDetailFragment : BaseFragment(){
     }
     private val viewModel: ProductDetailViewModel by viewModels()
 
+    private val productDetailAdapterReviews by lazy {
+        ProductDetailAdapterReviews()
+    }
     private val productDetailAdapter by lazy {
         ProductDetailAdapter()
     }
@@ -71,6 +73,7 @@ class ProductDetailFragment : BaseFragment(){
         setAction()
 
         setProductsDetail()
+        getProductDetailReviews()
 
 
 
@@ -159,11 +162,49 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
+    private fun getProductDetailReviews(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailReviews.collect{ result ->
+                when(result) {
+                    is Resource.Loading -> binding.vfProductDetailExpandable.displayedChild = 0
+                    is Resource.Failure -> {
+                        binding.vfProductDetailExpandable.displayedChild = 1
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        binding.vfProductDetailExpandable.displayedChild = 1
+                        Timber.tag("ProductDetailReviews").d("Success" + result.data)
+                        productDetailAdapterReviews.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
 
     private fun setupView() {
 
         binding.apply {
-            rvProductDetailExpandable.adapter = productDetailAdapter
+            //rvProductDetailExpandable.adapter = productDetailAdapter
+            llDetailProductExpand.lyPenilaianProduk.rvRatingView.adapter = productDetailAdapterReviews
+            llDetailProductExpand.lyPenilaianProduk.rbTotalRatingReview.rating = 2.0f
+            llDetailProductExpand.lyPenilaianProduk.tvRatingNum.text = resources.getString(R.string.rb_rating_num,2, productDetailAdapterReviews.itemCount)
+            llDetailProductExpand.llPenilaianProduk.setOnClickListener(
+                {
+                    if(llDetailProductExpand.llExpandedPenilaianProduk.visibility == View.GONE){
+                        TransitionManager.beginDelayedTransition(llDetailProductExpand.llPenilaianProduk, AutoTransition())
+                        llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.VISIBLE
+                        llDetailProductExpand.icDownArrowPenpro.rotation = 0f
+                    }
+                    else{
+                        TransitionManager.beginDelayedTransition(llDetailProductExpand.llPenilaianProduk, AutoTransition())
+                        llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.VISIBLE
+                        llDetailProductExpand.icDownArrowPenpro.rotation = -90f
+                    }
+                }
+            )
+
           //  vpBanner.adapter = productDetailBannerAdapter
           //  vpBanner.isSaveEnabled = false
           //  TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()

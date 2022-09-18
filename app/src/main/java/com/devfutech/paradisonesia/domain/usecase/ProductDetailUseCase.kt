@@ -12,4 +12,6 @@ class ProductDetailUseCase @Inject constructor(
     suspend fun getListProductDetail(map: Map<String, String>): Flow<List<ProductDetail>> = repository.productDetail(map)
 
     suspend fun getListProductDetail(index: String): Flow<ProductDetail> = repository.productDetail(index)
+
+    suspend fun getListProductDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?> = repository.productDetailReviews(index)
 }

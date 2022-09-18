@@ -1,57 +1,43 @@
-package com.devfutech.paradisonesia.external.adapter
+package com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
 
-import android.content.Intent
-import android.graphics.Paint
-import android.opengl.Visibility
-import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.core.os.bundleOf
-import androidx.core.widget.TextViewCompat
-import androidx.navigation.Navigation.findNavController
+import androidx.core.text.HtmlCompat
 //import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.loadAny
 import com.devfutech.paradisonesia.R
-import com.devfutech.paradisonesia.data.network.response.product.IncludeExclude
-import com.devfutech.paradisonesia.databinding.ItemProductBinding
 import com.devfutech.paradisonesia.databinding.ItemProductDetailDescBinding
-import com.devfutech.paradisonesia.databinding.ProductDetailFragmentBinding
-import com.devfutech.paradisonesia.domain.model.product.Product
-import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
-import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
-import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailFragmentArgs
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
 import timber.log.Timber
 
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.ProductViewHolder>(POST_COMPARATOR) {
+class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.ProductViewHolder>(
+    POST_COMPARATOR
+) {
 
     inner class ProductViewHolder(private val binding: ItemProductDetailDescBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail) {
             binding.apply {
 
+
                 /*
-                ivProduct.loadAny(item.thumbnail?:""){
+                itemBanner.ivBanner.loadAny(item.thumbnail?:""){
                     crossfade(true)
                     error(R.drawable.object_wisata_lombok)
                     //error(R.drawable.ic_image_not_available)
                 }
 
-                 */
+
 
                 Timber.tag("PDA").d("PDAs" + item.wishlist_count)
                 tvDetailProductName.text = item.name
@@ -76,9 +62,9 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
                     })
 
                 val include_excludes: List<ProductDetail.Include_Excludes?> = item.include_excludes
-
                 val fasilitias_layanan: List<ProductDetail.Facilities?> = item.facilities
-
+                val faqs: List<ProductDetail.Faqs?> = item.faqs
+                val terms: List<ProductDetail.Terms?> = item.terms
 
                 for(Item in include_excludes){
                     if(Item?.is_include==0){
@@ -100,6 +86,23 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
                     llDetailProductExpand.llIsiFasilitasLayanan.addView(textView)
                 }
 
+                var i=0
+                for (Item in faqs){
+                    val textView= TextView(this@ProductViewHolder.itemView.context)
+
+                    i++
+                    textView.text = HtmlCompat.fromHtml(this@ProductViewHolder.itemView.context.resources.getString(R.string.question_answer, i.toString(), Item?.question, i.toString(), Item?.answer), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    llDetailProductExpand.llIsiFaq.addView(textView)
+                }
+
+                var j=0
+                for (Item in terms){
+                    val textView= TextView(this@ProductViewHolder.itemView.context)
+
+                    j++
+                    textView.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.terms, j, Item?.description)
+                    llDetailProductExpand.llIsiSyaratKetentuan.addView(textView)
+                }
 
                 llDetailProductExpand.llInclude
                     .setOnClickListener({
@@ -143,6 +146,53 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
                             llDetailProductExpand.icDownArrowFasLay.rotation = -90f
                         }
                     })
+
+                llDetailProductExpand.llFaq
+                    .setOnClickListener({
+                        if(llDetailProductExpand.llExpandedFaq.visibility == View.GONE){
+                            TransitionManager.beginDelayedTransition(llDetailProductExpand.llFaq, AutoTransition())
+                            llDetailProductExpand.llExpandedFaq.visibility = View.VISIBLE
+                            llDetailProductExpand.icDownArrowFaq.rotation = 0f
+                        }
+                        else{
+                            TransitionManager.beginDelayedTransition(llDetailProductExpand.llFaq, AutoTransition())
+                            llDetailProductExpand.llExpandedFaq.visibility = View.GONE
+                            llDetailProductExpand.icDownArrowFaq.rotation = -90f
+                        }
+                    })
+
+                llDetailProductExpand.llSyaratKetentuan
+                    .setOnClickListener({
+                        if(llDetailProductExpand.llExpandedSyaratKetentuan.visibility == View.GONE){
+                            TransitionManager.beginDelayedTransition(llDetailProductExpand.llSyaratKetentuan, AutoTransition())
+                            llDetailProductExpand.llExpandedSyaratKetentuan.visibility = View.VISIBLE
+                            llDetailProductExpand.icDownArrowSyke.rotation = 0f
+                        }
+                        else{
+                            TransitionManager.beginDelayedTransition(llDetailProductExpand.llSyaratKetentuan, AutoTransition())
+                            llDetailProductExpand.llExpandedSyaratKetentuan.visibility = View.GONE
+                            llDetailProductExpand.icDownArrowSyke.rotation = -90f
+                        }
+                    })
+
+                llDetailProductExpand.llPenilaianProduk.setOnClickListener(
+                    {
+                        if(llDetailProductExpand.llExpandedPenilaianProduk.visibility == View.GONE){
+                            TransitionManager.beginDelayedTransition(llDetailProductExpand.llPenilaianProduk, AutoTransition())
+                            llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.VISIBLE
+                            llDetailProductExpand.icDownArrowPenpro.rotation = 0f
+                        }
+                        else{
+                            TransitionManager.beginDelayedTransition(llDetailProductExpand.llPenilaianProduk, AutoTransition())
+                            llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.VISIBLE
+                            llDetailProductExpand.icDownArrowPenpro.rotation = -90f
+                        }
+                    }
+                )
+
+
+
+                 */
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {

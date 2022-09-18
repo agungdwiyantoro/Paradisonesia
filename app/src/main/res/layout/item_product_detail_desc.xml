@@ -5,27 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/rl_banner"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vp_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tl_banner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/transparent"
-                    app:tabBackground="@drawable/tab_pager_selector"
-                    app:tabIndicator="@color/transparent" />
-        </RelativeLayout>
-
         <TextView
             android:id="@+id/tv_product_promo"
             android:layout_width="wrap_content"
@@ -39,7 +18,7 @@
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/rl_banner"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
@@ -73,6 +52,7 @@
             style="@style/Text.Small.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_4sdp"
             android:text="Location"
 
             android:layout_marginTop="@dimen/_5sdp"
@@ -86,6 +66,7 @@
             style="@style/Text.Small.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_4sdp"
             android:text="4.6"
             android:textColor="@color/star_color"
 
@@ -112,6 +93,7 @@
             style="@style/Text.Small.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_4sdp"
 
             android:drawableStart="@drawable/ic_favorite"
             android:textColor="@color/gray.primary_dark"
@@ -146,10 +128,11 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_description"
             app:layout_constraintStart_toStartOf="parent"/>
 
+<!--
         <include android:id="@+id/ll_detail_product_expand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/item_detail_product_expand"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_product_description" />
-
+-->
 </androidx.constraintlayout.widget.ConstraintLayout>

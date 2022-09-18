@@ -71,7 +71,9 @@ data class ProductDetailResponse (
     @SerializedName("faqs")
     val faqs: List<ProductDetail.Faqs?>,
     @SerializedName("terms")
-    val terms: List<ProductDetail.Terms?>
+    val terms: List<ProductDetail.Terms?>,
+    @SerializedName("reviews")
+    val reviews: List<ProductDetail.Reviews?>
     ) {
 
     fun toProductDetail() = ProductDetail(
@@ -109,6 +111,7 @@ data class ProductDetailResponse (
         include_excludes = include_excludes,
         faqs = faqs,
         terms = terms,
+        reviews = reviews
     )
 
 }

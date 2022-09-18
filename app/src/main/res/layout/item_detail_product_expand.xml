@@ -4,287 +4,373 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_tanggal_pelaksanaan"
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expandable_tanggal_pelaksanaan"
+            android:id="@+id/ll_tanggal_pelaksanaan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:padding="10dp"
-            android:background="@drawable/half_rounded_card">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tanggal_pelaksanaan"
-                style="@style/Text.Small.Bold"
-                android:textColor="@color/black"
-                android:layout_weight="4"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_down_arrow_tp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_tanggal_pelaksanaan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-            android:layout_marginTop="@dimen/_2sdp">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_isi_tanggal_pelaksanaan"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_expandable_tanggal_pelaksanaan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dilaksanakan mulai februari-agustus"
-                android:textColor="@color/blue_0063a7"
-                style="@style/Text.Small"/>
+                android:padding="10dp"
+                android:background="@drawable/half_rounded_card">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_tanggal_pelaksanaan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tanggal_pelaksanaan"
+                    style="@style/Text.Small.Bold"
+                    android:textColor="@color/black"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_down_arrow_tp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="-90"
+
+                    app:layout_constraintTop_toTopOf="@+id/tv_tanggal_pelaksanaan"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_tanggal_pelaksanaan"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_rencana_perjalanan"
+        android:id="@+id/ll_expanded_tanggal_pelaksanaan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
+        android:background="@drawable/half_rounded_card"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
         android:layout_marginTop="@dimen/_2sdp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expandable_rencana_perjalanan"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_isi_tanggal_pelaksanaan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:padding="10dp"
-            android:background="@drawable/half_rounded_card">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rencana_perjalanan"
-                style="@style/Text.Small.Bold"
-                android:textColor="@color/black"
-                android:layout_weight="4"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ic_down_arrow_rp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical|end"
-                android:layout_weight="1"
-                android:rotation="-90"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:text="Dilaksanakan mulai februari-agustus"
+            style="@style/Text.Small"/>
 
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_rencana_perjalanan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-            android:layout_marginTop="@dimen/_2sdp">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_isi_rencana_perjalanan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dilaksanakan mulai februari-agustus"
-                android:textColor="@color/blue_0063a7"
-                style="@style/Text.Small"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_include"
+
+
+
+
+<!--jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj-->
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        android:layout_marginTop="@dimen/_2sdp">
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expandable_include"
+            android:id="@+id/ll_rencana_perjalanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:padding="10dp"
-            android:background="@drawable/half_rounded_card">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_expandable_rencana_perjalanan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/include"
-                style="@style/Text.Small.Bold"
-                android:textColor="@color/black"
-                android:layout_weight="4"/>
+                android:padding="10dp"
+                android:background="@drawable/half_rounded_card">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ic_down_arrow_inc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical|end"
-                android:layout_weight="1"
-                android:rotation="-90"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_rencana_perjalanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rencana_perjalanan"
+                    style="@style/Text.Small.Bold"
 
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_down_arrow_rp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="-90"
+
+                    app:layout_constraintTop_toTopOf="@+id/tv_rencana_perjalanan"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_rencana_perjalanan"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+    </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_expanded_rencana_perjalanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/half_rounded_card"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_15sdp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+                    android:layout_marginTop="@dimen/_2sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_isi_rencana_perjalanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dilaksanakan mulai februari-agustus"
+                        android:textColor="@color/blue_0063a7"
+                        style="@style/Text.Small"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+    <!--jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj-->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_include"
+            android:id="@+id/ll_include"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+
             android:layout_marginTop="@dimen/_2sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_expandable_include"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/half_rounded_card">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_include"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/include"
+                    style="@style/Text.Small.Bold"
+                    android:textColor="@color/black"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_down_arrow_inc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="-90"
+
+                    app:layout_constraintTop_toTopOf="@+id/tv_include"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_include"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_isi_include"
+                android:id="@+id/ll_expanded_include"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical"
+                android:background="@drawable/half_rounded_card"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_15sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_isi_include"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_exclude"
+    <!--jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj-->
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        android:layout_marginTop="@dimen/_2sdp">
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expandable_exclude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:padding="10dp"
-            android:background="@drawable/half_rounded_card">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/exclude"
-                style="@style/Text.Small.Bold"
-                android:textColor="@color/black"
-
-                android:layout_weight="4"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ic_down_arrow_exl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_exclude"
+            android:id="@+id/ll_exclude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
 
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
             android:layout_marginTop="@dimen/_2sdp">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_isi_Exclude"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_expandable_exclude"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:padding="10dp"
+                android:background="@drawable/half_rounded_card">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_exclude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exclude"
+                    style="@style/Text.Small.Bold"
+                    android:textColor="@color/black"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_down_arrow_exl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="-90"
+
+                    app:layout_constraintTop_toTopOf="@+id/tv_exclude"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_exclude"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_expanded_exclude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/half_rounded_card"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+        android:layout_marginTop="@dimen/_2sdp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_isi_Exclude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_fasilitas_layanan"
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expandable_fasilitas_layanan"
+            android:id="@+id/ll_fasilitas_layanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            android:padding="10dp"
-            android:background="@drawable/half_rounded_card">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_expandable_fasilitas_layanan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fasilitas_layanan"
-                style="@style/Text.Small.Bold"
-                android:textColor="@color/black"
+                android:padding="10dp"
+                android:background="@drawable/half_rounded_card">
 
-                android:layout_weight="4"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_fasilitas_layanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fasilitas_layanan"
+                    style="@style/Text.Small.Bold"
+                    android:textColor="@color/black"
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ic_down_arrow_fas_lay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_down_arrow_fas_lay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="-90"
+
+                    app:layout_constraintTop_toTopOf="@+id/tv_fasilitas_layanan"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_fasilitas_layanan"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/ll_expanded_fasilitas_layanan"
@@ -308,251 +394,307 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_faq"
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="@dimen/_10sdp">
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_faq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_expandable_faq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
             android:padding="10dp"
             android:background="@drawable/half_rounded_card">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_faq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/faq"
                 style="@style/Text.Small.Bold"
                 android:textColor="@color/black"
 
-                android:layout_weight="4"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_down_arrow_faq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
+                android:rotation="-90"
 
+                app:layout_constraintTop_toTopOf="@+id/tv_faq"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_faq"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_expanded_faq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/half_rounded_card"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+        android:layout_marginTop="@dimen/_2sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_faq"
+            android:id="@+id/ll_isi_faq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-            android:layout_marginTop="@dimen/_2sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_isi_faq"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+            android:orientation="vertical">
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_syarat_ketentuan"
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="@dimen/_10sdp">
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_syarat_ketentuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_expandable_syarat_ketentuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
             android:padding="10dp"
             android:background="@drawable/half_rounded_card">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_syarat_ketentuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/syarat_ketentuan"
                 style="@style/Text.Small.Bold"
                 android:textColor="@color/black"
 
-                android:layout_weight="4"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_down_arrow_syke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
+                android:rotation="-90"
 
+                app:layout_constraintTop_toTopOf="@+id/tv_syarat_ketentuan"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_syarat_ketentuan"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_syarat_ketentuan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-            android:layout_marginTop="@dimen/_2sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_isi_syarat_ketentuan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_penilaian_produk"
+        android:id="@+id/ll_expanded_syarat_ketentuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="@dimen/_10sdp">
+        android:background="@drawable/half_rounded_card"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+        android:layout_marginTop="@dimen/_2sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_isi_syarat_ketentuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_penilaian_produk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_expandable_penilaian_produk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
             android:padding="10dp"
             android:background="@drawable/half_rounded_card">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_penilaian_produk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/penilaian_produk"
                 style="@style/Text.Small.Bold"
                 android:textColor="@color/black"
 
-                android:layout_weight="4"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_down_arrow_penpro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
+                android:rotation="-90"
 
+                app:layout_constraintTop_toTopOf="@+id/tv_penilaian_produk"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_penilaian_produk"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_penilaian_produk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-            android:layout_marginTop="@dimen/_2sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_isi_penilaian_produk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_paket_lainnya"
+        android:id="@+id/ll_expanded_penilaian_produk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="@dimen/_10sdp">
+        android:background="@drawable/half_rounded_card"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+        android:layout_marginTop="@dimen/_2sdp">
+
+        <include android:id="@+id/ly_penilaian_produk" layout="@layout/item_product_detail_penilaian_produk"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_paket_lainnya"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:elevation="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_expandable_paket_lainnya"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5"
             android:padding="10dp"
             android:background="@drawable/half_rounded_card">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_paket_lainnya"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/paket_lainnya"
                 style="@style/Text.Small.Bold"
                 android:textColor="@color/black"
 
-                android:layout_weight="4"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_down_arrow_paklain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_down"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:rotation="-90"/>
+                android:rotation="-90"
+
+                app:layout_constraintTop_toTopOf="@+id/tv_paket_lainnya"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_paket_lainnya"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_expanded_paket_lainnya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/half_rounded_card"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:visibility="gone"
+
+        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+        android:layout_marginTop="@dimen/_2sdp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_expanded_paket_lainnya"
+            android:id="@+id/ll_isi_paket_lainnya"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/half_rounded_card"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_15sdp"
-            android:visibility="gone"
-
-            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-            android:layout_marginTop="@dimen/_2sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_isi_paket_lainnya"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:orientation="vertical"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
