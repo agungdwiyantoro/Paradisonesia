@@ -22,6 +22,32 @@ class ProductDetailRepositoryImpl(
         emit(response!!)
     }
 
+    override suspend fun productDetailImages(index: String): Flow<List<ProductDetail.Images?>?> = flow {
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.images
+        emit(response)
+    }
+
+    override suspend fun productDetailRencanaPerjalanan(index: String): Flow<List<ProductDetail.Schedules?>?> = flow {
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.schedules
+        emit(response)
+    }
+
+    override suspend fun productDetailRencanaPerjalananDays(index: String): Flow<List<ProductDetail.Schedules.Days?>?> = flow{
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.schedules?.get(0)?.days
+        emit(response)
+    }
+
+
+    override suspend fun productDetailIncludeExcludes(index: String): Flow<List<ProductDetail.Include_Excludes?>?> = flow{
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.include_excludes
+        emit(response)
+    }
+
+    override suspend fun productDetailFasilitasLayanan(index: String): Flow<List<ProductDetail.Facilities?>?> = flow{
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.facilities
+        emit(response)
+    }
+
     override suspend fun productDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?> = flow {
         val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.reviews
         emit(response)

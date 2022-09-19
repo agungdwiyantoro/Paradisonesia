@@ -9,5 +9,11 @@ interface ProductDetailRepository {
 
     suspend fun productDetail(index: String): Flow<ProductDetail>
 
+    suspend fun productDetailImages(index: String) : Flow<List<ProductDetail.Images?>?>
+    suspend fun productDetailRencanaPerjalanan(index: String) : Flow<List<ProductDetail.Schedules?>?>
+    suspend fun productDetailRencanaPerjalananDays(index: String) : Flow<List<ProductDetail.Schedules.Days?>?>
+    suspend fun productDetailIncludeExcludes(index: String) : Flow<List<ProductDetail.Include_Excludes?>?>
+    suspend fun productDetailFasilitasLayanan(index: String) : Flow<List<ProductDetail.Facilities?>?>
     suspend fun productDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?>
+
 }

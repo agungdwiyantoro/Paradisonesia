@@ -146,6 +146,7 @@
     <string name="pesan_sekarang">Pesan Sekarang</string>
     <string name="tanggal_pelaksanaan">Tanggal Pelaksanaan</string>
     <string name="rencana_perjalanan">Rencana Perjalanan</string>
+    <string name="include_exclude">Include &amp; Exclude</string>
     <string name="include">Include</string>
     <string name="exclude">Exclude</string>
     <string name="fasilitas_layanan">Fasilitas &amp; Layanan</string>
@@ -160,4 +161,8 @@
     <string name="rb_rating_num">%1$d/5 (%2$d ulasan)</string>
     <string name="lihat_semua">Lihat Semua</string>
     <string name="anonymous">Anonymous</string>
+
+    <!-- schedules -->
+    <string name="hari_ke">Hari ke-%1$d</string>
+    <string name="time_schedules">%1$s - %2$s WIB</string>
 </resources>

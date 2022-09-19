@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListAdapter
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 
@@ -15,16 +16,16 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
 
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.*
-import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapter
-import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapterReviews
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.*
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedules
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedulesDays
 import com.devfutech.paradisonesia.external.extension.snackBar
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 
 import com.facebook.CallbackManager
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 
@@ -36,20 +37,37 @@ class ProductDetailFragment : BaseFragment(){
     private var adapter: ExpandableListAdapter? = null
     private var titleList: List<String>? = null
 
+    private val viewModel: ProductDetailViewModel by viewModels()
+
     private val binding: ProductDetailFragmentRealBinding by lazy{
         ProductDetailFragmentRealBinding.inflate(layoutInflater)
     }
-    private val viewModel: ProductDetailViewModel by viewModels()
 
-    private val productDetailAdapterReviews by lazy {
+    private val productDetailImagesAdapter by lazy {
+        ProductDetailAdapterImages()
+    }
+
+    private val productDetailSchedules by lazy {
+        ProductDetailAdapterSchedules(productDetailSchedulesDays)
+    }
+
+    private val productDetailSchedulesDays by lazy {
+        ProductDetailAdapterSchedulesDays()
+    }
+
+    private val productDetailIncludeAdapter by lazy {
+        ProductDetailAdapterIncludes()
+    }
+
+    private val productDetailFasilitasLayananAdapter by lazy{
+        ProductDetailAdapterFasilitasLayanan()
+    }
+
+    private val productDetailReviewsAdapter by lazy {
         ProductDetailAdapterReviews()
     }
     private val productDetailAdapter by lazy {
         ProductDetailAdapter()
-    }
-
-    private val productDetailBannerAdapter by lazy {
-        BannerAdapter()
     }
 
     private val callbackManager by lazy {
@@ -73,8 +91,12 @@ class ProductDetailFragment : BaseFragment(){
         setAction()
 
         setProductsDetail()
+        getProductDetailImages()
+        getProductDetailSchedules()
+        getProductDetailSchedulesDays()
+        getProductDetailIncludes()
+        getProductDetailFasilitasLayanan()
         getProductDetailReviews()
-
 
 
     }
@@ -162,6 +184,79 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
+    private fun getProductDetailImages(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailImages.collect{ result ->
+                when(result){
+                    is Resource.Loading -> binding.vfBanner.displayedChild = 0
+                    is Resource.Failure -> {
+                        binding.vfBanner.displayedChild = 1
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        binding.vfBanner.displayedChild = 1
+                        productDetailImagesAdapter.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun getProductDetailSchedules(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailSchedules.collect{ result ->
+                when(result) {
+                    is Resource.Success -> {
+                        productDetailSchedules.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun getProductDetailSchedulesDays(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailSchedulesDays.collect{ result ->
+                when(result) {
+                    is Resource.Success -> {
+                        productDetailSchedulesDays.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun getProductDetailIncludes(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailInclude.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        productDetailIncludeAdapter.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun getProductDetailFasilitasLayanan(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailFasilitasLayanan.collect{ result ->
+                when(result) {
+                    is Resource.Success -> {
+                        productDetailFasilitasLayananAdapter.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+
+    }
+
+
     private fun getProductDetailReviews(){
         lifecycleScope.launchWhenStarted {
             viewModel.productDetailReviews.collect{ result ->
@@ -174,7 +269,7 @@ class ProductDetailFragment : BaseFragment(){
                     is Resource.Success -> {
                         binding.vfProductDetailExpandable.displayedChild = 1
                         Timber.tag("ProductDetailReviews").d("Success" + result.data)
-                        productDetailAdapterReviews.submitList(result.data)
+                        productDetailReviewsAdapter.submitList(result.data)
                     }
                     else -> {}
                 }
@@ -182,14 +277,58 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
-
     private fun setupView() {
 
         binding.apply {
-            //rvProductDetailExpandable.adapter = productDetailAdapter
-            llDetailProductExpand.lyPenilaianProduk.rvRatingView.adapter = productDetailAdapterReviews
+            llDetailProductExpand.lySchedules.rvSchedulesHariKeTitle.adapter = productDetailSchedules
+            llDetailProductExpand.llRencanaPerjalanan.setOnClickListener({
+                if(llDetailProductExpand.llExpandedRencanaPerjalanan.visibility == View.GONE){
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedRencanaPerjalanan, AutoTransition())
+                    llDetailProductExpand.llExpandedRencanaPerjalanan.visibility = View.VISIBLE
+                    llDetailProductExpand.icDownArrowRp.rotation = 0f
+                }
+                else{
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedRencanaPerjalanan, AutoTransition())
+                    llDetailProductExpand.llExpandedRencanaPerjalanan.visibility = View.GONE
+                    llDetailProductExpand.icDownArrowRp.rotation = -90f
+                }
+            })
+
+            llDetailProductExpand.lyFasilitasLayanan.rvIncludeExclude.adapter = productDetailFasilitasLayananAdapter
+            llDetailProductExpand.llFasilitasLayanan.setOnClickListener({
+                if(llDetailProductExpand.llExpandedFasilitasLayanan.visibility == View.GONE){
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedFasilitasLayanan, AutoTransition())
+                    llDetailProductExpand.llExpandedFasilitasLayanan.visibility = View.VISIBLE
+                    llDetailProductExpand.icDownArrowFasLay.rotation = 0f
+                }
+                else{
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedFasilitasLayanan, AutoTransition())
+                    llDetailProductExpand.llExpandedFasilitasLayanan.visibility = View.GONE
+                    llDetailProductExpand.icDownArrowFasLay.rotation = -90f
+                }
+            })
+
+            llDetailProductExpand.lyProductDetailInclude.rvIncludeExclude.adapter = productDetailIncludeAdapter
+            llDetailProductExpand.llInclude.setOnClickListener({
+                if(llDetailProductExpand.llExpandedInclude.visibility == View.GONE){
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedInclude, AutoTransition())
+                    llDetailProductExpand.llExpandedInclude.visibility = View.VISIBLE
+                    llDetailProductExpand.icDownArrowInc.rotation = 0f
+                }
+                else{
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedInclude, AutoTransition())
+                    llDetailProductExpand.llExpandedInclude.visibility = View.GONE
+                    llDetailProductExpand.icDownArrowInc.rotation = -90f
+                }
+            })
+
+            vpBanner.adapter = productDetailImagesAdapter
+            vpBanner.isSaveEnabled = false
+            TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()
+
+            llDetailProductExpand.lyPenilaianProduk.rvRatingView.adapter = productDetailReviewsAdapter
             llDetailProductExpand.lyPenilaianProduk.rbTotalRatingReview.rating = 2.0f
-            llDetailProductExpand.lyPenilaianProduk.tvRatingNum.text = resources.getString(R.string.rb_rating_num,2, productDetailAdapterReviews.itemCount)
+            llDetailProductExpand.lyPenilaianProduk.tvRatingNum.text = resources.getString(R.string.rb_rating_num,2, productDetailReviewsAdapter.itemCount)
             llDetailProductExpand.llPenilaianProduk.setOnClickListener(
                 {
                     if(llDetailProductExpand.llExpandedPenilaianProduk.visibility == View.GONE){
@@ -199,7 +338,7 @@ class ProductDetailFragment : BaseFragment(){
                     }
                     else{
                         TransitionManager.beginDelayedTransition(llDetailProductExpand.llPenilaianProduk, AutoTransition())
-                        llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.VISIBLE
+                        llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.GONE
                         llDetailProductExpand.icDownArrowPenpro.rotation = -90f
                     }
                 }
