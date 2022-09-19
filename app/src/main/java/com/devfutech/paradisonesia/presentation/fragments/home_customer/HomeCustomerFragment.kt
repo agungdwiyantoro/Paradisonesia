@@ -191,6 +191,7 @@ class HomeCustomerFragment : BaseFragment() {
                     llInformationAccount.gone()
                 }
             }
+            slideBanners(bannerAdapter.itemCount)
             vpBanner.adapter = bannerAdapter
             vpBanner.isSaveEnabled = false
             TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()

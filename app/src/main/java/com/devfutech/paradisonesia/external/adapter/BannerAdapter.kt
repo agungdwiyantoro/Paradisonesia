@@ -3,6 +3,7 @@ package com.devfutech.paradisonesia.external.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemBannerBinding
 import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.external.utils.FileUtils.ltrim
+import kotlinx.coroutines.delay
 import timber.log.Timber
 
 class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(POST_COMPARATOR) {
@@ -29,7 +31,6 @@ class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(POST_C
             ivBanner.setOnClickListener{
                 Timber.tag("Banner Adapter Link").d(item.title.toString())
             }
-
 
                 /*
 

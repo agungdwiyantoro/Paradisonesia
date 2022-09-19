@@ -26,6 +26,7 @@ import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 
@@ -63,6 +64,10 @@ class ProductDetailFragment : BaseFragment(){
         ProductDetailAdapterFasilitasLayanan()
     }
 
+    private val productDetailFaqsAdapter by lazy{
+        ProductDetailAdapterFaqs()
+    }
+
     private val productDetailReviewsAdapter by lazy {
         ProductDetailAdapterReviews()
     }
@@ -96,6 +101,7 @@ class ProductDetailFragment : BaseFragment(){
         getProductDetailSchedulesDays()
         getProductDetailIncludes()
         getProductDetailFasilitasLayanan()
+        getProductDetailFaqs()
         getProductDetailReviews()
 
 
@@ -253,7 +259,19 @@ class ProductDetailFragment : BaseFragment(){
                 }
             }
         }
+    }
 
+    private fun getProductDetailFaqs(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailFaqs.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        productDetailFaqsAdapter.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
 
@@ -280,6 +298,20 @@ class ProductDetailFragment : BaseFragment(){
     private fun setupView() {
 
         binding.apply {
+            llDetailProductExpand.lyProductDetailFaq.rvProductDetailFaqs.adapter = productDetailFaqsAdapter
+            llDetailProductExpand.llFaq.setOnClickListener({
+                if(llDetailProductExpand.llExpandedFaq.visibility == View.GONE){
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedFaq, AutoTransition())
+                    llDetailProductExpand.llExpandedFaq.visibility = View.VISIBLE
+                    llDetailProductExpand.icDownArrowFaq.rotation = 0f
+                }
+                else{
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedFaq, AutoTransition())
+                    llDetailProductExpand.llExpandedFaq.visibility = View.GONE
+                    llDetailProductExpand.icDownArrowFaq.rotation = -90f
+                }
+            })
+
             llDetailProductExpand.lySchedules.rvSchedulesHariKeTitle.adapter = productDetailSchedules
             llDetailProductExpand.llRencanaPerjalanan.setOnClickListener({
                 if(llDetailProductExpand.llExpandedRencanaPerjalanan.visibility == View.GONE){

@@ -18,6 +18,7 @@ class ProductDetailUseCase @Inject constructor(
     suspend fun getListProductDetailSchdulesDays(index: String) : Flow<List<ProductDetail.Schedules.Days?>?> = repository.productDetailRencanaPerjalananDays(index)
     suspend fun getListProductDetailIncludeExcludes(index: String) : Flow<List<ProductDetail.Include_Excludes?>?> = repository.productDetailIncludeExcludes(index)
     suspend fun getListProductDetailFasilitasLayanan(index: String) : Flow<List<ProductDetail.Facilities?>?> = repository.productDetailFasilitasLayanan(index)
+    suspend fun getListProductDetailFaqs(index: String) : Flow<List<ProductDetail.Faqs?>?> = repository.productDetailFaqs(index)
     suspend fun getListProductDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?> = repository.productDetailReviews(index)
 
 }
