@@ -31,6 +31,12 @@ class ProductDetailViewModel @Inject constructor(
     val product:MutableStateFlow<Resource<List<Product>>>
         get() = _product
      */
+
+    private val _productDesc: MutableStateFlow<Resource<ProductDetail>> =
+        MutableStateFlow(Resource.Success(null))
+    val productDesc: MutableStateFlow<Resource<ProductDetail>>
+        get() = _productDesc
+
     private val _productDetailImages: MutableStateFlow<Resource<List<ProductDetail.Images?>>> =
         MutableStateFlow(Resource.Success(emptyList()))
     val productDetailImages: MutableStateFlow<Resource<List<ProductDetail.Images?>>>
@@ -66,19 +72,13 @@ class ProductDetailViewModel @Inject constructor(
     val productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>>
         get() = _productDetailReviews
 
-    private val _product: MutableStateFlow<Resource<ProductDetail>> =
-        MutableStateFlow(Resource.Success(null))
-    val product: MutableStateFlow<Resource<ProductDetail>>
-        get() = _product
-
     val index = state.get<String>("detailProduct").toString();
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
         //getProducts()
         //val map = mapOf("2" to "")
 
-        getProducts(index)
-
+        ProductDesc(index)
         ProductImages(index)
         ProductSchedules(index)
         ProductSchedulesDays(index)
@@ -125,17 +125,17 @@ class ProductDetailViewModel @Inject constructor(
     }
 */
 
-    fun getProducts(index : String){
-        _product.value = Resource.Loading()
+    fun ProductDesc(index : String){
+        _productDesc.value = Resource.Loading()
         viewModelScope.launch {
             productDetailUseCase.getListProductDetail(index)
                 .catch { error->
                     onError(error)
-                    _product.value = Resource.Failure(defaultError(error))
+                    _productDesc.value = Resource.Failure(defaultError(error))
                     Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
-                    _product.value = Resource.Success(it)
+                    _productDesc.value = Resource.Success(it)
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }

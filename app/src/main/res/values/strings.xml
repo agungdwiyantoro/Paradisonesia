@@ -138,11 +138,11 @@
     <string name="discounted_price"> <strike>Rp. %1$s</strike> </string>
     <string name="promo">Promo</string>
     <string name="per_pax">/pax</string>
-    <string name="reviews_w_value">(%1$s reviews)</string>
+    <string name="reviews_w_value">(%1$d reviews)</string>
     <string name="description">Description</string>
 
-    <!-- Product Detail Fragment -->
-    <string name="favorite">%1$s favorites</string>
+    <!-- Product Detail Fragment Expand -->
+    <string name="favorite">%1$d favorites</string>
     <string name="pesan_sekarang">Pesan Sekarang</string>
     <string name="tanggal_pelaksanaan">Tanggal Pelaksanaan</string>
     <string name="rencana_perjalanan">Rencana Perjalanan</string>

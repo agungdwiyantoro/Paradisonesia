@@ -17,7 +17,6 @@ import timber.log.Timber
 
 class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(POST_COMPARATOR) {
 
-
     inner class BannerViewHolder(private val binding: ItemBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Banner) {
@@ -31,7 +30,6 @@ class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(POST_C
             ivBanner.setOnClickListener{
                 Timber.tag("Banner Adapter Link").d(item.title.toString())
             }
-
                 /*
 
             root.apply {

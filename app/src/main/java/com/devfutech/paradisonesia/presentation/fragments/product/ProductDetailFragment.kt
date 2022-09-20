@@ -44,6 +44,10 @@ class ProductDetailFragment : BaseFragment(){
         ProductDetailFragmentRealBinding.inflate(layoutInflater)
     }
 
+    private val productDetailDescAdapter by lazy {
+        ProductDetailDescAdapter()
+    }
+
     private val productDetailImagesAdapter by lazy {
         ProductDetailAdapterImages()
     }
@@ -71,9 +75,6 @@ class ProductDetailFragment : BaseFragment(){
     private val productDetailReviewsAdapter by lazy {
         ProductDetailAdapterReviews()
     }
-    private val productDetailAdapter by lazy {
-        ProductDetailAdapter()
-    }
 
     private val callbackManager by lazy {
         CallbackManager.Factory.create()
@@ -95,7 +96,7 @@ class ProductDetailFragment : BaseFragment(){
         setupView()
         setAction()
 
-        setProductsDetail()
+        getProductDetailDesc()
         getProductDetailImages()
         getProductDetailSchedules()
         getProductDetailSchedulesDays()
@@ -168,9 +169,9 @@ class ProductDetailFragment : BaseFragment(){
         return if (isSelected) R.drawable.background_filter_selected else R.drawable.background_filter_unselected
     }
 
-    private fun setProductsDetail() {
+    private fun getProductDetailDesc() {
         lifecycleScope.launchWhenStarted {
-            viewModel.product.collect { result ->
+            viewModel.productDesc.collect { result ->
                 when (result) {
                     is Resource.Loading -> binding.vfProductDetailDesc.displayedChild = 0
                     is Resource.Failure -> {
@@ -181,8 +182,7 @@ class ProductDetailFragment : BaseFragment(){
                     is Resource.Success -> {
                         binding.vfProductDetailDesc.displayedChild = 1
                         Timber.tag("FRAGMENT_DATA").d("ProductDetailFragmentX " + result.data)
-                        productDetailAdapter.submitList(mutableListOf(result.data))
-                        //setupView(result.data!!)
+                        productDetailDescAdapter.submitList(mutableListOf(result.data))
                     }
                     else -> {}
                 }
@@ -298,6 +298,7 @@ class ProductDetailFragment : BaseFragment(){
     private fun setupView() {
 
         binding.apply {
+            llItemProductDetailDescription.rvItemProductDetailDesc.adapter = productDetailDescAdapter
             llDetailProductExpand.lyProductDetailFaq.rvProductDetailFaqs.adapter = productDetailFaqsAdapter
             llDetailProductExpand.llFaq.setOnClickListener({
                 if(llDetailProductExpand.llExpandedFaq.visibility == View.GONE){

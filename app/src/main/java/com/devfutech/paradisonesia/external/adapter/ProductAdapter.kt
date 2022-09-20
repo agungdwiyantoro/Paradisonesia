@@ -46,7 +46,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                 tvProductRating.text = item.rating_average
 
                 tvProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.reviews_w_value, item.reviews_count.toString()
+                    R.string.reviews_w_value, item.reviews_count
                 )
 
                 tvProductDiscountedPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG

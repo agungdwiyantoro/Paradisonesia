@@ -20,7 +20,7 @@ import timber.log.Timber
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.ProductViewHolder>(
+class ProductDetailDescAdapter : ListAdapter<ProductDetail, ProductDetailDescAdapter.ProductViewHolder>(
     POST_COMPARATOR
 ) {
 
@@ -28,6 +28,13 @@ class ProductDetailAdapter : ListAdapter<ProductDetail, ProductDetailAdapter.Pro
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail) {
             binding.apply {
+                tvDetailCategoryProduct.text = item.sub_category?.name
+                tvDetailProductName.text = item.name
+                tvDetailProductLocation.text = item.city?.name
+                tvDetailProductRating.text = item.rating_average
+                tvDetailProductFavorit.text = this@ProductViewHolder.itemView.context.getString(R.string.favorite, item.wishlist_count)
+                tvDetailProductDescription.text = item.description
+                tvDetailProductReviews.text = this@ProductViewHolder.itemView.context.getString(R.string.reviews_w_value, item.reviews_count)
 
 
                 /*

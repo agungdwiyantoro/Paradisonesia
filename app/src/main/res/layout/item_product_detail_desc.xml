@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/_10sdp">
 
         <TextView
             android:id="@+id/tv_product_promo"
@@ -25,7 +27,6 @@
             android:id="@+id/tv_detail_category_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/promo"
             android:textColor="@color/gray.primary"
             style="@style/Text.Medium.Bold"
 
@@ -39,7 +40,6 @@
             android:id="@+id/tv_detail_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/promo"
             style="@style/Text.Medium.Bold"
 
             android:layout_marginTop="@dimen/_5sdp"
@@ -53,7 +53,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/_4sdp"
-            android:text="Location"
 
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_10sdp"
@@ -67,7 +66,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/_4sdp"
-            android:text="4.6"
             android:textColor="@color/star_color"
 
             android:layout_marginTop="@dimen/_5sdp"
@@ -97,7 +95,6 @@
 
             android:drawableStart="@drawable/ic_favorite"
             android:textColor="@color/gray.primary_dark"
-            android:text="fuck"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_product_location"
@@ -119,7 +116,6 @@
             android:id="@+id/tv_detail_product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/promo"
             style="@style/Text.Medium"
 
             android:layout_marginTop="@dimen/_5sdp"

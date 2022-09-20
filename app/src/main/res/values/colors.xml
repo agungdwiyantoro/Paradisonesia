@@ -19,4 +19,6 @@
     <color name="star_color">#EC8423</color>
 
     <color name="orange">#FF6140</color>
+
+    <color name="thin_gray">#F8F8F8</color>
 </resources>
