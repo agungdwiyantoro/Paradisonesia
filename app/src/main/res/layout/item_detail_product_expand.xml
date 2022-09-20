@@ -190,7 +190,7 @@
                     android:id="@+id/tv_include"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/include_exclude"
+                    android:text="@string/include"
                     style="@style/Text.Small.Bold"
                     android:textColor="@color/black"
 
@@ -235,7 +235,6 @@
     </androidx.cardview.widget.CardView>
 
     <!--jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj-->
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -303,18 +302,11 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
         android:layout_marginTop="@dimen/_2sdp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_isi_Exclude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+        <include android:id="@+id/ly_exclude" layout="@layout/layout_common_product_detail_expand"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
-
-
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -528,11 +520,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
         android:layout_marginTop="@dimen/_2sdp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_isi_syarat_ketentuan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+        <include android:id="@+id/ly_syarat_ketentuan" layout="@layout/layout_item_product_detail_terms"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

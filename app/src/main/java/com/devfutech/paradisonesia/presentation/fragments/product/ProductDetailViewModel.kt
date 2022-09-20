@@ -67,6 +67,11 @@ class ProductDetailViewModel @Inject constructor(
     val productDetailFaqs: MutableStateFlow<Resource<List<ProductDetail.Faqs?>>>
         get() = _productDetailFaqs
 
+    private val _productDetailTerms: MutableStateFlow<Resource<List<ProductDetail.Terms?>>> =
+        MutableStateFlow(Resource.Success(emptyList()))
+    val productDetailTerms: MutableStateFlow<Resource<List<ProductDetail.Terms?>>>
+        get() = _productDetailTerms
+
     private val _productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>> =
         MutableStateFlow(Resource.Success(emptyList()))
     val productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>>
@@ -85,6 +90,7 @@ class ProductDetailViewModel @Inject constructor(
         ProductInclude(index)
         ProductFasilitasLayanan(index)
         ProductFaqs(index)
+        ProductTerms(index)
         ProductReviews(index)
 
     }
@@ -217,6 +223,19 @@ class ProductDetailViewModel @Inject constructor(
                     _productDetailFaqs.value = Resource.Failure(defaultError(error))
                 }.collect{
                     _productDetailFaqs.value = Resource.Success(it)
+                }
+        }
+    }
+
+    fun ProductTerms(index: String){
+        _productDetailTerms.value = Resource.Loading()
+        viewModelScope.launch {
+            productDetailUseCase.getListProductDetailTerms(index)
+                .catch { error ->
+                    onError(error)
+                    _productDetailTerms.value = Resource.Failure(defaultError(error))
+                }.collect{
+                    _productDetailTerms.value = Resource.Success(it)
                 }
         }
     }

@@ -53,6 +53,11 @@ class ProductDetailRepositoryImpl(
         emit(response)
     }
 
+    override suspend fun productDetailTerms(index: String): Flow<List<ProductDetail.Terms?>?> = flow{
+        val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.terms
+        emit(response)
+    }
+
     override suspend fun productDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?> = flow {
         val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.reviews
         emit(response)

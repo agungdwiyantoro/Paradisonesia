@@ -72,10 +72,14 @@ class ProductDetailFragment : BaseFragment(){
         ProductDetailAdapterFaqs()
     }
 
+    private  val productDetailTermsAdapter by lazy{
+        ProductDetailAdapterTerms()
+    }
+
     private val productDetailReviewsAdapter by lazy {
         ProductDetailAdapterReviews()
     }
-
+    
     private val callbackManager by lazy {
         CallbackManager.Factory.create()
     }
@@ -103,6 +107,7 @@ class ProductDetailFragment : BaseFragment(){
         getProductDetailIncludes()
         getProductDetailFasilitasLayanan()
         getProductDetailFaqs()
+        getProductDetailTerms()
         getProductDetailReviews()
 
 
@@ -274,6 +279,18 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
+    private fun getProductDetailTerms(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailTerms.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        productDetailTermsAdapter.submitList(result.data)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
 
     private fun getProductDetailReviews(){
         lifecycleScope.launchWhenStarted {
@@ -298,6 +315,20 @@ class ProductDetailFragment : BaseFragment(){
     private fun setupView() {
 
         binding.apply {
+            llDetailProductExpand.lySyaratKetentuan.rvItemProductDetailTerms.adapter = productDetailTermsAdapter
+            llDetailProductExpand.llSyaratKetentuan.setOnClickListener({
+                if(llDetailProductExpand.llExpandedSyaratKetentuan.visibility == View.GONE){
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedSyaratKetentuan, AutoTransition())
+                    llDetailProductExpand.llExpandedSyaratKetentuan.visibility = View.VISIBLE
+                    llDetailProductExpand.icDownArrowSyke.rotation = 0f
+                }
+                else{
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedSyaratKetentuan, AutoTransition())
+                    llDetailProductExpand.llExpandedSyaratKetentuan.visibility = View.GONE
+                    llDetailProductExpand.icDownArrowSyke.rotation = -90f
+                }
+            })
+
             llItemProductDetailDescription.rvItemProductDetailDesc.adapter = productDetailDescAdapter
             llDetailProductExpand.lyProductDetailFaq.rvProductDetailFaqs.adapter = productDetailFaqsAdapter
             llDetailProductExpand.llFaq.setOnClickListener({
@@ -352,6 +383,20 @@ class ProductDetailFragment : BaseFragment(){
                     TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedInclude, AutoTransition())
                     llDetailProductExpand.llExpandedInclude.visibility = View.GONE
                     llDetailProductExpand.icDownArrowInc.rotation = -90f
+                }
+            })
+
+            llDetailProductExpand.lyExclude.rvIncludeExclude.adapter = productDetailIncludeAdapter
+            llDetailProductExpand.llExclude.setOnClickListener({
+                if(llDetailProductExpand.llExpandedExclude.visibility == View.GONE){
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedExclude, AutoTransition())
+                    llDetailProductExpand.llExpandedExclude.visibility = View.VISIBLE
+                    llDetailProductExpand.icDownArrowExl.rotation = 0f
+                }
+                else{
+                    TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedExclude, AutoTransition())
+                    llDetailProductExpand.llExpandedExclude.visibility = View.GONE
+                    llDetailProductExpand.icDownArrowExl.rotation = -90f
                 }
             })
 

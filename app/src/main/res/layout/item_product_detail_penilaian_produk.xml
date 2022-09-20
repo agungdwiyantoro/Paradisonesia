@@ -33,8 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rb_rating_num"
-                style="@style/Text.Medium"
-
+                style="@style/Text.Small"
                 android:layout_marginStart="@dimen/_10sdp"
                 app:layout_constraintTop_toTopOf="@+id/rb_total_rating_review"
                 app:layout_constraintBottom_toBottomOf="@+id/rb_total_rating_review"
@@ -71,10 +70,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lihat_semua"
                 android:textColor="@color/orange"
-                style="@style/Text.Large.Bold"
+                style="@style/Text.Medium.Bold"
 
                 android:gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_48"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

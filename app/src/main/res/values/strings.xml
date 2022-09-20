@@ -155,7 +155,7 @@
     <string name="penilaian_produk">Penilaian Produk</string>
     <string name="paket_lainnya">Paket Lainnya</string>
     <string name="question_answer"><![CDATA[<b>Question %1$s :</b> <br> %2$s <br><b>Answer %3$s :</b> <br>  %4$s <br>]]> </string>
-    <string name="terms">%1$d . %2$s \n</string>
+    <string name="terms">%1$d. %2$s \n</string>
 
     <!-- penilaian produk -->
     <string name="rb_rating_num">%1$d/5 (%2$d ulasan)</string>

@@ -15,6 +15,7 @@ interface ProductDetailRepository {
     suspend fun productDetailIncludeExcludes(index: String) : Flow<List<ProductDetail.Include_Excludes?>?>
     suspend fun productDetailFasilitasLayanan(index: String) : Flow<List<ProductDetail.Facilities?>?>
     suspend fun productDetailFaqs(index: String) : Flow<List<ProductDetail.Faqs?>?>
+    suspend fun productDetailTerms(index: String) : Flow<List<ProductDetail.Terms?>?>
     suspend fun productDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?>
 
 }

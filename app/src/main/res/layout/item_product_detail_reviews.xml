@@ -14,7 +14,7 @@
             android:id="@+id/iv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_baseline_account_circle_24"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -23,11 +23,11 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_details"
+            android:text="@string/anonymous"
             style="@style/Text.Medium.Bold"
 
             app:layout_constraintTop_toTopOf="@+id/iv_user"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_user"
+            app:layout_constraintBottom_toTopOf="@+id/rb_total_rating_review"
             app:layout_constraintStart_toEndOf="@+id/iv_user"/>
 
         <androidx.appcompat.widget.AppCompatRatingBar
@@ -36,14 +36,16 @@
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.RatingBar.Small"
             app:layout_constraintTop_toBottomOf="@+id/tv_username"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_user"
             app:layout_constraintStart_toStartOf="@+id/tv_username"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_review"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_200sdp"
-
+            android:layout_height="wrap_content"
+            style="@style/Text.Small"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@+id/rb_total_rating_review"
             app:layout_constraintStart_toStartOf="@+id/rb_total_rating_review"
             app:layout_constraintEnd_toEndOf="parent"/>
