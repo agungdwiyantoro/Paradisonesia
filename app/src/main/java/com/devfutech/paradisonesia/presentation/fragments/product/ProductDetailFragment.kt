@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.presentation.fragments.product
 
 
 import android.os.Bundle
+import android.os.FileUtils
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.ExpandableListAdapter
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
@@ -20,6 +22,7 @@ import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.*
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedules
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedulesDays
 import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 
@@ -315,6 +318,11 @@ class ProductDetailFragment : BaseFragment(){
     private fun setupView() {
 
         binding.apply {
+            val args : ProductFragmentArgs by navArgs()
+            val price = args.categoryProductID
+
+            tvPrice.text = resources.getString(R.string.final_price, convertToCurrency(price))
+
             llDetailProductExpand.lySyaratKetentuan.rvItemProductDetailTerms.adapter = productDetailTermsAdapter
             llDetailProductExpand.llSyaratKetentuan.setOnClickListener({
                 if(llDetailProductExpand.llExpandedSyaratKetentuan.visibility == View.GONE){

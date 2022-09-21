@@ -178,10 +178,14 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_cart"
-            android:background="@color/yellow_ffa216"
-            style="@style/Button.Filled.Yellow.Rounded"
-            android:layout_weight="1"/>
+            android:src="@drawable/ic_cart"
+            android:background="@drawable/bg_orange"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

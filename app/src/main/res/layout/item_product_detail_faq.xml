@@ -22,7 +22,7 @@
                 android:id="@+id/tv_faq_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Text.Medium.Bold"
+                style="@style/Text.Small.Bold"
                 android:text="@string/faq_question"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -58,7 +58,7 @@
                 android:id="@+id/tv_faq_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Text.Medium"
+                style="@style/Text.Small"
                 android:text="@string/question"
                 app:layout_constraintTop_toTopOf="parent"/>
 

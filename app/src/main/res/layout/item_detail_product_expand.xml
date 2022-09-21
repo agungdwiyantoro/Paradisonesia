@@ -211,28 +211,33 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_expanded_include"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/half_rounded_card"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_15sdp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-                android:layout_marginTop="@dimen/_2sdp">
-
-
-                <include android:id="@+id/ly_product_detail_include" layout="@layout/layout_common_product_detail_expand"/>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_expanded_include"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/half_rounded_card"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_15sdp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+                    android:layout_marginTop="@dimen/_2sdp">
+
+                    <include android:id="@+id/ly_product_detail_include" layout="@layout/layout_common_product_detail_expand"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
 
     <!--jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj-->
 
@@ -282,31 +287,32 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_expanded_exclude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/half_rounded_card"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_15sdp"
-        android:visibility="gone"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_expanded_exclude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/half_rounded_card"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_15sdp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+            android:layout_marginTop="@dimen/_2sdp">
 
-        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-        android:layout_marginTop="@dimen/_2sdp">
+            <include android:id="@+id/ly_exclude" layout="@layout/layout_common_product_detail_expand"/>
 
-        <include android:id="@+id/ly_exclude" layout="@layout/layout_common_product_detail_expand"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -370,14 +376,12 @@
             android:paddingEnd="@dimen/_10sdp"
             android:paddingBottom="@dimen/_15sdp"
             android:visibility="gone"
-
             app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
             android:layout_marginTop="@dimen/_2sdp">
 
             <include android:id="@+id/ly_fasilitas_layanan" layout="@layout/layout_common_product_detail_expand"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     </androidx.cardview.widget.CardView>
 
@@ -512,7 +516,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/half_rounded_card"
-        android:paddingStart="@dimen/_10sdp"
+        android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_10sdp"
         android:paddingBottom="@dimen/_15sdp"
         android:visibility="gone"
