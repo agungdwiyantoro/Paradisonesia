@@ -21,25 +21,25 @@ import timber.log.Timber
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductDetailAdapterReviews : ListAdapter<ProductDetail.Reviews, ProductDetailAdapterReviews.ProductViewHolder>(
+class ProductDetailAdapterReviews: ListAdapter<ProductDetail.Reviews, ProductDetailAdapterReviews.ProductViewHolder>(
     POST_COMPARATOR
 ) {
-
     inner class ProductViewHolder(private val binding: ItemProductDetailReviewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail.Reviews) {
             binding.apply {
+                /*
                 ivUser.loadAny(item.item_id?:""){
                     crossfade(true)
                     error(R.drawable.ic_image_not_available)
                 }
 
+                 */
+
                 Timber.tag("SUCKNIGGA").d("DICK " + item.review)
                 tvUsername.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.anonymous)
                 rbTotalRatingReview.rating = item.rating?.toFloat()!!
                 tvReview.text = item.review
-
-
 /*
                 itemBanner.ivBanner.loadAny(item.thumbnail?:""){
                     crossfade(true)
@@ -220,7 +220,6 @@ class ProductDetailAdapterReviews : ListAdapter<ProductDetail.Reviews, ProductDe
                 }
 
                  */
-
             }
         }
     }

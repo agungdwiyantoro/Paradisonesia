@@ -3,6 +3,7 @@ package com.devfutech.paradisonesia.presentation.fragments.product
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
@@ -77,7 +78,8 @@ class ProductDetailViewModel @Inject constructor(
     val productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>>
         get() = _productDetailReviews
 
-    val index = state.get<String>("detailProduct").toString();
+    val tempPriceID = state.get<PriceID>("detailProduct")
+    val index = tempPriceID?.id.toString()
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
         //getProducts()

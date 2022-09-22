@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.loadAny
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductBinding
+import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
@@ -84,7 +85,12 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
 
                  */
 
-                val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(item.id!!)
+                val priceID = PriceID(
+                    item.id,
+                    item.price
+                )
+
+                val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(priceID)
                 root.setOnClickListener{
                     findNavController(it).navigate(action)
                 }

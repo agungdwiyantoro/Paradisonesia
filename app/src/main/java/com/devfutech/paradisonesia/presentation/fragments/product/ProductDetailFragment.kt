@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
+import com.devfutech.paradisonesia.domain.model.PriceID
 
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.*
@@ -31,7 +32,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
-
 
 @AndroidEntryPoint
 class ProductDetailFragment : BaseFragment(){
@@ -318,10 +318,14 @@ class ProductDetailFragment : BaseFragment(){
     private fun setupView() {
 
         binding.apply {
-            val args : ProductFragmentArgs by navArgs()
-            val price = args.categoryProductID
+            val args : ProductDetailFragmentArgs by navArgs()
+            val price:PriceID = args.detailProduct
 
-            tvPrice.text = resources.getString(R.string.final_price, convertToCurrency(price))
+            llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.setOnClickListener({
+
+            })
+
+            tvPrice.text = resources.getString(R.string.final_price, convertToCurrency(price.price))
 
             llDetailProductExpand.lySyaratKetentuan.rvItemProductDetailTerms.adapter = productDetailTermsAdapter
             llDetailProductExpand.llSyaratKetentuan.setOnClickListener({
