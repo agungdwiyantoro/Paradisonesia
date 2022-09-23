@@ -12,6 +12,7 @@ import android.widget.ExpandableListAdapter
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.devfutech.paradisonesia.R
@@ -24,6 +25,7 @@ import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedul
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedulesDays
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
+import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 
@@ -81,10 +83,6 @@ class ProductDetailFragment : BaseFragment(){
 
     private val productDetailReviewsAdapter by lazy {
         ProductDetailAdapterReviews()
-    }
-    
-    private val callbackManager by lazy {
-        CallbackManager.Factory.create()
     }
 
     override fun onCreateView(
@@ -322,7 +320,7 @@ class ProductDetailFragment : BaseFragment(){
             val price:PriceID = args.detailProduct
 
             llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.setOnClickListener({
-
+                findNavController().safeNavigate(R.id.productDetailFragment_to_productReviewsLihatSemuaFragment)
             })
 
             tvPrice.text = resources.getString(R.string.final_price, convertToCurrency(price.price))

@@ -169,6 +169,10 @@
         android:label="product_detail_fragment"
         tools:layout="@layout/product_detail_fragment_real" >
 
+        <action
+            android:id="@+id/productDetailFragment_to_productReviewsLihatSemuaFragment"
+            app:destination="@id/productReviewsLihatSemuaFragment" />
+
         <argument
             android:name="detailProduct"
             app:argType="com.devfutech.paradisonesia.domain.model.PriceID" />
@@ -192,5 +196,16 @@
             app:argType="integer"
             android:defaultValue="0" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/productReviewsLihatSemuaFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.review_lihat_semua.ReviewLihatSemua"
+        android:label="product_review_lihat_semua_fragment"
+        tools:layout="@layout/item_product_detail_reviews" >
+
+        <argument
+            android:name="detailProduct"
+            app:argType="com.devfutech.paradisonesia.domain.model.PriceID" />
     </fragment>
 </navigation>

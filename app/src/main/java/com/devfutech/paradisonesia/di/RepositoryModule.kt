@@ -57,4 +57,12 @@ class RepositoryModule {
     ) : ProductDetailRepository {
         return ProductDetailRepositoryImpl(remoteDataSource)
     }
+
+    @Provides
+    @Singleton
+    fun provideProductReviewsLihatSemuaRepository(
+        remoteDataSource: ReviewLihatSemuaService
+    ) : ReviewRepository {
+        return ReviewSemuanyaRepositoryImpl(remoteDataSource)
+    }
 }

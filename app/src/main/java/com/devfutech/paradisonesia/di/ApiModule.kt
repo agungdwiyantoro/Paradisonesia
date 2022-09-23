@@ -61,6 +61,12 @@ class ApiModule {
 
     @Provides
     @Singleton
+    fun provideReviewLihatSemuaService(retrofit: Retrofit) : ReviewLihatSemuaService =
+        retrofit.create(ReviewLihatSemuaService::class.java)
+
+
+    @Provides
+    @Singleton
     fun provideProductDetailService(retrofit: Retrofit) : ProductDetailService =
         retrofit.create(ProductDetailService::class.java)
 
