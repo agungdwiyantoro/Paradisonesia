@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.AppCompatTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -8,10 +9,10 @@
     android:paddingEnd="@dimen/_10sdp"
     android:paddingTop="@dimen/_5sdp"
     android:paddingBottom="@dimen/_5sdp"
-    android:text="5"
     android:textStyle="bold"
     android:textColor="@color/white"
     android:drawablePadding="@dimen/_1sdp"
     android:drawableStart="@drawable/ic_baseline_star_rate_24"
     android:background="@drawable/rounded_grey_18_radius_corners"
+    android:layout_weight="1"
     />

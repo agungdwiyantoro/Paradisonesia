@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.devfutech.paradisonesia.databinding.LayoutLihatSemuaPenilaianProdukBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.devfutech.paradisonesia.databinding.ItemProductDetailPenilaianProdukBinding
+import com.devfutech.paradisonesia.databinding.ItemProductDetailReviewsBinding
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapterReviews
 import com.devfutech.paradisonesia.external.adapter.ProductReviewAdapterLihatSemua
+import com.devfutech.paradisonesia.external.adapter.ReviewLihatSemuaAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailViewModel
@@ -21,8 +24,8 @@ class ReviewLihatSemua : BaseFragment() {
 
     private val viewModel: ReviewLihatSemuaViewModel by viewModels()
 
-    private val binding: LayoutLihatSemuaPenilaianProdukBinding by lazy {
-        LayoutLihatSemuaPenilaianProdukBinding.inflate(layoutInflater)
+    private val binding: ItemProductDetailPenilaianProdukBinding by lazy {
+        ItemProductDetailPenilaianProdukBinding.inflate(layoutInflater)
     }
 
     private val productReviewAdapterLihatSemua by lazy {
@@ -45,6 +48,9 @@ class ReviewLihatSemua : BaseFragment() {
     private fun setupView(){
         binding.apply {
 
+            rvChooseStar.adapter = ReviewLihatSemuaAdapter(mutableListOf("1","2","3","4","5"))
+            rvRatingView.adapter = productReviewAdapterLihatSemua
+            tvLihatSemuanya.visibility = View.GONE
         }
     }
 
@@ -65,7 +71,7 @@ class ReviewLihatSemua : BaseFragment() {
                    // }
                     is Resource.Success -> {
                     //    binding.vfProductDetailExpandable.displayedChild = 1
-                        Timber.tag("ProductDetailReviews").d("Success" + result.data)
+                        Timber.tag("ProductDetailReviewsNEW").d("Success" + result.data)
                         productReviewAdapterLihatSemua.submitList(result.data)
                     }
                     else -> {}

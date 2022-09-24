@@ -10,5 +10,5 @@ interface ReviewLihatSemuaService {
     @GET("products/{index}/review")
     suspend fun reviewLihatSemua(
         @Path(value = "index", encoded = true) indexURL : String?
-    ): BaseResponse<ReviewLihatSemuaResponse>
+    ): BaseResponse<List<ReviewLihatSemuaResponse>>
 }

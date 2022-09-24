@@ -19,13 +19,23 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_penilaian_produk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/penilaian_produk"
+                style="@style/Text.Medium.Bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
             <RatingBar
                 android:id="@+id/rb_total_rating_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 style="@style/Widget.AppCompat.RatingBar.Small"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_penilaian_produk"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -40,14 +50,17 @@
                 app:layout_constraintStart_toEndOf="@+id/rb_total_rating_review"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_choose_star"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
-                android:visibility="gone"
+                app:layout_constraintHorizontal_weight="5"
                 tools:listitem="@layout/item_choose_star"
-                app:layout_constraintTop_toBottomOf="@id/rb_total_rating_review"/>
+                app:layout_constraintTop_toBottomOf="@id/rb_total_rating_review"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

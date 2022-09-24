@@ -35,9 +35,9 @@ class ReviewLihatSemuaViewModel @Inject constructor(
         get() = _product
      */
 
-    private val _productDetailReviews: MutableStateFlow<Resource<List<Review?>>> =
+    private val _productDetailReviews: MutableStateFlow<Resource<List<Review>>> =
         MutableStateFlow(Resource.Success(emptyList()))
-    val productDetailReviews: MutableStateFlow<Resource<List<Review?>>>
+    val productDetailReviews: MutableStateFlow<Resource<List<Review>>>
         get() = _productDetailReviews
 
     val tempPriceID = state.get<PriceID>("detailProduct")
@@ -47,7 +47,7 @@ class ReviewLihatSemuaViewModel @Inject constructor(
         //getProducts()
         //val map = mapOf("2" to "")
 
-        ProductReviews(index)
+        ProductReviews("19")
 
     }
 
@@ -93,10 +93,10 @@ class ReviewLihatSemuaViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _productDetailReviews.value = Resource.Failure(defaultError(error))
-                    Timber.tag("Product Detail Reviews").d("error")
+                    Timber.tag("Product Detail Reviews NEW").d("error")
                 }.collect{
                     _productDetailReviews.value = Resource.Success(it)
-                    Timber.tag("Product Detail Reviews").d("Success " + it)
+                    Timber.tag("Product Detail Reviews NEW").d("Success " + it)
                 }
         }
     }

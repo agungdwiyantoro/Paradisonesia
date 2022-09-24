@@ -12,9 +12,10 @@ import kotlinx.coroutines.flow.flow
 class ReviewSemuanyaRepositoryImpl(
     private val remoteDataSource: ReviewLihatSemuaService
 ): ReviewRepository{
-    override suspend fun listReview(index: String): Flow<List<Review?>?> = flow {
-        val response = remoteDataSource.reviewLihatSemua(index).data?.toReviewLihatSemua()
-
-        emit(response!!)
+    override suspend fun listReview(index: String): Flow<List<Review>> = flow {
+        val response = remoteDataSource.reviewLihatSemua(index).data?.map {
+            it.toReviewLihatSemua()
+        }?: listOf()
+        emit(response)
     }
 }
