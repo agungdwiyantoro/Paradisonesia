@@ -14,5 +14,6 @@
     android:drawablePadding="@dimen/_1sdp"
     android:drawableStart="@drawable/ic_baseline_star_rate_24"
     android:background="@drawable/rounded_grey_18_radius_corners"
-    android:layout_weight="1"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
     />

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductDetailPenilaianProdukBinding
 import com.devfutech.paradisonesia.databinding.ItemProductDetailReviewsBinding
 import com.devfutech.paradisonesia.external.Resource
@@ -47,7 +48,7 @@ class ReviewLihatSemua : BaseFragment() {
 
     private fun setupView(){
         binding.apply {
-
+            tvRatingNum.text = resources.getString(R.string.rb_rating_num, 3, 5)
             rvChooseStar.adapter = ReviewLihatSemuaAdapter(mutableListOf("1","2","3","4","5"))
             rvRatingView.adapter = productReviewAdapterLihatSemua
             tvLihatSemuanya.visibility = View.GONE
