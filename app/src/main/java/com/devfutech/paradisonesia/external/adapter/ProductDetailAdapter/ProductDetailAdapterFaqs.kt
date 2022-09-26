@@ -31,6 +31,9 @@ class ProductDetailAdapterFaqs : ListAdapter<ProductDetail.Faqs, ProductDetailAd
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail.Faqs) {
             binding.apply {
+                if(i == itemCount){
+                    i = 0
+                }
                 i++
                 tvFaqQuestion.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.faq_question, i, item.question)
                 tvFaqAnswer.text = item.answer

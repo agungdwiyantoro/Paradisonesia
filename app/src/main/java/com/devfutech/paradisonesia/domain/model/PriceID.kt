@@ -7,5 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class PriceID(
     val id: Int?,
-    val price: Int?
+    val price: Int?,
+    val ratingAverage: String?,
+    val ratingCount: Int?
 ) : Parcelable

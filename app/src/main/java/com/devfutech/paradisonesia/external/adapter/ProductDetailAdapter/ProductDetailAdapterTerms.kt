@@ -31,6 +31,9 @@ class ProductDetailAdapterTerms : ListAdapter<ProductDetail.Terms, ProductDetail
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail.Terms) {
             binding.apply {
+                if(i==itemCount){
+                    i=0
+                }
                 i++
                 tvTerms.text = this@ProductViewHolder.itemView.context.getString(R.string.terms, i, item.description)
             }

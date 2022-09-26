@@ -205,7 +205,8 @@
         tools:layout="@layout/item_product_detail_reviews" >
 
         <argument
-            android:name="detailProduct"
-            app:argType="com.devfutech.paradisonesia.domain.model.PriceID" />
+            android:name="ratingAverageRatingCount"
+            app:argType="com.devfutech.paradisonesia.domain.model.ReviewLihatSemua" />
     </fragment>
+
 </navigation>

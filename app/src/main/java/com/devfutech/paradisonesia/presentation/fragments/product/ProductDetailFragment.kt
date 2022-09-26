@@ -12,12 +12,14 @@ import android.widget.ExpandableListAdapter
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
 import com.devfutech.paradisonesia.domain.model.PriceID
+import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
 
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.*
@@ -66,7 +68,11 @@ class ProductDetailFragment : BaseFragment(){
     }
 
     private val productDetailIncludeAdapter by lazy {
-        ProductDetailAdapterIncludes()
+        ProductDetailAdapterIncludesExcludes()
+    }
+
+    private val productDetailExcludeAdapter by lazy {
+        ProductDetailAdapterIncludesExcludes()
     }
 
     private val productDetailFasilitasLayananAdapter by lazy{
@@ -106,6 +112,7 @@ class ProductDetailFragment : BaseFragment(){
         getProductDetailSchedules()
         getProductDetailSchedulesDays()
         getProductDetailIncludes()
+        getProductDetailExcludes()
         getProductDetailFasilitasLayanan()
         getProductDetailFaqs()
         getProductDetailTerms()
@@ -246,7 +253,22 @@ class ProductDetailFragment : BaseFragment(){
             viewModel.productDetailInclude.collect{ result ->
                 when(result){
                     is Resource.Success -> {
-                        productDetailIncludeAdapter.submitList(result.data)
+                        productDetailIncludeAdapter.submitList(result.data?.filter { (result.data)
+                            (it?.is_include == 0)})
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun getProductDetailExcludes(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.productDetailInclude.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        productDetailExcludeAdapter.submitList(result.data?.filter { (result.data)
+                            (it?.is_include == 1)})
                     }
                     else -> {}
                 }
@@ -314,14 +336,28 @@ class ProductDetailFragment : BaseFragment(){
     }
 
     private fun setupView() {
+        val args : ProductDetailFragmentArgs by navArgs()
+        val price:PriceID = args.detailProduct
 
         binding.apply {
-            val args : ProductDetailFragmentArgs by navArgs()
-            val price:PriceID = args.detailProduct
 
+            val reviewLihatSemua = ReviewLihatSemua(
+                price.id,
+                price.ratingAverage,
+                price.ratingCount
+            )
+
+            val action = ProductDetailFragmentDirections.productDetailFragmentToProductReviewsLihatSemuaFragment(reviewLihatSemua)
+            llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.setOnClickListener{
+                Navigation.findNavController(it).navigate(action)
+            }
+
+            /*
             llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.setOnClickListener({
                 findNavController().safeNavigate(R.id.productDetailFragment_to_productReviewsLihatSemuaFragment)
             })
+
+             */
 
             tvPrice.text = resources.getString(R.string.final_price, convertToCurrency(price.price))
 
@@ -396,7 +432,7 @@ class ProductDetailFragment : BaseFragment(){
                 }
             })
 
-            llDetailProductExpand.lyExclude.rvIncludeExclude.adapter = productDetailIncludeAdapter
+            llDetailProductExpand.lyExclude.rvIncludeExclude.adapter = productDetailExcludeAdapter
             llDetailProductExpand.llExclude.setOnClickListener({
                 if(llDetailProductExpand.llExpandedExclude.visibility == View.GONE){
                     TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedExclude, AutoTransition())
@@ -415,8 +451,11 @@ class ProductDetailFragment : BaseFragment(){
             TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()
 
             llDetailProductExpand.lyPenilaianProduk.rvRatingView.adapter = productDetailReviewsAdapter
-            llDetailProductExpand.lyPenilaianProduk.rbTotalRatingReview.rating = 2.0f
-            llDetailProductExpand.lyPenilaianProduk.tvRatingNum.text = resources.getString(R.string.rb_rating_num,2, productDetailReviewsAdapter.itemCount)
+            if(price.ratingAverage!=null) {
+                llDetailProductExpand.lyPenilaianProduk.rbTotalRatingReview.rating = price.ratingAverage.toFloat()
+            }
+
+            llDetailProductExpand.lyPenilaianProduk.tvRatingNum.text = resources.getString(R.string.rb_rating_num, price.ratingAverage, price.ratingCount)
             llDetailProductExpand.llPenilaianProduk.setOnClickListener(
                 {
                     if(llDetailProductExpand.llExpandedPenilaianProduk.visibility == View.GONE){

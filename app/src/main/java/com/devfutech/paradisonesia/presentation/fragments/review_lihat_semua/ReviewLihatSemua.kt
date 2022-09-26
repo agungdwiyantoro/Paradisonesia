@@ -6,17 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.navArgs
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductDetailPenilaianProdukBinding
-import com.devfutech.paradisonesia.databinding.ItemProductDetailReviewsBinding
+import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailAdapterReviews
 import com.devfutech.paradisonesia.external.adapter.ProductReviewAdapterLihatSemua
 import com.devfutech.paradisonesia.external.adapter.ReviewLihatSemuaAdapter
-import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -47,9 +45,15 @@ class ReviewLihatSemua : BaseFragment() {
     }
 
     private fun setupView(){
+        val args : ReviewLihatSemuaArgs by navArgs()
+        val rating: ReviewLihatSemua = args.ratingAverageRatingCount
+
         binding.apply {
-            tvRatingNum.text = resources.getString(R.string.rb_rating_num, 3, 5)
+            tvRatingNum.text = resources.getString(R.string.rb_rating_num, rating.ratingAverage, rating.ratingCount)
             rvChooseStar.adapter = ReviewLihatSemuaAdapter(mutableListOf("1","2","3","4","5"))
+            if(rating.ratingAverage!=null){
+                rbTotalRatingReview.rating = rating.ratingAverage.toFloat()
+            }
             rvRatingView.adapter = productReviewAdapterLihatSemua
             tvLihatSemuanya.visibility = View.GONE
         }

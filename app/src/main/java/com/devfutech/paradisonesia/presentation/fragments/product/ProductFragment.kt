@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
@@ -21,6 +22,7 @@ import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -47,18 +49,28 @@ class ProductFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setAction()
+        setProducts()
 
     }
 
     private fun setAction() {
+        /*
         viewModel.getProducts(mapOf(
             "show" to "5"
         ))
+
+
+
+        viewModel.getProductsMap(mapOf(
+            "city_code" to "[1505,6104]"
+        ))
+         */
         binding.apply {
             llFilterCategory.setOnClickListener {
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY)
-                filter.show(parentFragmentManager, filter.tag)
+               val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY)
+               filter.show(parentFragmentManager, filter.tag)
             }
+
             llFilterLocation.setOnClickListener {
                 val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION)
                 filter.show(parentFragmentManager, filter.tag)
@@ -78,7 +90,10 @@ class ProductFragment : BaseFragment() {
             tieSearch.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
 
-                    setProducts(s.toString())
+                    ///setProducts(s.toString())
+                    viewModel.getProductsMap(mapOf(
+                        "search_key" to tieSearch.text.toString()
+                    ))
                 //productAdapter.currentList.filter { it.name!!.contains(s.toString()) }
                 }
 
@@ -99,14 +114,25 @@ class ProductFragment : BaseFragment() {
                             if (result.isEmpty()) resources.getString(
                                 R.string.label_category)
                             else resources.getString(R.string.label_category_count, result.size)
-                        setProductsCategory(result[0].id!!)
+                        //setProductsCategory(result[0].id!!)
+                        val id = mutableListOf<Int?>()
+                        for (item in result){
+                            id.add(item.id)
+                        }
+
+                        viewModel.getProductsMap(mapOf(
+                            "sub_category_id" to id.toString()//listOf(result[0].id).toString()
+                        ))
+
+
                         llFilterCategory.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
                         tvFilterCategory.setTextColor(ContextCompat.getColor(requireContext(),color))
                         ivFilterCategory.setColorFilter(ContextCompat.getColor(requireContext(),color))
 
-                        Timber.tag("ACTION SORT").d("ACTION_FILTER_CAT" + result[0].id)
+                        Timber.tag("ACTION SORT").d("ACTION_FILTER_CAT" + id)
 
                     }
+
                     FilterBottomSheet.FILTER_LOCATION -> {
                         tvFilterLocation.text =
                             if (result.isEmpty()) resources.getString(
@@ -178,6 +204,28 @@ class ProductFragment : BaseFragment() {
         }
     }
 
+    private fun setProducts(id: Int) {
+        lifecycleScope.launchWhenStarted {
+            viewModel.product.collect { result ->
+                when (result) {
+                    is Resource.Loading -> println("Loading")
+                    is Resource.Failure -> {
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
+                        //productAdapter.submitList(result.data)
+                        //productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
+
+                        productAdapter.submitList(result.data)
+
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
     private fun setProductsCategory(id: Int) {
         lifecycleScope.launchWhenStarted {
             viewModel.product.collect { result ->
@@ -223,21 +271,20 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupView() {
-        val args : ProductFragmentArgs by navArgs()
+        val args: ProductFragmentArgs by navArgs()
         val id = args.categoryProductID
         binding.apply {
             rvProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = productAdapter
             }
+            Timber.tag("NIGERITOS").d("XHIT " + id.toString())
 
-        }
-        Timber.tag("NIGERITOS").d("XHIT " + id.toString())
-        if(id<=5) {
-            setProducts(id.toString())
-        }
-        else{
-            setProducts()
+
+
+            //else{
+            //    setProducts()
+            //}
         }
     }
 

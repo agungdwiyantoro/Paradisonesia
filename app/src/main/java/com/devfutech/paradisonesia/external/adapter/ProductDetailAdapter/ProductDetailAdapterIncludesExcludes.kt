@@ -20,7 +20,7 @@ import timber.log.Timber
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductDetailAdapterIncludes : ListAdapter<ProductDetail.Include_Excludes, ProductDetailAdapterIncludes.ProductViewHolder>(
+class ProductDetailAdapterIncludesExcludes : ListAdapter<ProductDetail.Include_Excludes, ProductDetailAdapterIncludesExcludes.ProductViewHolder>(
     POST_COMPARATOR
 ) {
 
@@ -28,7 +28,11 @@ class ProductDetailAdapterIncludes : ListAdapter<ProductDetail.Include_Excludes,
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail.Include_Excludes) {
             binding.apply {
-                if(item.is_include==0)ivCheckCircle.setImageResource(R.drawable.ic_baseline_check_circle_24) else ivCheckCircle.setImageResource(R.drawable.ic_baseline_cancel_24)
+                var image = R.drawable.ic_baseline_cancel_24
+                if(item.is_include==0){
+                    image = R.drawable.ic_baseline_check_circle_24
+                }
+                ivCheckCircle.setImageResource(image)
                 tvIncludeExclude.text = item.description
             }
         }

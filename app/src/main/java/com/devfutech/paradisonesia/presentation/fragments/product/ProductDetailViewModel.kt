@@ -80,6 +80,7 @@ class ProductDetailViewModel @Inject constructor(
 
     val tempPriceID = state.get<PriceID>("detailProduct")
     val index = tempPriceID?.id.toString()
+
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
         //getProducts()

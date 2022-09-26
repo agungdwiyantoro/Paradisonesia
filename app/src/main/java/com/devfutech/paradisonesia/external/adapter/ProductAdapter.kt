@@ -1,11 +1,8 @@
 package com.devfutech.paradisonesia.external.adapter
 
-import android.content.Intent
 import android.graphics.Paint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 //import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -16,11 +13,7 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductBinding
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.product.Product
-import com.devfutech.paradisonesia.domain.model.product.ProductParcelable
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
-import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailFragmentArgs
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragment
 import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
 
 /**
@@ -87,7 +80,9 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
 
                 val priceID = PriceID(
                     item.id,
-                    item.price
+                    item.price,
+                    item.rating_average,
+                    item.reviews_count,
                 )
 
                 val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(priceID)
