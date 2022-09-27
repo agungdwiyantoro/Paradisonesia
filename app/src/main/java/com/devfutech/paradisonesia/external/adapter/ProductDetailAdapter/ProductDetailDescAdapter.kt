@@ -24,6 +24,8 @@ class ProductDetailDescAdapter : ListAdapter<ProductDetail, ProductDetailDescAda
     POST_COMPARATOR
 ) {
 
+    var tempRating : String? = null
+
     inner class ProductViewHolder(private val binding: ItemProductDetailDescBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductDetail) {
@@ -31,7 +33,14 @@ class ProductDetailDescAdapter : ListAdapter<ProductDetail, ProductDetailDescAda
                 tvDetailCategoryProduct.text = item.sub_category?.name
                 tvDetailProductName.text = item.name
                 tvDetailProductLocation.text = item.city?.name
-                tvDetailProductRating.text = item.rating_average
+
+                tempRating = item.rating_average
+                if(item.rating_average.isNullOrEmpty()){
+                    tempRating = "0"
+                }
+
+                tvDetailProductRating.text = tempRating
+
                 tvDetailProductFavorit.text = this@ProductViewHolder.itemView.context.getString(R.string.favorite, item.wishlist_count)
                 tvDetailProductDescription.text = item.description
                 tvDetailProductReviews.text = this@ProductViewHolder.itemView.context.getString(R.string.reviews_w_value, item.reviews_count)

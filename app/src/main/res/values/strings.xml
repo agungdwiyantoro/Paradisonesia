@@ -162,7 +162,7 @@
     <string name="rb_rating_num">%1$s/5 (%2$d ulasan)</string>
     <string name="lihat_semua">Lihat Semua</string>
     <string name="anonymous">Anonymous</string>
-    <string name="no_review">There\'s no review on this product, be the first to to review this product</string>
+    <string name="no_review">There\'s no review on this product, be the first to review this product</string>
 
     <!-- schedules -->
     <string name="hari_ke">Hari ke-%1$d</string>

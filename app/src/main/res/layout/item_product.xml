@@ -67,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Location"
+            android:drawablePadding="@dimen/_4sdp"
             app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
             app:layout_constraintStart_toStartOf="@+id/tv_product_name"
             app:drawableStartCompat="@drawable/ic_map" />
@@ -76,9 +77,9 @@
             style="@style/Text.Small.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="4.6"
+            tools:text="0"
             android:textColor="@color/star_color"
-
+            android:drawablePadding="@dimen/_4sdp"
             android:layout_marginStart="@dimen/_20sdp"
             app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
             app:layout_constraintStart_toEndOf="@+id/tv_product_location"
@@ -89,7 +90,7 @@
             style="@style/Text.Small.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="4.6"
+            tools:text="0"
             android:textColor="@color/gray.primary_dark"
 
             android:layout_marginStart="@dimen/_5sdp"

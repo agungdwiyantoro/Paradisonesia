@@ -23,6 +23,7 @@ import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmen
 class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(POST_COMPARATOR) {
 
     var tempResult : AppCompatTextView = result
+    var tempRating : String? = null
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -40,7 +41,12 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
                     R.string.final_price, convertToCurrency(item.price)
                 )
 
-                tvProductRating.text = item.rating_average
+
+                tempRating = item.rating_average
+                if(item.rating_average.isNullOrEmpty()){
+                    tempRating = "0"
+                }
+                tvProductRating.text = tempRating
 
                 tvProductReviews.text = this@ProductViewHolder.itemView.context.resources.getString(
                     R.string.reviews_w_value, item.reviews_count
@@ -51,6 +57,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
                     R.string.discounted_price, convertToCurrency(item.net_price)
                 )
 
+                tvProductLocation.text = item.city?.name
                 tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
                 //tvProductRating.text = item.
 //                root.apply {
