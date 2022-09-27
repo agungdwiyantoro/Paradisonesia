@@ -1,8 +1,12 @@
 package com.devfutech.paradisonesia.presentation.fragments.product
 
+import android.content.Context
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
 import com.devfutech.paradisonesia.domain.model.banner.Banner
@@ -39,13 +43,14 @@ class ProductViewModel @Inject constructor(
 
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
+
+        Timber.tag("pvmodel").d("id is " + id)
         if(id==0){
             getProducts()
         }
         else{
             getProducts(id)
         }
-
     }
 
     fun getProducts(){
@@ -76,6 +81,46 @@ class ProductViewModel @Inject constructor(
                 }.collect {
                     _product.value = Resource.Success(it.filter {
                         it.sub_category?.category?.id == index})
+
+                    Timber.tag("AnjingProduct").d("Success" + it)
+                }
+        }
+    }
+
+    fun getProductAllSearch(map: Map<String, String>, tvResult: AppCompatTextView, context: Context){
+        _product.value = Resource.Loading()
+        viewModelScope.launch {
+            productUseCase.getListProduct(map)
+                .catch { error->
+                    onError(error)
+                    _product.value = Resource.Failure(defaultError(error))
+                    Timber.tag("KontolProduct").d("Error")
+
+                }.collect {
+                    _product.value = Resource.Success(it)
+
+                    tvResult.text = context.resources.getString(R.string.result, it.size)
+
+                    Timber.tag("AnjingProduct").d("Success" + it)
+                }
+        }
+    }
+
+    fun getProductByCategorySearch(map: Map<String, String>, tvResult: AppCompatTextView, context: Context){
+        _product.value = Resource.Loading()
+        viewModelScope.launch {
+            productUseCase.getListProduct(map)
+                .catch { error->
+                    onError(error)
+                    _product.value = Resource.Failure(defaultError(error))
+                    Timber.tag("KontolProduct").d("Error")
+
+                }.collect {
+                    _product.value = Resource.Success(it.filter {
+                        it.sub_category?.category?.id == id})
+
+                    tvResult.text = context.resources.getString(R.string.result, it.filter {
+                        it.sub_category?.category?.id == id}.size)
 
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }

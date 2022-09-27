@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.size
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -32,10 +34,11 @@ class ProductFragment : BaseFragment() {
         ProductFragmentBinding.inflate(layoutInflater)
     }
 //    private val ss: ArrayList<Product> = TODO()
+    val args: ProductFragmentArgs by navArgs()
 
     private val viewModel: ProductViewModel by viewModels()
     private val productAdapter by lazy {
-        ProductAdapter()
+        ProductAdapter(binding.tvResult)
     }
 
     override fun onCreateView(
@@ -91,17 +94,39 @@ class ProductFragment : BaseFragment() {
                 override fun afterTextChanged(s: Editable?) {
 
                     ///setProducts(s.toString())
-                    viewModel.getProductsMap(mapOf(
-                        "search_key" to tieSearch.text.toString()
-                    ))
-                //productAdapter.currentList.filter { it.name!!.contains(s.toString()) }
+                    Timber.tag("afterTextChanged").d("tieAfterTextChanged")
+
+                    if(args.categoryProductID==0){
+                        if(tieSearch.hasFocus()) {
+                            viewModel.getProductAllSearch(
+                                mapOf(
+                                    "search_key" to s.toString()
+                                ), tvResult, requireContext()
+                            )
+                        }
+                    }
+                    else{
+                        if(tieSearch.hasFocus()) {
+                            viewModel.getProductByCategorySearch(
+                                mapOf(
+                                    "search_key" to s.toString()
+                                ), tvResult, requireContext()
+                            )
+                        }
+                    }
+                   // tvResult.text = resources.getString(R.string.result, productAdapter.itemCount)
+
+                    //productAdapter.currentList.filter { it.name!!.contains(s.toString()) }
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                   // tvResult.text = resources.getString(R.string.result, productAdapter.itemCount)
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                   // tvResult.text = resources.getString(R.string.result, productAdapter.itemCount)
                 }
+
             })
 
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
@@ -120,9 +145,17 @@ class ProductFragment : BaseFragment() {
                             id.add(item.id)
                         }
 
-                        viewModel.getProductsMap(mapOf(
-                            "sub_category_id" to id.toString()//listOf(result[0].id).toString()
-                        ))
+                        if(args.categoryProductID==0){
+                            viewModel.getProductAllSearch(mapOf(
+                                "sub_category_id" to id.toString()//listOf(result[0].id).toString()
+                            ), tvResult, requireContext())
+                        }
+                        else{
+                            viewModel.getProductByCategorySearch(mapOf(
+                                "sub_category_id" to id.toString()//listOf(result[0].id).toString()
+                            ), tvResult, requireContext())
+                        }
+
 
 
                         llFilterCategory.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
@@ -130,7 +163,6 @@ class ProductFragment : BaseFragment() {
                         ivFilterCategory.setColorFilter(ContextCompat.getColor(requireContext(),color))
 
                         Timber.tag("ACTION SORT").d("ACTION_FILTER_CAT" + id)
-
                     }
 
                     FilterBottomSheet.FILTER_LOCATION -> {
@@ -138,7 +170,7 @@ class ProductFragment : BaseFragment() {
                             if (result.isEmpty()) resources.getString(
                                 R.string.label_location
                             ) else resources.getString(R.string.label_location_count, result.size)
-                        setProductsLocation(result[0].id!!)
+                        //setProductsLocation(result[0].id!!)
                         Timber.tag("ACTION SORT").d("ACTION_FILTER_LOCATION" + result[0].id)
                         llFilterLocation.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
                         tvFilterLocation.setTextColor(ContextCompat.getColor(requireContext(),color))
@@ -271,14 +303,15 @@ class ProductFragment : BaseFragment() {
     }
 
     private fun setupView() {
-        val args: ProductFragmentArgs by navArgs()
-        val id = args.categoryProductID
+       // val args: ProductFragmentArgs by navArgs()
+       // val categoryID = args.categoryProductID
+
         binding.apply {
             rvProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = productAdapter
             }
-            Timber.tag("NIGERITOS").d("XHIT " + id.toString())
+            Timber.tag("NIGERITOS").d("XHIT " + args.categoryProductID)
 
 
 
@@ -287,5 +320,6 @@ class ProductFragment : BaseFragment() {
             //}
         }
     }
+
 
 }

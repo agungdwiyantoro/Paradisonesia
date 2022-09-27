@@ -580,28 +580,43 @@
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_expanded_penilaian_produk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/half_rounded_card"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_15sdp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-        android:layout_marginTop="@dimen/_2sdp">
 
-        <include android:id="@+id/ly_penilaian_produk" layout="@layout/item_product_detail_penilaian_produk"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_expanded_penilaian_produk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/half_rounded_card"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_15sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+                android:layout_marginTop="@dimen/_2sdp">
+
+                <ViewFlipper
+                    android:id="@+id/vf_product_detail_penilaian_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include android:id="@+id/include_no_review" layout="@layout/layout_belum_ada_review"/>
+
+                    <include android:id="@+id/ly_penilaian_produk" layout="@layout/item_product_detail_penilaian_produk"/>
+
+                </ViewFlipper>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.cardview.widget.CardView>
+
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

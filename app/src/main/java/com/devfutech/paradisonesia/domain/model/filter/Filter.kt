@@ -9,5 +9,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Filter(
     val id:Int?,
-    val name:String?,
+    val name:String?
 ) : Parcelable

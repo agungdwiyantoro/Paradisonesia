@@ -3,6 +3,7 @@ package com.devfutech.paradisonesia.external.adapter
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.Navigation.findNavController
 //import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -19,7 +20,9 @@ import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmen
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(POST_COMPARATOR) {
+class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(POST_COMPARATOR) {
+
+    var tempResult : AppCompatTextView = result
 
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -48,6 +51,7 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
                     R.string.discounted_price, convertToCurrency(item.net_price)
                 )
 
+                tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {
@@ -121,5 +125,9 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(PO
             ): Boolean =
                 oldItem.id == newItem.id
         }
+    }
+
+    override fun getItemCount(): Int {
+        return super.getItemCount()
     }
 }

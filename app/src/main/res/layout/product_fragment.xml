@@ -69,103 +69,204 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_filter_category"
-                style="@style/Chip.Category.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_filter_unselected"
-                android:gravity="center_vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_filter_category"
-                    style="@style/Text.Small"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:gravity="center_vertical"
+
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+
+                    android:id="@+id/ll_filter_category"
+
+                    style="@style/Chip.Category.Filter"
+
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/label_category" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_filter_category"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
-                    android:src="@drawable/ic_arrow_down"
-                    app:tint="@color/black" />
+                    android:background="@drawable/background_filter_unselected"
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:gravity="center_vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_filter_location"
-                style="@style/Chip.Category.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_filter_unselected"
-                android:gravity="center_vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_filter_location"
-                    style="@style/Text.Small"
+                    <androidx.appcompat.widget.AppCompatTextView
+
+                        android:id="@+id/tv_filter_category"
+
+                        style="@style/Text.Small"
+
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center"
+
+                        android:text="@string/label_category" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+
+                        android:id="@+id/iv_filter_category"
+
+                        android:layout_width="@dimen/_12sdp"
+
+                        android:layout_height="@dimen/_12sdp"
+
+                        android:layout_gravity="center"
+
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+
+                        android:src="@drawable/ic_arrow_down"
+
+                        app:tint="@color/black" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+
+                    android:id="@+id/ll_filter_location"
+
+                    style="@style/Chip.Category.Filter"
+
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
-                    android:text="@string/label_location" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_filter_location"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
-                    android:src="@drawable/ic_arrow_down"
-                    android:tint="@color/black" />
+                    android:background="@drawable/background_filter_unselected"
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:gravity="center_vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_filter_item"
-                style="@style/Chip.Category.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@drawable/background_filter_selected"
-                android:gravity="center">
+                    <androidx.appcompat.widget.AppCompatTextView
 
-                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/tv_filter_location"
+
+                        style="@style/Text.Small"
+
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+
+                        android:text="@string/label_location" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+
+                        android:id="@+id/iv_filter_location"
+
+                        android:layout_width="@dimen/_12sdp"
+
+                        android:layout_height="@dimen/_12sdp"
+
+                        android:layout_gravity="center"
+
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+
+                        android:src="@drawable/ic_arrow_down"
+
+                        android:tint="@color/black" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <View
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+
+                    android:id="@+id/ll_filter_item"
+
+                    style="@style/Chip.Category.Filter"
+
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_16sdp"
-                    android:src="@drawable/ic_filter"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
+
+                    android:layout_height="wrap_content"
+
                     android:layout_gravity="bottom"
-                    android:tint="@color/white" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_filter_sorting"
-                style="@style/Chip.Category.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@drawable/background_filter_selected"
-                android:gravity="center">
+                    android:background="@drawable/background_filter_selected"
 
-                <androidx.appcompat.widget.AppCompatImageView
+                    android:gravity="center">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="@dimen/_16sdp"
+
+                        android:src="@drawable/ic_filter"
+
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+
+                        android:layout_gravity="bottom"
+
+                        android:tint="@color/white" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+
+                    android:id="@+id/ll_filter_sorting"
+
+                    style="@style/Chip.Category.Filter"
+
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_16sdp"
-                    android:layout_marginHorizontal="@dimen/_4sdp"
+
+                    android:layout_height="wrap_content"
+
                     android:layout_gravity="bottom"
-                    android:src="@drawable/ic_sort"
-                    android:tint="@color/white" />
+
+                    android:background="@drawable/background_filter_selected"
+
+                    android:gravity="center">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="@dimen/_16sdp"
+
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+
+                        android:layout_gravity="bottom"
+
+                        android:src="@drawable/ic_sort"
+
+                        android:tint="@color/white" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_result"
+                style="@style/Text.Small.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.core.widget.NestedScrollView>
 
     <androidx.recyclerview.widget.RecyclerView

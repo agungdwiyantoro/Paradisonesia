@@ -326,8 +326,19 @@ class ProductDetailFragment : BaseFragment(){
                     }
                     is Resource.Success -> {
                         binding.vfProductDetailExpandable.displayedChild = 1
-                        Timber.tag("ProductDetailReviews").d("Success" + result.data)
-                        productDetailReviewsAdapter.submitList(result.data)
+
+                        if(result.data.isNullOrEmpty()){
+                            binding.llDetailProductExpand.vfProductDetailPenilaianProduk.displayedChild = 0
+                        }
+                        else{
+                            binding.llDetailProductExpand.vfProductDetailPenilaianProduk.displayedChild = 1
+                            Timber.tag("ProductDetailReviews").d("Success" + result.data)
+                            productDetailReviewsAdapter.submitList(result.data)
+                        }
+
+                      //  binding.vfProductDetailExpandable.displayedChild = 1
+                      //  Timber.tag("ProductDetailReviews").d("Success" + result.data)
+                      //  productDetailReviewsAdapter.submitList(result.data)
                     }
                     else -> {}
                 }
