@@ -176,6 +176,7 @@
         <argument
             android:name="detailProduct"
             app:argType="com.devfutech.paradisonesia.domain.model.PriceID" />
+
     </fragment>
 
 

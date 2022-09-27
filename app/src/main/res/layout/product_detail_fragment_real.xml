@@ -163,7 +163,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/final_price"
-            android:layout_weight="5"
+            android:textColor="@color/colorPrimary"
+            style="@style/Text.Large"
+            android:layout_weight="6"
             android:layout_marginEnd="@dimen/_10sdp"/>
 
         <Button
