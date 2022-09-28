@@ -7,19 +7,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.databinding.ItemFilterBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.domain.model.product.Product
 
 /**
  * Created by devfutech on 10/8/2021.
  */
-class FilterAdapter(
-    private val onItemSelected: (List<Filter>) -> Unit,
-) : ListAdapter<Filter, FilterAdapter.FilterViewHolder>(POST_COMPARATOR) {
+class FilterAdapterSubCategory(
+    private val onItemSelected: (List<Product.Sub_category>) -> Unit,
+) : ListAdapter<Product.Sub_category, FilterAdapterSubCategory.FilterViewHolder>(POST_COMPARATOR) {
 
-    private val itemSelected = mutableListOf<Filter>()
+    private val itemSelected = mutableListOf<Product.Sub_category>()
 
     inner class FilterViewHolder(private val binding: ItemFilterBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Filter) {
+        fun bind(item: Product.Sub_category) {
             binding.apply {
                 cbItem.apply {
                     text = item.name
@@ -53,15 +54,15 @@ class FilterAdapter(
     }
 
     companion object {
-        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Filter>() {
+        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Product.Sub_category>() {
             override fun areContentsTheSame(
-                oldItem: Filter,
-                newItem: Filter
+                oldItem: Product.Sub_category,
+                newItem: Product.Sub_category
             ): Boolean = oldItem == newItem
 
             override fun areItemsTheSame(
-                oldItem: Filter,
-                newItem: Filter
+                oldItem: Product.Sub_category,
+                newItem: Product.Sub_category
             ): Boolean =
                 oldItem.id == newItem.id
         }

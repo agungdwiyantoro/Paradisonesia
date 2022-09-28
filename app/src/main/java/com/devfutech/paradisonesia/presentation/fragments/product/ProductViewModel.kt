@@ -10,6 +10,7 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
 import com.devfutech.paradisonesia.domain.model.banner.Banner
+import com.devfutech.paradisonesia.domain.model.city.City
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.usecase.ProductUseCase
 import com.devfutech.paradisonesia.external.Resource
@@ -33,6 +34,11 @@ class ProductViewModel @Inject constructor(
     val product:MutableStateFlow<Resource<List<Product>>>
         get() = _product
      */
+
+    private val _productCity: MutableStateFlow<Resource<List<City>>> =
+        MutableStateFlow(Resource.Success(emptyList()))
+    val productCity: MutableStateFlow<Resource<List<City>>>
+        get() = _productCity
 
     private val _product: MutableStateFlow<Resource<List<Product>>> =
         MutableStateFlow(Resource.Success(emptyList()))
@@ -123,6 +129,21 @@ class ProductViewModel @Inject constructor(
                         it.sub_category?.category?.id == id}.size)
 
                     Timber.tag("AnjingProduct").d("Success" + it)
+                }
+        }
+    }
+
+    fun getProductByLocation(map: Map<String, String>, tvResult: AppCompatTextView, context: Context){
+        _product.value = Resource.Loading()
+        viewModelScope.launch {
+            productUseCase.getListProduct(map)
+                .catch { error->
+                    onError(error)
+                    _product.value = Resource.Failure(defaultError(error))
+                }.collect{
+                    _product.value = Resource.Success(it)
+
+                    tvResult.text = context.resources.getString(R.string.result, it.size)
                 }
         }
     }

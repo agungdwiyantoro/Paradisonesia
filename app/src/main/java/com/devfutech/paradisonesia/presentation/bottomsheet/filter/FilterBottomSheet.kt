@@ -15,8 +15,10 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.domain.model.filter.SortFilter
+import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapter
+import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterLocation
+import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterSubCategory
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterSortAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.utils.FileUtils
@@ -27,18 +29,24 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
+class FilterBottomSheet(private val type: Int, private val categoryId: Int) : BaseBottomSheet() {
 
     private val binding: BottomSheetFilterBinding by lazy {
         BottomSheetFilterBinding.inflate(layoutInflater)
     }
     private val viewModel: FilterBottomSheetViewModel by viewModels()
-    private var itemSelected = listOf<Filter>()
+    private var itemSelectedSubCategory = listOf<Product.Sub_category>()
+    private var itemSelectedLocation = listOf<Product.City>()
+
     private var itemSortSelected =mutableListOf(SortFilter(1, 2000, 3000, 4000))//mutableListOf<SortFilter>()
     //listOf<SortFilter>()
 
-    private val filterAdapter by lazy {
-        FilterAdapter(this::onItemSelected)
+    private val filterAdapterSubCategory by lazy {
+        FilterAdapterSubCategory(this::onItemSelectedSubCategory)
+    }
+
+    private val filterAdapterLocation by lazy {
+        FilterAdapterLocation(this::onItemSelectedLocation)
     }
 
     private val filterSortAdapter by lazy{
@@ -56,18 +64,44 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setupAction()
-        setProvince()
+       // setProvince()
+        setCategory()
     }
 
-    private fun onItemSelected(items: List<Filter>) {
-        itemSelected = items
+    private fun onItemSelectedSubCategory(items: List<Product.Sub_category>) {
+        itemSelectedSubCategory = items
+    }
+
+    private fun onItemSelectedLocation(items: List<Product.City>) {
+        itemSelectedLocation = items
     }
 
     private fun onItemSortSelected(items: List<SortFilter>){
        // itemSortSelected = mutableListOf(items)
     }
 
+    /*
     private fun setProvince() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.filterx.collect { result ->
+                when (result) {
+                    is Resource.Loading -> println("Loading")
+                    is Resource.Failure -> {
+                        binding.root.snackBar(result.error)
+                    }
+                    is Resource.Success -> {
+                        filterAdapter.submitList(result.data)
+                    }
+                    else -> {}
+
+                }
+            }
+        }
+    }
+
+     */
+
+    private fun setCategory() {
         lifecycleScope.launchWhenStarted {
             viewModel.filter.collect { result ->
                 when (result) {
@@ -76,7 +110,9 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        filterAdapter.submitList(result.data)
+                        filterAdapter.submitList(result.data?.filter {
+                            it?.category?.id == categoryId
+                        }?.distinct())
                     }
                     else -> {}
 
@@ -103,7 +139,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
             btnApplyFilter.setOnClickListener {
                 setFragmentResult(
                     ACTION_FILTER, bundleOf(
-                        ITEM_FILTER to itemSelected,
+                        ITEM_FILTER to itemSelectedSubCategory,
                         ITEM_TYPE to type
                     )
                 )
@@ -236,7 +272,7 @@ class FilterBottomSheet(private val type: Int) : BaseBottomSheet() {
     }
 
     companion object {
-        const val ACTION_FILTER = "ation_filter"
+        const val ACTION_FILTER = "action_filter"
         const val ACTION_SORT = "action_sort"
         const val ITEM_FILTER = "item_key"
         const val ITEM_TYPE = "item_type"

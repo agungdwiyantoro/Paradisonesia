@@ -20,4 +20,6 @@ interface ProductRepository {
 
     suspend fun listProduct(): Flow<List<Product>>
 
+    suspend fun listProductSubCategoryProduct(): Flow<List<Product.Sub_category?>?>
+
 }

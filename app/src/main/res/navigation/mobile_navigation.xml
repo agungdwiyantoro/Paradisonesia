@@ -66,6 +66,7 @@
             android:id="@+id/action_signupFragment_to_emailVerificationFragment"
             app:destination="@id/emailVerificationFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/homeCustomerFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragment"
@@ -83,7 +84,9 @@
         <action
             android:id="@+id/action_homeCustomerFragment_to_productFragment2"
             app:destination="@id/productFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/bookingFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.booking.BookingFragment"

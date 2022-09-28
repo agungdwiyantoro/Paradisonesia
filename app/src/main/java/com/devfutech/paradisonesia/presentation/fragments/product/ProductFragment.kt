@@ -7,24 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.size
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
 import com.devfutech.paradisonesia.domain.model.filter.Filter
+import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -70,23 +67,23 @@ class ProductFragment : BaseFragment() {
          */
         binding.apply {
             llFilterCategory.setOnClickListener {
-               val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY)
+               val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY, args.categoryProductID)
                filter.show(parentFragmentManager, filter.tag)
             }
 
             llFilterLocation.setOnClickListener {
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION, args.categoryProductID)
                 filter.show(parentFragmentManager, filter.tag)
             }
 
             llFilterItem.setOnClickListener{
                    // findNavController().safeNavigate(R.id.action_Product)
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_ADVANCE)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_ADVANCE, args.categoryProductID)
                 filter.show(parentFragmentManager, filter.tag)
             }
 
             llFilterSorting.setOnClickListener{
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_SORTING)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_SORTING, args.categoryProductID)
                 filter.show(parentFragmentManager, filter.tag)
             }
 
@@ -131,7 +128,7 @@ class ProductFragment : BaseFragment() {
 
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
-                val result: ArrayList<Filter> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
+                val result: ArrayList<Product.Sub_category> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
                 val color = if (result.isNotEmpty()) R.color.white else R.color.black
                 when (type) {
                     FilterBottomSheet.FILTER_CATEGORY -> {
@@ -170,7 +167,16 @@ class ProductFragment : BaseFragment() {
                             if (result.isEmpty()) resources.getString(
                                 R.string.label_location
                             ) else resources.getString(R.string.label_location_count, result.size)
+
+                        val id = mutableListOf<Int?>()
+                        for (item in result){
+                            id.add(item.id)
+                        }
                         //setProductsLocation(result[0].id!!)
+                        viewModel.getProductByLocation(mapOf(
+                            "city_code" to id.toString()
+                        ), tvResult, requireContext())
+
                         Timber.tag("ACTION SORT").d("ACTION_FILTER_LOCATION" + result[0].id)
                         llFilterLocation.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
                         tvFilterLocation.setTextColor(ContextCompat.getColor(requireContext(),color))

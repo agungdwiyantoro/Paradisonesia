@@ -23,4 +23,6 @@ class ProductUseCase @Inject constructor(
     suspend fun getListProduct(map: Map<String,String>): Flow<List<Product>>  = repository.listProduct(map)
 
     suspend fun getListProduct(): Flow<List<Product>>  = repository.listProduct()
+
+    suspend fun getListProductCategoryProduct(): Flow<List<Product.Sub_category?>?> = repository.listProductSubCategoryProduct()
 }

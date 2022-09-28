@@ -48,6 +48,13 @@ class ProductRepositoryImpl(
         emit(response)
     }
 
+    override suspend fun listProductSubCategoryProduct(): Flow<List<Product.Sub_category?>?> = flow{
+        val response = remoteDataSource.products().data?.map {
+            it.sub_category
+        }
+        emit(response)
+    }
+
     override suspend fun listProduct(map: Map<String, String>): Flow<List<Product>> = flow {
         val response = remoteDataSource.products(map).data?.map {
             it.toProduct()
