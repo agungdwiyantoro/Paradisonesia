@@ -148,6 +148,23 @@ class ProductViewModel @Inject constructor(
         }
     }
 
+    fun getProductSort(map: Map<String, String>){
+        _product.value = Resource.Loading()
+        viewModelScope.launch {
+            productUseCase.getListProduct(map)
+                .catch { error->
+                    onError(error)
+                    _product.value = Resource.Failure(defaultError(error))
+                    Timber.tag("KontolProduct").d("Error")
+
+                }.collect {
+                    _product.value = Resource.Success(it.sortedBy { (it.price)
+                    })
+                    Timber.tag("AnjingProduct").d("Success" + it)
+                }
+        }
+    }
+
     fun getProductsMap(map: Map<String, String>){
         _product.value = Resource.Loading()
         viewModelScope.launch {

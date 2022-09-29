@@ -22,4 +22,5 @@ interface ProductRepository {
 
     suspend fun listProductSubCategoryProduct(): Flow<List<Product.Sub_category?>?>
 
+    suspend fun listProductProvinces() : Flow<List<Product.City?>?>
 }

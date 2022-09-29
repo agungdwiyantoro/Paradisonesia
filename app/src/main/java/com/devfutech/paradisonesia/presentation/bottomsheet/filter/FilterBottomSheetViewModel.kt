@@ -32,13 +32,13 @@ class FilterBottomSheetViewModel @Inject constructor(
         get() = _filter
      */
 
-    private val _filterx: MutableStateFlow<Resource<List<Filter>>> = MutableStateFlow(Resource.Success(listOf()))
-    val filterx: MutableStateFlow<Resource<List<Filter>>>
-        get() = _filterx
+    private val _filterLocation: MutableStateFlow<Resource<List<Product.City?>?>> = MutableStateFlow(Resource.Success(listOf()))
+    val filterLocation: MutableStateFlow<Resource<List<Product.City?>?>>
+        get() = _filterLocation
 
-    private val _filter: MutableStateFlow<Resource<List<Product.Sub_category?>?>> = MutableStateFlow(Resource.Success(listOf()))
-    val filter: MutableStateFlow<Resource<List<Product.Sub_category?>?>>
-        get() = _filter
+    private val _filterSubCategory: MutableStateFlow<Resource<List<Product.Sub_category?>?>> = MutableStateFlow(Resource.Success(listOf()))
+    val filterSubCategory: MutableStateFlow<Resource<List<Product.Sub_category?>?>>
+        get() = _filterSubCategory
 
     private val _SortFilter: MutableStateFlow<Resource<List<SortFilter>>> = MutableStateFlow(Resource.Success(listOf()))
     val SortFilter: MutableStateFlow<Resource<List<SortFilter>>>
@@ -76,28 +76,26 @@ class FilterBottomSheetViewModel @Inject constructor(
     }
  */
     fun getProvince(){
-        _filterx.value = Resource.Loading()
+        _filterLocation.value = Resource.Loading()
         viewModelScope.launch {
-            productUseCase.getListProvince()
+            productUseCase.getListProductProvinces()
                 .catch { error->
                     onError(error)
-                    _filterx.value = Resource.Failure(defaultError(error))
-                }.map {_filters ->
-                    _filters.map { it.toFilter() }
+                    _filterLocation.value = Resource.Failure(defaultError(error))
                 }.collect {
-                    _filterx.value = Resource.Success(it)
+                    _filterLocation.value = Resource.Success(it)
                 }
         }
     }
     fun getCategory(){
-        _filter.value = Resource.Loading()
+        _filterSubCategory.value = Resource.Loading()
         viewModelScope.launch {
             productUseCase.getListProductCategoryProduct()
                 .catch { error->
                     onError(error)
-                    _filter.value = Resource.Failure(defaultError(error))
+                    _filterSubCategory.value = Resource.Failure(defaultError(error))
                 }.collect {
-                    _filter.value = Resource.Success(it)
+                    _filterSubCategory.value = Resource.Success(it)
                 }
         }
     }

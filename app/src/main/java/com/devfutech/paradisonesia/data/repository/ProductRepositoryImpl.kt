@@ -55,6 +55,13 @@ class ProductRepositoryImpl(
         emit(response)
     }
 
+    override suspend fun listProductProvinces(): Flow<List<Product.City?>?> = flow{
+        val response = remoteDataSource.products().data?.map {
+            it.city
+        }
+        emit(response)
+    }
+
     override suspend fun listProduct(map: Map<String, String>): Flow<List<Product>> = flow {
         val response = remoteDataSource.products(map).data?.map {
             it.toProduct()

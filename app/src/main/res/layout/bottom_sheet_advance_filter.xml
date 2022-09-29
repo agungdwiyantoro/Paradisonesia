@@ -31,7 +31,7 @@
         android:background="@color/white">
 
         <include android:id="@+id/ly_filter_fragment" layout="@layout/filter_fragment" />
-        <include android:id="@+id/ly_sort_fragment" layout="@layout/sort_item"/>
+        <include android:id="@+id/ly_sort_fragment" layout="@layout/bottom_sheet_sort_item"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_apply_filter"

@@ -126,7 +126,7 @@ class ProductFragment : BaseFragment() {
 
             })
 
-            setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
+            setFragmentResultListener(FilterBottomSheet.ACTION_FILTER_SUB_CATEGORY) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
                 val result: ArrayList<Product.Sub_category> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
                 val color = if (result.isNotEmpty()) R.color.white else R.color.black
@@ -161,7 +161,16 @@ class ProductFragment : BaseFragment() {
 
                         Timber.tag("ACTION SORT").d("ACTION_FILTER_CAT" + id)
                     }
+                }
+            }
 
+            setFragmentResultListener(FilterBottomSheet.ACTION_FILTER_LOCATION) { _, bundle ->
+                val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
+                val result: ArrayList<Product.City> =
+                    bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
+                val color = if (result.isNotEmpty()) R.color.white else R.color.black
+
+                when (type) {
                     FilterBottomSheet.FILTER_LOCATION -> {
                         tvFilterLocation.text =
                             if (result.isEmpty()) resources.getString(
@@ -169,29 +178,56 @@ class ProductFragment : BaseFragment() {
                             ) else resources.getString(R.string.label_location_count, result.size)
 
                         val id = mutableListOf<Int?>()
-                        for (item in result){
-                            id.add(item.id)
+                        for (item in result) {
+                            id.add(item.code)
                         }
                         //setProductsLocation(result[0].id!!)
-                        viewModel.getProductByLocation(mapOf(
-                            "city_code" to id.toString()
-                        ), tvResult, requireContext())
+                        viewModel.getProductByLocation(
+                            mapOf(
+                                "city_code" to id.toString()
+                            ), tvResult, requireContext()
+                        )
 
-                        Timber.tag("ACTION SORT").d("ACTION_FILTER_LOCATION" + result[0].id)
+                        Timber.tag("ACTION SORT").d("ACTION_FILTER_LOCATION" + result[0].code)
                         llFilterLocation.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
-                        tvFilterLocation.setTextColor(ContextCompat.getColor(requireContext(),color))
-                        ivFilterLocation.setColorFilter(ContextCompat.getColor(requireContext(),color))
+                        tvFilterLocation.setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                color
+                            )
+                        )
+                        ivFilterLocation.setColorFilter(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                color
+                            )
+                        )
                     }
                 }
             }
 
+
             setFragmentResultListener(FilterBottomSheet.ACTION_SORT) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
-                val result: ArrayList<Filter> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
+                val result: ArrayList<Product.City> =
+                    bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
+                val color = if (result.isNotEmpty()) R.color.white else R.color.black
 
-                Timber.tag("ACTION SORT").d("ACTION_SORT" + result)
+                when (type) {
+                    FilterBottomSheet.FILTER_SORTING -> {
+                        viewModel.getProductSort(
+                            mapOf(
+                                "sub_category_id" to "3"
+                            )
+                        )
+                    }
 
+                }
             }
+
+
+
+
         }
     }
 
