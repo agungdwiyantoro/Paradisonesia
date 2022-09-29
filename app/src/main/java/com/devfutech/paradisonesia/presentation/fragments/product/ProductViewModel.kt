@@ -158,8 +158,8 @@ class ProductViewModel @Inject constructor(
                     Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
-                    _product.value = Resource.Success(it.sortedBy { (it.price)
-                    })
+                    _product.value = Resource.Success(it.filter {
+                        it.sub_category?.category?.id == id})
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }

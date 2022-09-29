@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.presentation.fragments.product
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -207,17 +208,26 @@ class ProductFragment : BaseFragment() {
             }
 
 
-            setFragmentResultListener(FilterBottomSheet.ACTION_SORT) { _, bundle ->
+            setFragmentResultListener(FilterBottomSheet.ACTION_FILTER_SORT) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
-                val result: ArrayList<Product.City> =
-                    bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
-                val color = if (result.isNotEmpty()) R.color.white else R.color.black
+                val result: Int = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
+              //  val color = if (result.isNotEmpty()) R.color.white else R.color.black
 
                 when (type) {
                     FilterBottomSheet.FILTER_SORTING -> {
+                       // tvFilterCategory.text =
+                       //     if (result.isEmpty()) resources.getString(
+                       //         R.string.label_category)
+                      //      else resources.getString(R.string.label_category_count, 9)
+                        //setProductsCategory(result[0].id!!)
+                        val id = mutableListOf<Int?>()
+
+                        Timber.tag("ACTION_FILTER_SORT").d("SORTx" + result)
+                        id.add(args.categoryProductID)
                         viewModel.getProductSort(
                             mapOf(
-                                "sub_category_id" to "3"
+                                "sort_type" to "desc",
+                                "sort_by" to "price"
                             )
                         )
                     }

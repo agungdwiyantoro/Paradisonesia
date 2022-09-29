@@ -154,26 +154,35 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         //Timber.tag("type").d("john" + viewModel.getProvince())
         binding.apply {
             btnApplyFilter.setOnClickListener {
-                setFragmentResult(
-                    ACTION_FILTER_SUB_CATEGORY, bundleOf(
-                        ITEM_FILTER to itemSelectedSubCategory,
-                        ITEM_TYPE to type
+                if(type==1) {
+                    setFragmentResult(
+                        ACTION_FILTER_SUB_CATEGORY, bundleOf(
+                            ITEM_FILTER to itemSelectedSubCategory,
+                            ITEM_TYPE to type
+                        )
                     )
-                )
+                    Timber.tag("Type1").d("Type1")
+                }
 
-                setFragmentResult(
-                    ACTION_FILTER_LOCATION, bundleOf(
-                        ITEM_FILTER to itemSelectedLocation,
-                        ITEM_TYPE to type
+                if(type==2) {
+                    setFragmentResult(
+                        ACTION_FILTER_LOCATION, bundleOf(
+                            ITEM_FILTER to itemSelectedLocation,
+                            ITEM_TYPE to type
+                        )
                     )
-                )
+                    Timber.tag("Type2").d("Type2")
+                }
 
-                setFragmentResult(
-                    ACTION_SORT, bundleOf(
-                        ITEM_FILTER to itemSortSelected,
-                        ITEM_TYPE to type
+                if(type==4) {
+                    setFragmentResult(
+                        ACTION_FILTER_SORT, bundleOf(
+                            ITEM_FILTER to itemSortSelected,
+                            ITEM_TYPE to type
+                        )
                     )
-                )
+                    Timber.tag("Type4").d("Type4")
+                }
 
 
 
@@ -312,6 +321,6 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
 
         const val ACTION_FILTER_SUB_CATEGORY = "ACTION_FILTER_SUB_CATEGORY"
         const val ACTION_FILTER_LOCATION = "ACTION_FILTER_LOCATION"
-        const val ACTION_SORT = "ACTION_SORT"
+        const val ACTION_FILTER_SORT = "ACTION_FILTER_SORT"
     }
 }
