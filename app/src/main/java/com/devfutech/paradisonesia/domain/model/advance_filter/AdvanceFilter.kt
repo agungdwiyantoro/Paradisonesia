@@ -8,10 +8,7 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class AdvanceFilter(
-    val id:Int?,
-    val minPrice:Int?,
-    val maxPrice:Int?,
+    val price: List<Int?>,
     val rating: Int?,
-    val startDate: String?,
-    val endDate: String?
+    val date: List<Int>
 ) : Parcelable

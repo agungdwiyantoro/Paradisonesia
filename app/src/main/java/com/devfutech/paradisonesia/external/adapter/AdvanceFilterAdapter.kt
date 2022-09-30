@@ -76,7 +76,7 @@ class AdvanceFilterAdapter(
                 oldItem: AdvanceFilter,
                 newItem: AdvanceFilter
             ): Boolean =
-                oldItem.id == newItem.id
+                oldItem.price == newItem.price
         }
     }
 }

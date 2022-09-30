@@ -8,13 +8,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.domain.model.product.Product
 import timber.log.Timber
 
 class FilterAdapterSortItem(
-    private val onItemSelected: (List<Int>) -> Unit,
+    private val onItemSelected: (Int) -> Unit,
 ) : RecyclerView.Adapter<FilterAdapterSortItem.ViewHolder>() {
 
-    private val itemSelected = mutableListOf<Int>()
+    var id : Int = 1
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
@@ -35,12 +36,26 @@ class FilterAdapterSortItem(
         holder.radB_highest_price.text = holder.itemView.resources.getString(R.string.highest_price)
         holder.radB_highest_rating.text = holder.itemView.resources.getString(R.string.highest_rating)
 
+        holder.rg_sort_filter.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
+
+            if(holder.radB_lowest_price.isChecked){
+                id = 1
+            }
+            if (holder.radB_highest_price.isChecked){
+                id = 2
+            }
+            if(holder.radB_highest_rating.isChecked){
+                id = 3
+            }
+            onItemSelected(id)
+
+        })
+
+
         //holder.rg_sort_filter.setOnClickListener{
 
         //}
-        Timber.tag("CHECKRADIOBUTTON").d("FILTERSORT" + holder.rg_sort_filter.checkedRadioButtonId)
-        itemSelected.add(holder.rg_sort_filter.checkedRadioButtonId)
-        onItemSelected(itemSelected)
+        //itemSelected.add(holder.rg_sort_filter.checkedRadioButtonId)
     }
 
 

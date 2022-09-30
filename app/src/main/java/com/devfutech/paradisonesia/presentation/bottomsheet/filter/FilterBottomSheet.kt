@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -11,8 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
+import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterAdvance
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterLocation
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterSortItem
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterSubCategory
@@ -33,8 +36,8 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
     private val viewModel: FilterBottomSheetViewModel by viewModels()
     private var itemSelectedSubCategory = listOf<Product.Sub_category>()
     private var itemSelectedLocation = listOf<Product.City>()
-
-    private var itemSortSelected = listOf<Int>()
+    private var itemSelectedAdvance = AdvanceFilter(mutableListOf(), null, mutableListOf())
+    private var itemSortSelected : Int = 0
     //listOf<SortFilter>()
 
     private val filterAdapterSubCategory by lazy {
@@ -45,6 +48,9 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         FilterAdapterLocation(this::onItemSelectedLocation)
     }
 
+    private val filterAdapterAdvance by lazy {
+        FilterAdapterAdvance(this::onItemSelectedAdvance)
+    }
     private val filterSortAdapter by lazy{
         FilterAdapterSortItem(this::onItemSortSelected);
     }
@@ -72,7 +78,11 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         itemSelectedLocation = items
     }
 
-    private fun onItemSortSelected(items: List<Int>){
+    private fun onItemSelectedAdvance(items: AdvanceFilter){
+        itemSelectedAdvance = items
+    }
+
+    private fun onItemSortSelected(items: Int){
         itemSortSelected = items
     }
 
@@ -142,7 +152,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         when (type) {
             1 -> viewModel.getCategory()
             2 -> viewModel.getProvince()
-            3 -> viewModel.getSortList()
+
 
             else -> {
 
@@ -174,6 +184,15 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
                     Timber.tag("Type2").d("Type2")
                 }
 
+                if(type==3) {
+                    setFragmentResult(
+                        ACTION_FILTER_ADVANCE, bundleOf(
+                            ITEM_FILTER to itemSelectedAdvance,
+                            ITEM_TYPE to type
+                        )
+                    )
+                }
+
                 if(type==4) {
                     setFragmentResult(
                         ACTION_FILTER_SORT, bundleOf(
@@ -189,81 +208,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
                 dismiss()
             }
 
-            FileUtils.dateMask(binding.filterFragment.tieStartDate, binding.filterFragment.tlStartDate)
-            FileUtils.dateMask(binding.filterFragment.tieEndDate, binding.filterFragment.tlEndDate)
-            binding.filterFragment.ivCalendarStartDate.setOnClickListener({
 
-               // filterFragment.layoutCalendar.root.visibility = View.VISIBLE
-            })
-
-            binding.filterFragment.ivCalendarEndDate.setOnClickListener({
-               // filterFragment.layoutCalendar.root.visibility = View.VISIBLE
-            })
-
-            filterFragment.tiePriceMinim.setText(resources.getString(R.string.final_price, FileUtils.convertToCurrency(filterFragment.sbPrice.valueFrom.toInt())))
-            filterFragment.tiePriceMax.setText(resources.getString(R.string.final_price, FileUtils.convertToCurrency(filterFragment.sbPrice.valueTo.toInt())))
-
-            filterFragment.sbPrice.labelBehavior = LabelFormatter.LABEL_GONE
-
-            filterFragment.sbPrice.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{
-                override fun onStartTrackingTouch(slider: RangeSlider) {
-                    val values = slider.values
-                    Timber.tag("FilterBottomSheet").d(values[0].toString())
-                    Timber.tag("FilterBottomSheet").d(values[1].toString())
-
-                    var minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(values[0].toInt()))
-                    var maxPrice = resources.getString(R.string.final_price,  FileUtils.convertToCurrency(values[1].toInt()))
-
-                    if(values[0]==1.0E7.toFloat()||values[1]==1.0E7.toFloat()){
-                        val minPriceConverted = String.format("%.0f", values[0])
-                        val maxPriceConverted = String.format("%.0f", values[1])
-                        minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(minPriceConverted.toInt()))
-                        maxPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(maxPriceConverted.toInt()))
-                    }
-
-                    filterFragment.tiePriceMinim.setText(minPrice)
-                    filterFragment.tiePriceMax.setText(maxPrice)
-                }
-
-                override fun onStopTrackingTouch(slider: RangeSlider) {
-                    val values = slider.values
-                    Timber.tag("FilterBottomSheet").d(values[0].toString())
-                    Timber.tag("FilterBottomSheet").d(values[1].toString())
-
-                    var minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(values[0].toInt()))
-                    var maxPrice = resources.getString(R.string.final_price,  FileUtils.convertToCurrency(values[1].toInt()))
-
-                    if(values[0]==1.0E7.toFloat()||values[1]==1.0E7.toFloat()){
-                        val minPriceConverted = String.format("%.0f", values[0])
-                        val maxPriceConverted = String.format("%.0f", values[1])
-                        minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(minPriceConverted.toInt()))
-                        maxPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(maxPriceConverted.toInt()))
-                    }
-
-                    filterFragment.tiePriceMinim.setText(minPrice)
-                    filterFragment.tiePriceMax.setText(maxPrice)
-                }
-            })
-
-            filterFragment.sbPrice.addOnChangeListener(RangeSlider.OnChangeListener { slider, value, fromUser ->
-
-                val values = slider.values
-                Timber.tag("FilterBottomSheet").d(values[0].toString())
-                Timber.tag("FilterBottomSheet").d(values[1].toString())
-
-                var minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(values[0].toInt()))
-                var maxPrice = resources.getString(R.string.final_price,  FileUtils.convertToCurrency(values[1].toInt()))
-
-                if(values[0]==1.0E7.toFloat()||values[1]==1.0E7.toFloat()){
-                    val minPriceConverted = String.format("%.0f", values[0])
-                    val maxPriceConverted = String.format("%.0f", values[1])
-                    minPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(minPriceConverted.toInt()))
-                    maxPrice = resources.getString(R.string.final_price, FileUtils.convertToCurrency(maxPriceConverted.toInt()))
-                }
-
-                filterFragment.tiePriceMinim.setText(minPrice)
-                filterFragment.tiePriceMax.setText(maxPrice)
-            })
         }
     }
 
@@ -294,7 +239,8 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
 
             if(type==3){
                 rvFilter.apply {
-
+                    adapter = filterAdapterAdvance
+                    layoutManager = GridLayoutManager(requireContext(), 1)
                 }
             }
 
@@ -321,6 +267,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
 
         const val ACTION_FILTER_SUB_CATEGORY = "ACTION_FILTER_SUB_CATEGORY"
         const val ACTION_FILTER_LOCATION = "ACTION_FILTER_LOCATION"
+        const val ACTION_FILTER_ADVANCE = "ACTION_FILTER_ADVANCE"
         const val ACTION_FILTER_SORT = "ACTION_FILTER_SORT"
     }
 }

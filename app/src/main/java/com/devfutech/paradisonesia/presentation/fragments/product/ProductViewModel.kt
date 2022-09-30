@@ -159,13 +159,14 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
-                        it.sub_category?.category?.id == id})
+                        it.sub_category?.category?.id == id
+                    })
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
 
-    fun getProductsMap(map: Map<String, String>){
+    fun getProductsMap(map: Map<String, String>, tvResult: AppCompatTextView, context: Context){
         _product.value = Resource.Loading()
         viewModelScope.launch {
             productUseCase.getListProduct(map)
@@ -175,7 +176,12 @@ class ProductViewModel @Inject constructor(
                     Timber.tag("MapKontolProduct").d("MapError")
 
                 }.collect {
-                    _product.value = Resource.Success(it)
+                    _product.value = Resource.Success(it.filter {
+                        it.sub_category?.category?.id == id
+                    })
+
+                    tvResult.text = context.resources.getString(R.string.result, it.filter {
+                        it.sub_category?.category?.id == id}.size)
 
                     Timber.tag("MapAnjingProduct").d("Success" + it)
                 }

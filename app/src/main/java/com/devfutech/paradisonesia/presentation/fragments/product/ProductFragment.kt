@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
+import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
@@ -33,6 +34,8 @@ class ProductFragment : BaseFragment() {
     }
 //    private val ss: ArrayList<Product> = TODO()
     val args: ProductFragmentArgs by navArgs()
+
+    private var map : Map<String, String> = emptyMap()
 
     private val viewModel: ProductViewModel by viewModels()
     private val productAdapter by lazy {
@@ -183,11 +186,25 @@ class ProductFragment : BaseFragment() {
                             id.add(item.code)
                         }
                         //setProductsLocation(result[0].id!!)
+
+                        if(args.categoryProductID==0){
+                            viewModel.getProductAllSearch(mapOf(
+                                "city_code" to id.toString()//listOf(result[0].id).toString()
+                            ), tvResult, requireContext())
+                        }
+                        else{
+                            viewModel.getProductByCategorySearch(mapOf(
+                                "city_code" to id.toString()//listOf(result[0].id).toString()
+                            ), tvResult, requireContext())
+                        }
+                        /*
                         viewModel.getProductByLocation(
                             mapOf(
                                 "city_code" to id.toString()
                             ), tvResult, requireContext()
                         )
+
+                         */
 
                         Timber.tag("ACTION SORT").d("ACTION_FILTER_LOCATION" + result[0].code)
                         llFilterLocation.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
@@ -207,29 +224,115 @@ class ProductFragment : BaseFragment() {
                 }
             }
 
+            setFragmentResultListener(FilterBottomSheet.ACTION_FILTER_ADVANCE) { _, bundle ->
+                val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
+                val result: AdvanceFilter = bundle.get(FilterBottomSheet.ITEM_FILTER) as AdvanceFilter
+                //  val color = if (result.isNotEmpty()) R.color.white else R.color.black
+
+                when (type) {
+                    FilterBottomSheet.FILTER_ADVANCE -> {
+                        // tvFilterCategory.text =
+                        //     if (result.isEmpty()) resources.getString(
+                        //         R.string.label_category)
+                        //      else resources.getString(R.string.label_category_count, 9)
+                        //setProductsCategory(result[0].id!!)
+                        if(args.categoryProductID==0){
+                            viewModel.getProductAllSearch(mapOf(
+                                "price" to result.price.toString()
+                            ), tvResult, requireContext())
+                        }
+                        else{
+                            viewModel.getProductByCategorySearch(mapOf(
+                                "price" to result.price.toString()
+                            ), tvResult, requireContext())
+                        }
+
+                        /*
+                        viewModel.getProductsMap(mapOf(
+                            "price" to result.price.toString()
+                        ), tvResult, requireContext())
+                         */
+
+                        Timber.tag("ACTION_FILTER_SORT").d("SORTx" + result.price)
+
+
+                    }
+
+                }
+            }
 
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER_SORT) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
-                val result: Int = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
+                val result: Int = bundle.getInt(FilterBottomSheet.ITEM_FILTER)
               //  val color = if (result.isNotEmpty()) R.color.white else R.color.black
 
                 when (type) {
                     FilterBottomSheet.FILTER_SORTING -> {
-                       // tvFilterCategory.text =
-                       //     if (result.isEmpty()) resources.getString(
-                       //         R.string.label_category)
-                      //      else resources.getString(R.string.label_category_count, 9)
+                        // tvFilterCategory.text =
+                        //     if (result.isEmpty()) resources.getString(
+                        //         R.string.label_category)
+                        //      else resources.getString(R.string.label_category_count, 9)
                         //setProductsCategory(result[0].id!!)
-                        val id = mutableListOf<Int?>()
-
                         Timber.tag("ACTION_FILTER_SORT").d("SORTx" + result)
-                        id.add(args.categoryProductID)
-                        viewModel.getProductSort(
-                            mapOf(
-                                "sort_type" to "desc",
-                                "sort_by" to "price"
-                            )
-                        )
+                        if(args.categoryProductID==0){
+                            if (result == 1){
+                                viewModel.getProductAllSearch(
+                                    mapOf(
+                                        "sort_type" to "asc",
+                                        "sort_by" to "price"
+                                    ), tvResult, requireContext()
+                                )
+                            }
+
+                            if (result == 2){
+                                viewModel.getProductAllSearch(
+                                    mapOf(
+                                        "sort_type" to "desc",
+                                        "sort_by" to "price"
+                                    ), tvResult, requireContext()
+                                )
+                            }
+
+                            if (result == 3){
+                                viewModel.getProductAllSearch(
+                                    mapOf(
+                                        "sort_type" to "desc",
+                                        "sort_by" to "rating_average"
+                                    ), tvResult, requireContext()
+                                )
+                            }
+                        }
+                        else{
+                            if (result == 1){
+                                viewModel.getProductByCategorySearch(
+                                    mapOf(
+                                        "sort_type" to "asc",
+                                        "sort_by" to "price"
+                                    ), tvResult, requireContext()
+                                )
+                            }
+
+                            if (result == 2){
+                                viewModel.getProductByCategorySearch(
+                                    mapOf(
+                                        "sort_type" to "desc",
+                                        "sort_by" to "price"
+                                    ), tvResult, requireContext()
+                                )
+                            }
+
+                            if (result == 3){
+                                viewModel.getProductByCategorySearch(
+                                    mapOf(
+                                        "sort_type" to "desc",
+                                        "sort_by" to "rating_average"
+                                    ), tvResult, requireContext()
+                                )
+                            }
+                        }
+
+
+
                     }
 
                 }
