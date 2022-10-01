@@ -91,6 +91,10 @@ class ProductDetailFragment : BaseFragment(){
         ProductDetailAdapterReviews()
     }
 
+    private val productDetailPaketLainnyaAdapter by lazy {
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -478,6 +482,22 @@ class ProductDetailFragment : BaseFragment(){
                         TransitionManager.beginDelayedTransition(llDetailProductExpand.llPenilaianProduk, AutoTransition())
                         llDetailProductExpand.llExpandedPenilaianProduk.visibility = View.GONE
                         llDetailProductExpand.icDownArrowPenpro.rotation = -90f
+                    }
+                }
+            )
+
+            llDetailProductExpand.lyPaketLainnya.rvProductDetailPaketLainnya.adapter =
+            llDetailProductExpand.llPaketLainnya.setOnClickListener(
+                {
+                    if(llDetailProductExpand.llExpandedPaketLainnya.visibility == View.GONE){
+                        TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedPaketLainnya, AutoTransition())
+                        llDetailProductExpand.llExpandedPaketLainnya.visibility = View.VISIBLE
+                        llDetailProductExpand.icDownArrowPaklain.rotation = 0f
+                    }
+                    else{
+                        TransitionManager.beginDelayedTransition(llDetailProductExpand.llPaketLainnya, AutoTransition())
+                        llDetailProductExpand.llPaketLainnya.visibility = View.GONE
+                        llDetailProductExpand.icDownArrowPaklain.rotation = -90f
                     }
                 }
             )

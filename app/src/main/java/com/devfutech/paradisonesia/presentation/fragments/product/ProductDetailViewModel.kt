@@ -78,6 +78,11 @@ class ProductDetailViewModel @Inject constructor(
     val productDetailReviews: MutableStateFlow<Resource<List<ProductDetail.Reviews?>>>
         get() = _productDetailReviews
 
+    private val _productDetailPaketLainnya: MutableStateFlow<Resource<List<ProductDetail>>> =
+        MutableStateFlow(Resource.Success(emptyList()))
+    val productDetailPaketLainnya: MutableStateFlow<Resource<List<ProductDetail>>>
+        get() = _productDetailPaketLainnya
+
     val tempPriceID = state.get<PriceID>("detailProduct")
     val index = tempPriceID?.id.toString()
 
@@ -95,6 +100,7 @@ class ProductDetailViewModel @Inject constructor(
         ProductFaqs(index)
         ProductTerms(index)
         ProductReviews(index)
+        ProductPaketLainnya(index)
 
     }
 
@@ -258,4 +264,13 @@ class ProductDetailViewModel @Inject constructor(
         }
     }
 
+    fun ProductPaketLainnya(index: String){
+        _productDetailPaketLainnya.value = Resource.Loading()
+        viewModelScope.launch {
+            productDetailUseCase.getListProductDetail(index)
+                .catch { error->
+                    
+                }
+        }
+    }
 }

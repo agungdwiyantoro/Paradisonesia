@@ -332,7 +332,6 @@ class ProductFragment : BaseFragment() {
                         }
 
 
-
                     }
 
                 }

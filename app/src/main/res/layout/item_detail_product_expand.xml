@@ -580,36 +580,33 @@
     </androidx.cardview.widget.CardView>
 
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-
-        <androidx.cardview.widget.CardView
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_expanded_penilaian_produk"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/half_rounded_card"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_15sdp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
+            android:layout_marginTop="@dimen/_2sdp">
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_expanded_penilaian_produk"
+            <ViewFlipper
+                android:id="@+id/vf_product_detail_penilaian_produk"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/half_rounded_card"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_15sdp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
-                android:layout_marginTop="@dimen/_2sdp">
+                android:layout_height="wrap_content">
 
-                <ViewFlipper
-                    android:id="@+id/vf_product_detail_penilaian_produk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <include android:id="@+id/include_no_review" layout="@layout/layout_belum_ada_review"/>
+                <include android:id="@+id/ly_penilaian_produk" layout="@layout/item_product_detail_penilaian_produk"/>
 
-                    <include android:id="@+id/include_no_review" layout="@layout/layout_belum_ada_review"/>
-
-                    <include android:id="@+id/ly_penilaian_produk" layout="@layout/item_product_detail_penilaian_produk"/>
-
-                </ViewFlipper>
+            </ViewFlipper>
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -663,10 +660,8 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -681,16 +676,12 @@
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
         android:paddingBottom="@dimen/_15sdp"
-        android:visibility="gone"
+
 
         app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
         android:layout_marginTop="@dimen/_2sdp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_isi_paket_lainnya"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+        <include android:id="@+id/ly_paket_lainnya" layout="@layout/layout_product_detail_paket_lainnya"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
