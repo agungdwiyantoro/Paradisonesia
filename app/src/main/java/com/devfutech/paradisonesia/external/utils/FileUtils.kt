@@ -20,9 +20,9 @@ import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
 import androidx.viewbinding.BuildConfig.DEBUG
-import com.devfutech.paradisonesia.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
@@ -34,7 +34,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.time.format.ResolverStyle
 import java.util.*
-import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 
 /**
@@ -339,6 +339,11 @@ object FileUtils {
         }
     }
 
+    fun NavController.refreshCurrentFragment(){
+        val id = currentDestination?.id
+        popBackStack(id!!,true)
+        navigate(id)
+    }
 
 
     fun simpleSpinnerAdapter(context: Context, items: Array<String>) : ArrayAdapter<String>? {
@@ -465,6 +470,35 @@ object FileUtils {
             return valid
         }
 
+    }
+
+    fun monthToDate(date: String?) : String{
+        val namaTanggal : List<String> = listOf(
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember")
+        val month = date?.substring(5,7)
+        val year = date?.substring(0,4)
+        val tanggal = date?.substring(8,10)
+        val time = date?.substring(11,15)
+        var monthFinish = ""
+        if (month?.contains("0") == true){
+            monthFinish = namaTanggal.get(month.get(1).digitToInt()-1)
+        }
+        else {
+            monthFinish = namaTanggal.get(month?.toInt()!!)
+        }
+
+        return tanggal.plus(" ").plus(monthFinish).plus(" ").plus(year)
     }
 
 }

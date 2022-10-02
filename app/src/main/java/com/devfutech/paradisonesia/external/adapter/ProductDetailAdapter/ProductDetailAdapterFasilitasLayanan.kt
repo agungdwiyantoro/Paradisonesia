@@ -44,6 +44,10 @@ class ProductDetailAdapterFasilitasLayanan : ListAdapter<ProductDetail.Facilitie
                     ivCheckCircle.setImageResource(R.drawable.ic_baseline_ac_unit_24)
                     tvIncludeExclude.text = item.facility.get(0)?.name
                 }
+                if(item.facility.get(0)?.id==5){
+                    ivCheckCircle.setImageResource(R.drawable.ic_baseline_local_parking_24)
+                    tvIncludeExclude.text = item.facility.get(0)?.name
+                }
             }
         }
     }

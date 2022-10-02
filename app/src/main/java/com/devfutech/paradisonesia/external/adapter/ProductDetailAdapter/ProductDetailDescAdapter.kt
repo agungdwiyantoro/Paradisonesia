@@ -15,6 +15,7 @@ import coil.loadAny
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductDetailDescBinding
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
+import com.devfutech.paradisonesia.external.utils.FileUtils
 import timber.log.Timber
 
 /**
@@ -33,6 +34,8 @@ class ProductDetailDescAdapter : ListAdapter<ProductDetail, ProductDetailDescAda
                 tvDetailCategoryProduct.text = item.sub_category?.name
                 tvDetailProductName.text = item.name
                 tvDetailProductLocation.text = item.city?.name
+                Timber.tag(this@ProductDetailDescAdapter.toString()).d(item.end_date?.substring(0,10))
+                tvDetailProductTanggalPelaksanaan.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.tanggal_pelaksanaan_w_value, FileUtils.monthToDate(item.start_date), FileUtils.monthToDate(item.end_date))
 
                 tempRating = item.rating_average
                 if(item.rating_average.isNullOrEmpty()){

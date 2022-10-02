@@ -3,32 +3,39 @@ package com.devfutech.paradisonesia.external.adapter
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.Navigation.findNavController
-//import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.findNavController
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.loadAny
+
 import com.devfutech.paradisonesia.R
-import com.devfutech.paradisonesia.databinding.ItemProductBinding
+
+import com.devfutech.paradisonesia.databinding.ItemProductPaketLainnyaBinding
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.product.Product
+
+
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
-import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
+import com.devfutech.paradisonesia.external.utils.FileUtils.refreshCurrentFragment
+import com.devfutech.paradisonesia.presentation.fragments.product.ProductDetailFragmentDirections
+
 
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(POST_COMPARATOR) {
+class ProductDetailAdapterPaketLainnya : ListAdapter<Product, ProductDetailAdapterPaketLainnya.ProductViewHolder>(POST_COMPARATOR) {
 
-    var tempResult : AppCompatTextView = result
     var tempRating : String? = null
 
-    inner class ProductViewHolder(private val binding: ItemProductBinding) :
+    inner class ProductViewHolder(private val binding: ItemProductPaketLainnyaBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product) {
             binding.apply {
+
+
                 ivProduct.loadAny(item.thumbnail?:""){
                     crossfade(true)
                     error(R.drawable.object_wisata_lombok)
@@ -58,7 +65,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
                 )
 
                 tvProductLocation.text = item.city?.name
-                tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
+
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {
@@ -97,8 +104,10 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
                     item.reviews_count,
                 )
 
-                val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(priceID)
+
+                val action = ProductDetailFragmentDirections.actionProductDetailFragmentSelf(priceID)
                 root.setOnClickListener{
+                    //it.findNavController().refreshCurrentFragment()
                     findNavController(it).navigate(action)
                 }
 
@@ -108,7 +117,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
-            ItemProductBinding.inflate(
+            ItemProductPaketLainnyaBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

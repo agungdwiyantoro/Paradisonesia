@@ -10,54 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ll_tanggal_pelaksanaan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ll_expandable_tanggal_pelaksanaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:background="@drawable/half_rounded_card">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_tanggal_pelaksanaan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tanggal_pelaksanaan"
-                    style="@style/Text.Small.Bold"
-                    android:textColor="@color/black"
-
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_down_arrow_tp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_down"
-                    android:rotation="-90"
-
-                    app:layout_constraintTop_toTopOf="@+id/tv_tanggal_pelaksanaan"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_tanggal_pelaksanaan"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_expanded_tanggal_pelaksanaan"
         android:layout_width="match_parent"
@@ -676,8 +628,7 @@
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
         android:paddingBottom="@dimen/_15sdp"
-
-
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/ll_expandable"
         android:layout_marginTop="@dimen/_2sdp">
 

@@ -6,14 +6,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/rvProductDetailPaketLainnya"
-        android:layout_width="@dimen/_165sdp"
-        android:layout_height="@dimen/_203sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="3"
-        tools:listitem="@layout/item_product"/>
+        app:spanCount="3"
+        tools:listitem="@layout/item_product_paket_lainnya"/>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_lihat_semua"

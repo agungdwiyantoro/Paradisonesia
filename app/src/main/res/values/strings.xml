@@ -140,6 +140,7 @@
     <string name="per_pax">/pax</string>
     <string name="reviews_w_value">(%1$d reviews)</string>
     <string name="description">Description</string>
+    <string name="tanggal_pelaksanaan_w_value">%1$s - %2$s</string>
     <string name="result">%1$d result</string>
 
     <!-- Product Detail Fragment Expand -->

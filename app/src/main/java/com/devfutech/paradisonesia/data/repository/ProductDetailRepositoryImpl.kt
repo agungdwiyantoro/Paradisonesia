@@ -62,5 +62,5 @@ class ProductDetailRepositoryImpl(
         val response = remoteDataSource.productsDetail(index).data?.toProductDetail()?.reviews
         emit(response)
     }
-
+    
 }

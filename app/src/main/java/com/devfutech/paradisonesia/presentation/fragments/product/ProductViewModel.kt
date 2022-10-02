@@ -51,7 +51,7 @@ class ProductViewModel @Inject constructor(
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
 
         Timber.tag("pvmodel").d("id is " + id)
-        if(id==0){
+        if(id==0||id==null){
             getProducts()
         }
         else{

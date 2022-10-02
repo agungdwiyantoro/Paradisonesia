@@ -179,6 +179,9 @@
         <argument
             android:name="detailProduct"
             app:argType="com.devfutech.paradisonesia.domain.model.PriceID" />
+        <action
+            android:id="@+id/action_productDetailFragment_self"
+            app:destination="@id/productDetailFragment" />
 
     </fragment>
 

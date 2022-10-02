@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListAdapter
+import androidx.core.graphics.scaleMatrix
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
@@ -22,9 +24,11 @@ import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
 
 import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.*
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedules
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedulesDays
+import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapterPaketLainnya
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
@@ -42,10 +46,9 @@ class ProductDetailFragment : BaseFragment(){
    // val args : ProductDetailFragmentArgs by navArgs()
     //args.detailProduct
     //private var expandableListView: ExpandableListView? = null
-    private var adapter: ExpandableListAdapter? = null
-    private var titleList: List<String>? = null
-
+    val args : ProductDetailFragmentArgs by navArgs()
     private val viewModel: ProductDetailViewModel by viewModels()
+    private val viewModelProduct: ProductViewModel by viewModels()
 
     private val binding: ProductDetailFragmentRealBinding by lazy{
         ProductDetailFragmentRealBinding.inflate(layoutInflater)
@@ -92,7 +95,7 @@ class ProductDetailFragment : BaseFragment(){
     }
 
     private val productDetailPaketLainnyaAdapter by lazy {
-
+        ProductDetailAdapterPaketLainnya()
     }
 
     override fun onCreateView(
@@ -121,6 +124,7 @@ class ProductDetailFragment : BaseFragment(){
         getProductDetailFaqs()
         getProductDetailTerms()
         getProductDetailReviews()
+        getProductDetailPaketLainnya()
 
 
     }
@@ -350,8 +354,24 @@ class ProductDetailFragment : BaseFragment(){
         }
     }
 
+    private fun getProductDetailPaketLainnya(){
+        lifecycleScope.launchWhenStarted {
+            viewModelProduct.product.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        Timber.tag("NIGX").d("SJIT" + result.data)
+                        productDetailPaketLainnyaAdapter.submitList(result.data?.filter {
+                            it.sub_category?.id == args.detailProduct.subCategoryId && it.id!= args.detailProduct.id
+                        })
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
     private fun setupView() {
-        val args : ProductDetailFragmentArgs by navArgs()
+
         val price:PriceID = args.detailProduct
 
         binding.apply {
@@ -486,7 +506,7 @@ class ProductDetailFragment : BaseFragment(){
                 }
             )
 
-            llDetailProductExpand.lyPaketLainnya.rvProductDetailPaketLainnya.adapter =
+            llDetailProductExpand.lyPaketLainnya.rvProductDetailPaketLainnya.adapter = productDetailPaketLainnyaAdapter
             llDetailProductExpand.llPaketLainnya.setOnClickListener(
                 {
                     if(llDetailProductExpand.llExpandedPaketLainnya.visibility == View.GONE){
@@ -495,8 +515,8 @@ class ProductDetailFragment : BaseFragment(){
                         llDetailProductExpand.icDownArrowPaklain.rotation = 0f
                     }
                     else{
-                        TransitionManager.beginDelayedTransition(llDetailProductExpand.llPaketLainnya, AutoTransition())
-                        llDetailProductExpand.llPaketLainnya.visibility = View.GONE
+                        TransitionManager.beginDelayedTransition(llDetailProductExpand.llExpandedPaketLainnya, AutoTransition())
+                        llDetailProductExpand.llExpandedPaketLainnya.visibility = View.GONE
                         llDetailProductExpand.icDownArrowPaklain.rotation = -90f
                     }
                 }

@@ -269,7 +269,10 @@ class ProductDetailViewModel @Inject constructor(
         viewModelScope.launch {
             productDetailUseCase.getListProductDetail(index)
                 .catch { error->
-                    
+                    onError(error)
+                    _productDetailPaketLainnya.value = Resource.Failure(defaultError(error))
+                }.collect{
+                    _productDetailPaketLainnya.value = Resource.Success(listOf(it))
                 }
         }
     }

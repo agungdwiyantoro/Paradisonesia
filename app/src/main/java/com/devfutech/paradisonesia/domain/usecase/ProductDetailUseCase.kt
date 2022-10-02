@@ -10,9 +10,7 @@ class ProductDetailUseCase @Inject constructor(
     private val repository: ProductDetailRepository
 ) {
     suspend fun getListProductDetail(map: Map<String, String>): Flow<List<ProductDetail>> = repository.productDetail(map)
-
     suspend fun getListProductDetail(index: String): Flow<ProductDetail> = repository.productDetail(index)
-
     suspend fun getListProductDetailImages(index: String) : Flow<List<ProductDetail.Images?>?> = repository.productDetailImages(index)
     suspend fun getListProductDetailSchedules(index: String) : Flow<List<ProductDetail.Schedules?>?> = repository.productDetailRencanaPerjalanan(index)
     suspend fun getListProductDetailSchdulesDays(index: String) : Flow<List<ProductDetail.Schedules.Days?>?> = repository.productDetailRencanaPerjalananDays(index)
@@ -21,5 +19,4 @@ class ProductDetailUseCase @Inject constructor(
     suspend fun getListProductDetailFaqs(index: String) : Flow<List<ProductDetail.Faqs?>?> = repository.productDetailFaqs(index)
     suspend fun getListProductDetailTerms(index: String) : Flow<List<ProductDetail.Terms?>?> = repository.productDetailTerms(index)
     suspend fun getListProductDetailReviews(index: String): Flow<List<ProductDetail.Reviews?>?> = repository.productDetailReviews(index)
-
 }
