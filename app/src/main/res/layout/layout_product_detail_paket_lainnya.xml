@@ -6,11 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/rvProductDetailPaketLainnya"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,12 +16,11 @@
         app:spanCount="3"
         tools:listitem="@layout/item_product_paket_lainnya"/>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_lihat_semua"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/rv_rating_view">
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

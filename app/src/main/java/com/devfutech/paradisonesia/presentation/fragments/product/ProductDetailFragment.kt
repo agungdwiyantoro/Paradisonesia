@@ -30,10 +30,12 @@ import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedul
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedulesDays
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapterPaketLainnya
 import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragmentDirections
 
 import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayoutMediator
@@ -102,9 +104,6 @@ class ProductDetailFragment : BaseFragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
-
         return binding.root
     }
 
@@ -360,9 +359,13 @@ class ProductDetailFragment : BaseFragment(){
                 when(result){
                     is Resource.Success -> {
                         Timber.tag("NIGX").d("SJIT" + result.data)
-                        productDetailPaketLainnyaAdapter.submitList(result.data?.filter {
-                            it.sub_category?.id == args.detailProduct.subCategoryId && it.id!= args.detailProduct.id
-                        })
+                        val resultData  = result.data?.filter {
+                            it.sub_category?.id == args.detailProduct.subCategoryId && it.id!= args.detailProduct.id }
+
+                        if (resultData?.size!!>3){
+                            binding.llDetailProductExpand.lyPaketLainnya.cvLihatSemua.visibility = View.VISIBLE
+                        }
+                        productDetailPaketLainnyaAdapter.submitList(resultData.take(3))
                     }
                     else -> {}
                 }
@@ -521,6 +524,11 @@ class ProductDetailFragment : BaseFragment(){
                     }
                 }
             )
+
+            llDetailProductExpand.lyPaketLainnya.cvLihatSemua.setOnClickListener{
+                val actionToDestination = ProductDetailFragmentDirections.actionProductDetailFragmentToProductFragment(price.subCategoryId!!)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
+                Navigation.findNavController(it).navigate(actionToDestination)
+            }
 
             Timber.tag("GITLAB").d("PUSH")
             Timber.tag("GITLAB2").d("PUSH")

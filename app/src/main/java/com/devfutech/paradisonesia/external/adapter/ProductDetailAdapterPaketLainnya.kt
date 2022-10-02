@@ -1,8 +1,14 @@
 package com.devfutech.paradisonesia.external.adapter
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Paint
+import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 
@@ -16,6 +22,7 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductPaketLainnyaBinding
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.product.Product
+import com.devfutech.paradisonesia.external.extension.visible
 
 
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
@@ -44,8 +51,8 @@ class ProductDetailAdapterPaketLainnya : ListAdapter<Product, ProductDetailAdapt
 
                 tvProductName.text = item.name
 
-                tvProductFinalPrice.text =   this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.final_price, convertToCurrency(item.price)
+                tvProductFinalPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
+                    R.string.discounted_price, convertToCurrency(item.net_price)
                 )
 
 
@@ -61,8 +68,9 @@ class ProductDetailAdapterPaketLainnya : ListAdapter<Product, ProductDetailAdapt
 
                 tvProductDiscountedPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvProductDiscountedPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.discounted_price, convertToCurrency(item.net_price)
+                    R.string.final_price, convertToCurrency(item.price)
                 )
+
 
                 tvProductLocation.text = item.city?.name
 
@@ -108,7 +116,11 @@ class ProductDetailAdapterPaketLainnya : ListAdapter<Product, ProductDetailAdapt
                 val action = ProductDetailFragmentDirections.actionProductDetailFragmentSelf(priceID)
                 root.setOnClickListener{
                     //it.findNavController().refreshCurrentFragment()
-                    findNavController(it).navigate(action)
+
+                    findNavController(it).apply {
+                        navigate(action)
+                    }
+                  //  findNavController(it).popBackStack()
                 }
 
             }

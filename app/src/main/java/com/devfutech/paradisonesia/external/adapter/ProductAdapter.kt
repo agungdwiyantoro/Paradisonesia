@@ -37,8 +37,8 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 tvProductName.text = item.name
 
-                tvProductFinalPrice.text =   this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.final_price, convertToCurrency(item.price)
+                tvProductFinalPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
+                    R.string.discounted_price, convertToCurrency(item.net_price)
                 )
 
 
@@ -54,7 +54,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 tvProductDiscountedPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvProductDiscountedPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.discounted_price, convertToCurrency(item.net_price)
+                    R.string.final_price, convertToCurrency(item.price)
                 )
 
                 tvProductLocation.text = item.city?.name
