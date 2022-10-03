@@ -526,7 +526,7 @@ class ProductDetailFragment : BaseFragment(){
             )
 
             llDetailProductExpand.lyPaketLainnya.cvLihatSemua.setOnClickListener{
-                val actionToDestination = ProductDetailFragmentDirections.actionProductDetailFragmentToProductFragment(price.subCategoryId!!)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
+                val actionToDestination = ProductDetailFragmentDirections.actionProductDetailFragmentToProductFragment(price)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
                 Navigation.findNavController(it).navigate(actionToDestination)
             }
 

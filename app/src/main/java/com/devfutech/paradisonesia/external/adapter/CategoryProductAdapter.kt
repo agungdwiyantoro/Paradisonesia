@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductCategoryBinding
+import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.category_product.CategoryProduct
 import com.devfutech.paradisonesia.external.utils.FileUtils.ltrim
 import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragment
@@ -34,10 +35,16 @@ class CategoryProductAdapter :
                 }
                 tvCategoryProduct.text = item.name
 
-
+                val priceID = PriceID(
+                    item.id,
+                    null,
+                    null,
+                    null,
+                    null,
+                )
 
                 root.setOnClickListener{
-                    val action = HomeCustomerFragmentDirections.actionHomeCustomerFragmentToProductFragment(item.id!!)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
+                    val action = HomeCustomerFragmentDirections.actionHomeCustomerFragmentToProductFragment(priceID)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
                     root.setOnClickListener{
                         Navigation.findNavController(it).navigate(action)
                     }

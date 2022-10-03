@@ -204,12 +204,11 @@
         <action
             android:id="@+id/action_productFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment"/>
-
         <argument
             android:name="categoryProductID"
-            app:argType="integer"
-            android:defaultValue="0" />
-
+            app:argType="com.devfutech.paradisonesia.domain.model.PriceID"
+            android:defaultValue="@null"
+            app:nullable="true"/>
     </fragment>
 
     <fragment

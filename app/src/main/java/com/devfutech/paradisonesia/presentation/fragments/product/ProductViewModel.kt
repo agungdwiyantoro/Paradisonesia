@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
@@ -45,17 +46,20 @@ class ProductViewModel @Inject constructor(
     val product: MutableStateFlow<Resource<List<Product>>>
         get() = _product
 
-    val id = state.get<Int>("categoryProductID")
+    val priceID = state.get<PriceID>("categoryProductID")
 
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
 
-        Timber.tag("pvmodel").d("id is " + id)
-        if(id==0||id==null){
+        Timber.tag("pvmodel").d("id is " + priceID?.id)
+        if(priceID?.id==0||priceID?.id==null){
             getProducts()
         }
+        else if (priceID.subCategoryId!=null){
+            getProductSubCategory(priceID.subCategoryId)
+        }
         else{
-            getProducts(id)
+            getProducts(priceID.id)
         }
     }
 
@@ -93,6 +97,24 @@ class ProductViewModel @Inject constructor(
         }
     }
 
+    fun getProductSubCategory(index: Int?){
+        _product.value = Resource.Loading()
+        viewModelScope.launch {
+            productUseCase.getListProduct()
+                .catch { error->
+                    onError(error)
+                    _product.value = Resource.Failure(defaultError(error))
+                    Timber.tag("KontolProduct").d("Error")
+
+                }.collect {
+                    _product.value = Resource.Success(it.filter {
+                        it.sub_category?.id == index})
+
+                    Timber.tag("AnjingProduct").d("Success" + it)
+                }
+        }
+    }
+
     fun getProductAllSearch(map: Map<String, String>, tvResult: AppCompatTextView, context: Context){
         _product.value = Resource.Loading()
         viewModelScope.launch {
@@ -123,10 +145,10 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
-                        it.sub_category?.category?.id == id})
+                        it.sub_category?.category?.id == priceID?.id})
 
                     tvResult.text = context.resources.getString(R.string.result, it.filter {
-                        it.sub_category?.category?.id == id}.size)
+                        it.sub_category?.category?.id == priceID?.id}.size)
 
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
@@ -159,7 +181,7 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
-                        it.sub_category?.category?.id == id
+                        it.sub_category?.category?.id == priceID?.id
                     })
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
@@ -177,11 +199,11 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
-                        it.sub_category?.category?.id == id
+                        it.sub_category?.category?.id == priceID?.id
                     })
 
                     tvResult.text = context.resources.getString(R.string.result, it.filter {
-                        it.sub_category?.category?.id == id}.size)
+                        it.sub_category?.category?.id == priceID?.id}.size)
 
                     Timber.tag("MapAnjingProduct").d("Success" + it)
                 }

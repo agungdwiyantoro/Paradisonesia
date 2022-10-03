@@ -116,9 +116,13 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
+                        /*
                         filterAdapterSubCategory.submitList(result.data?.filter {
                             it?.category?.id == categoryId
                         }?.distinct())
+
+                         */
+                        filterAdapterSubCategory.submitList(result.data?.distinct())
                     }
                     else -> {}
 
@@ -164,6 +168,16 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         //Timber.tag("type").d("john" + viewModel.getProvince())
         binding.apply {
             btnApplyFilter.setOnClickListener {
+
+                setFragmentResult(
+                    ACTION_FILTER, bundleOf(
+                        ACTION_FILTER_SUB_CATEGORY to itemSelectedSubCategory,
+                       // ITEM_FILTER to itemSelectedLocation,
+                        ACTION_FILTER_ADVANCE to itemSelectedAdvance,
+                        ACTION_FILTER_SORT to itemSortSelected
+                    )
+                )
+                /*
                 if(type==1) {
                     setFragmentResult(
                         ACTION_FILTER_SUB_CATEGORY, bundleOf(
@@ -203,6 +217,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
                     Timber.tag("Type4").d("Type4")
                 }
 
+                 */
 
 
                 dismiss()
@@ -269,5 +284,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         const val ACTION_FILTER_LOCATION = "ACTION_FILTER_LOCATION"
         const val ACTION_FILTER_ADVANCE = "ACTION_FILTER_ADVANCE"
         const val ACTION_FILTER_SORT = "ACTION_FILTER_SORT"
+
+        var map: MutableMap<String, String> = mutableMapOf()
     }
 }

@@ -13,7 +13,7 @@ import com.devfutech.paradisonesia.domain.model.product.Product
  * Created by devfutech on 10/8/2021.
  */
 class FilterAdapterSubCategory(
-    private val onItemSelected: (List<Product.Sub_category>) -> Unit,
+    private val onItemSelected: (List<Product.Sub_category>) -> Unit
 ) : ListAdapter<Product.Sub_category, FilterAdapterSubCategory.FilterViewHolder>(POST_COMPARATOR) {
 
     private val itemSelected = mutableListOf<Product.Sub_category>()

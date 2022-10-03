@@ -1,22 +1,22 @@
 package com.devfutech.paradisonesia.presentation.fragments.product
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
 import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
-import com.devfutech.paradisonesia.domain.model.filter.Filter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.ProductAdapter
@@ -70,24 +70,33 @@ class ProductFragment : BaseFragment() {
         ))
          */
         binding.apply {
+            var isAllowOrNot : Int
+            if(args.categoryProductID?.id==null){
+                isAllowOrNot = 0
+            }
+            else{
+                isAllowOrNot = args.categoryProductID?.id!!
+            }
             llFilterCategory.setOnClickListener {
-               val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY, args.categoryProductID)
+
+
+               val filter = FilterBottomSheet(FilterBottomSheet.FILTER_CATEGORY, isAllowOrNot)
                filter.show(parentFragmentManager, filter.tag)
             }
 
             llFilterLocation.setOnClickListener {
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION, args.categoryProductID)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_LOCATION, isAllowOrNot)
                 filter.show(parentFragmentManager, filter.tag)
             }
 
             llFilterItem.setOnClickListener{
                    // findNavController().safeNavigate(R.id.action_Product)
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_ADVANCE, args.categoryProductID)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_ADVANCE, isAllowOrNot)
                 filter.show(parentFragmentManager, filter.tag)
             }
 
             llFilterSorting.setOnClickListener{
-                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_SORTING, args.categoryProductID)
+                val filter = FilterBottomSheet(FilterBottomSheet.FILTER_SORTING, isAllowOrNot)
                 filter.show(parentFragmentManager, filter.tag)
             }
 
@@ -97,7 +106,7 @@ class ProductFragment : BaseFragment() {
                     ///setProducts(s.toString())
                     Timber.tag("afterTextChanged").d("tieAfterTextChanged")
 
-                    if(args.categoryProductID==0){
+                    if(args.categoryProductID?.id==null){
                         if(tieSearch.hasFocus()) {
                             viewModel.getProductAllSearch(
                                 mapOf(
@@ -130,6 +139,70 @@ class ProductFragment : BaseFragment() {
 
             })
 
+            setFragmentResultListener(FilterBottomSheet.ACTION_FILTER) { _, bundle ->
+                val resultSubCategory: ArrayList<Product.Sub_category> = bundle.getParcelableArrayList(FilterBottomSheet.ACTION_FILTER_SUB_CATEGORY) ?: arrayListOf()
+                val resultAdvance: AdvanceFilter = bundle.get(FilterBottomSheet.ACTION_FILTER_ADVANCE) as AdvanceFilter
+                val resultSort: Int = bundle.getInt(FilterBottomSheet.ACTION_FILTER_SORT)
+
+                var map: MutableMap<String, String> = mutableMapOf()
+
+                if(resultSubCategory.isNotEmpty()){
+                    val id = mutableListOf<Int?>()
+                    for (item in resultSubCategory){
+                        id.add(item.id)
+                    }
+                    map = mutableMapOf("sub_category_id" to id.toString())
+                    FilterBottomSheet.map += map
+                    tvFilterCategory.text = resources.getString(R.string.label_category_count, resultSubCategory.size)
+                }
+
+                if(resultAdvance.price.isNotEmpty()){
+                    FilterBottomSheet.map += mapOf(
+                        "price" to resultAdvance.price.toString()
+                    )
+                }
+
+                if(resultSort!=0) {
+                    if (resultSort == 1) {
+                        map += mapOf(
+                            "sort_type" to "asc",
+                            "sort_by" to "price"
+                        )
+                        FilterBottomSheet.map += mapOf(
+                            "sort_type" to "asc",
+                            "sort_by" to "price"
+                        )
+                    }
+
+                    if (resultSort == 2) {
+                        map += mapOf(
+                            "sort_type" to "desc",
+                            "sort_by" to "price"
+                        )
+
+                        FilterBottomSheet.map += mapOf(
+                            "sort_type" to "desc",
+                            "sort_by" to "price"
+                        )
+                    }
+
+                    if (resultSort == 3) {
+                        map += mapOf(
+                            "sort_type" to "desc",
+                            "sort_by" to "rating_average"
+                        )
+                        FilterBottomSheet.map += mapOf(
+                            "sort_type" to "desc",
+                            "sort_by" to "rating_average"
+                        )
+                    }
+                }
+
+                Timber.tag("PRODUCTFRAGMENT").d("XMEE " + FilterBottomSheet.map)
+                Timber.tag("PRODUCTFRAGMENT2").d("XMEE2 " + FilterBottomSheet.map.get("sub_category_id"))
+                viewModel.getProductAllSearch(FilterBottomSheet.map, tvResult, requireContext())
+            }
+            /*
             setFragmentResultListener(FilterBottomSheet.ACTION_FILTER_SUB_CATEGORY) { _, bundle ->
                 val type = bundle.getInt(FilterBottomSheet.ITEM_TYPE)
                 val result: ArrayList<Product.Sub_category> = bundle.getParcelableArrayList(FilterBottomSheet.ITEM_FILTER) ?: arrayListOf()
@@ -146,10 +219,11 @@ class ProductFragment : BaseFragment() {
                             id.add(item.id)
                         }
 
-                        if(args.categoryProductID==0){
+                       // if(args.categoryProductID?.id==0){
                             viewModel.getProductAllSearch(mapOf(
                                 "sub_category_id" to id.toString()//listOf(result[0].id).toString()
                             ), tvResult, requireContext())
+                        /*
                         }
                         else{
                             viewModel.getProductByCategorySearch(mapOf(
@@ -157,6 +231,8 @@ class ProductFragment : BaseFragment() {
                             ), tvResult, requireContext())
                         }
 
+
+                         */
 
 
                         llFilterCategory.setBackgroundResource(setResourceBackground(result.isNotEmpty()))
@@ -187,7 +263,7 @@ class ProductFragment : BaseFragment() {
                         }
                         //setProductsLocation(result[0].id!!)
 
-                        if(args.categoryProductID==0){
+                        if(args.categoryProductID?.id==0){
                             viewModel.getProductAllSearch(mapOf(
                                 "city_code" to id.toString()//listOf(result[0].id).toString()
                             ), tvResult, requireContext())
@@ -236,7 +312,7 @@ class ProductFragment : BaseFragment() {
                         //         R.string.label_category)
                         //      else resources.getString(R.string.label_category_count, 9)
                         //setProductsCategory(result[0].id!!)
-                        if(args.categoryProductID==0){
+                        if(args.categoryProductID?.id==0){
                             viewModel.getProductAllSearch(mapOf(
                                 "price" to result.price.toString()
                             ), tvResult, requireContext())
@@ -266,6 +342,11 @@ class ProductFragment : BaseFragment() {
                 val result: Int = bundle.getInt(FilterBottomSheet.ITEM_FILTER)
               //  val color = if (result.isNotEmpty()) R.color.white else R.color.black
 
+                binding.apply {
+
+                    //rvProduct.scrollToPosition(0)
+                }
+
                 when (type) {
                     FilterBottomSheet.FILTER_SORTING -> {
                         // tvFilterCategory.text =
@@ -273,8 +354,12 @@ class ProductFragment : BaseFragment() {
                         //         R.string.label_category)
                         //      else resources.getString(R.string.label_category_count, 9)
                         //setProductsCategory(result[0].id!!)
+                        binding.apply {
+                            rvProduct.smoothScrollToPosition(0)
+                        }
+
                         Timber.tag("ACTION_FILTER_SORT").d("SORTx" + result)
-                        if(args.categoryProductID==0){
+                        if(args.categoryProductID?.id==0){
                             if (result == 1){
                                 viewModel.getProductAllSearch(
                                     mapOf(
@@ -329,14 +414,14 @@ class ProductFragment : BaseFragment() {
                                     ), tvResult, requireContext()
                                 )
                             }
+
+
                         }
-
-
                     }
 
                 }
             }
-
+*/
 
 
 
@@ -464,7 +549,15 @@ class ProductFragment : BaseFragment() {
             rvProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = productAdapter
+
             }
+
+            rvProduct.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
+                override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                    super.onItemRangeMoved(fromPosition, toPosition, itemCount)
+                    rvProduct.smoothScrollToPosition(0)
+                }
+            })
             Timber.tag("NIGERITOS").d("XHIT " + args.categoryProductID)
 
 
