@@ -15,6 +15,7 @@ import com.devfutech.paradisonesia.databinding.ItemProductBinding
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
+import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
 
 /**
@@ -24,7 +25,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
     var tempResult : AppCompatTextView = result
     var tempRating : String? = null
-
+    val tempID = mutableListOf<Int?>()
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product) {
@@ -59,6 +60,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 tvProductLocation.text = item.city?.name
                 tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
+                tempID.add(item.sub_category?.id)
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {
@@ -103,7 +105,9 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
                 }
 
             }
+            FilterBottomSheet.map = mutableMapOf("sub_category_id" to tempID.distinct().toString())
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -133,6 +137,7 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
             ): Boolean =
                 oldItem.id == newItem.id
         }
+
     }
 
     override fun getItemCount(): Int {

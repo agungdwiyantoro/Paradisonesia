@@ -6,8 +6,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -152,7 +150,7 @@ class ProductFragment : BaseFragment() {
                         id.add(item.id)
                     }
                     map = mutableMapOf("sub_category_id" to id.toString())
-                    FilterBottomSheet.map += map
+                    FilterBottomSheet.map += mutableMapOf("sub_category_id" to id.toString())
                     tvFilterCategory.text = resources.getString(R.string.label_category_count, resultSubCategory.size)
                 }
 

@@ -87,6 +87,7 @@ class FilterBottomSheetViewModel @Inject constructor(
                 }
         }
     }
+
     fun getCategory(){
         _filterSubCategory.value = Resource.Loading()
         viewModelScope.launch {
