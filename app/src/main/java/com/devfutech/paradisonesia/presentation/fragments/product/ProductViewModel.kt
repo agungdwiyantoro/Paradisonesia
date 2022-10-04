@@ -130,7 +130,7 @@ class ProductViewModel @Inject constructor(
                 }.collect {
                     _product.value = Resource.Success(it)
 
-                    tvResult.text = context.resources.getString(R.string.result, it.size)
+                    tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }

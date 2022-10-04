@@ -152,7 +152,7 @@ class ProductFragment : BaseFragment() {
                         id.add(item.id)
                     }
                     map = mutableMapOf("sub_category_id" to id.toString())
-                    FilterBottomSheet.map += mutableMapOf("sub_category_id" to id.toString())
+                    FilterBottomSheet.map += mapOf("sub_category_id" to id.toString())
                     tvFilterCategory.text = resources.getString(R.string.label_category_count, resultSubCategory.size)
 
                     llFilterCategory.setBackgroundResource(setResourceBackground(resultSubCategory.isNotEmpty()))
@@ -454,7 +454,10 @@ class ProductFragment : BaseFragment() {
                             tempID.add(it.product_sub_category_id) }
 
                         if(FilterBottomSheet.map.isEmpty() == true){
-                            FilterBottomSheet.map += mutableMapOf("sub_category_id" to tempID.distinct().toString())
+                            FilterBottomSheet.map += mutableMapOf(
+                                "sub_category_id" to tempID.distinct().toString(),
+                                "sort_type" to "desc",
+                                "sort_by" to "rating_average")
                             binding.tvFilterCategory.text = resources.getString(R.string.label_category_count, tempID.distinct().size)
                         }
 
@@ -560,7 +563,6 @@ class ProductFragment : BaseFragment() {
     private fun setupView() {
        // val args: ProductFragmentArgs by navArgs()
        // val categoryID = args.categoryProductID
-
         binding.apply {
             rvProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -571,7 +573,7 @@ class ProductFragment : BaseFragment() {
             rvProduct.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
                 override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
                     super.onItemRangeMoved(fromPosition, toPosition, itemCount)
-                    rvProduct.smoothScrollToPosition(0)
+                    rvProduct.scrollToPosition(0)
                 }
             })
             Timber.tag("NIGERITOS").d("XHIT " + args.categoryProductID)

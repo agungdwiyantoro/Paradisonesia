@@ -20,6 +20,8 @@ import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
 import androidx.viewbinding.BuildConfig.DEBUG
+import com.google.android.material.slider.RangeSlider
+
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -499,6 +501,12 @@ object FileUtils {
         }
 
         return tanggal.plus(" ").plus(monthFinish).plus(" ").plus(year)
+    }
+
+    fun RangeSlider.setRange(from: Float, to: Float) {
+        valueFrom = 0F
+        valueTo = to
+        valueFrom = from
     }
 
 }

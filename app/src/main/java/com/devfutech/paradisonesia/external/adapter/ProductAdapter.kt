@@ -27,6 +27,9 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
     var tempResult : AppCompatTextView = result
     var tempRating : String? = null
 
+    //var resultLanjutanAll : String = "for all products"
+    //var forLanjutan = "for"
+    var resultLanjutan : MutableList<String> = mutableListOf()
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product) {
@@ -60,8 +63,9 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
                 )
 
                 tvProductLocation.text = item.city?.name
-                tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
 
+                resultLanjutan.add(item.sub_category?.name.toString())
+                tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
                 //tvProductRating.text = item.
 //                root.apply {

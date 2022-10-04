@@ -13,6 +13,7 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.utils.FileUtils
+import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import com.google.android.material.slider.LabelFormatter
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textfield.TextInputEditText
@@ -25,6 +26,7 @@ class FilterAdapterAdvance(
 
     var priceMin : Int = 0
     var priceMax : Int = 0
+
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,12 +41,28 @@ class FilterAdapterAdvance(
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var price = emptyList<Int>()
+        val tempPrice = FilterBottomSheet.map.get("price")?.removeSurrounding("[", "]")?.replace(" ","")?.split(",")?.map { it.toInt() }
+
+        Timber.tag("KUNTUL").d("price " + tempPrice?.get(0))
 
         FileUtils.dateMask(holder.tieStartDate, holder.tlStartDate)
         FileUtils.dateMask(holder.tieEndDate, holder.tlEndDate)
 
-        holder.tiePriceMinim.setText(holder.itemView.resources.getString(R.string.final_price, FileUtils.convertToCurrency(holder.sbPrice.valueFrom.toInt())))
-        holder.tiePriceMax.setText(holder.itemView.resources.getString(R.string.final_price, FileUtils.convertToCurrency(holder.sbPrice.valueTo.toInt())))
+        var valueFrom = holder.sbPrice.valueFrom.toInt()
+        var valueTo = holder.sbPrice.valueTo.toInt()
+
+        if(tempPrice?.isNotEmpty() == true) {
+            //holder.sbPrice.valueFrom = tempPrice.get(0).toFloat()
+           // holder.sbPrice.valueTo = tempPrice.get(1).toFloat()
+            valueFrom = tempPrice.get(0)
+            valueTo =  tempPrice.get(1)
+        }
+
+        //holder.sbPrice.valueTo = valueTo.toFloat()
+        //holder.sbPrice.valueFrom = valueFrom.toFloat()
+        holder.sbPrice.values =  listOf(valueTo.toFloat(),valueFrom.toFloat())
+        holder.tiePriceMinim.setText(holder.itemView.resources.getString(R.string.final_price, FileUtils.convertToCurrency(valueFrom)))
+        holder.tiePriceMax.setText(holder.itemView.resources.getString(R.string.final_price, FileUtils.convertToCurrency(valueTo)))
 
         holder.sbPrice.labelBehavior = LabelFormatter.LABEL_GONE
 

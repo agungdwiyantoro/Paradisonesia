@@ -141,7 +141,7 @@
     <string name="reviews_w_value">(%1$d reviews)</string>
     <string name="description">Description</string>
     <string name="tanggal_pelaksanaan_w_value">%1$s - %2$s</string>
-    <string name="result">%1$d result</string>
+    <string name="result">%1$d result for %2$s</string>
 
     <!-- Product Detail Fragment Expand -->
     <string name="favorite">%1$d favorites</string>
