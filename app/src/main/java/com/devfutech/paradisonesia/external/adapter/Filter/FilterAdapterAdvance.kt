@@ -114,7 +114,7 @@ class FilterAdapterAdvance(
 
 
         price = listOf(0, 10000000)
-        onItemSelected(AdvanceFilter(price, 3, price))
+        onItemSelected(AdvanceFilter(price, null, emptyList()))
     }
 
 

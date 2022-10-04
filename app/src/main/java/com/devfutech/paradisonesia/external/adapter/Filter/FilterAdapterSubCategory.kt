@@ -15,22 +15,23 @@ import timber.log.Timber
  * Created by devfutech on 10/8/2021.
  */
 class FilterAdapterSubCategory(
-    private val onItemSelected: (List<Product.Sub_category>) -> Unit
+    private val onItemSelected: (List<Product.Sub_category>) -> Unit, private val array: List<Int>?
 ) : ListAdapter<Product.Sub_category, FilterAdapterSubCategory.FilterViewHolder>(POST_COMPARATOR) {
 
     private val itemSelected = mutableListOf<Product.Sub_category>()
-    private var array = FilterBottomSheet.map.get("sub_category_id")?.removeSurrounding("[", "]")?.replace(" ","")?.split(",")?.map { it.toInt() }
+    private var tempArray = array//FilterBottomSheet.map.get("sub_category_id")?.removeSurrounding("[", "]")?.replace(" ","")?.split(",")?.map { it.toInt() }
 
     inner class FilterViewHolder(private val binding: ItemFilterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Product.Sub_category) {
             binding.apply {
 
-               // Timber.tag("FACS").d("ALDIANA " + array?.get(index) + ", " + item.id)
+                Timber.tag("FACS").d("ALDIANA " + tempArray)
 
-                if(array?.contains(item.id) == true){
+                if(tempArray?.contains(item.id) == true){
                     cbItem.isChecked = true
                 }
+
                 /*
                 if( FilterBottomSheet.map["sub_category_id"]?.get(0)?.digitToInt() ==item.id) {
                     cbItem.apply { check(true) }
@@ -53,11 +54,11 @@ class FilterAdapterSubCategory(
                         } else {
                             itemSelected.remove(item)
                         }
-                        onItemSelected(itemSelected)
+
                     }
                 }
 
-
+                onItemSelected(itemSelected)
             }
         }
     }

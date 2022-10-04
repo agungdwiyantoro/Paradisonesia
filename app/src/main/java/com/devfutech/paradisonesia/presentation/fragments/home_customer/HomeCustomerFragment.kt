@@ -22,6 +22,7 @@ import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.MainActivity
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -199,6 +200,8 @@ class HomeCustomerFragment : BaseFragment() {
                 }
             }
 
+            //FilterBottomSheet.map.remove("sub_category_id")
+            FilterBottomSheet.map = mutableMapOf()
             vpBanner.adapter = bannerAdapter
             vpBanner.isSaveEnabled = false
             TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()

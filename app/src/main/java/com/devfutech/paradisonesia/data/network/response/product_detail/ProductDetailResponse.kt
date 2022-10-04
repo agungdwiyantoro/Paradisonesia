@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.data.network.response.product_detail
 
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
+import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetailPaketLainnya
 import com.google.gson.annotations.SerializedName
 
 data class ProductDetailResponse (
@@ -112,6 +113,23 @@ data class ProductDetailResponse (
         faqs = faqs,
         terms = terms,
         reviews = reviews
+    )
+
+    fun toPaketLainnya() = ProductDetailPaketLainnya(
+        id = id,
+        merchant_id = merchant_id,
+        product_sub_category_id = product_sub_category_id,
+        status_id = status_id,
+        name = name,
+        description = description,
+        address = address,
+        coordinate = coordinate,
+        city_code = city_code,
+        duration = duration,
+        start_date = start_date,
+        end_date = end_date,
+        net_price = net_price,
+        price = price,
     )
 
 }

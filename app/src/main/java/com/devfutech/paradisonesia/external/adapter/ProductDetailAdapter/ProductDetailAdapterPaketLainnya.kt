@@ -1,35 +1,35 @@
-package com.devfutech.paradisonesia.external.adapter
+package com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
 
+//import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.navigation.Navigation.findNavController
-//import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.loadAny
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemProductBinding
+import com.devfutech.paradisonesia.databinding.ItemProductDetailReviewsBinding
 import com.devfutech.paradisonesia.domain.model.PriceID
-import com.devfutech.paradisonesia.domain.model.product.Product
-import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
-import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
+import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
+import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.fragments.product.ProductFragmentDirections
 import timber.log.Timber
 
 /**
  * Created by devfutech on 10/5/2021.
  */
-class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(POST_COMPARATOR) {
-
-    var tempResult : AppCompatTextView = result
+class ProductDetailAdapterPaketLainnya: ListAdapter<ProductDetail, ProductDetailAdapterPaketLainnya.ProductViewHolder>(
+    POST_COMPARATOR
+) {
+   // var tempResult : AppCompatTextView = result
     var tempRating : String? = null
-
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Product) {
+        fun bind(item: ProductDetail) {
             binding.apply {
                 ivProduct.loadAny(item.thumbnail?:""){
                     crossfade(true)
@@ -39,8 +39,8 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 tvProductName.text = item.name
 
-                tvProductFinalPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.discounted_price, convertToCurrency(item.net_price)
+                tvProductFinalPrice.text =   this@ProductViewHolder.itemView.context.resources.getString(
+                    R.string.final_price, FileUtils.convertToCurrency(item.price)
                 )
 
 
@@ -56,13 +56,11 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 tvProductDiscountedPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvProductDiscountedPrice.text = this@ProductViewHolder.itemView.context.resources.getString(
-                    R.string.final_price, convertToCurrency(item.price)
+                    R.string.discounted_price, FileUtils.convertToCurrency(item.net_price)
                 )
 
                 tvProductLocation.text = item.city?.name
-                tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
-
-
+               // tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount)
                 //tvProductRating.text = item.
 //                root.apply {
 //                    setOnClickListener {
@@ -103,13 +101,10 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 val action = ProductFragmentDirections.actionProductFragmentToProductDetailFragment(priceID)
                 root.setOnClickListener{
-                    findNavController(it).navigate(action)
+                    Navigation.findNavController(it).navigate(action)
                 }
-
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -127,22 +122,17 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
     }
 
     companion object {
-        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Product>() {
+        val POST_COMPARATOR = object : DiffUtil.ItemCallback<ProductDetail>() {
             override fun areContentsTheSame(
-                oldItem: Product,
-                newItem: Product
+                oldItem: ProductDetail,
+                newItem: ProductDetail
             ): Boolean = oldItem == newItem
 
             override fun areItemsTheSame(
-                oldItem: Product,
-                newItem: Product
+                oldItem: ProductDetail,
+                newItem: ProductDetail
             ): Boolean =
                 oldItem.id == newItem.id
         }
-
-    }
-
-    override fun getItemCount(): Int {
-        return super.getItemCount()
     }
 }

@@ -48,6 +48,7 @@ class ProductViewModel @Inject constructor(
 
     val priceID = state.get<PriceID>("categoryProductID")
 
+
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
 
@@ -73,11 +74,12 @@ class ProductViewModel @Inject constructor(
                     Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
-                    _product.value = Resource.Success(it)
+                    _product.value = Resource.Success(it.sortedByDescending { it.rating_average })
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
+
 
     fun getProducts(index: Int?){
         _product.value = Resource.Loading()
@@ -90,12 +92,13 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
-                        it.sub_category?.category?.id == index})
+                        it.sub_category?.category?.id == index}.sortedByDescending { it.rating_average })
 
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
+
 
     fun getProductSubCategory(index: Int?){
         _product.value = Resource.Loading()
@@ -108,7 +111,7 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
-                        it.sub_category?.id == index})
+                        it.sub_category?.id == index}.sortedByDescending { it.rating_average })
 
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }

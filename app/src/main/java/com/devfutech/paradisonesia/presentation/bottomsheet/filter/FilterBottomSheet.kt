@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.BottomSheetFilterBinding
 import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.product.Product
@@ -20,12 +18,8 @@ import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterLocation
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterSortItem
 import com.devfutech.paradisonesia.external.adapter.Filter.FilterAdapterSubCategory
 import com.devfutech.paradisonesia.external.extension.snackBar
-import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseBottomSheet
-import com.google.android.material.slider.LabelFormatter
-import com.google.android.material.slider.RangeSlider
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class FilterBottomSheet(private val type: Int, private val categoryId: Int) : BaseBottomSheet() {
@@ -41,7 +35,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
     //listOf<SortFilter>()
 
     private val filterAdapterSubCategory by lazy {
-        FilterAdapterSubCategory(this::onItemSelectedSubCategory)
+        FilterAdapterSubCategory(this::onItemSelectedSubCategory, map.get("sub_category_id")?.removeSurrounding("[", "]")?.replace(" ","")?.split(",")?.map { it.toInt() })
     }
 
     private val filterAdapterLocation by lazy {
@@ -52,7 +46,7 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         FilterAdapterAdvance(this::onItemSelectedAdvance)
     }
     private val filterSortAdapter by lazy{
-        FilterAdapterSortItem(this::onItemSortSelected);
+        FilterAdapterSortItem(this::onItemSortSelected, sortIndex);
     }
 
     override fun onCreateView(
@@ -286,5 +280,6 @@ class FilterBottomSheet(private val type: Int, private val categoryId: Int) : Ba
         const val ACTION_FILTER_SORT = "ACTION_FILTER_SORT"
 
         var map: MutableMap<String, String> = mutableMapOf()
+        var sortIndex: Int = 3
     }
 }

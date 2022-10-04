@@ -9,13 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.domain.model.product.Product
+import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import timber.log.Timber
 
 class FilterAdapterSortItem(
-    private val onItemSelected: (Int) -> Unit,
+    private val onItemSelected: (Int) -> Unit, private val index: Int
 ) : RecyclerView.Adapter<FilterAdapterSortItem.ViewHolder>() {
 
-    var id : Int = 1
+    var id : Int = index
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
@@ -36,16 +37,31 @@ class FilterAdapterSortItem(
         holder.radB_highest_price.text = holder.itemView.resources.getString(R.string.highest_price)
         holder.radB_highest_rating.text = holder.itemView.resources.getString(R.string.highest_rating)
 
+        if(id==1){
+            holder.radB_lowest_price.isChecked=true
+        }
+        if(id==2){
+            holder.radB_highest_price.isChecked=true
+        }
+        if(id==3){
+            holder.radB_highest_rating.isChecked=true
+        }
+
+
+
         holder.rg_sort_filter.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
 
             if(holder.radB_lowest_price.isChecked){
                 id = 1
+                FilterBottomSheet.sortIndex = 1
             }
             if (holder.radB_highest_price.isChecked){
                 id = 2
+                FilterBottomSheet.sortIndex = 2
             }
             if(holder.radB_highest_rating.isChecked){
                 id = 3
+                FilterBottomSheet.sortIndex = 3
             }
             onItemSelected(id)
 

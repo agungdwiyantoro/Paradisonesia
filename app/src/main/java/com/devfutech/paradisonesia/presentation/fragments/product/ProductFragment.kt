@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -34,7 +35,7 @@ class ProductFragment : BaseFragment() {
     val args: ProductFragmentArgs by navArgs()
 
     private var map : Map<String, String> = emptyMap()
-
+    val tempID = mutableListOf<Int?>()
     private val viewModel: ProductViewModel by viewModels()
     private val productAdapter by lazy {
         ProductAdapter(binding.tvResult)
@@ -141,6 +142,7 @@ class ProductFragment : BaseFragment() {
                 val resultSubCategory: ArrayList<Product.Sub_category> = bundle.getParcelableArrayList(FilterBottomSheet.ACTION_FILTER_SUB_CATEGORY) ?: arrayListOf()
                 val resultAdvance: AdvanceFilter = bundle.get(FilterBottomSheet.ACTION_FILTER_ADVANCE) as AdvanceFilter
                 val resultSort: Int = bundle.getInt(FilterBottomSheet.ACTION_FILTER_SORT)
+                val color = if (resultSubCategory.isNotEmpty()) R.color.white else R.color.black
 
                 var map: MutableMap<String, String> = mutableMapOf()
 
@@ -152,6 +154,10 @@ class ProductFragment : BaseFragment() {
                     map = mutableMapOf("sub_category_id" to id.toString())
                     FilterBottomSheet.map += mutableMapOf("sub_category_id" to id.toString())
                     tvFilterCategory.text = resources.getString(R.string.label_category_count, resultSubCategory.size)
+
+                    llFilterCategory.setBackgroundResource(setResourceBackground(resultSubCategory.isNotEmpty()))
+                    tvFilterCategory.setTextColor(ContextCompat.getColor(requireContext(),color))
+                    ivFilterCategory.setColorFilter(ContextCompat.getColor(requireContext(),color))
                 }
 
                 if(resultAdvance.price.isNotEmpty()){
@@ -198,6 +204,7 @@ class ProductFragment : BaseFragment() {
 
                 Timber.tag("PRODUCTFRAGMENT").d("XMEE " + FilterBottomSheet.map)
                 Timber.tag("PRODUCTFRAGMENT2").d("XMEE2 " + FilterBottomSheet.map.get("sub_category_id"))
+
                 viewModel.getProductAllSearch(FilterBottomSheet.map, tvResult, requireContext())
             }
             /*
@@ -440,6 +447,17 @@ class ProductFragment : BaseFragment() {
                     }
                     is Resource.Success -> {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
+
+
+                        result.data?.filter {
+                            Timber.tag("PRODUCT ADAPTER").d("MAPiX " + it.product_sub_category_id)
+                            tempID.add(it.product_sub_category_id) }
+
+                        if(FilterBottomSheet.map.isEmpty() == true){
+                            FilterBottomSheet.map += mutableMapOf("sub_category_id" to tempID.distinct().toString())
+                            binding.tvFilterCategory.text = resources.getString(R.string.label_category_count, tempID.distinct().size)
+                        }
+
                         productAdapter.submitList(result.data)
 
                         //productAdapter.submitList(result.data?.sortedBy { it.price })

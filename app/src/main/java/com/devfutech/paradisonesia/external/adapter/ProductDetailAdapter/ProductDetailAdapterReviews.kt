@@ -1,19 +1,12 @@
 package com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter
 
-import android.transition.AutoTransition
-import android.transition.TransitionManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.text.HtmlCompat
 //import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.loadAny
 import com.devfutech.paradisonesia.R
-import com.devfutech.paradisonesia.databinding.ItemProductDetailDescBinding
 import com.devfutech.paradisonesia.databinding.ItemProductDetailReviewsBinding
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
 import timber.log.Timber
