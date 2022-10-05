@@ -64,8 +64,8 @@ class ProductAdapter(result : AppCompatTextView) : ListAdapter<Product, ProductA
 
                 tvProductLocation.text = item.city?.name
 
-                resultLanjutan.add(item.sub_category?.name.toString())
-                tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
+               // resultLanjutan.add(item.sub_category?.name.toString())
+               // tempResult.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.result, itemCount, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
                 //tvProductRating.text = item.
 //                root.apply {

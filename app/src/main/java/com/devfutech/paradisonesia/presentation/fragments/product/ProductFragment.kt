@@ -35,7 +35,8 @@ class ProductFragment : BaseFragment() {
     val args: ProductFragmentArgs by navArgs()
 
     private var map : Map<String, String> = emptyMap()
-    val tempID = mutableListOf<Int?>()
+    private val tempID = mutableListOf<Int?>()
+    private val tempSubCategoryName = mutableListOf<String?>()
     private val viewModel: ProductViewModel by viewModels()
     private val productAdapter by lazy {
         ProductAdapter(binding.tvResult)
@@ -200,6 +201,12 @@ class ProductFragment : BaseFragment() {
                             "sort_by" to "rating_average"
                         )
                     }
+                }
+
+                if(tieSearch.text?.isNotEmpty() == true){
+                    FilterBottomSheet.map += mapOf(
+                        "search_key" to tieSearch.text.toString()
+                    )
                 }
 
                 Timber.tag("PRODUCTFRAGMENT").d("XMEE " + FilterBottomSheet.map)
@@ -451,7 +458,8 @@ class ProductFragment : BaseFragment() {
 
                         result.data?.filter {
                             Timber.tag("PRODUCT ADAPTER").d("MAPiX " + it.product_sub_category_id)
-                            tempID.add(it.product_sub_category_id) }
+                            tempID.add(it.product_sub_category_id)
+                            tempSubCategoryName.add(it.sub_category?.name)}
 
                         if(FilterBottomSheet.map.isEmpty() == true){
                             FilterBottomSheet.map += mutableMapOf(
@@ -460,7 +468,7 @@ class ProductFragment : BaseFragment() {
                                 "sort_by" to "rating_average")
                             binding.tvFilterCategory.text = resources.getString(R.string.label_category_count, tempID.distinct().size)
                         }
-
+                        binding.tvResult.text = resources.getString(R.string.result, tempID.distinct().size, tempSubCategoryName.distinct().toString().removeSurrounding("[", "]"))
                         productAdapter.submitList(result.data)
 
                         //productAdapter.submitList(result.data?.sortedBy { it.price })
@@ -569,6 +577,8 @@ class ProductFragment : BaseFragment() {
                 adapter = productAdapter
 
             }
+
+
 
             rvProduct.adapter?.registerAdapterDataObserver(object : AdapterDataObserver() {
                 override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {

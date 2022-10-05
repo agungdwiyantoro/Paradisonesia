@@ -48,9 +48,12 @@ class ProductViewModel @Inject constructor(
 
     val priceID = state.get<PriceID>("categoryProductID")
 
+    var resultLanjutan : MutableList<String> = mutableListOf()
+
 
     init {
         //getProducts(mutableMapOf("page" to "1", "show" to "2", "sort_by" to "price", "sort_type" to "asc"))
+
 
         Timber.tag("pvmodel").d("id is " + priceID?.id)
         if(priceID?.id==0||priceID?.id==null){
@@ -129,7 +132,10 @@ class ProductViewModel @Inject constructor(
 
                 }.collect {
                     _product.value = Resource.Success(it)
-
+                    resultLanjutan.clear()
+                    it.filter {
+                        resultLanjutan.add(it.sub_category?.name.toString())
+                    }
                     tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
                     Timber.tag("AnjingProduct").d("Success" + it)
@@ -149,9 +155,12 @@ class ProductViewModel @Inject constructor(
                 }.collect {
                     _product.value = Resource.Success(it.filter {
                         it.sub_category?.category?.id == priceID?.id})
+                    resultLanjutan.clear()
+                    it.filter {
+                        resultLanjutan.add(it.sub_category?.name.toString())
+                    }
+                    tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
-                    tvResult.text = context.resources.getString(R.string.result, it.filter {
-                        it.sub_category?.category?.id == priceID?.id}.size)
 
                     Timber.tag("AnjingProduct").d("Success" + it)
                 }
@@ -167,8 +176,12 @@ class ProductViewModel @Inject constructor(
                     _product.value = Resource.Failure(defaultError(error))
                 }.collect{
                     _product.value = Resource.Success(it)
+                    resultLanjutan.clear()
+                    it.filter {
+                        resultLanjutan.add(it.sub_category?.name.toString())
+                    }
+                    tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
-                    tvResult.text = context.resources.getString(R.string.result, it.size)
                 }
         }
     }
@@ -204,9 +217,12 @@ class ProductViewModel @Inject constructor(
                     _product.value = Resource.Success(it.filter {
                         it.sub_category?.category?.id == priceID?.id
                     })
+                    resultLanjutan.clear()
+                    it.filter {
+                        resultLanjutan.add(it.sub_category?.name.toString())
+                    }
+                    tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
-                    tvResult.text = context.resources.getString(R.string.result, it.filter {
-                        it.sub_category?.category?.id == priceID?.id}.size)
 
                     Timber.tag("MapAnjingProduct").d("Success" + it)
                 }

@@ -80,8 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:valueFrom="0"
-            android:valueTo="10000000"
-            android:stepSize="1000000"
+            android:valueTo="100000000"
+            android:stepSize="10000000"
             android:layout_marginTop="@dimen/_10sdp"
             app:thumbColor="@color/white"
 
