@@ -42,6 +42,7 @@ class RequestInterceptor @Inject constructor(
                     //AccessToken.refreshCurrentAccessTokenAsync()
                     //runBlocking {
 
+                    //authPreference.viewModel.getTokenRefresh(authPreference.getToken())
                    // }
                    // initialResponse.close()
                    // setHeader(originalRequest, authPreference.getRefreshToken())

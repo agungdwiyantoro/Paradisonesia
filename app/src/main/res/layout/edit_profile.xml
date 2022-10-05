@@ -229,5 +229,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include android:id="@+id/layout_calendar" layout="@layout/layout_calendar"/>
+    <include android:visibility="gone" android:id="@+id/layout_calendar" layout="@layout/layout_calendar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

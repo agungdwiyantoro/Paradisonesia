@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
  */
 
 interface CustomerRepository {
-    suspend fun authCustomer(payload: Map<String,String>): Flow<Customer?>
+    suspend fun authCustomer(payload: Map<String,String>): Flow<Customer.ProfileBasic?>
     suspend fun profileCustomer() : Flow<List<Customer>>
 }

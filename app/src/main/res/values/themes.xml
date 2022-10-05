@@ -317,23 +317,21 @@
     <!-- Rating Style -->
 
     <style name="RatingBar" parent="Widget.AppCompat.RatingBar">
-        <item name="colorControlNormal">@color/grey</item>
-        <item name="colorControlActivated">@color/golden.secondary</item>
         <item name="android:numStars">5</item>
         <item name="android:stepSize">1</item>
+        <item name="android:progressTint">@color/golden.primary</item>
     </style>
 
-    <style name="RatingBarIndicator" parent="Widget.AppCompat.RatingBar.Indicator">
-        <item name="colorControlNormal">@color/grey</item>
-        <item name="colorControlActivated">@color/golden.secondary</item>
+    <style name="AppCompatRatingBarIndicator" parent="Widget.AppCompat.RatingBar.Indicator">
         <item name="android:numStars">5</item>
         <item name="android:stepSize">1</item>
+        <item name="android:progressTint">@color/golden.primary</item>
     </style>
 
-    <style name="RatingBarSmall" parent="Widget.AppCompat.RatingBar.Small">
-        <item name="colorControlNormal">@color/grey</item>
-        <item name="colorControlActivated">@color/golden.secondary</item>
+    <style name="AppCompatRatingBarSmall" parent="Widget.AppCompat.RatingBar.Small">
         <item name="android:numStars">5</item>
         <item name="android:stepSize">1</item>
+        <item name="android:progressTint">@color/golden.primary</item>
     </style>
+
 </resources>

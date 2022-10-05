@@ -2,10 +2,7 @@ package com.devfutech.paradisonesia.data.network.service
 
 import com.devfutech.paradisonesia.data.network.response.BaseResponse
 import com.devfutech.paradisonesia.data.network.response.customer.CustomerAuthResponse
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Created by devfutech on 9/10/2021.
@@ -15,8 +12,8 @@ interface CustomerService {
     suspend fun profile(): BaseResponse<List<CustomerAuthResponse>>
 
     @POST("auth")
-    @FormUrlEncoded
+    //@FormUrlEncoded
     suspend fun authCustomer(
-        @FieldMap payload: Map<String,String>
+        @Body payload: Map<String,String>
     ): BaseResponse<CustomerAuthResponse>
 }

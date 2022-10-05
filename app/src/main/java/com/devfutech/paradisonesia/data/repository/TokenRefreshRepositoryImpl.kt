@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.flow
 class TokenRefreshRepositoryImpl (
     private val remoteDataSource: TokenRefreshService
 ) : TokenRefreshRepository {
-    override suspend fun tokenRefresh(payload: String): Flow<String?> = flow {
-        val response = remoteDataSource.authRefreshToken(payload).data?.refresh_token
+    override suspend fun tokenRefresh(payload: String): Flow<Token?> = flow {
+        val response = remoteDataSource.authRefreshToken(payload).data?.toToken()
         emit(response)
     }
 }

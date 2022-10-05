@@ -50,7 +50,8 @@ class SigninFragment : BaseFragment(){
     private val binding: SigninFragmentBinding by lazy {
         SigninFragmentBinding.inflate(layoutInflater)
     }
-    private val viewModel by viewModels<SigninViewModel>()
+    private val viewModel: SigninViewModel by viewModels()
+
     private val callbackManager by lazy {
         CallbackManager.Factory.create()
     }

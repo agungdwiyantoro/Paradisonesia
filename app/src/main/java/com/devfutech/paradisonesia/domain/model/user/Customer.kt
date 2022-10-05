@@ -25,6 +25,14 @@ data class Customer(
     //val statusId: Int?,
     //val apiToken:String?,
 ) {
+
+    data class ProfileBasic(
+        val name: String?,
+        val email: String?,
+        val phone: String?,
+        val is_email_verified: Int?
+    )
+
     data class Profile(
         val id: Int?,
         val user_id: Int?,

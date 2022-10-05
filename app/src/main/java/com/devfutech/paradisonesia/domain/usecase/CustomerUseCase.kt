@@ -11,7 +11,7 @@ import javax.inject.Inject
 class CustomerUseCase @Inject constructor(
     private val repository: CustomerRepository
 ){
-    suspend fun authCustomer(payload: Map<String,String>): Flow<Customer?> {
+    suspend fun authCustomer(payload: Map<String,String>): Flow<Customer.ProfileBasic?> {
         return repository.authCustomer(payload)
     }
 

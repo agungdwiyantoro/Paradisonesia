@@ -50,4 +50,13 @@ data class CustomerAuthResponse(
          */
     )
 
+    fun toBasicProfile() = Customer.ProfileBasic(
+
+        name = user?.name,
+        email = user?.email,
+        phone = user?.phone,
+        is_email_verified = user?.is_email_verified
+
+    )
+
 }

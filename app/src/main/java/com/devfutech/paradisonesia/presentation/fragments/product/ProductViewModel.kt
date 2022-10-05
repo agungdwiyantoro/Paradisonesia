@@ -2,15 +2,10 @@ package com.devfutech.paradisonesia.presentation.fragments.product
 
 import android.content.Context
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.domain.model.PriceID
-import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
-import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.city.City
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.domain.usecase.ProductUseCase
@@ -19,7 +14,6 @@ import com.devfutech.paradisonesia.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
