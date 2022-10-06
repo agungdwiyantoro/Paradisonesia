@@ -25,7 +25,28 @@ class EditProfileViewModel @Inject constructor(
     val googleSignIn: MutableStateFlow<Resource<Customer>>
         get() = _googleSignIn
 
+    private val _customerProfile: MutableStateFlow<Resource<Customer>> =
+        MutableStateFlow(Resource.Success())
+    val customerProfile: MutableStateFlow<Resource<Customer>>
+        get() = _customerProfile
 
+    init {
+        getCustomer()
+    }
+    fun getCustomer(){
+        viewModelScope.launch {
+            customerUseCase.customerProfile()
+                .catch { error ->
+                    onError(error)
+                }.collect{
+                    _customerProfile.value = Resource.Success(it)
+                    Timber.tag("UserName").d(it.name.toString())
+                    Timber.tag("UserEmail").d(it.email.toString())
+                    Timber.tag("UserPhone").d(it.phone.toString())
+                    Timber.tag("UserEmaiilVerified").d(it.is_email_verified.toString())
+                }
+        }
+    }
     /*
     fun checkUserToServer(
         name: String,

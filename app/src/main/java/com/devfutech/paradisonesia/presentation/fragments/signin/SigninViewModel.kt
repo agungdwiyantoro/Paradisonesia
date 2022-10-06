@@ -7,6 +7,7 @@ import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.domain.usecase.RefreshTokenUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
+import com.facebook.internal.Mutable
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +27,11 @@ class SigninViewModel @Inject constructor(
     private val refreshTokenUseCase: RefreshTokenUseCase
 ) : BaseViewModel() {
 
+    private val _customerProfile: MutableStateFlow<Resource<Customer>> =
+        MutableStateFlow(Resource.Success())
+    val customerProfile: MutableStateFlow<Resource<Customer>>
+        get() = _customerProfile
+
     private val _googleSignIn: MutableStateFlow<Resource<Customer.ProfileBasic>> =
         MutableStateFlow(Resource.Success())
     val googleSignIn: MutableStateFlow<Resource<Customer.ProfileBasic>>
@@ -44,7 +50,12 @@ class SigninViewModel @Inject constructor(
                     if (!fcm.isSuccessful) {
                         return@addOnCompleteListener
                     }
-                    getCustomer(
+
+                    Timber.tag("FUCKPUSSYLOOSE").d(task.user?.displayName.toString() +
+                        task.user?.email.toString() +
+                        task.user?.uid.toString())
+
+                    authCustomer(
                         task.user?.displayName.toString(),
                         task.user?.email.toString(),
                         task.user?.uid.toString(),
@@ -76,6 +87,17 @@ class SigninViewModel @Inject constructor(
                     if (!fcm.isSuccessful) {
                         return@addOnCompleteListener
                     }
+                    Timber.tag("FUCKPUSSYLOOSE").d(task.user?.displayName.toString() +
+                            task.user?.email.toString() +
+                            task.user?.uid.toString())
+
+                    authCustomer(
+                        task.user?.displayName.toString(),
+                        task.user?.email.toString(),
+                        task.user?.uid.toString(),
+                        1
+                    )
+
                     /*
                     checkUserToServer(
                         name = task.user?.displayName.toString(),
@@ -105,7 +127,10 @@ class SigninViewModel @Inject constructor(
 
     }
 
-    fun getCustomer(name: String, email: String, userUid: String,  isEmailVerified: Int){
+
+
+    fun authCustomer(name: String, email: String, userUid: String,  isEmailVerified: Int){
+        _googleSignIn.value = Resource.Loading()
         viewModelScope.launch {
             customerUseCase.authCustomer(
                 mapOf(
@@ -119,7 +144,6 @@ class SigninViewModel @Inject constructor(
                 onError(error)
             }.collect {
                 _googleSignIn.value = Resource.Success(it)
-
                 /*
                 authPreference.apply {
                     setToken(it?.refresh_token.toString())
@@ -154,7 +178,7 @@ class SigninViewModel @Inject constructor(
             //    Timber.tag("TokenRefresh_token").d(it?.refresh_token.toString())
 
                 authPreference.apply {
-             //       setToken(it?.access_token.toString())
+                //       setToken(it?.access_token.toString())
                //     setRefreshToken(it?.refresh_token.toString())
                 }
 

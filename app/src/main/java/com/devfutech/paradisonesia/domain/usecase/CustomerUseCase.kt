@@ -15,5 +15,5 @@ class CustomerUseCase @Inject constructor(
         return repository.authCustomer(payload)
     }
 
-    suspend fun profileCustomer(): Flow<List<Customer>> = repository.profileCustomer()
+    suspend fun customerProfile(): Flow<Customer> = repository.profileCustomer()
 }

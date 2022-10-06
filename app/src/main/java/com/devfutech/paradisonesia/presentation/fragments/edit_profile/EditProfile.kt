@@ -49,6 +49,8 @@ class EditProfile : BaseFragment(){
         CallbackManager.Factory.create()
     }
 
+    private val viewModel: EditProfileViewModel by viewModels()
+
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
 
@@ -70,6 +72,7 @@ class EditProfile : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
         setupView()
         setupAction()
+        setupPrintCustomerProfile()
        // setupObserve()
     }
 
@@ -159,6 +162,22 @@ class EditProfile : BaseFragment(){
         }
     }
 
+    private fun setupPrintCustomerProfile(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.customerProfile.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        Timber.tag("UserNameCok").d(result.data?.name.toString())
+                        Timber.tag("UserEmailCok").d(result.data?.email.toString())
+                        Timber.tag("UserPhoneCok").d(result.data?.phone.toString())
+                        Timber.tag("UserEmaiilVerifiedCok").d(result.data?.is_email_verified.toString())
+                    }
+                    else ->{}
+
+                }
+            }
+        }
+    }
 
     fun loginCheck(){
         binding.apply {

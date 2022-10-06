@@ -12,13 +12,14 @@ data class Customer(
     val is_email_verified: Int?,
     val is_new_member: Int?,
     val note: String?,
+    val profile: Profile,
+    val status: Status,
+    val customer_level: Customer_Level,
     val token_type: String?,
     val expires_in: Int?,
     val access_token: String?,
     val refresh_token: String?,
-    val profile: Profile,
-    val status: Status,
-    val customer_level: Customer_Level
+
 
     //val customerLevelId: Int?,
     //val merchantId: Any?,
