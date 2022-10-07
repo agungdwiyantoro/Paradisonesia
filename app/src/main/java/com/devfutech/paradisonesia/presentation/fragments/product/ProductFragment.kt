@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SimpleAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -18,8 +19,10 @@ import com.devfutech.paradisonesia.databinding.ProductFragmentBinding
 import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.product.Product
 import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.external.adapter.PaginationAdapter
 import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +57,7 @@ class ProductFragment : BaseFragment() {
         setupView()
         setAction()
         setProducts()
+        setProductIndex()
 
     }
 
@@ -69,14 +73,16 @@ class ProductFragment : BaseFragment() {
             "city_code" to "[1505,6104]"
         ))
          */
+
         binding.apply {
-            var isAllowOrNot : Int
+            val isAllowOrNot : Int
             if(args.categoryProductID?.id==null){
                 isAllowOrNot = 0
             }
             else{
                 isAllowOrNot = args.categoryProductID?.id!!
             }
+
             llFilterCategory.setOnClickListener {
 
 
@@ -444,6 +450,27 @@ class ProductFragment : BaseFragment() {
         return if (isSelected) R.drawable.background_filter_selected else R.drawable.background_filter_unselected
     }
 
+    private fun setProductIndex(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.product.collect{result ->
+                when (result) {
+                    is Resource.Success -> {
+                        val totalPage = result.data?.size?.div(10)
+
+                        val index : MutableList<Int> = mutableListOf()
+                        if(index.size<=10){
+                            binding.llPage.cLPagination.visibility = View.GONE
+                        }
+                        for(i in 1..totalPage!!){
+                            index.add(i)
+                        }
+                        binding.llPage.rvPages.adapter = PaginationAdapter(index, viewModel, binding.tvResult,requireContext() )
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
     private fun setProducts() {
         lifecycleScope.launchWhenStarted {
             viewModel.product.collect { result ->
@@ -454,12 +481,15 @@ class ProductFragment : BaseFragment() {
                     }
                     is Resource.Success -> {
                         Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
+                        //val totalPage = result.data?.size?.rem(10)
+
 
 
                         result.data?.filter {
                             Timber.tag("PRODUCT ADAPTER").d("MAPiX " + it.product_sub_category_id)
                             tempID.add(it.product_sub_category_id)
-                            tempSubCategoryName.add(it.sub_category?.name)}
+                            tempSubCategoryName.add(it.sub_category?.name)
+                        }
 
                         if(FilterBottomSheet.map.isEmpty() == true){
                             FilterBottomSheet.map += mutableMapOf(
@@ -468,7 +498,10 @@ class ProductFragment : BaseFragment() {
                                 "sort_by" to "rating_average")
                             binding.tvFilterCategory.text = resources.getString(R.string.label_category_count, tempID.distinct().size)
                         }
-                        binding.tvResult.text = resources.getString(R.string.result, tempID.distinct().size, tempSubCategoryName.distinct().toString().removeSurrounding("[", "]"))
+
+
+                      //  binding.tvResult.text = resources.getString(R.string.result, tempID.distinct().size, tempSubCategoryName.distinct().toString().removeSurrounding("[", "]"))
+                        binding.tvResult.text = resources.getString(R.string.result, result.data?.size, tempSubCategoryName.distinct().toString().removeSurrounding("[", "]"))
                         productAdapter.submitList(result.data)
 
                         //productAdapter.submitList(result.data?.sortedBy { it.price })

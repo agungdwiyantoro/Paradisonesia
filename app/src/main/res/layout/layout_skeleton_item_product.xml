@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardElevation="@dimen/_8sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/object_wisata_lombok"
+            android:backgroundTint="@color/grey"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            style="@style/Text.Medium.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Product Name"
+
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/rounded_grey"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@+id/iv_product"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+
+        <TextView
+            android:id="@+id/tv_product_location"
+            style="@style/Text.Small.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Location"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/rounded_grey"
+            android:textColor="@color/grey"
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_product_name" />
+
+        <TextView
+            android:id="@+id/tv_product_rating"
+            style="@style/Text.Small.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="00000"
+            android:background="@drawable/rounded_grey"
+            android:textColor="@color/grey"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="@+id/tv_product_location"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_product_location"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_location" />
+
+        <TextView
+            android:id="@+id/tv_product_reviews"
+            style="@style/Text.Small.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/reviews_w_value"
+            android:textColor="@color/grey"
+            android:background="@drawable/rounded_grey"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="@+id/tv_product_location"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_product_location"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_rating" />
+
+        <TextView
+            android:id="@+id/tv_product_discounted_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/discounted_price"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/grey"
+            android:background="@drawable/rounded_grey"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+
+            app:layout_constraintTop_toBottomOf="@+id/tv_product_location"
+            app:layout_constraintBottom_toTopOf="@+id/tv_product_final_price"
+            app:layout_constraintStart_toStartOf="@+id/tv_product_final_price" />
+
+        <TextView
+            android:id="@+id/tv_product_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/include"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@color/disc_color"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/tv_product_final_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/final_price"
+            android:textSize="@dimen/_20sdp"
+            android:textColor="@color/grey"
+            android:background="@drawable/rounded_grey"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="1"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@+id/tv_product_discount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_product_discount"
+            app:layout_constraintBottom_toBottomOf="@id/tv_product_discount" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

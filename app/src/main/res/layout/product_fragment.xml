@@ -265,6 +265,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <include android:id="@+id/ll_page" layout="@layout/item_pages"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>
