@@ -340,7 +340,10 @@ class ProductDetailFragment : BaseFragment(){
                         else{
                             binding.llDetailProductExpand.vfProductDetailPenilaianProduk.displayedChild = 1
                             Timber.tag("ProductDetailReviews").d("Success" + result.data)
-                            productDetailReviewsAdapter.submitList(result.data)
+                            if (result.data.size>2){
+                                binding.llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.visibility = View.VISIBLE
+                            }
+                            productDetailReviewsAdapter.submitList(result.data.take(2))
                         }
 
                       //  binding.vfProductDetailExpandable.displayedChild = 1

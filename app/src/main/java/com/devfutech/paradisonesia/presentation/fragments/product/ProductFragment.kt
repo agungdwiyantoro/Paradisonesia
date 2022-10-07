@@ -458,8 +458,8 @@ class ProductFragment : BaseFragment() {
                         val totalPage = result.data?.size?.div(10)
 
                         val index : MutableList<Int> = mutableListOf()
-                        if(index.size<=10){
-                            binding.llPage.cLPagination.visibility = View.GONE
+                        if(totalPage!!>2){
+                            binding.llPage.cLPagination.visibility = View.VISIBLE
                         }
                         for(i in 1..totalPage!!){
                             index.add(i)

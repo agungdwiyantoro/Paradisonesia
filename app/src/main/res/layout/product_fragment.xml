@@ -265,7 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <include android:id="@+id/ll_page" layout="@layout/item_pages"/>
+            <include android:id="@+id/ll_page" android:visibility="gone" layout="@layout/item_pages"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
