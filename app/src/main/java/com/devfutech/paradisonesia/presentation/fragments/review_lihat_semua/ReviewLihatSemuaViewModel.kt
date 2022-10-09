@@ -36,9 +36,9 @@ class ReviewLihatSemuaViewModel @Inject constructor(
         get() = _product
      */
 
-    private val _productDetailReviews: MutableStateFlow<Resource<List<Review>>> =
+    private val _productDetailReviews: MutableStateFlow<Resource<List<Review?>?>> =
         MutableStateFlow(Resource.Success(emptyList()))
-    val productDetailReviews: MutableStateFlow<Resource<List<Review>>>
+    val productDetailReviews: MutableStateFlow<Resource<List<Review?>?>>
         get() = _productDetailReviews
 
     val tempReviewID = state.get<ReviewLihatSemua>("ratingAverageRatingCount")
@@ -91,6 +91,23 @@ class ReviewLihatSemuaViewModel @Inject constructor(
         _productDetailReviews.value = Resource.Loading()
         viewModelScope.launch {
             reviewUseCase.getListReview(index)
+                .catch { error->
+                    onError(error)
+                    _productDetailReviews.value = Resource.Failure(defaultError(error))
+                    Timber.tag("Product Detail Reviews NEW").d("error")
+                }.collect{
+                    _productDetailReviews.value = Resource.Success(it)
+                    Timber.tag("Product Detail Reviews NEW").d("Success " + it)
+                }
+        }
+    }
+
+    fun ProductReviewsFilter(index: String, indexFilter: String){
+        _productDetailReviews.value = Resource.Loading()
+        viewModelScope.launch {
+            reviewUseCase.getListReview(index, mapOf(
+                "rating" to indexFilter
+            ))
                 .catch { error->
                     onError(error)
                     _productDetailReviews.value = Resource.Failure(defaultError(error))

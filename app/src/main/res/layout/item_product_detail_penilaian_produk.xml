@@ -60,8 +60,8 @@
                 app:layout_constraintTop_toBottomOf="@id/rb_total_rating_review"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                android:layout_marginTop="@dimen/_5sdp"/>
+                android:layout_marginTop="@dimen/_5sdp"
+                android:visibility="gone"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,13 +75,15 @@
         tools:listitem="@layout/item_product_detail_reviews"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/cv_total_rating_ulasan"
+
         />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_lihat_semua"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/rv_rating_view">
+        app:layout_constraintTop_toBottomOf="@+id/rv_rating_view"
+       >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -90,12 +92,13 @@
             android:paddingBottom="@dimen/_5sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_lihat_semuanya"
+                android:id="@+id/tv_lihat_semua"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/lihat_semua"
                 android:textColor="@color/orange"
                 style="@style/Text.Medium.Bold"
+                android:visibility="gone"
 
                 android:gravity="center_vertical"
                 android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_48"

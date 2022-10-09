@@ -18,4 +18,11 @@ class ReviewSemuanyaRepositoryImpl(
         }?: listOf()
         emit(response)
     }
+
+    override suspend fun listReview(index: String, map: Map<String, String>): Flow<List<Review?>?> = flow{
+        val response = remoteDataSource.reviewLihatSemua(index, map).data?.map {
+            it.toReviewLihatSemua()
+        }
+        emit(response)
+    }
 }

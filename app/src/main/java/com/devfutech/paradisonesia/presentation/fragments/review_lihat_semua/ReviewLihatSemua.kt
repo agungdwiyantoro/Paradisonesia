@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -49,13 +50,16 @@ class ReviewLihatSemua : BaseFragment() {
         val rating: ReviewLihatSemua = args.ratingAverageRatingCount
 
         binding.apply {
+            Timber.tag("reviewLihatJancuk").d("AFFOY" + rating.id)
             tvRatingNum.text = resources.getString(R.string.rb_rating_num, rating.ratingAverage, rating.ratingCount)
-            rvChooseStar.adapter = ReviewLihatSemuaAdapter(mutableListOf("1","2","3","4","5"))
+            rvChooseStar.visibility = View.VISIBLE
+            rvChooseStar.adapter = ReviewLihatSemuaAdapter(mutableListOf("1","2","3","4","5"), rating.id!!, viewModel)
             if(rating.ratingAverage!=null){
                 rbTotalRatingReview.rating = rating.ratingAverage.toFloat()
             }
             rvRatingView.adapter = productReviewAdapterLihatSemua
-            tvLihatSemuanya.visibility = View.GONE
+            rvRatingView.updatePadding(0,0, 0, resources.getDimension(R.dimen._100sdp).toInt())
+            tvLihatSemua.visibility = View.GONE
         }
     }
 

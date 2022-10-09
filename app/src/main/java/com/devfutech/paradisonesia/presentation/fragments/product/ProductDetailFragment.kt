@@ -2,21 +2,15 @@ package com.devfutech.paradisonesia.presentation.fragments.product
 
 
 import android.os.Bundle
-import android.os.FileUtils
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListAdapter
-import androidx.core.graphics.scaleMatrix
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ProductDetailFragmentRealBinding
@@ -24,23 +18,17 @@ import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.ReviewLihatSemua
 
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.ProductAdapter
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.*
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedules
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.Schedules.ProductDetailAdapterSchedulesDays
 import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapterPaketLainnya
 import com.devfutech.paradisonesia.external.extension.snackBar
-import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency
-import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragmentDirections
 
-import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -341,7 +329,7 @@ class ProductDetailFragment : BaseFragment(){
                             binding.llDetailProductExpand.vfProductDetailPenilaianProduk.displayedChild = 1
                             Timber.tag("ProductDetailReviews").d("Success" + result.data)
                             if (result.data.size>2){
-                                binding.llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.visibility = View.VISIBLE
+                                binding.llDetailProductExpand.lyPenilaianProduk.tvLihatSemua.visibility = View.VISIBLE
                             }
                             productDetailReviewsAdapter.submitList(result.data.take(2))
                         }
@@ -388,10 +376,7 @@ class ProductDetailFragment : BaseFragment(){
                 price.ratingCount
             )
 
-            val action = ProductDetailFragmentDirections.productDetailFragmentToProductReviewsLihatSemuaFragment(reviewLihatSemua)
-            llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.setOnClickListener{
-                Navigation.findNavController(it).navigate(action)
-            }
+
 
             /*
             llDetailProductExpand.lyPenilaianProduk.tvLihatSemuanya.setOnClickListener({
@@ -511,6 +496,10 @@ class ProductDetailFragment : BaseFragment(){
                     }
                 }
             )
+            val action = ProductDetailFragmentDirections.productDetailFragmentToProductReviewsLihatSemuaFragment(reviewLihatSemua)
+            llDetailProductExpand.lyPenilaianProduk.tvLihatSemua.setOnClickListener{
+                Navigation.findNavController(it).navigate(action)
+            }
 
             llDetailProductExpand.lyPaketLainnya.rvProductDetailPaketLainnya.adapter = productDetailPaketLainnyaAdapter
             llDetailProductExpand.llPaketLainnya.setOnClickListener(

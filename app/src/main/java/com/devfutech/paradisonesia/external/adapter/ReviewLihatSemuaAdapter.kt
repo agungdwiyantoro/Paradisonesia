@@ -8,8 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.presentation.fragments.review_lihat_semua.ReviewLihatSemua
+import com.devfutech.paradisonesia.presentation.fragments.review_lihat_semua.ReviewLihatSemuaViewModel
+import timber.log.Timber
 
-class ReviewLihatSemuaAdapter(private val mList: List<String>) : RecyclerView.Adapter<ReviewLihatSemuaAdapter.ViewHolder>() {
+class ReviewLihatSemuaAdapter(private val mList: List<String>, private val index: Int, private val viewModel: ReviewLihatSemuaViewModel)
+    : RecyclerView.Adapter<ReviewLihatSemuaAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +34,11 @@ class ReviewLihatSemuaAdapter(private val mList: List<String>) : RecyclerView.Ad
 
         // sets the text to the textview from our itemHolder class
         holder.textView.text = ItemsViewModel
+        Timber.tag("rvChooseStarAdapter").d("bitchass")
+        holder.textView.setOnClickListener{
+            viewModel.ProductReviewsFilter(index.toString(), (position+1).toString())
+            Timber.tag("rvChooseStarAdapter").d("clicked " + (position+1))
+        }
 
     }
 
@@ -41,6 +49,6 @@ class ReviewLihatSemuaAdapter(private val mList: List<String>) : RecyclerView.Ad
 
     // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val textView: TextView = itemView.findViewById(R.id.textView)
+        val textView: TextView = itemView.findViewById(R.id.tv_star)
     }
 }
