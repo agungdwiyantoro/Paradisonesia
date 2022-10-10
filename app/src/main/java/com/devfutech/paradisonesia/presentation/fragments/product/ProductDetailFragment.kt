@@ -496,6 +496,7 @@ class ProductDetailFragment : BaseFragment(){
                     }
                 }
             )
+
             val action = ProductDetailFragmentDirections.productDetailFragmentToProductReviewsLihatSemuaFragment(reviewLihatSemua)
             llDetailProductExpand.lyPenilaianProduk.tvLihatSemua.setOnClickListener{
                 Navigation.findNavController(it).navigate(action)
@@ -520,6 +521,12 @@ class ProductDetailFragment : BaseFragment(){
             llDetailProductExpand.lyPaketLainnya.cvLihatSemua.setOnClickListener{
                 val actionToDestination = ProductDetailFragmentDirections.actionProductDetailFragmentToProductFragment(price)//ProductFragmentDirections.actionProductFragmentToProductDetailFragment(productParcelable)
                 Navigation.findNavController(it).navigate(actionToDestination)
+            }
+
+
+            llDetailProductExpand.lyPenilaianProduk.rvChooseStar.setOnClickListener{
+
+
             }
 
             Timber.tag("GITLAB").d("PUSH")

@@ -33,6 +33,7 @@ class ProductDetailAdapterReviews: ListAdapter<ProductDetail.Reviews, ProductDet
                 tvUsername.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.anonymous)
                 rbTotalRatingReview.rating = item.rating?.toFloat()!!
                 tvReview.text = item.review
+
 /*
                 itemBanner.ivBanner.loadAny(item.thumbnail?:""){
                     crossfade(true)

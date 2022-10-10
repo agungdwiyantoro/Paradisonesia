@@ -153,6 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:text="@string/label_all_categories" />
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -162,10 +163,13 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:layout_gravity="center"
                     app:spanCount="5"
                     tools:itemCount="5"
                     tools:listitem="@layout/item_product_category" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
+
         </ViewFlipper>
 
         <ViewFlipper

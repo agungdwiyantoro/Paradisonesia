@@ -11,6 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.HomeCustomerFragmentBinding
 import com.devfutech.paradisonesia.external.Resource
@@ -100,7 +103,7 @@ class HomeCustomerFragment : BaseFragment() {
                     }
                     is Resource.Success -> {
                         binding.vfCategoryProduct.displayedChild = 1
-                        categoryProductAdapter.submitList(result.data)
+                        categoryProductAdapter.submitList(result.data?.take(5))
                     }
                     else -> {}
                 }
