@@ -133,13 +133,13 @@ class SigninViewModel @Inject constructor(
         _googleSignIn.value = Resource.Loading()
         viewModelScope.launch {
             customerUseCase.authCustomer(
-                mapOf(
-                    "name" to name,
-                    "email" to email,
-                    "user_uid" to "UUIDTest1",
-                    "player_id" to "player_id_Test1",
-                    "is_email_verivied" to isEmailVerified.toString()
-                )
+
+                    name,
+                    email,
+                    "UUIDTest3",
+                    "player_id_Test1",
+                    isEmailVerified.toString()
+
             ).catch { error ->
                 onError(error)
             }.collect {
@@ -155,6 +155,7 @@ class SigninViewModel @Inject constructor(
                 Timber.tag("UserEmail").d(it?.email.toString())
                 Timber.tag("UserPhone").d(it?.phone.toString())
                 Timber.tag("UserEmaiilVerified").d(it?.is_email_verified.toString())
+
              //   Timber.tag("UserIsNewMember").d(it?.is_new_member.toString())
               //  Timber.tag("UserNote").d(it?.note.toString())
 

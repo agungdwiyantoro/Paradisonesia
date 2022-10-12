@@ -194,10 +194,12 @@ class HomeCustomerFragment : BaseFragment() {
                 Firebase.auth.currentUser == null -> {
                     tvInfoMessage.text = resources.getString(R.string.label_login_instruction)
                 }
+
                 Firebase.auth.currentUser?.isEmailVerified == false -> {
                     tvInfoMessage.text =
                         resources.getString(R.string.label_verify_email_instruction)
                 }
+
                 else -> {
                     llInformationAccount.gone()
                 }
@@ -208,6 +210,7 @@ class HomeCustomerFragment : BaseFragment() {
             vpBanner.adapter = bannerAdapter
             vpBanner.isSaveEnabled = false
             TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()
+
 
             rvProductCategory.adapter = categoryProductAdapter
             rvRecommendationDestination.adapter = cityAdapter

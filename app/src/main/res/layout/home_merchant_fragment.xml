@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ViewFlipper
+        android:id="@+id/vf_merchant_transaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include android:id="@+id/ly_merchant_transaction" layout="@layout/layout_merchant_transaction"/>
+
+    </ViewFlipper>
+
+
+    <ViewFlipper
+        android:id="@+id/vf_received_accept_ready"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:tabBackground="@drawable/tab_merchant_pager_adapter"
+            app:tabIndicator="@color/transparent" />
+
+    </ViewFlipper>
+
+    <ViewFlipper
+        android:id="@+id/vf_merchant_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include android:id="@+id/ly_merchant_list_item" layout="@layout/layout_merchant_list_item"/>
+
+    </ViewFlipper>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

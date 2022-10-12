@@ -54,7 +54,6 @@ class RequestInterceptor @Inject constructor(
 //                    }
 //                    context.startActivity(intent)
                     //initialResponse.close()
-                    //authenticationRequest.newBuilder().addHeader()
                     initialResponse
                 }
                 else -> initialResponse
@@ -65,6 +64,7 @@ class RequestInterceptor @Inject constructor(
     private fun setHeader(request: Request, accesToken: String?): Request {
         val newRequest = request.newBuilder()
 
+        Timber.tag("RequestInterceptor").d("SetHeader")
         if (!TextUtils.isEmpty(accesToken)) newRequest.addHeader("Authorization","Bearer $accesToken")
 
         return newRequest

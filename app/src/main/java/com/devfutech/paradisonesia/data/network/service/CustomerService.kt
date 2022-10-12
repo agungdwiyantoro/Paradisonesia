@@ -13,8 +13,12 @@ interface CustomerService {
     suspend fun customerProfile(): BaseResponse<Customer>
 
     @POST("auth")
-    //@FormUrlEncoded
+    @FormUrlEncoded
     suspend fun authCustomer(
-        @Body payload: Map<String,String>
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("user_uid") user_uid: String,
+        @Field("player_id") player_id: String,
+        @Field("is_email_verivied") is_email_verivied: String
     ): BaseResponse<CustomerAuthResponse>
 }

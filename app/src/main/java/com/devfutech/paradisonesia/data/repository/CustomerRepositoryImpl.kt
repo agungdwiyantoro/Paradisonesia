@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.flow
 class CustomerRepositoryImpl(
     private val remoteDataSource: CustomerService
 ): CustomerRepository {
-    override suspend fun authCustomer(payload : Map<String, String>): Flow<Customer.ProfileBasic?>  = flow{
-        val response =  remoteDataSource.authCustomer(payload).data?.toBasicProfile()
+    override suspend fun authCustomer(name: String, email: String, user_uid: String, player_id: String, is_email_verified: String): Flow<Customer.ProfileBasic?>  = flow{
+        val response =  remoteDataSource.authCustomer(name, email, user_uid, player_id, is_email_verified).data?.toBasicProfile()
         emit(response)
     }
 

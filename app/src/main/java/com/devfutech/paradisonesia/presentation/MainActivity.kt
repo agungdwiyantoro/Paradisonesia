@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupTopMenu() {
         topLeves = listOf(
             resources.getString(R.string.label_home),
+            resources.getString(R.string.label_review),
             resources.getString(R.string.label_booking),
             resources.getString(R.string.label_inbox),
             resources.getString(R.string.label_account)
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupAction() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeCustomerFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                R.id.homeCustomerFragment, R.id.reviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                 else -> binding.bnMain.gone()
             }
         }

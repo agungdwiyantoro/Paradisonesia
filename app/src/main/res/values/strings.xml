@@ -145,6 +145,7 @@
     <string name="next">Next</string>
     <string name="previous">Prev</string>
     <string name="page">Page</string>
+    <string name="label_review">Review</string>
 
     <!-- Product Detail Fragment Expand -->
     <string name="favorite">%1$d favorites</string>
@@ -176,4 +177,20 @@
     <string name="faq_question">%1$d. %2$s </string>
     <string name="hide">Hide</string>
     <string name="question">Question</string>
+
+
+    <!-- Home Merchant -->
+    <string name="total_earnings">Total Earnings</string>
+    <string name="total_transaction_this_month">Total Transaction For This Month</string>
+    <string name="total_product_published">Total Product Published</string>
+    <string name="received">Received</string>
+    <string name="accept">Accepted</string>
+    <string name="ready">Ready</string>
+
+
+    <!-- Home Merchant Dummy -->
+    <string name="product_name">Product Name</string>
+    <string name="product_type">Product Type</string>
+    <string name="product_address">Product Address</string>
+
 </resources>

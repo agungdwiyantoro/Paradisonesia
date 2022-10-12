@@ -45,7 +45,4 @@ class RefreshTokenViewModel @Inject constructor(
                 }
         }
     }
-
-
-
 }
