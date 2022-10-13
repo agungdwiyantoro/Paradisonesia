@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.presentation.fragments.edit_profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import android.view.LayoutInflater
 import android.view.View
@@ -170,10 +171,18 @@ class EditProfile : BaseFragment(){
                         Timber.tag("UserNameCok").d(result.data?.name.toString())
                         Timber.tag("UserEmailCok").d(result.data?.email.toString())
                         Timber.tag("UserPhoneCok").d(result.data?.phone.toString())
-                        Timber.tag("UserEmaiilVerifiedCok").d(result.data?.is_email_verified.toString())
+                        Timber.tag("UserAddressCok").d(result.data?.profile?.address.toString())
+                        Timber.tag("UserBirthdayCok").d(result.data?.profile?.birth_date.toString())
+                        Timber.tag("UserGender").d(result.data?.profile?.gender.toString())
+                        binding.apply {
+                            tieFullNameValue.setText(result.data?.name)
+                            tieAddressValue.setText(result.data?.profile?.address)
+                            tiePhoneNumberValue.setText(result.data?.phone)
+                            tieCalendarPickValue.setText(com.devfutech.paradisonesia.external.utils.FileUtils.getDateTime(result.data?.profile?.birth_date!!))
+
+                        }
                     }
                     else ->{}
-
                 }
             }
         }

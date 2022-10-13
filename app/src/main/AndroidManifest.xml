@@ -21,9 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paradisonesia"
         tools:ignore="AllowBackup" >
-        <activity
-            android:name=".ProductDescription"
-            android:exported="false" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

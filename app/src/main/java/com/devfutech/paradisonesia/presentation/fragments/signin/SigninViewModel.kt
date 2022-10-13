@@ -155,8 +155,10 @@ class SigninViewModel @Inject constructor(
                 Timber.tag("UserEmail").d(it?.email.toString())
                 Timber.tag("UserPhone").d(it?.phone.toString())
                 Timber.tag("UserEmaiilVerified").d(it?.is_email_verified.toString())
+                Timber.tag("Token").d("VV" + it?.token)
+                Timber.tag("TokenRefresh").d("VV" + it?.refresh)
 
-             //   Timber.tag("UserIsNewMember").d(it?.is_new_member.toString())
+                //   Timber.tag("UserIsNewMember").d(it?.is_new_member.toString())
               //  Timber.tag("UserNote").d(it?.note.toString())
 
              //   Timber.tag("ProfileID").d(it?.profile?.id.toString())
@@ -179,8 +181,8 @@ class SigninViewModel @Inject constructor(
             //    Timber.tag("TokenRefresh_token").d(it?.refresh_token.toString())
 
                 authPreference.apply {
-                //       setToken(it?.access_token.toString())
-               //     setRefreshToken(it?.refresh_token.toString())
+                       setToken(it?.token!!)
+                    setRefreshToken(it.refresh!!)
                 }
 
                 Timber.tag("AuthPrefGetToken").d(authPreference.getToken())

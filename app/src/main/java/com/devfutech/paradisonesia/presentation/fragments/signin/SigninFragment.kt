@@ -328,7 +328,7 @@ class SigninFragment : BaseFragment(){
                     idToken = account.idToken!!,
                     isGoogle = true
                 ).also {
-                    authPreference.setToken(account.idToken!!)
+                   // authPreference.setToken(account.idToken!!)
                     //SavedPreference.setToken(requireContext(), account.idToken.toString())
                     Timber.tag("JANCOOOK").d("acc " + account.idToken)
                    // Timber.tag("JANCOOOK2").d("lolok" + SavedPreference.getToken(requireContext()))

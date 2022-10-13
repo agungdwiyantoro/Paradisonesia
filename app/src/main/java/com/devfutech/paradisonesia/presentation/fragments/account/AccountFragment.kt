@@ -86,11 +86,14 @@ class AccountFragment : BaseFragment() {
     private fun setupAction() {
         binding.apply {
             tvRegisterAsMerchant.setOnClickListener {
+                /*
                 if (Firebase.auth.currentUser?.isEmailVerified == true) {
                     viewModel.checkStatus()
                 } else {
                     requireContext().toast("Email belum diverifikasi")
                 }
+                 */
+                findNavController().navigate(R.id.action_accountFragment_to_home_merchant)
             }
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_signinFragment)

@@ -30,6 +30,7 @@ import java.io.File
 import java.io.FileFilter
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -509,4 +510,13 @@ object FileUtils {
         valueFrom = from
     }
 
+   fun getDateTime(s: String): String? {
+        try {
+            val sdf = SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH)
+            val netDate = Date(s.toLong() * 1000)
+            return sdf.format(netDate)
+        } catch (e: Exception) {
+            return e.toString()
+        }
+    }
 }

@@ -1,26 +1,18 @@
 package com.devfutech.paradisonesia.presentation.fragments.home_customer
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.HomeCustomerFragmentBinding
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.BannerAdapter
 import com.devfutech.paradisonesia.external.adapter.CategoryProductAdapter
 import com.devfutech.paradisonesia.external.adapter.CityAdapter
-import com.devfutech.paradisonesia.external.adapter.ProductDetailAdapter.ProductDetailDescAdapter
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.MainActivity
@@ -32,12 +24,6 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import timber.log.Timber
-import java.util.*
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
-
 
 @AndroidEntryPoint
 class HomeCustomerFragment : BaseFragment() {
@@ -204,16 +190,14 @@ class HomeCustomerFragment : BaseFragment() {
                     llInformationAccount.gone()
                 }
             }
-
             //FilterBottomSheet.map.remove("sub_category_id")
             FilterBottomSheet.map = mutableMapOf()
             vpBanner.adapter = bannerAdapter
             vpBanner.isSaveEnabled = false
             TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()
-
-
             rvProductCategory.adapter = categoryProductAdapter
             rvRecommendationDestination.adapter = cityAdapter
         }
     }
+
 }

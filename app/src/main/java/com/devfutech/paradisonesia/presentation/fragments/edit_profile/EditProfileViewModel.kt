@@ -20,11 +20,6 @@ class EditProfileViewModel @Inject constructor(
     private val authPreference: AuthPreference
 ) : BaseViewModel() {
 
-    private val _googleSignIn: MutableStateFlow<Resource<Customer>> =
-        MutableStateFlow(Resource.Success())
-    val googleSignIn: MutableStateFlow<Resource<Customer>>
-        get() = _googleSignIn
-
     private val _customerProfile: MutableStateFlow<Resource<Customer>> =
         MutableStateFlow(Resource.Success())
     val customerProfile: MutableStateFlow<Resource<Customer>>
@@ -33,6 +28,7 @@ class EditProfileViewModel @Inject constructor(
     init {
         getCustomer()
     }
+
     fun getCustomer(){
         viewModelScope.launch {
             customerUseCase.customerProfile()
@@ -40,10 +36,10 @@ class EditProfileViewModel @Inject constructor(
                     onError(error)
                 }.collect{
                     _customerProfile.value = Resource.Success(it)
-                    Timber.tag("UserName").d(it.name.toString())
-                    Timber.tag("UserEmail").d(it.email.toString())
-                    Timber.tag("UserPhone").d(it.phone.toString())
-                    Timber.tag("UserEmaiilVerified").d(it.is_email_verified.toString())
+                    Timber.tag("UserNameProfile").d(it.name.toString())
+                    Timber.tag("UserEmailProfile").d(it.email.toString())
+                    Timber.tag("UserPhoneProfile").d(it.phone.toString())
+                    Timber.tag("UserEmaiilVerifiedProfile").d(it.is_email_verified.toString())
                 }
         }
     }

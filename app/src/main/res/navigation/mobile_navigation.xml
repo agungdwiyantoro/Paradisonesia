@@ -126,6 +126,9 @@
         <action
             android:id="@+id/action_accountFragment_to_editProfile"
             app:destination="@id/editProfile" />
+        <action
+            android:id="@+id/action_accountFragment_to_home_merchant"
+            app:destination="@id/homeMerchant" />
 
     </fragment>
     <fragment
@@ -220,6 +223,14 @@
         <argument
             android:name="ratingAverageRatingCount"
             app:argType="com.devfutech.paradisonesia.domain.model.ReviewLihatSemua" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeMerchant"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragment"
+        android:label="home_merchant"
+        tools:layout="@layout/home_merchant_fragment">
+
     </fragment>
 
 </navigation>

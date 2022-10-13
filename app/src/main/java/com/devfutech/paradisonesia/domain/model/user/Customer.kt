@@ -10,7 +10,7 @@ data class Customer(
     val email: String?,
     val phone: String?,
     val is_email_verified: Int?,
-    val is_new_member: Int?,
+    val is_new_member: Boolean?,
     val note: String?,
     val profile: Profile,
     val status: Status,
@@ -31,7 +31,9 @@ data class Customer(
         val name: String?,
         val email: String?,
         val phone: String?,
-        val is_email_verified: Int?
+        val is_email_verified: Int?,
+        val token: String?,
+        val refresh: String?
     )
 
     data class Profile(
