@@ -510,9 +510,10 @@ object FileUtils {
         valueFrom = from
     }
 
-   fun getDateTime(s: String): String? {
+
+    fun convertTimeStamp(s: String): String {
         try {
-            val sdf = SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH)
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             val netDate = Date(s.toLong() * 1000)
             return sdf.format(netDate)
         } catch (e: Exception) {

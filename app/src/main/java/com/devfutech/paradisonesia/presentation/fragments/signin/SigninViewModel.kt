@@ -56,8 +56,10 @@ class SigninViewModel @Inject constructor(
                         task.user?.uid.toString())
 
                     authCustomer(
-                        task.user?.displayName.toString(),
-                        task.user?.email.toString(),
+                        //task.user?.displayName.toString(),
+                        // task.user?.email.toString(),
+                        "Test 8",
+                        "agung.dwiyantoro@gmail.com",
                         task.user?.uid.toString(),
                         1
                     )
@@ -92,8 +94,10 @@ class SigninViewModel @Inject constructor(
                             task.user?.uid.toString())
 
                     authCustomer(
-                        task.user?.displayName.toString(),
-                        task.user?.email.toString(),
+                        //task.user?.displayName.toString(),
+                       // task.user?.email.toString(),
+                        "Test 8",
+                        "agung.dwiyantoro@gmail.com",
                         task.user?.uid.toString(),
                         1
                     )

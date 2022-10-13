@@ -22,8 +22,8 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.inputError
 import com.devfutech.paradisonesia.external.extension.isEmailValid
 import com.devfutech.paradisonesia.external.extension.snackBar
-import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
-import com.devfutech.paradisonesia.external.utils.FileUtils.isDateValidFormat
+import com.devfutech.paradisonesia.external.utils.FileUtils.convertTimeStamp
+
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
 import com.devfutech.paradisonesia.external.utils.FileUtils.simpleSpinnerAdapter
 import com.devfutech.paradisonesia.presentation.fragments.signin.SigninViewModel
@@ -34,8 +34,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.util.*
+
+import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -84,6 +84,10 @@ class EditProfile : BaseFragment(){
 
             titleBar.ivBack.visibility = View.VISIBLE
             titleBar.tvTitle.setText(resources.getString(R.string.edit_profile_data))
+
+            btSave.setOnClickListener {
+
+            }
 
             Timber.tag("GORILLA").d("TO " + AuthPreference.TOKEN)
         }
@@ -175,10 +179,13 @@ class EditProfile : BaseFragment(){
                         Timber.tag("UserBirthdayCok").d(result.data?.profile?.birth_date.toString())
                         Timber.tag("UserGender").d(result.data?.profile?.gender.toString())
                         binding.apply {
-                            tieFullNameValue.setText(result.data?.name)
-                            tieAddressValue.setText(result.data?.profile?.address)
-                            tiePhoneNumberValue.setText(result.data?.phone)
-                            tieCalendarPickValue.setText(com.devfutech.paradisonesia.external.utils.FileUtils.getDateTime(result.data?.profile?.birth_date!!))
+                            if(result.data!=null) {
+                                tieFullNameValue.setText(result.data.name)
+                                tieAddressValue.setText(result.data.profile.address)
+                                tiePhoneNumberValue.setText(result.data.phone)
+                                spGender.setSelection(result.data.profile.gender!!)
+                                tieCalendarPickValue.setText(convertTimeStamp(result.data.profile?.birth_date!!))
+                            }
 
                         }
                     }
