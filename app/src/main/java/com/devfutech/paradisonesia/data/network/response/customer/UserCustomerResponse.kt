@@ -16,7 +16,7 @@ data class UserCustomerResponse(
     @SerializedName("is_email_verified")
     val is_email_verified: Int?,
     @SerializedName("is_new_member")
-    val is_new_member: Boolean?,
+    val is_new_member: Int?,
     @SerializedName("note")
     val note: String?,
     @SerializedName("token_type")

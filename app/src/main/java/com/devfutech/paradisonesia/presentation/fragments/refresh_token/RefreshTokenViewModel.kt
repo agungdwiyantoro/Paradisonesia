@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.domain.model.PriceID
 import com.devfutech.paradisonesia.domain.model.city.City
 import com.devfutech.paradisonesia.domain.model.product.Product
@@ -23,7 +24,12 @@ import javax.inject.Inject
 @HiltViewModel
 class RefreshTokenViewModel @Inject constructor(
     private val tokenUseCase: RefreshTokenUseCase,
+    private val authPreference: AuthPreference
 ) : BaseViewModel() {
+
+    init {
+        getTokenRefresh(authPreference.getRefreshToken())
+    }
 
     private val _refreshToken: MutableStateFlow<Resource<Token>> =
         MutableStateFlow(Resource.Success())
@@ -41,6 +47,7 @@ class RefreshTokenViewModel @Inject constructor(
 
                 }.collect {
                     _refreshToken.value = Resource.Success(it)
+                    authPreference.setToken(it?.access_token!!)
                     Timber.tag("RepresToken").d("RepresToken Success" + it)
                 }
         }

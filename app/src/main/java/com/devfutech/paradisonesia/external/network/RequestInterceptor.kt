@@ -2,14 +2,22 @@ package com.devfutech.paradisonesia.external.network
 
 import android.content.Context
 import android.text.TextUtils
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.domain.usecase.RefreshTokenUseCase
+import com.devfutech.paradisonesia.external.Resource
+import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.devfutech.paradisonesia.presentation.fragments.edit_profile.EditProfileViewModel
+import com.devfutech.paradisonesia.presentation.fragments.refresh_token.RefreshTokenViewModel
 import com.facebook.AccessToken
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -39,6 +47,8 @@ class RequestInterceptor @Inject constructor(
 
             return when (initialResponse.code) {
                 401 -> {
+                    Timber.tag("GGGXXX").d("djancoek " + authPreference.getToken())
+                    //setRefreshToken().refreshAccesToken()
                     //AccessToken.refreshCurrentAccessTokenAsync()
                     //runBlocking {
 
@@ -53,24 +63,53 @@ class RequestInterceptor @Inject constructor(
 //                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
 //                    }
 //                    context.startActivity(intent)
-                    //initialResponse.close()
-                    initialResponse
+                    initialResponse.close()
+                    setHeader(chain.request(),authPreference.getToken())
+                    chain.proceed(authenticationRequest)
+                    //initialResponse
                 }
                 else -> initialResponse
             }
         }
     }
 
-    private fun setHeader(request: Request, accesToken: String?): Request {
+    private fun setHeader(request: Request, accessToken: String?): Request {
         val newRequest = request.newBuilder()
 
         Timber.tag("RequestInterceptor").d("SetHeader")
-        if (!TextUtils.isEmpty(accesToken)) newRequest.addHeader("Authorization","Bearer $accesToken")
+        if (!TextUtils.isEmpty(accessToken)) newRequest.addHeader("Authorization","Bearer $accessToken")
 
         return newRequest
             .header("Accept", "application/json, text/plain, */*")
             .header("Content-Type", "application/json")
             .header("platform","android")
             .build()
+    }
+
+    inner class setRefreshToken : BaseFragment() {
+
+
+
+        fun refreshAccesToken(){
+            lifecycleScope.launchWhenStarted {
+                val viewModel: RefreshTokenViewModel by viewModels()
+                viewModel.getTokenRefresh(authPreference.getRefreshToken())
+               /*
+                viewModel.refreshToken.collect{ result ->
+                    when(result){
+                        is Resource.Success -> {
+                            Timber.tag("RequestInt").d("XV " + result.data)
+                        }
+
+                        else -> {}
+                    }
+
+                }
+
+                */
+            }
+        }
+
+
     }
 }

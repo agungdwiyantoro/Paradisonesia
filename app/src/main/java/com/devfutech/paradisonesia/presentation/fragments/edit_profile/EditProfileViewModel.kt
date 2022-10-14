@@ -3,6 +3,7 @@ package com.devfutech.paradisonesia.presentation.fragments.edit_profile
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
 import com.devfutech.paradisonesia.domain.model.user.Customer
+import com.devfutech.paradisonesia.domain.model.user.CustomerGetDetail
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.presentation.base.BaseViewModel
@@ -20,16 +21,22 @@ class EditProfileViewModel @Inject constructor(
     private val authPreference: AuthPreference
 ) : BaseViewModel() {
 
-    private val _customerProfile: MutableStateFlow<Resource<Customer>> =
+    private val _customerProfile: MutableStateFlow<Resource<CustomerGetDetail>> =
         MutableStateFlow(Resource.Success())
-    val customerProfile: MutableStateFlow<Resource<Customer>>
+    val customerProfile: MutableStateFlow<Resource<CustomerGetDetail>>
         get() = _customerProfile
 
+    private val _updateCustomerProfile: MutableStateFlow<Resource<CustomerGetDetail>> =
+        MutableStateFlow(Resource.Success())
+    val updateCustomerGetDetail: MutableStateFlow<Resource<CustomerGetDetail>>
+        get() = _updateCustomerProfile
+
     init {
+        Timber.tag("EditProfileViewModel").d("init getCustomer")
         getCustomer()
     }
 
-    fun getCustomer(){
+    private fun getCustomer(){
         viewModelScope.launch {
             customerUseCase.customerProfile()
                 .catch { error ->
@@ -41,6 +48,30 @@ class EditProfileViewModel @Inject constructor(
                     Timber.tag("UserPhoneProfile").d(it.phone.toString())
                     Timber.tag("UserEmaiilVerifiedProfile").d(it.is_email_verified.toString())
                 }
+        }
+    }
+
+    fun postUpdateCustomerProfile(
+        name: String,
+        email: String,
+        phone: String,
+        address:String,
+        gender: Int,
+        birth_date: String){
+        viewModelScope.launch {
+            customerUseCase.updateCustomerProfile(
+                name, email, phone, address, gender, birth_date
+            ).catch { error ->
+                onError(error)
+            }.collect{
+                _updateCustomerProfile.value = Resource.Success(it)
+                Timber.tag("UpdatedName").d(it?.name.toString())
+                Timber.tag("UpdatedEmail").d(it?.email.toString())
+                Timber.tag("UpdatedPhone").d(it?.phone.toString())
+                Timber.tag("UpdatedAddress").d(it?.profile?.address.toString())
+                Timber.tag("UpdatedGender").d("VV" + it?.profile?.gender)
+                Timber.tag("Updated_birthdate").d("VV" + it?.profile?.gender)
+            }
         }
     }
     /*

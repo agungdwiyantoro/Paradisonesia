@@ -33,6 +33,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.time.format.ResolverStyle
@@ -513,11 +514,21 @@ object FileUtils {
 
     fun convertTimeStamp(s: String): String {
         try {
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+            val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
             val netDate = Date(s.toLong() * 1000)
             return sdf.format(netDate)
         } catch (e: Exception) {
             return e.toString()
         }
+    }
+
+    fun convertDateToTimestamp(date: String): String{
+        val l = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+        return l.atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond.toString()
     }
 }

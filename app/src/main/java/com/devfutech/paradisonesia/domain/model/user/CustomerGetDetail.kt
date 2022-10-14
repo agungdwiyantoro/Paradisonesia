@@ -4,13 +4,13 @@ package com.devfutech.paradisonesia.domain.model.user
 /**
  * Created by devfutech on 9/14/2021.
  */
-data class Customer(
+data class CustomerGetDetail(
     val id: Int?,
     val name: String?,
     val email: String?,
     val phone: String?,
     val is_email_verified: Int?,
-    val is_new_member: Int?,
+    val is_new_member: Boolean?,
     val note: String?,
     val profile: Profile,
     val status: Status,
@@ -19,8 +19,6 @@ data class Customer(
     val expires_in: Int?,
     val access_token: String?,
     val refresh_token: String?,
-
-
     //val customerLevelId: Int?,
     //val merchantId: Any?,
     //val statusId: Int?,

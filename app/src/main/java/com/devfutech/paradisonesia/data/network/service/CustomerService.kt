@@ -3,6 +3,7 @@ package com.devfutech.paradisonesia.data.network.service
 import com.devfutech.paradisonesia.data.network.response.BaseResponse
 import com.devfutech.paradisonesia.data.network.response.customer.CustomerAuthResponse
 import com.devfutech.paradisonesia.domain.model.user.Customer
+import com.devfutech.paradisonesia.domain.model.user.CustomerGetDetail
 import retrofit2.http.*
 
 /**
@@ -10,7 +11,18 @@ import retrofit2.http.*
  */
 interface CustomerService {
     @GET("profiles")
-    suspend fun customerProfile(): BaseResponse<Customer>
+    suspend fun customerProfile(): BaseResponse<CustomerGetDetail>
+
+    @POST("profiles")
+    @FormUrlEncoded
+    suspend fun updateCustomerProfile(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("phone") phone: String,
+        @Field("address") address: String,
+        @Field("gender") gender: Int,
+        @Field("birth_date") birth_date: String,
+    ): BaseResponse<CustomerGetDetail>
 
     @POST("auth")
     @FormUrlEncoded

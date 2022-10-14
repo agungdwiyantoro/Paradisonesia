@@ -22,6 +22,7 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.inputError
 import com.devfutech.paradisonesia.external.extension.isEmailValid
 import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.utils.FileUtils.convertDateToTimestamp
 import com.devfutech.paradisonesia.external.utils.FileUtils.convertTimeStamp
 
 import com.devfutech.paradisonesia.external.utils.FileUtils.safeNavigate
@@ -36,6 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -65,7 +67,7 @@ class EditProfile : BaseFragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 
@@ -84,10 +86,6 @@ class EditProfile : BaseFragment(){
 
             titleBar.ivBack.visibility = View.VISIBLE
             titleBar.tvTitle.setText(resources.getString(R.string.edit_profile_data))
-
-            btSave.setOnClickListener {
-
-            }
 
             Timber.tag("GORILLA").d("TO " + AuthPreference.TOKEN)
         }
@@ -149,7 +147,13 @@ class EditProfile : BaseFragment(){
             })
 
             btSave.setOnClickListener ({
-                loginCheck()
+                viewModel.postUpdateCustomerProfile(tieFullNameValue.text.toString(),
+                tieEmailValue.text.toString(),
+                tiePhoneNumberValue.text.toString(),
+                tieAddressValue.text.toString(),
+                spGender.selectedItemPosition,
+                convertDateToTimestamp(tieCalendarPickValue.text.toString()))
+              //  loginCheck()
             })
 
             Firebase.auth.currentUser?.let { account ->
@@ -184,9 +188,8 @@ class EditProfile : BaseFragment(){
                                 tieAddressValue.setText(result.data.profile.address)
                                 tiePhoneNumberValue.setText(result.data.phone)
                                 spGender.setSelection(result.data.profile.gender!!)
-                                tieCalendarPickValue.setText(convertTimeStamp(result.data.profile?.birth_date!!))
+                                tieCalendarPickValue.setText(convertTimeStamp(result.data.profile.birth_date!!))
                             }
-
                         }
                     }
                     else ->{}
@@ -194,6 +197,7 @@ class EditProfile : BaseFragment(){
             }
         }
     }
+
 
     fun loginCheck(){
         binding.apply {

@@ -185,7 +185,7 @@ class SigninViewModel @Inject constructor(
             //    Timber.tag("TokenRefresh_token").d(it?.refresh_token.toString())
 
                 authPreference.apply {
-                       setToken(it?.token!!)
+                    setToken(it?.token!!)
                     setRefreshToken(it.refresh!!)
                 }
 
