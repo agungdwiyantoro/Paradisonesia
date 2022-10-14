@@ -87,9 +87,6 @@ class RequestInterceptor @Inject constructor(
     }
 
     inner class setRefreshToken : BaseFragment() {
-
-
-
         fun refreshAccesToken(){
             lifecycleScope.launchWhenStarted {
                 val viewModel: RefreshTokenViewModel by viewModels()
@@ -100,16 +97,11 @@ class RequestInterceptor @Inject constructor(
                         is Resource.Success -> {
                             Timber.tag("RequestInt").d("XV " + result.data)
                         }
-
                         else -> {}
                     }
-
                 }
-
                 */
             }
         }
-
-
     }
 }

@@ -129,6 +129,9 @@
         <action
             android:id="@+id/action_accountFragment_to_home_merchant"
             app:destination="@id/homeMerchant" />
+        <action
+            android:id="@+id/action_accountFragment_to_merchantRegisterFragment2"
+            app:destination="@id/merchantRegisterFragment" />
 
     </fragment>
     <fragment

@@ -62,7 +62,8 @@ class AccountFragment : BaseFragment() {
                     is Resource.Loading -> dialogLoading.show()
                     is Resource.Failure -> {
                         dialogLoading.dismiss()
-                        binding.root.snackBar(result.error)
+                        Timber.tag("AccountFragment").d("re " + result.error)
+                        //binding.root.snackBar(result.error)
                         if (result.error == "Belum terdaftar") {
                             findNavController().navigate(R.id.action_accountFragment_to_merchantRegisterFragment)
                         }
@@ -93,7 +94,7 @@ class AccountFragment : BaseFragment() {
                     requireContext().toast("Email belum diverifikasi")
                 }
                  */
-                findNavController().navigate(R.id.action_accountFragment_to_home_merchant)
+                findNavController().navigate(R.id.action_accountFragment_to_merchantRegisterFragment)
             }
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
