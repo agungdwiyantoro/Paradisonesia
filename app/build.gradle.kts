@@ -13,13 +13,13 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.devfutech.paradisonesia"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 2
         versionName = "1.1.0"
 
@@ -78,6 +78,7 @@ dependencies {
     //Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
     implementation("com.google.firebase:firebase-auth:21.0.8")
+    implementation("androidx.datastore:datastore-core:1.0.0-rc01")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     //Livedata
@@ -146,6 +147,9 @@ dependencies {
 
     //Yahoo Range Seekbar
     implementation("com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0")
+
+    //Data Store
+    implementation("androidx.datastore:datastore-preferences:1.1.0-dev01")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

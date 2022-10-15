@@ -142,9 +142,7 @@ class SigninFragment : BaseFragment(){
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-    }
+
 
     private fun setupAction() {
         binding.apply {

@@ -37,6 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 import com.devfutech.paradisonesia.external.utils.FileUtils.getDate
+import com.devfutech.paradisonesia.presentation.fragments.refresh_token.RefreshTokenViewModel
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -53,6 +54,7 @@ class EditProfile : BaseFragment(){
     }
 
     private val viewModel: EditProfileViewModel by viewModels()
+    private val viewModelRefresh: RefreshTokenViewModel by viewModels()
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
@@ -171,10 +173,29 @@ class EditProfile : BaseFragment(){
         }
     }
 
+    fun refreshAccesToken(){
+        lifecycleScope.launchWhenStarted {
+            viewModelRefresh.refreshToken.collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        Timber.tag("RequestInt").d("XV " + result.data)
+                    }
+                    else -> {
+                        Timber.tag("RequestInt").d("PUKI KONTOL")
+                    }
+                }
+            }
+        }
+    }
+
     private fun setupPrintCustomerProfile(){
         lifecycleScope.launchWhenStarted {
             viewModel.customerProfile.collect{ result ->
                 when(result){
+                    is Resource.Failure -> {
+                        Timber.tag("KOLOT").d("KONJIL")
+                        refreshAccesToken()
+                    }
                     is Resource.Success -> {
                         Timber.tag("UserNameCok").d(result.data?.name.toString())
                         Timber.tag("UserEmailCok").d(result.data?.email.toString())
@@ -192,7 +213,9 @@ class EditProfile : BaseFragment(){
                             }
                         }
                     }
-                    else ->{}
+                    else ->{
+
+                    }
                 }
             }
         }

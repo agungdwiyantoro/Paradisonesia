@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-@HiltViewModel
+
 class RefreshTokenViewModel @Inject constructor(
     private val tokenUseCase: RefreshTokenUseCase,
     private val authPreference: AuthPreference

@@ -48,7 +48,7 @@ class RequestInterceptor @Inject constructor(
             return when (initialResponse.code) {
                 401 -> {
                     Timber.tag("GGGXXX").d("djancoek " + authPreference.getToken())
-                    //setRefreshToken().refreshAccesToken()
+
                     //AccessToken.refreshCurrentAccessTokenAsync()
                     //runBlocking {
 
@@ -63,10 +63,10 @@ class RequestInterceptor @Inject constructor(
 //                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
 //                    }
 //                    context.startActivity(intent)
-                    initialResponse.close()
-                    setHeader(chain.request(),authPreference.getToken())
-                    chain.proceed(authenticationRequest)
-                    //initialResponse
+                    //initialResponse.close()
+                   // setHeader(chain.request(),authPreference.getToken())
+                   // chain.proceed(authenticationRequest)
+                    initialResponse
                 }
                 else -> initialResponse
             }
@@ -76,7 +76,7 @@ class RequestInterceptor @Inject constructor(
     private fun setHeader(request: Request, accessToken: String?): Request {
         val newRequest = request.newBuilder()
 
-        Timber.tag("RequestInterceptor").d("SetHeader")
+        Timber.tag("RequestInterceptor").d("SetHeader " + authPreference.getToken())
         if (!TextUtils.isEmpty(accessToken)) newRequest.addHeader("Authorization","Bearer $accessToken")
 
         return newRequest
@@ -84,24 +84,5 @@ class RequestInterceptor @Inject constructor(
             .header("Content-Type", "application/json")
             .header("platform","android")
             .build()
-    }
-
-    inner class setRefreshToken : BaseFragment() {
-        fun refreshAccesToken(){
-            lifecycleScope.launchWhenStarted {
-                val viewModel: RefreshTokenViewModel by viewModels()
-                viewModel.getTokenRefresh(authPreference.getRefreshToken())
-               /*
-                viewModel.refreshToken.collect{ result ->
-                    when(result){
-                        is Resource.Success -> {
-                            Timber.tag("RequestInt").d("XV " + result.data)
-                        }
-                        else -> {}
-                    }
-                }
-                */
-            }
-        }
     }
 }
