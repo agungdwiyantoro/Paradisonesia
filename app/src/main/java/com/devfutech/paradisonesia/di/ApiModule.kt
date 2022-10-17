@@ -1,11 +1,16 @@
 package com.devfutech.paradisonesia.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.viewbinding.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
+import com.devfutech.paradisonesia.data.local.preferences.SessionManager
 import com.devfutech.paradisonesia.data.network.service.*
+import com.devfutech.paradisonesia.data.repository.TokenRefreshRepositoryImpl
+import com.devfutech.paradisonesia.domain.repository.TokenRefreshRepository
 import com.devfutech.paradisonesia.external.config.BaseConfig
 import com.devfutech.paradisonesia.external.network.RequestInterceptor
 import dagger.Module
@@ -94,6 +99,40 @@ class ApiModule {
     @Singleton
     fun provideProductService(retrofit: Retrofit): ProductService =
         retrofit.create(ProductService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(
+        @ApplicationContext context: Context,
+    ): SharedPreferences =
+        context.getSharedPreferences(AuthPreference.SHARED_PREFS, Context.MODE_PRIVATE)
+
+    @Singleton
+    @Provides
+    fun provideAppSharedPreferences(
+        sharedPreferences: SharedPreferences
+    ) = AuthPreference(sharedPreferences)
+
+    @Singleton
+    @Provides
+    fun provideAuthRepository(): TokenRefreshRepository = TokenRefreshRepositoryImpl()
+
+    @Singleton
+    @Provides
+    fun provideSessionManager(
+        appSharedPreferences: AuthPreference,
+        authRepository: TokenRefreshRepository
+    ): SessionManager = SessionManager(
+        pref = appSharedPreferences,
+        authRepository = authRepository
+    )
+
+    @Singleton
+    @Provides
+    fun provideAuthInterceptorImpl(
+        sessionManager: SessionManager
+    ): RequestInterceptor = RequestInterceptor(sessionManager = sessionManager)
+
 
     @Singleton
     @Provides

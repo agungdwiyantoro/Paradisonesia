@@ -25,6 +25,15 @@ data class CustomerGetDetail(
     //val apiToken:String?,
 ) {
 
+    data class ProfileData(
+        val name: String?,
+        val email: String?,
+        val phone: String?,
+        val address: String?,
+        val gender: Int?,
+        val birth_date: String?,
+    )
+
     data class ProfileBasic(
         val name: String?,
         val email: String?,

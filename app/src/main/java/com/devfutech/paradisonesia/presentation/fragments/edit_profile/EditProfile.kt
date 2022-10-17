@@ -172,7 +172,7 @@ class EditProfile : BaseFragment(){
 
         }
     }
-
+/*
     fun refreshAccesToken(){
         lifecycleScope.launchWhenStarted {
             viewModelRefresh.refreshToken.collect { result ->
@@ -188,13 +188,15 @@ class EditProfile : BaseFragment(){
         }
     }
 
+ */
+
     private fun setupPrintCustomerProfile(){
         lifecycleScope.launchWhenStarted {
             viewModel.customerProfile.collect{ result ->
                 when(result){
                     is Resource.Failure -> {
                         Timber.tag("KOLOT").d("KONJIL")
-                        refreshAccesToken()
+                        //refreshAccesToken()
                     }
                     is Resource.Success -> {
                         Timber.tag("UserNameCok").d(result.data?.name.toString())
@@ -209,7 +211,8 @@ class EditProfile : BaseFragment(){
                                 tieAddressValue.setText(result.data.profile.address)
                                 tiePhoneNumberValue.setText(result.data.phone)
                                 spGender.setSelection(result.data.profile.gender!!)
-                                tieCalendarPickValue.setText(convertTimeStamp(result.data.profile.birth_date!!))
+                                Timber.tag("EditProfile").d("timestamp " + convertTimeStamp(result.data.profile.birth_date!!) )
+                                tieCalendarPickValue.setText(convertTimeStamp(result.data.profile.birth_date))
                             }
                         }
                     }

@@ -26,9 +26,9 @@ class EditProfileViewModel @Inject constructor(
     val customerProfile: MutableStateFlow<Resource<CustomerGetDetail>>
         get() = _customerProfile
 
-    private val _updateCustomerProfile: MutableStateFlow<Resource<CustomerGetDetail>> =
+    private val _updateCustomerProfile: MutableStateFlow<Resource<CustomerGetDetail.ProfileData?>> =
         MutableStateFlow(Resource.Success())
-    val updateCustomerGetDetail: MutableStateFlow<Resource<CustomerGetDetail>>
+    val updateCustomerGetDetail: MutableStateFlow<Resource<CustomerGetDetail.ProfileData?>>
         get() = _updateCustomerProfile
 
     init {
@@ -65,12 +65,7 @@ class EditProfileViewModel @Inject constructor(
                 onError(error)
             }.collect{
                 _updateCustomerProfile.value = Resource.Success(it)
-                Timber.tag("UpdatedName").d(it?.name.toString())
-                Timber.tag("UpdatedEmail").d(it?.email.toString())
-                Timber.tag("UpdatedPhone").d(it?.phone.toString())
-                Timber.tag("UpdatedAddress").d(it?.profile?.address.toString())
-                Timber.tag("UpdatedGender").d("VV" + it?.profile?.gender)
-                Timber.tag("Updated_birthdate").d("VV" + it?.profile?.gender)
+
             }
         }
     }

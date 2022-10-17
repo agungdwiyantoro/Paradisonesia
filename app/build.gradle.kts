@@ -148,9 +148,6 @@ dependencies {
     //Yahoo Range Seekbar
     implementation("com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0")
 
-    //Data Store
-    implementation("androidx.datastore:datastore-preferences:1.1.0-dev01")
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

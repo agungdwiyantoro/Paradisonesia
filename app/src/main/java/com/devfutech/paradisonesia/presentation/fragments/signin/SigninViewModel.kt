@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.presentation.fragments.signin
 
 import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.data.local.preferences.AuthPreference
+import com.devfutech.paradisonesia.data.local.preferences.SessionManager
 import com.devfutech.paradisonesia.domain.model.user.Customer
 import com.devfutech.paradisonesia.domain.usecase.CustomerUseCase
 import com.devfutech.paradisonesia.domain.usecase.RefreshTokenUseCase
@@ -184,10 +185,17 @@ class SigninViewModel @Inject constructor(
              //   Timber.tag("TokenAccess_token").d(it?.access_token.toString())
             //    Timber.tag("TokenRefresh_token").d(it?.refresh_token.toString())
 
+                /*
                 authPreference.apply {
                     setToken(it?.token!!)
                     setRefreshToken(it.refresh!!)
                 }
+
+                 */
+
+                authPreference.setToken(it?.token!!)
+                authPreference.setRefreshToken(it.refresh!!)
+
 
                 Timber.tag("AuthPrefGetToken").d(authPreference.getToken())
                 Timber.tag("AuthRefreshToken").d(authPreference.getRefreshToken())

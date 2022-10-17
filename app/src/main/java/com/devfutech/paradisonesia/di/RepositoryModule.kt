@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
-
+/*
     @Provides
     @Singleton
     fun provideTokenRefreshRepository(
@@ -26,6 +26,8 @@ class RepositoryModule {
         return TokenRefreshRepositoryImpl(remoteDataSource)
     }
 
+
+ */
     @Provides
     @Singleton
     fun provideCustomerRepository(

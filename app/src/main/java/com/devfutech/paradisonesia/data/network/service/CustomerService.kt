@@ -22,7 +22,7 @@ interface CustomerService {
         @Field("address") address: String,
         @Field("gender") gender: Int,
         @Field("birth_date") birth_date: String,
-    ): BaseResponse<CustomerGetDetail>
+    ): BaseResponse<CustomerGetDetail.ProfileData?>
 
     @POST("auth")
     @FormUrlEncoded

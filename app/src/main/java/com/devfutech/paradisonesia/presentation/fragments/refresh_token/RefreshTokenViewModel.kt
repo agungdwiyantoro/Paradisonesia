@@ -26,7 +26,7 @@ class RefreshTokenViewModel @Inject constructor(
     private val tokenUseCase: RefreshTokenUseCase,
     private val authPreference: AuthPreference
 ) : BaseViewModel() {
-
+/*
     init {
         getTokenRefresh(authPreference.getRefreshToken())
     }
@@ -52,4 +52,6 @@ class RefreshTokenViewModel @Inject constructor(
                 }
         }
     }
+
+ */
 }

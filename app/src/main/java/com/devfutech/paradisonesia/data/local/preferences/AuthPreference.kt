@@ -10,20 +10,20 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class AuthPreference @Inject constructor(
-    @Named("AuthDataPrefs") private val sharedPreferences: SharedPreferences
-) : BaseFragment(){
+   private val sharedPreferences: SharedPreferences
+) {
     companion object {
-        const val TOKEN = "token"
-        const val REFRESH_TOKEN = "refresh_token"
+        const val SHARED_PREFS = "APP_SHARED_PREFS"
+        const val TOKEN = "TOKEN"
+        const val REFRESH_TOKEN = "REFRESH_TOKEN"
     }
 
-    fun getToken(): String = sharedPreferences.getString(TOKEN, "") ?: ""
+    fun getToken(): String? = sharedPreferences.getString(TOKEN, null)
 
     fun setToken(token: String) = sharedPreferences.edit().putString(TOKEN, token).apply()
 
-    fun getRefreshToken(): String = sharedPreferences.getString(REFRESH_TOKEN, "") ?: ""
+    fun getRefreshToken(): String? = sharedPreferences.getString(REFRESH_TOKEN, null)
 
     fun setRefreshToken(token_refresh: String)= sharedPreferences.edit().putString(REFRESH_TOKEN, token_refresh).apply()
 
-    val viewModel: RefreshTokenViewModel by viewModels()
 }

@@ -514,6 +514,7 @@ object FileUtils {
 
     fun convertTimeStamp(s: String): String {
         try {
+            Timber.tag("timeStamp").d("date " + Date())
             val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
             val netDate = Date(s.toLong() * 1000)
             return sdf.format(netDate)
@@ -526,7 +527,7 @@ object FileUtils {
         val l = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         } else {
-            TODO("VERSION.SDK_INT < O")
+            return SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH).parse(date)!!.toString()
         }
 
         return l.atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond.toString()
