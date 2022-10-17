@@ -61,6 +61,7 @@
     <string name="name1">Mandatory field 1<font color='#FF0000'>*</font></string>
     <string name="label_merchant_name">Merchant Name</string>
     <string name="merchant_address">Merchant Address</string>
+    <string name="label_description">Description</string>
     <string name="label_identity_card_mandatory">Identity Card<font color='#FF0000'>*</font></string>
     <string name="label_submit">Submit</string>
     <string name="label_merchant_submission">Merchant Submission</string>
