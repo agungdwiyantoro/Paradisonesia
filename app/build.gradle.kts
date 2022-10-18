@@ -13,13 +13,13 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 32
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.devfutech.paradisonesia"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 32
         versionCode = 2
         versionName = "1.1.0"
 
@@ -147,6 +147,9 @@ dependencies {
 
     //Yahoo Range Seekbar
     implementation("com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0")
+
+    //Text Recognizer
+    implementation ("com.google.android.gms:play-services-mlkit-text-recognition:18.0.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

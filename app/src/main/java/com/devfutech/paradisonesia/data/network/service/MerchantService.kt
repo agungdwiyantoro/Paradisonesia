@@ -11,11 +11,14 @@ import retrofit2.http.*
 interface MerchantService {
     @POST("merchants/register")
     @Multipart
+    //@FormUrlEncoded
     suspend fun merchantRegister(
         @PartMap payload:Map<String,String>,
-        @Part ktp:MultipartBody.Part?,
-        @Part npwp:MultipartBody.Part?,
-        @Part siup:MultipartBody.Part?,
+        @PartMap payloadKtpNumber:Map<String,Long>,
+        //@Field("ktp_number") long: Long?
+        //@Part ktp:MultipartBody.Part?,
+       // @Part npwp:MultipartBody.Part?,
+       // @Part siup:MultipartBody.Part?,
     ): BaseResponse<MerchantRegisterResponse>
 
 

@@ -1,6 +1,5 @@
 package com.devfutech.paradisonesia.external.utils
 
-
 import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
@@ -19,15 +18,20 @@ import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.BuildConfig.DEBUG
+import com.devfutech.paradisonesia.domain.model.city.City
 import com.google.android.material.slider.RangeSlider
-
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
+import java.io.IOException
+import java.net.URI
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -38,7 +42,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.time.format.ResolverStyle
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 /**
@@ -531,5 +534,73 @@ object FileUtils {
         }
 
         return l.atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond.toString()
+    }
+
+    fun textRecognizer(context: Context, uri: Uri, textInputEditText: TextInputEditText ){
+        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        val image: InputImage
+        try {
+            image = InputImage.fromFilePath(context, uri)
+            val result = recognizer.process(image)
+                .addOnSuccessListener { visionText ->
+                    // Task completed successfully
+                    // ...
+                    Timber.tag("FILEUTILS").d("SUCCESS")
+                    val resultText = visionText.text
+                    for (block in visionText.textBlocks) {
+                        val blockText = block.text
+                        val blockCornerPoints = block.cornerPoints
+                        val blockFrame = block.boundingBox
+                        for (line in block.lines) {
+                            val lineText = line.text
+                            val lineCornerPoints = line.cornerPoints
+                            val lineFrame = line.boundingBox
+                            if(lineText.length==16&&lineText.matches(Regex(".*\\d.*"))){
+                                Timber.tag("FILEUTILS").d("VISION TEXT " + lineText)
+                                textInputEditText.setText(textCorrector(lineText))
+                            }
+                            for (element in line.elements) {
+                                val elementText = element.text
+                                val elementCornerPoints = element.cornerPoints
+                                val elementFrame = element.boundingBox
+                            }
+                        }
+                    }
+                    Timber.tag("FILEUTILS").d("VISION TEXT " + resultText)
+                }
+                .addOnFailureListener { e ->
+                    // Task failed with an exception
+                    // ...
+                    Timber.tag("FILEUTILS").d("FAILED")
+                }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+
+    fun textCorrector(text: String): String{
+        var textResult = text
+
+        for(i in 0.. (text.length-1)){
+            if(text.get(i).toString().equals("S")){
+                Timber.tag("KUNTUL SEGER").d("JOXM " + text)
+                textResult = textResult.replace(text.get(i).toString(), "5", true)
+            }
+            if(text.get(i).toString().equals("I")){
+                textResult = textResult.replace(text.get(i).toString(), "1")
+            }
+            if(text.get(i).toString().equals("L")){
+                textResult = textResult.replace(text.get(i).toString(), "1")
+            }
+            if(text.get(i).toString().equals("A")){
+                textResult = textResult.replace(text.get(i).toString(), "4")
+            }
+            if(text.get(i).toString().equals("O")){
+                textResult = textResult.replace(text.get(i).toString(), "0")
+            }
+        }
+
+        return textResult
     }
 }

@@ -29,7 +29,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApiModule {
+object ApiModule {
     @Provides
     @Singleton
     fun provideRetrofitApi(okHttpClient: OkHttpClient): Retrofit =
@@ -39,6 +39,7 @@ class ApiModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+    /*
     @Singleton
     @Provides
     fun provideOkHttpClientApi(
@@ -63,6 +64,17 @@ class ApiModule {
             })
             .build()
     }
+
+
+     */
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(
+        authInterceptor: RequestInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(authInterceptor)
+        .build()
 
     @Provides
     @Singleton

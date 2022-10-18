@@ -14,11 +14,12 @@ class MerchantUseCase @Inject constructor(
 ) {
     suspend fun merchantRegister(
         payload: Map<String, String>,
-        ktp: MultipartBody.Part?,
-        npwp: MultipartBody.Part?,
-        siup: MultipartBody.Part?
+        payloadLong: Map<String, Long>
+        //ktp: MultipartBody.Part?,
+     //   npwp: MultipartBody.Part?,
+      //  siup: MultipartBody.Part?
     ): Flow<String?> {
-        return repository.merchantRegister(payload, ktp, npwp, siup)
+        return repository.merchantRegister(payload, payloadLong/*,ktp, npwp, siup*/)
     }
 
     suspend fun merchantStatus(): Flow<MerchantStatus?> {

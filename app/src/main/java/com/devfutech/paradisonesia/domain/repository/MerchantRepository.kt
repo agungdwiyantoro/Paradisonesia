@@ -10,9 +10,10 @@ import okhttp3.MultipartBody
 interface MerchantRepository {
     suspend fun merchantRegister(
         payload: Map<String, String>,
-        ktp: MultipartBody.Part?,
-        npwp: MultipartBody.Part?,
-        siup: MultipartBody.Part?
+        payloadLong: Map<String, Long>
+       // ktp: MultipartBody.Part?//,
+       // npwp: MultipartBody.Part?,
+       // siup: MultipartBody.Part?
     ): Flow<String?>
 
     suspend fun merchantStatus(): Flow<MerchantStatus?>

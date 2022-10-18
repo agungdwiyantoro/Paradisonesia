@@ -23,7 +23,6 @@ import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import okhttp3.MultipartBody
 import okhttp3.MultipartBody.Part.Companion.createFormData
 import okhttp3.RequestBody
@@ -90,6 +89,7 @@ class MerchantRegisterFragment : BaseFragment() {
                 code = 0
                 mPermissionResult.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
+            /*
             ivNpwp.setOnClickListener {
                 code = 1
                 mPermissionResult.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -98,12 +98,16 @@ class MerchantRegisterFragment : BaseFragment() {
                 code = 2
                 mPermissionResult.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
+
+             */
             btnSubmit.setOnClickListener {
                 viewModel.merchantRegister(
                     payload = mapOf(
                         "name" to etMerchantName.text?.trim().toString(),
-                        "address" to etMerchantAddress.text?.trim().toString()
-                    ), ktp = ktp, npwp = npwp, siup = siup
+                        "address" to etMerchantAddress.text?.trim().toString(),
+                        "description" to etMerchantDescription.text?.trim().toString(),
+                    )/*, ktp = ktp.toString(), npwp = npwp, siup = siup*/
+                    , mapOf("ktp_number" to etMerchantKTPNumber.text?.trim().toString().toLong())
                 )
             }
         }
@@ -133,10 +137,13 @@ class MerchantRegisterFragment : BaseFragment() {
                 when (code) {
                     0 -> {
                         binding.ivIdentityCard.loadAny(uri)
+                        FileUtils.textRecognizer(requireContext(), uri!!, binding.etMerchantKTPNumber)
+                        binding.ilMerchantKTPNumber.visibility = View.VISIBLE
                         uri?.let {
                             ktp = prepareFilePart("ktp", it)
                         }
                     }
+                    /*
                     1 -> {
                         binding.ivNpwp.loadAny(uri)
                         uri?.let {
@@ -149,6 +156,7 @@ class MerchantRegisterFragment : BaseFragment() {
                             siup = prepareFilePart("siup", it)
                         }
                     }
+                     */
                 }
             }
         }

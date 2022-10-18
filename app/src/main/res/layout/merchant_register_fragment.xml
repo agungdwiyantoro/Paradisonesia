@@ -76,7 +76,22 @@
                         style="@style/EditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/" />
+                        android:hint="@string/label_description" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/il_merchant_KTP_number"
+                    style="@style/InputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_merchant_KTP_number"
+                        style="@style/EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/label_identity_card_number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -102,6 +117,7 @@
                         android:src="@drawable/ic_photo"
                         app:shapeAppearanceOverlay="@style/Shape.Rounded.10" />
 
+                    <!--
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
@@ -151,6 +167,7 @@
                         android:layout_height="0.5dp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:background="@color/black" />
+                        -->
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView

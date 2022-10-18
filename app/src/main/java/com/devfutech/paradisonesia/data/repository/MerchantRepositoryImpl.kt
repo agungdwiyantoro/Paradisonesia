@@ -16,11 +16,12 @@ class MerchantRepositoryImpl(
 ) : MerchantRepository {
     override suspend fun merchantRegister(
         payload: Map<String, String>,
-        ktp: MultipartBody.Part?,
-        npwp: MultipartBody.Part?,
-        siup: MultipartBody.Part?
+        payloadLong: Map<String, Long>
+        //ktp: MultipartBody.Part?,
+        //npwp: MultipartBody.Part?,
+        //siup: MultipartBody.Part?
     ): Flow<String?> = flow {
-        val response = remoteDataSource.merchantRegister(payload, ktp, npwp, siup).message
+        val response = remoteDataSource.merchantRegister(payload, payloadLong/*, ktp, npwp, siup*/).message
         emit(response)
     }
 
