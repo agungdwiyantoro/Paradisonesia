@@ -50,15 +50,11 @@ class RequestInterceptor @Inject constructor(
             } else {
                 accessToken = refreshToken()
                 Timber.tag("REQUEST INTERCEPTOR").d("POST INTERCEPT" + accessToken)
-
                 if (accessToken.isNullOrBlank()) {
-                    //sessionManager.logout()
-                    //accessToken = refreshToken()
-                    response.close()
-                    return chain.proceed(newRequestWithAccessToken(accessToken, request))//response
+                    sessionManager.logout()
+                    Timber.tag("REQUEST INTERCEPTOR").d("accessTokenIsNull")
+                    return response
                 }
-
-
                 return chain.proceed(newRequestWithAccessToken(accessToken, request))
             }
         }
@@ -69,8 +65,6 @@ class RequestInterceptor @Inject constructor(
     private fun newRequestWithAccessToken(accessToken: String?, request: Request): Request =
         request.newBuilder()
             .header("Authorization", "Bearer $accessToken")
-            .header("Accept", "application/json")
-            .header("platform", "mobile")
             .build()
 
     private fun refreshToken(): String? {
@@ -81,5 +75,6 @@ class RequestInterceptor @Inject constructor(
             } ?: return null
         }
     }
+
 
 }
