@@ -44,7 +44,8 @@ class RequestInterceptor @Inject constructor(
 
         Timber.tag("REQUEST INTERCEPTOR").d("PRE INTERCEPT" + accessToken)
         if (response.code == HttpURLConnection.HTTP_UNAUTHORIZED) {
-            val newAccessToken = sessionManager.getAccessToken()
+            //val newAccessToken = sessionManager.getAccessToken()
+            val newAccessToken = refreshToken()
             if (newAccessToken != accessToken) {
                 return chain.proceed(newRequestWithAccessToken(accessToken, request))
             } else {
