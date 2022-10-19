@@ -565,7 +565,7 @@ object FileUtils {
                             }
                         }
                     }
-                    Timber.tag("FILEUTILS").d("VISION TEXT " + resultText)
+                    Timber.tag("FILEUTILS").d("VISION TEXTx " + resultText)
                 }
                 .addOnFailureListener { e ->
                     // Task failed with an exception
