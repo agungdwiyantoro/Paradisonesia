@@ -18,15 +18,14 @@ import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.BuildConfig.DEBUG
-import com.devfutech.paradisonesia.domain.model.city.City
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter

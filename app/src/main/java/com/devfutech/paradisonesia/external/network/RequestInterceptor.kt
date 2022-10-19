@@ -53,6 +53,7 @@ class RequestInterceptor @Inject constructor(
                 if (accessToken.isNullOrBlank()) {
                     sessionManager.logout()
                     Timber.tag("REQUEST INTERCEPTOR").d("accessTokenIsNull")
+                    Timber.tag("REQUEST INTERCEPTOR").d("ACCESSTOKENISNULL")
                     return response
                 }
                 return chain.proceed(newRequestWithAccessToken(accessToken, request))

@@ -149,7 +149,7 @@ dependencies {
     implementation("com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0")
 
     //Text Recognizer
-    implementation ("com.google.android.gms:play-services-mlkit-text-recognition:18.0.2")
+    implementation ("com.google.mlkit:text-recognition:16.0.0-beta6")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
