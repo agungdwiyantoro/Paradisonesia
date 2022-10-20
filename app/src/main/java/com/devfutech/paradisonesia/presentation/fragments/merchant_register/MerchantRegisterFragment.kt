@@ -101,6 +101,7 @@ class MerchantRegisterFragment : BaseFragment() {
 
              */
             btnSubmit.setOnClickListener {
+                /*
                 viewModel.merchantRegister(
                     payload = mapOf(
                         "name" to etMerchantName.text?.trim().toString(),
@@ -109,6 +110,9 @@ class MerchantRegisterFragment : BaseFragment() {
                     )/*, ktp = ktp.toString(), npwp = npwp, siup = siup*/
                     , mapOf("ktp_number" to etMerchantKTPNumber.text?.trim().toString().toLong())
                 )
+
+                 */
+                findNavController().navigate(R.id.action_merchantRegisterFragment_to_merchantReviewedStatusFragment)
             }
         }
     }

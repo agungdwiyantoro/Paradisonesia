@@ -148,7 +148,11 @@
         android:id="@+id/merchantRegisterFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_register.MerchantRegisterFragment"
         android:label="merchant_register_fragment"
-        tools:layout="@layout/merchant_register_fragment" />
+        tools:layout="@layout/merchant_register_fragment" >
+        <action
+            android:id="@+id/action_merchantRegisterFragment_to_merchantReviewedStatusFragment"
+            app:destination="@id/merchantReviewedStatusFragment" />
+    </fragment>
     <fragment
         android:id="@+id/merchantReviewedStatusFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_reviewed_status.MerchantReviewedStatusFragment"
@@ -236,4 +240,11 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/merchantReviewStatus"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_reviewed_status.MerchantReviewedStatusFragment"
+        android:label="merchant_review_status"
+        tools:layout="@layout/merchant_reviewed_status_fragment">
+
+    </fragment>
 </navigation>

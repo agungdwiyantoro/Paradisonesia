@@ -554,9 +554,9 @@ object FileUtils {
                             val lineText = line.text
                             val lineCornerPoints = line.cornerPoints
                             val lineFrame = line.boundingBox
-                            if(lineText.length==16&&lineText.matches(Regex(".*\\d.*"))){
+                            if(lineText.replace(" ", "").length==16&&lineText.replace(" ", "").matches(Regex(".*\\d.*"))){
                                 Timber.tag("FILEUTILS").d("VISION TEXT " + lineText)
-                                textInputEditText.setText(textCorrector(lineText))
+                                textInputEditText.setText(textCorrector(lineText).replace(" ", ""))
                             }
                             for (element in line.elements) {
                                 val elementText = element.text
@@ -565,7 +565,7 @@ object FileUtils {
                             }
                         }
                     }
-                    Timber.tag("FILEUTILS").d("VISION TEXTx " + resultText)
+                    Timber.tag("FILEUTILS").d("VISION TEXTx " + resultText.replace(" ", ""))
                 }
                 .addOnFailureListener { e ->
                     // Task failed with an exception
@@ -600,6 +600,6 @@ object FileUtils {
             }
         }
 
-        return textResult
+        return textResult.replace(" ", "")
     }
 }
