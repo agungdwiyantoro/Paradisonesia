@@ -180,6 +180,12 @@
     <string name="hide">Hide</string>
     <string name="question">Question</string>
 
+    <!-- Merchant Register -->
+    <string name="error_merchant_name">Name must be filled</string>
+    <string name="error_merchant_address">Address must be filled</string>
+    <string name="error_merchant_description">Description must be filled</string>
+    <string name="error_merchant_id_number_blank">ID card number must be filled</string>
+    <string name="error_merchant_id_number_less_than_sixteen">ID card number must be 16 characters</string>
 
     <!-- Home Merchant -->
     <string name="total_earnings">Total Earnings</string>
@@ -188,7 +194,6 @@
     <string name="received">Received</string>
     <string name="accept">Accepted</string>
     <string name="ready">Ready</string>
-
 
     <!-- Home Merchant Dummy -->
     <string name="product_name">Product Name</string>

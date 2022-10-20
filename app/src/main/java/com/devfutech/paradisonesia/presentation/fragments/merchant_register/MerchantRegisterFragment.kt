@@ -22,6 +22,8 @@ import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
 import okhttp3.MultipartBody.Part.Companion.createFormData
@@ -112,7 +114,9 @@ class MerchantRegisterFragment : BaseFragment() {
                 )
 
                  */
-                findNavController().navigate(R.id.action_merchantRegisterFragment_to_merchantReviewedStatusFragment)
+                if(widgetHandling()) {
+                    findNavController().navigate(R.id.action_merchantRegisterFragment_to_merchantReviewedStatusFragment)
+                }
             }
         }
     }
@@ -173,7 +177,67 @@ class MerchantRegisterFragment : BaseFragment() {
                 movementMethod = LinkMovementMethod.getInstance()
                 setLinkTextColor(ContextCompat.getColor(requireContext(), R.color.blue_0063a7))
             }
+
+            val errorMessageFunction: ArrayList<String> = arrayListOf(
+                getString(R.string.error_merchant_name),
+                getString(R.string.error_merchant_address),
+                getString(R.string.error_merchant_description),
+                getString(R.string.error_merchant_id_number_blank)
+            )
+
+            val textInputEditTextFunction: ArrayList<TextInputEditText> = arrayListOf(
+                binding.etMerchantName,
+                binding.etMerchantAddress,
+                binding.etMerchantDescription,
+                binding.etMerchantKTPNumber
+            )
+
+           val textInputLayoutFunction: ArrayList<TextInputLayout> = arrayListOf(
+                binding.ilMerchantName,
+                binding.ilMerchantAddress,
+                binding.ilMerchantDescription,
+                binding.ilMerchantKTPNumber
+            )
+
+            for (i in 0..(textInputEditTextFunction.size-1)) {
+                FileUtils.TextInputEditTextWatcher(
+                    textInputEditTextFunction[i],
+                    textInputLayoutFunction[i],
+                    errorMessageFunction[i]
+                )
+            }
         }
+    }
+
+    private fun widgetHandling(): Boolean{
+        if(binding.etMerchantName.text.isNullOrBlank()){
+            binding.ilMerchantName.error = getString(R.string.error_merchant_name)
+            binding.etMerchantName.requestFocus()
+            return false
+        }
+        if(binding.etMerchantAddress.text.isNullOrBlank()){
+            binding.ilMerchantAddress.error = getString(R.string.error_merchant_address)
+            binding.etMerchantAddress.requestFocus()
+            return false
+        }
+        if(binding.etMerchantDescription.text.isNullOrBlank()){
+            binding.ilMerchantDescription.error = getString(R.string.error_merchant_description)
+            binding.etMerchantDescription.requestFocus()
+            return false
+        }
+        if(binding.etMerchantKTPNumber.text.isNullOrBlank()){
+            binding.ilMerchantKTPNumber.error = getString(R.string.error_merchant_id_number_blank)
+            binding.etMerchantKTPNumber.requestFocus()
+            return false
+        }
+        if(binding.etMerchantKTPNumber.text?.length?.compareTo(16)==-1){
+            binding.ilMerchantKTPNumber.error = getString(R.string.error_merchant_id_number_less_than_sixteen)
+            binding.etMerchantKTPNumber.requestFocus()
+            return false
+        }
+
+
+        return true
     }
 
     private fun prepareFilePart(partName: String, fileUri: Uri): MultipartBody.Part? {
@@ -187,4 +251,31 @@ class MerchantRegisterFragment : BaseFragment() {
         }
         return null
     }
+
+    /*
+    private val errorMessageFunction: ArrayList<String> = arrayListOf(
+        getString(R.string.error_merchant_name),
+        getString(R.string.error_merchant_address),
+        getString(R.string.error_merchant_description),
+        getString(R.string.error_merchant_id_number_blank)
+    )
+
+    private val textInputEditTextFunction: ArrayList<TextInputEditText> = arrayListOf(
+        binding.etMerchantName,
+        binding.etMerchantAddress,
+        binding.etMerchantDescription,
+        binding.etMerchantKTPNumber
+    )
+
+    private val textInputLayoutFunction: ArrayList<TextInputLayout> = arrayListOf(
+        binding.ilMerchantName,
+        binding.ilMerchantAddress,
+        binding.ilMerchantDescription,
+        binding.ilMerchantKTPNumber
+    )
+
+     */
+
+
+
 }

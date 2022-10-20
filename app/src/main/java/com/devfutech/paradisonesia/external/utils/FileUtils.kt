@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.navigation.NavController
 import androidx.viewbinding.BuildConfig.DEBUG
+import com.devfutech.paradisonesia.R
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -577,29 +578,72 @@ object FileUtils {
         }
     }
 
-
     fun textCorrector(text: String): String{
         var textResult = text
 
         for(i in 0.. (text.length-1)){
-            if(text.get(i).toString().equals("S")){
+            if(text.get(i).toString().equals("S", true)){
                 Timber.tag("KUNTUL SEGER").d("JOXM " + text)
                 textResult = textResult.replace(text.get(i).toString(), "5", true)
             }
             if(text.get(i).toString().equals("I")){
                 textResult = textResult.replace(text.get(i).toString(), "1")
             }
-            if(text.get(i).toString().equals("L")){
+            if(text.get(i).toString().equals("L", true)){
                 textResult = textResult.replace(text.get(i).toString(), "1")
             }
             if(text.get(i).toString().equals("A")){
                 textResult = textResult.replace(text.get(i).toString(), "4")
             }
-            if(text.get(i).toString().equals("O")){
+            if(text.get(i).toString().equals("O", true)){
                 textResult = textResult.replace(text.get(i).toString(), "0")
+            }
+            if(text.get(i).toString().equals("B")){
+                textResult = textResult.replace(text.get(i).toString(), "8")
+            }
+            if(text.get(i).toString().equals("T")){
+                textResult = textResult.replace(text.get(i).toString(), "5")
+            }
+            if(text.get(i).toString().equals("b")){
+                textResult = textResult.replace(text.get(i).toString(), "6")
             }
         }
 
         return textResult.replace(" ", "")
     }
+
+    class TextInputEditTextWatcher(textInputEditText: TextInputEditText, textInputLayout: TextInputLayout, errorMessage: String) : TextWatcher {
+
+        private val textInputLayoutTemp = textInputLayout
+        private val textInputEditTextTemp = textInputEditText
+        private val errorMessageTemp = errorMessage
+
+        init {
+            textInputEditTextTemp.addTextChangedListener(this)
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            if(!s.isNullOrBlank()) {
+                textInputLayoutTemp.error = null
+            }
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if(!s.isNullOrBlank()) {
+                textInputLayoutTemp.error = null
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            if(!s.isNullOrBlank()) {
+                textInputLayoutTemp.error = null
+            }
+            else{
+                textInputLayoutTemp.error = errorMessageTemp
+                textInputEditTextTemp.requestFocus()
+            }
+        }
+
+    }
+
 }
