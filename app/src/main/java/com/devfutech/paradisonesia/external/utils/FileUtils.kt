@@ -555,7 +555,7 @@ object FileUtils {
                             val lineCornerPoints = line.cornerPoints
                             val lineFrame = line.boundingBox
                             if(lineText.replace(" ", "").length==16&&lineText.replace(" ", "").matches(Regex(".*\\d.*"))){
-                                Timber.tag("FILEUTILS").d("VISION TEXT " + lineText)
+                                Timber.tag("FILEUTILSxx").d("VISION TEXT " + lineText)
                                 textInputEditText.setText(textCorrector(lineText).replace(" ", ""))
                             }
                             for (element in line.elements) {
