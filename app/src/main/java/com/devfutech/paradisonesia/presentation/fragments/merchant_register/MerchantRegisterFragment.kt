@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.presentation.fragments.merchant_register
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -16,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.loadAny
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.MerchantRegisterFragmentBinding
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.snackBar
@@ -115,6 +117,7 @@ class MerchantRegisterFragment : BaseFragment() {
 
                  */
                 if(widgetHandling()) {
+                    IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
                     findNavController().navigate(R.id.action_merchantRegisterFragment_to_merchantReviewedStatusFragment)
                 }
             }

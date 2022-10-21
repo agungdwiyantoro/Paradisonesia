@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.presentation.fragments.merchant_reviewed_status
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.MerchantReviewedStatusFragmentBinding
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +23,7 @@ class MerchantReviewedStatusFragment : BaseFragment() {
         MerchantReviewedStatusFragmentBinding.inflate(layoutInflater)
     }
     private val args:MerchantReviewedStatusFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

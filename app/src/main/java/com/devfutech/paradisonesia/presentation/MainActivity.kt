@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.devfutech.paradisonesia.R
+import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.ActivityMainBinding
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.toast
@@ -29,8 +31,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
-        setupTopMenu()
-        setupAction()
+        if(IsMerchantPreference(getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)).getIsMerchant()){
+            setupTopMenuMerchant()
+            setupActionMerchant()
+            binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(true)
+        }
+        else{
+            setupTopMenuCustomer()
+            setupActionCustomer()
+            binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(false)
+        }
+
     }
 
     private fun setupView() {
@@ -40,7 +51,16 @@ class MainActivity : AppCompatActivity() {
         binding.bnMain.setupWithNavController(navController)
     }
 
-    private fun setupTopMenu() {
+    private fun setupTopMenuCustomer() {
+        topLeves = listOf(
+            resources.getString(R.string.label_home),
+            resources.getString(R.string.label_booking),
+            resources.getString(R.string.label_inbox),
+            resources.getString(R.string.label_account)
+        )
+    }
+
+    private fun setupTopMenuMerchant() {
         topLeves = listOf(
             resources.getString(R.string.label_home),
             resources.getString(R.string.label_review),
@@ -64,14 +84,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupAction() {
+    private fun setupActionCustomer() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeCustomerFragment, R.id.reviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                R.id.homeCustomerFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                 else -> binding.bnMain.gone()
             }
         }
     }
+
+    private fun setupActionMerchant() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                else -> binding.bnMain.gone()
+            }
+        }
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

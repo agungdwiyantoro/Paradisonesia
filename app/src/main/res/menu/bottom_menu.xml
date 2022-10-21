@@ -5,9 +5,10 @@
         android:icon="@drawable/ic_home"
         android:title="@string/label_home" />
     <item
-        android:id="@+id/reviewFragment"
+        android:id="@+id/merchantReviewFragment"
         android:icon="@drawable/ic_review"
-        android:title="@string/label_review" />
+        android:title="@string/label_review"
+        android:visible="false"/>
     <item
         android:id="@+id/bookingFragment"
         android:icon="@drawable/ic_booking"

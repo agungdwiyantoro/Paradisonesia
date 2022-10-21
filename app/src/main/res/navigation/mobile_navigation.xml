@@ -88,6 +88,14 @@
     </fragment>
 
     <fragment
+        android:id="@+id/merchantReviewFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_review.MerchantReviewFragment"
+        android:label="@string/label_review"
+        tools:layout="@layout/merchant_review_fragment">
+
+    </fragment>
+
+    <fragment
         android:id="@+id/bookingFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.booking.BookingFragment"
         android:label="@string/label_booking"
@@ -96,6 +104,7 @@
             android:id="@+id/action_bookingFragment_to_signinFragment"
             app:destination="@id/signinFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/inboxFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.inbox.InboxFragment"
@@ -240,11 +249,5 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/merchantReviewStatus"
-        android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_reviewed_status.MerchantReviewedStatusFragment"
-        android:label="merchant_review_status"
-        tools:layout="@layout/merchant_reviewed_status_fragment">
 
-    </fragment>
 </navigation>
