@@ -4,6 +4,12 @@
         android:id="@+id/homeCustomerFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/label_home" />
+
+    <item
+        android:id="@+id/homeMerchantFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/label_home" />
+
     <item
         android:id="@+id/merchantReviewFragment"
         android:icon="@drawable/ic_review"

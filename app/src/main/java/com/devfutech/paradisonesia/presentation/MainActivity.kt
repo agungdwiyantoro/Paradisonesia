@@ -35,11 +35,13 @@ class MainActivity : AppCompatActivity() {
             setupTopMenuMerchant()
             setupActionMerchant()
             binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(true)
+            binding.bnMain.menu.findItem(R.id.homeMerchantFragment).setVisible(true)
         }
         else{
             setupTopMenuCustomer()
             setupActionCustomer()
             binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(false)
+            binding.bnMain.menu.findItem(R.id.homeCustomerFragment).setVisible(true)
         }
 
     }
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupActionMerchant() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                 else -> binding.bnMain.gone()
             }
         }

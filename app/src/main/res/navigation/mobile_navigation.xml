@@ -124,7 +124,8 @@
             app:destination="@id/emailVerificationFragment" />
         <action
             android:id="@+id/action_accountFragment_to_merchantRegisterFragment"
-            app:destination="@id/merchantRegisterFragment" />
+            app:destination="@id/merchantRegisterFragment"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_accountFragment_to_merchantReviewedStatusFragment"
             app:destination="@id/merchantReviewedStatusFragment"
@@ -162,6 +163,7 @@
             android:id="@+id/action_merchantRegisterFragment_to_merchantReviewedStatusFragment"
             app:destination="@id/merchantReviewedStatusFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/merchantReviewedStatusFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_reviewed_status.MerchantReviewedStatusFragment"
@@ -172,6 +174,9 @@
             app:argType="com.devfutech.paradisonesia.domain.model.merchant.MerchantStatus"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_merchantReviewedStatusFragment_to_homeMerchant"
+            app:destination="@id/homeMerchant" />
     </fragment>
 
 
