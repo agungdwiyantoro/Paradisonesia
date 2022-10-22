@@ -41,7 +41,8 @@ class MerchantReviewedStatusFragment : BaseFragment() {
     private fun setupAction() {
         binding.apply {
             appBar.ivBack.setOnClickListener {
-                findNavController().navigateUp()
+               // findNavController().navigateUp()
+                findNavController().navigate(R.id.action_merchantReviewedStatusFragment_to_accountFragment)
             }
         }
     }

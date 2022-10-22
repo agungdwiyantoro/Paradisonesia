@@ -31,18 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
-        if(IsMerchantPreference(getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)).getIsMerchant()){
-            setupTopMenuMerchant()
-            setupActionMerchant()
-            binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(true)
-            binding.bnMain.menu.findItem(R.id.homeMerchantFragment).setVisible(true)
-        }
-        else{
-            setupTopMenuCustomer()
-            setupActionCustomer()
-            binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(false)
-            binding.bnMain.menu.findItem(R.id.homeCustomerFragment).setVisible(true)
-        }
 
     }
 
@@ -51,6 +39,20 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
         binding.bnMain.setupWithNavController(navController)
+
+       // binding.bnMain.getMenu().clear()
+
+        if(IsMerchantPreference(getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)).getIsMerchant()){
+         //   binding.bnMain.inflateMenu(R.menu.bottom_menu)
+            setupTopMenuCustomer()
+            setupActionCustomer()
+        }
+
+        else {
+            //binding.bnMain.inflateMenu(R.menu.bottom_menu)
+            setupTopMenuMerchant()
+            setupActionMerchant()
+        }
     }
 
     private fun setupTopMenuCustomer() {
@@ -98,12 +100,11 @@ class MainActivity : AppCompatActivity() {
     private fun setupActionMerchant() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                R.id.homeMerchantFragment, R.id.merchantReviewFragment,R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                 else -> binding.bnMain.gone()
             }
         }
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

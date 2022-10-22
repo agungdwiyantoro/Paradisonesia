@@ -16,6 +16,9 @@
             app:destination="@id/homeCustomerFragment"
             app:popUpTo="@id/homeCustomerFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeMerchantFragment"
+            app:destination="@id/homeMerchantFragment" />
     </fragment>
 
     <action
@@ -88,11 +91,17 @@
     </fragment>
 
     <fragment
+        android:id="@+id/homeMerchantFragment"
+        android:name="com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragment"
+        android:label="@string/label_home"
+        tools:layout="@layout/home_merchant_fragment">
+    </fragment>
+
+    <fragment
         android:id="@+id/merchantReviewFragment"
         android:name="com.devfutech.paradisonesia.presentation.fragments.merchant_review.MerchantReviewFragment"
         android:label="@string/label_review"
         tools:layout="@layout/merchant_review_fragment">
-
     </fragment>
 
     <fragment
@@ -138,7 +147,7 @@
             app:destination="@id/editProfile" />
         <action
             android:id="@+id/action_accountFragment_to_home_merchant"
-            app:destination="@id/homeMerchant" />
+            app:destination="@id/homeMerchantFragment" />
         <action
             android:id="@+id/action_accountFragment_to_merchantRegisterFragment2"
             app:destination="@id/merchantRegisterFragment" />
@@ -176,7 +185,11 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_merchantReviewedStatusFragment_to_homeMerchant"
-            app:destination="@id/homeMerchant" />
+            app:destination="@id/homeMerchantFragment" />
+        <action
+            android:id="@+id/action_merchantReviewedStatusFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+
     </fragment>
 
 
@@ -246,13 +259,7 @@
             app:argType="com.devfutech.paradisonesia.domain.model.ReviewLihatSemua" />
     </fragment>
 
-    <fragment
-        android:id="@+id/homeMerchant"
-        android:name="com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragment"
-        android:label="home_merchant"
-        tools:layout="@layout/home_merchant_fragment">
 
-    </fragment>
 
 
 </navigation>

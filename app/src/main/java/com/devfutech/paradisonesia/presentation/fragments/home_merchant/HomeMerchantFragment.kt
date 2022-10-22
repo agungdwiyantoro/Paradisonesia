@@ -15,21 +15,9 @@ class HomeMerchantFragment : BaseFragment() {
         HomeMerchantFragmentBinding.inflate(layoutInflater)
     }
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupView()
-    }
-
-    private fun setupView(){
-        binding.apply {
-
-        }
     }
 }

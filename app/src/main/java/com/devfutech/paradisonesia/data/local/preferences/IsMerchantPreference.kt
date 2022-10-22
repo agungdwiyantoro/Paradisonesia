@@ -12,7 +12,7 @@ class IsMerchantPreference @Inject constructor(
         const val IS_MERCHANT_PREFERENCE = "IS_MERCHANT_PREFERENCE"
     }
 
-    fun getIsMerchant(): Boolean = sharedPreferences.getBoolean(IS_MERCHANT_PREFERENCE, true)
+    fun getIsMerchant(): Boolean = sharedPreferences.getBoolean(IS_MERCHANT_PREFERENCE, false)
 
     fun setIsMerchant(ismMerchantValue: Boolean) = sharedPreferences.edit().putBoolean(IS_MERCHANT_PREFERENCE, ismMerchantValue).apply()
 }
