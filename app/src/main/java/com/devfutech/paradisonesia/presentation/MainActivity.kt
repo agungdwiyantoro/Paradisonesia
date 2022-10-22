@@ -40,16 +40,16 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         binding.bnMain.setupWithNavController(navController)
 
-       // binding.bnMain.getMenu().clear()
+        binding.bnMain.getMenu().clear()
 
         if(IsMerchantPreference(getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)).getIsMerchant()){
-         //   binding.bnMain.inflateMenu(R.menu.bottom_menu)
+            binding.bnMain.inflateMenu(R.menu.bottom_menu)
             setupTopMenuCustomer()
             setupActionCustomer()
         }
 
         else {
-            //binding.bnMain.inflateMenu(R.menu.bottom_menu)
+            binding.bnMain.inflateMenu(R.menu.bottom_menu_merchant)
             setupTopMenuMerchant()
             setupActionMerchant()
         }

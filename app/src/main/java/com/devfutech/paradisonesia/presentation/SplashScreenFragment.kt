@@ -14,6 +14,7 @@ import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.SplashScreenFragmentBinding
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SplashScreenFragment : BaseFragment() {
@@ -35,6 +36,7 @@ class SplashScreenFragment : BaseFragment() {
     }
 
     private fun setupAction() {
+        Timber.tag("SplashScreenFragment").d(" " +IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant().toString())
         if(IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant()){
             Handler(Looper.getMainLooper()).postDelayed({
                 navigationTo(R.id.action_splashScreenFragment_to_homeCustomerFragment)
