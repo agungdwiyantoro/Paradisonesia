@@ -151,6 +151,9 @@ dependencies {
     //Text Recognizer
     implementation ("com.google.mlkit:text-recognition:16.0.0-beta6")
 
+    //Splash Screen
+    implementation ("androidx.core:core-splashscreen:1.0.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

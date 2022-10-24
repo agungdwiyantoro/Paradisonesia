@@ -4,7 +4,7 @@
     <string name="facebook_app_id" translatable="false">1179502965813030</string>
     <string name="facebook_client_token" translatable="false">2c6f38ab0a7200ab4a96117812235e8f</string>
     <string name="todo">todo</string>
-
+    <string name="main_activity">Main Activity</string>
     <!--    Firebase auth message-->
     <string name="badly_format_email">The email address is badly formatted.</string>
     <string name="home">Home</string>

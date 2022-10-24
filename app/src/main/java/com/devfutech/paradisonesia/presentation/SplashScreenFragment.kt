@@ -1,5 +1,6 @@
 package com.devfutech.paradisonesia.presentation
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -7,8 +8,10 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import android.view.ViewTreeObserver
+import android.view.animation.AnticipateInterpolator
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.SplashScreenFragmentBinding
@@ -22,6 +25,7 @@ class SplashScreenFragment : BaseFragment() {
     private val binding:SplashScreenFragmentBinding by lazy {
         SplashScreenFragmentBinding.inflate(layoutInflater)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

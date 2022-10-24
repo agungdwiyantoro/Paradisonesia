@@ -23,6 +23,7 @@ import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.external.utils.FileUtils
+import com.devfutech.paradisonesia.presentation.MainActivity
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -118,6 +119,8 @@ class MerchantRegisterFragment : BaseFragment() {
                  */
                 if(widgetHandling()) {
                     IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(true)
+                    (activity as MainActivity).setupActionMerchant(true)
+                    (activity as MainActivity).setReviewVisibility(true)
                     findNavController().navigate(R.id.action_merchantRegisterFragment_to_merchantReviewedStatusFragment)
                 }
             }

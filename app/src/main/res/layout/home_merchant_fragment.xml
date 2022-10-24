@@ -8,9 +8,6 @@
 
         <include android:id="@+id/ly_merchant_transaction" layout="@layout/layout_merchant_transaction"/>
 
-
-
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_banner"
             android:layout_width="match_parent"
