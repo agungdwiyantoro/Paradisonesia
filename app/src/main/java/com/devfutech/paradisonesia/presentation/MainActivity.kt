@@ -102,6 +102,10 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    fun orderThePosition(){
+        binding.bnMain.menu.getItem(4).setChecked(true)
+    }
+
     fun setReviewVisibility(visiblity : Boolean) {
         binding.bnMain.menu.findItem(R.id.merchantReviewFragment).setVisible(visiblity)
     }
@@ -130,41 +134,58 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupActionMerchant(item: Int, itemDes: Int) {
-        binding.bnMain.menu.removeItem(item)
-        binding.bnMain.menu.add(0, itemDes, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+        binding.bnMain.menu.clear()
+        binding.bnMain.menu.add(0, R.id.homeMerchantFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+        binding.bnMain.menu.add(0, R.id.merchantReviewFragment, 1, R.string.label_review).setIcon(R.drawable.ic_review)
+        binding.bnMain.menu.add(0, R.id.bookingFragment, 2, R.string.label_booking).setIcon(R.drawable.ic_booking)
+        binding.bnMain.menu.add(0,  R.id.inboxFragment, 3, R.string.label_inbox).setIcon(R.drawable.ic_inbox)
+        binding.bnMain.menu.add(0,  R.id.accountFragment, 4, R.string.label_account).setIcon(R.drawable.ic_account)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                itemDes, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                 else -> binding.bnMain.gone()
             }
         }
     }
-    /*
-    fun setupActionMerchant(item: Int) {
-        if(item==R.id.homeCustomerFragment){
-            binding.bnMain.menu.removeItem(R.id.homeMerchantFragment)
-            binding.bnMain.menu.add(0, R.id.homeCustomerFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                when (destination.id) {
-                    R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
-                    else -> binding.bnMain.gone()
-                }
-            }
-        }
-        if(item==R.id.homeMerchantFragment){
-            binding.bnMain.menu.removeItem(R.id.homeCustomerFragment)
-            binding.bnMain.menu.add(0, R.id.homeMerchantFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                when (destination.id) {
-                    R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
-                    else -> binding.bnMain.gone()
-                }
-            }
-        }
-       // binding.bnMain.setupWithNavController(navController)
-    }
 
-     */
+    /*
+       fun setupActionMerchant(item: Int, itemDes: Int) {
+           binding.bnMain.menu.removeItem(item)
+           binding.bnMain.menu.add(0, itemDes, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+           navController.addOnDestinationChangedListener { _, destination, _ ->
+               when (destination.id) {
+                   itemDes, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                   else -> binding.bnMain.gone()
+               }
+           }
+       }
+
+       fun setupActionMerchant(item: Int) {
+           if(item==R.id.homeCustomerFragment){
+               binding.bnMain.menu.removeItem(R.id.homeMerchantFragment)
+               binding.bnMain.menu.add(0, R.id.homeCustomerFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+               navController.addOnDestinationChangedListener { _, destination, _ ->
+                   when (destination.id) {
+                       R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                       else -> binding.bnMain.gone()
+                   }
+               }
+           }
+           if(item==R.id.homeMerchantFragment){
+               binding.bnMain.menu.removeItem(R.id.homeCustomerFragment)
+               binding.bnMain.menu.add(0, R.id.homeMerchantFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+               navController.addOnDestinationChangedListener { _, destination, _ ->
+                   when (destination.id) {
+                       R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                       else -> binding.bnMain.gone()
+                   }
+               }
+           }
+          // binding.bnMain.setupWithNavController(navController)
+       }
+
+        */
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

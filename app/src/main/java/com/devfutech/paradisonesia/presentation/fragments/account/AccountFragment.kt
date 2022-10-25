@@ -106,12 +106,14 @@ class AccountFragment : BaseFragment() {
                     tvRegisterAsMerchant.text = getString(R.string.label_switch_as_merchant)
                     (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
                     (activity as MainActivity).setReviewVisibility(false)
+                    (activity as MainActivity).orderThePosition()
                 }
                 else{
                     IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(true)
                     tvRegisterAsMerchant.text = getString(R.string.label_switch_as_customer)
                     (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment, R.id.homeMerchantFragment)
                     (activity as MainActivity).setReviewVisibility(true)
+                    (activity as MainActivity).orderThePosition()
                 }
             }
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
