@@ -54,6 +54,8 @@
     <string name="label_term_conditions">Term &amp; Conditions</string>
     <string name="label_privacy_policy">Privacy Policy</string>
     <string name="label_register_as_a_merchant">Register as a Merchant</string>
+    <string name="label_switch_as_merchant">Switch as merchant</string>
+    <string name="label_switch_as_customer">Switch as customer</string>
     <string name="label_version">Version 0.0.1</string>
     <string name="label_account_greetings">Halo, %1$s</string>
     <string name="label_bank_account">Bank Account</string>

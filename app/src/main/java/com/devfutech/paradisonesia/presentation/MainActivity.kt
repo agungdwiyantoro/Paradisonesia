@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.get
@@ -52,23 +53,34 @@ class MainActivity : AppCompatActivity() {
         binding.bnMain.setupWithNavController(navController)
 
      //   binding.bnMain.getMenu().clear()
+        setupTopMenuMerchant()
 
         if(IsMerchantPreference(getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)).getIsMerchant()){
            // binding.bnMain.inflateMenu(R.menu.bottom_menu)
            // setupTopMenuCustomer()
            // setupActionCustomer()
 
+            setupActionMerchant(R.id.homeCustomerFragment, R.id.homeMerchantFragment)
             setReviewVisibility(true)
+
+
         }
 
         else {
            // binding.bnMain.inflateMenu(R.menu.bottom_menu_merchant)
-            setReviewVisibility(false)
 
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                    else -> binding.bnMain.gone()
+                }
+            }
+
+            setReviewVisibility(false)
         }
 
-        setupTopMenuMerchant()
-        setupActionMerchant(false)
+
     }
 
     private fun setupTopMenuCustomer() {
@@ -117,16 +129,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setupActionMerchant(isMerchant: Boolean) {
-        if (isMerchant) {
+    fun setupActionMerchant(item: Int, itemDes: Int) {
+        binding.bnMain.menu.removeItem(item)
+        binding.bnMain.menu.add(0, itemDes, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                itemDes, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                else -> binding.bnMain.gone()
+            }
+        }
+    }
+    /*
+    fun setupActionMerchant(item: Int) {
+        if(item==R.id.homeCustomerFragment){
+            binding.bnMain.menu.removeItem(R.id.homeMerchantFragment)
+            binding.bnMain.menu.add(0, R.id.homeCustomerFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
-                    R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                    R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                     else -> binding.bnMain.gone()
                 }
             }
-        } else {
-//            binding.bnMain.menu.add(0, R.id.homeCustomerFragment, 0, R.string.label_home)
+        }
+        if(item==R.id.homeMerchantFragment){
+            binding.bnMain.menu.removeItem(R.id.homeCustomerFragment)
+            binding.bnMain.menu.add(0, R.id.homeMerchantFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
                     R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
@@ -134,9 +161,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        binding.bnMain.setupWithNavController(navController)
+       // binding.bnMain.setupWithNavController(navController)
     }
+
+     */
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

@@ -97,7 +97,22 @@ class AccountFragment : BaseFragment() {
                     requireContext().toast("Email belum diverifikasi")
                 }
                  */
-                findNavController().navigate(R.id.action_accountFragment_to_merchantRegisterFragment)
+                if(IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_REGISTERED_MERCHANT, Context.MODE_PRIVATE)!!).getIsRegisteredMerchant()==false) {
+                    findNavController().navigate(R.id.action_accountFragment_to_merchantRegisterFragment)
+                }
+                else if(IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_REGISTERED_MERCHANT, Context.MODE_PRIVATE)!!).getIsRegisteredMerchant()==true
+                    &&IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant()==true){
+                    IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
+                    tvRegisterAsMerchant.text = getString(R.string.label_switch_as_merchant)
+                    (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
+                    (activity as MainActivity).setReviewVisibility(false)
+                }
+                else{
+                    IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(true)
+                    tvRegisterAsMerchant.text = getString(R.string.label_switch_as_customer)
+                    (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment, R.id.homeMerchantFragment)
+                    (activity as MainActivity).setReviewVisibility(true)
+                }
             }
             includedNonLogin.btnGoToLoginPage.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
@@ -112,7 +127,11 @@ class AccountFragment : BaseFragment() {
                         findNavController().navigate(R.id.action_accountFragment_to_signinFragment)
                     }.also {
                         requireContext().toast(getString(R.string.signed_out))
-                }
+                    }.also {
+                        IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
+                        (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
+                        (activity as MainActivity).setReviewVisibility(false)
+                    }
             })
 
             llEditProfile.setOnClickListener({
@@ -120,8 +139,8 @@ class AccountFragment : BaseFragment() {
             })
 
             llPrivacyPolicy.setOnClickListener{
-                IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(true)
-                (activity as MainActivity).setupActionMerchant(false)
+                IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
+                (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
                 (activity as MainActivity).setReviewVisibility(false)
             }
         }
@@ -145,6 +164,23 @@ class AccountFragment : BaseFragment() {
                 tvEmail.text = account.email
                 tvRegisterAsMerchant.isVisible = account.isEmailVerified
                 tvVersionApps.text = BuildConfig.VERSION_NAME
+
+                Timber.tag("ACCOUNT FRAGMENT").d("JAN " + IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_REGISTERED_MERCHANT, Context.MODE_PRIVATE)!!).getIsRegisteredMerchant()
+                + " , " + IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant())
+
+                if(IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_REGISTERED_MERCHANT, Context.MODE_PRIVATE)!!).getIsRegisteredMerchant()==false){
+                    tvRegisterAsMerchant.text = getString(R.string.label_register_as_a_merchant)
+                }
+
+                else if(IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_REGISTERED_MERCHANT, Context.MODE_PRIVATE)!!).getIsRegisteredMerchant()==true
+                    &&IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant()==true){
+                    tvRegisterAsMerchant.text = getString(R.string.label_switch_as_customer)
+                }
+                else{
+                    tvRegisterAsMerchant.text = getString(R.string.label_switch_as_merchant)
+                }
+
+
             }
         }
     }

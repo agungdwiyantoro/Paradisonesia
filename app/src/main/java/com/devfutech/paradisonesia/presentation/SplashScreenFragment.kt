@@ -26,7 +26,6 @@ class SplashScreenFragment : BaseFragment() {
         SplashScreenFragmentBinding.inflate(layoutInflater)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,12 +42,12 @@ class SplashScreenFragment : BaseFragment() {
         Timber.tag("SplashScreenFragment").d(" " +IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant().toString())
         if(IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant()){
             Handler(Looper.getMainLooper()).postDelayed({
-                navigationTo(R.id.action_splashScreenFragment_to_homeCustomerFragment)
+                navigationTo(R.id.action_splashScreenFragment_to_homeMerchantFragment)
             }, 3000L)
         }
         else {
             Handler(Looper.getMainLooper()).postDelayed({
-                navigationTo(R.id.action_splashScreenFragment_to_homeMerchantFragment)
+                navigationTo(R.id.action_splashScreenFragment_to_homeCustomerFragment)
             }, 3000L)
         }
     }
