@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.domain.repository
 
 import com.devfutech.paradisonesia.domain.model.merchant.MerchantStatus
+import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 
@@ -17,4 +18,5 @@ interface MerchantRepository {
     ): Flow<String?>
 
     suspend fun merchantStatus(): Flow<MerchantStatus?>
+    suspend fun merchantHome(): Flow<HomeMerchant?>
 }

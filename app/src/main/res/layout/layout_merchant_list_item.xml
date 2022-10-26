@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rv_merchant_list_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="@dimen/_8sdp"
     android:paddingEnd="@dimen/_8sdp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:listitem="@layout/item_merchant_list_item">
 
 

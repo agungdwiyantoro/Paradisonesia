@@ -1,6 +1,7 @@
 package com.devfutech.paradisonesia.domain.usecase
 
 import com.devfutech.paradisonesia.domain.model.merchant.MerchantStatus
+import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.domain.repository.MerchantRepository
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -26,4 +27,7 @@ class MerchantUseCase @Inject constructor(
         return repository.merchantStatus()
     }
 
+    suspend fun homeMerchant(): Flow<HomeMerchant?> {
+        return repository.merchantHome()
+    }
 }

@@ -2,6 +2,7 @@ package com.devfutech.paradisonesia.data.repository
 
 import com.devfutech.paradisonesia.data.network.service.MerchantService
 import com.devfutech.paradisonesia.domain.model.merchant.MerchantStatus
+import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.domain.repository.MerchantRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -29,4 +30,10 @@ class MerchantRepositoryImpl(
         val response = remoteDataSource.merchantStatus().data?.toMerchantStatus()
         emit(response)
     }
+
+    override suspend fun merchantHome(): Flow<HomeMerchant?> {
+        TODO("Not yet implemented")
+    }
+
+
 }

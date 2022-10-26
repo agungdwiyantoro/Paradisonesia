@@ -4,7 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.devfutech.paradisonesia.domain.model.banner.Banner
 import com.devfutech.paradisonesia.domain.model.category_product.CategoryProduct
 import com.devfutech.paradisonesia.domain.model.city.City
+import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.domain.model.product.product_detail.ProductDetail
+import com.devfutech.paradisonesia.domain.usecase.MerchantUseCase
 import com.devfutech.paradisonesia.domain.usecase.ProductDetailUseCase
 import com.devfutech.paradisonesia.domain.usecase.ProductUseCase
 import com.devfutech.paradisonesia.external.Resource
@@ -19,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeMerchantViewModel @Inject constructor(
-    private val productUseCase: ProductUseCase
+    private val merchantUseCase: MerchantUseCase
 ) : BaseViewModel() {
     private val _banner: MutableStateFlow<Resource<List<Banner>>> =
         MutableStateFlow(Resource.Success(emptyList()))
@@ -37,13 +39,31 @@ class HomeMerchantViewModel @Inject constructor(
     val productDetail: MutableStateFlow<Resource<ProductDetail>>
         get() = _productDetail
 
+    private val _topHomeMerchant: MutableStateFlow<Resource<HomeMerchant>> = MutableStateFlow(Resource.Success())
+    val topHomeMerchant : MutableStateFlow<Resource<HomeMerchant>>
+        get() = _topHomeMerchant
+
     init {
-        getBanners()
-        getListCategory()
-        getListCity()
+    //    getBanners()
+      //  getListCategory()
+        //getListCity()
        // getProductDetail("8")
+        getTopHomeMerchant()
     }
 
+    private  fun getTopHomeMerchant(){
+        _topHomeMerchant.value = Resource.Loading()
+        viewModelScope.launch {
+            merchantUseCase.homeMerchant()
+                .catch { onError(it)
+                    _topHomeMerchant.value = Resource.Failure(defaultError(it))
+                }.collect{
+                    _topHomeMerchant.value = Resource.Success(it)
+                }
+        }
+    }
+
+    /*
     private fun getListCity() {
         _city.value = Resource.Loading()
         viewModelScope.launch {
@@ -83,7 +103,7 @@ class HomeMerchantViewModel @Inject constructor(
         }
     }
 
-    /*
+
     private fun getProductDetail(index: String) {
          _productDetail.value = Resource.Loading()
         viewModelScope.launch {

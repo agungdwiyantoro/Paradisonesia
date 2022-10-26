@@ -120,7 +120,7 @@ class MerchantRegisterFragment : BaseFragment() {
                 if(widgetHandling()) {
                     IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(true)
                     IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_REGISTERED_MERCHANT, Context.MODE_PRIVATE)!!).setIsRegisteredMerchant(true)
-                    (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment, R.id.homeMerchantFragment)
+                    (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment)
                     (activity as MainActivity).setReviewVisibility(true)
                     findNavController().navigate(R.id.action_merchantRegisterFragment_to_merchantReviewedStatusFragment)
                 }

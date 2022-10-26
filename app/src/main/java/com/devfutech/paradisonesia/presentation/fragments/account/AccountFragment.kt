@@ -104,14 +104,14 @@ class AccountFragment : BaseFragment() {
                     &&IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).getIsMerchant()==true){
                     IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
                     tvRegisterAsMerchant.text = getString(R.string.label_switch_as_merchant)
-                    (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
+                    (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment)
                     (activity as MainActivity).setReviewVisibility(false)
                     (activity as MainActivity).orderThePosition()
                 }
                 else{
                     IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(true)
                     tvRegisterAsMerchant.text = getString(R.string.label_switch_as_customer)
-                    (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment, R.id.homeMerchantFragment)
+                    (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment)
                     (activity as MainActivity).setReviewVisibility(true)
                     (activity as MainActivity).orderThePosition()
                 }
@@ -131,7 +131,7 @@ class AccountFragment : BaseFragment() {
                         requireContext().toast(getString(R.string.signed_out))
                     }.also {
                         IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
-                        (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
+                        (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment)
                         (activity as MainActivity).setReviewVisibility(false)
                     }
             })
@@ -142,7 +142,7 @@ class AccountFragment : BaseFragment() {
 
             llPrivacyPolicy.setOnClickListener{
                 IsMerchantPreference(activity?.getSharedPreferences(IsMerchantPreference.IS_MERCHANT_PREFERENCE, Context.MODE_PRIVATE)!!).setIsMerchant(false)
-                (activity as MainActivity).setupActionMerchant(R.id.homeMerchantFragment, R.id.homeCustomerFragment)
+                (activity as MainActivity).setupActionMerchant(R.id.homeCustomerFragment)
                 (activity as MainActivity).setReviewVisibility(false)
             }
         }

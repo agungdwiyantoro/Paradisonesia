@@ -8,6 +8,7 @@
 
         <include android:id="@+id/ly_merchant_transaction" layout="@layout/layout_merchant_transaction"/>
 
+        <!--
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_banner"
             android:layout_width="match_parent"
@@ -20,12 +21,7 @@
             android:background="@color/transparent"
             app:tabBackground="@drawable/tab_merchant_pager_adapter"
             app:tabIndicator="@color/transparent" />
-
-
-
-
+-->
         <include android:id="@+id/ly_merchant_list_item" layout="@layout/layout_merchant_list_item"/>
-
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>

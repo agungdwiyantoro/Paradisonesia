@@ -21,35 +21,38 @@ import com.google.android.material.textfield.TextInputLayout
 import timber.log.Timber
 
 
-class TopHomeMerchantAdapter(
-    private val list: MutableList<HomeMerchant>,
-) : RecyclerView.Adapter<TopHomeMerchantAdapter.ViewHolder>() {
+class ProductMerchantAdapter(
+    private val list: MutableList<HomeMerchant.MerchantProduct>,
+) : RecyclerView.Adapter<ProductMerchantAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_merchant_transaction, parent, false)
+            .inflate(R.layout.item_merchant_list_item, parent, false)
 
         return ViewHolder(view)
     }
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Timber.tag("TOPHOMEKONTOL").d("KUNTUL X " + list.get(position).valueTopMerchant )
-        holder.valueTopMerchant.text = list.get(position).valueTopMerchant.toString()
-        holder.titleTopMerchant.text = list.get(position).titleTopMerchant
+        holder.tvTitleProductMerchant.text = list.get(position).productName
+        holder.tvProductServiceName.text = list.get(position).productType
+        holder.tvProductAddress.text = list.get(position).productAddress
+        holder.tvTotal.text = FileUtils.convertToCurrency(list.get(position).productTotal)
     }
 
     // Holds the views for adding it to image and text
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-        val titleTopMerchant : AppCompatTextView = itemView.findViewById(R.id.tv_merchant_transaction_title)
-        val valueTopMerchant : AppCompatTextView = itemView.findViewById(R.id.tv_total_earning_value)
+        val tvTitleProductMerchant : AppCompatTextView = itemView.findViewById(R.id.tv_item_title)
+        val tvProductServiceName : AppCompatTextView = itemView.findViewById(R.id.tv_service_name)
+        val tvProductAddress : AppCompatTextView = itemView.findViewById(R.id.tv_address)
+        val tvTotal : AppCompatTextView = itemView.findViewById(R.id.tv_total)
     }
 
     override fun getItemCount(): Int {
 
-        return 3
+        return list.size
     }
 }

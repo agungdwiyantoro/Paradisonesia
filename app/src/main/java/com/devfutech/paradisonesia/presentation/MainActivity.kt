@@ -1,16 +1,11 @@
 package com.devfutech.paradisonesia.presentation
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.get
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.devfutech.paradisonesia.R
@@ -19,10 +14,7 @@ import com.devfutech.paradisonesia.databinding.ActivityMainBinding
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.toast
 import com.devfutech.paradisonesia.external.extension.visible
-import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerFragment
-import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragment
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -60,7 +52,7 @@ class MainActivity : AppCompatActivity() {
            // setupTopMenuCustomer()
            // setupActionCustomer()
 
-            setupActionMerchant(R.id.homeCustomerFragment, R.id.homeMerchantFragment)
+            setupActionMerchant(R.id.homeMerchantFragment)
             setReviewVisibility(true)
 
 
@@ -69,7 +61,9 @@ class MainActivity : AppCompatActivity() {
         else {
            // binding.bnMain.inflateMenu(R.menu.bottom_menu_merchant)
 
+            setupActionMerchant(R.id.homeCustomerFragment)
 
+/*
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
                     R.id.homeCustomerFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
@@ -77,6 +71,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+
+ */
             setReviewVisibility(false)
         }
 
@@ -133,17 +129,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setupActionMerchant(item: Int, itemDes: Int) {
+    fun setupActionMerchant(itemID: Int) {
         binding.bnMain.menu.clear()
-        binding.bnMain.menu.add(0, R.id.homeMerchantFragment, 0, R.string.label_home).setIcon(R.drawable.ic_home)
+        binding.bnMain.menu.add(0, itemID, 0, R.string.label_home).setIcon(R.drawable.ic_home)
         binding.bnMain.menu.add(0, R.id.merchantReviewFragment, 1, R.string.label_review).setIcon(R.drawable.ic_review)
         binding.bnMain.menu.add(0, R.id.bookingFragment, 2, R.string.label_booking).setIcon(R.drawable.ic_booking)
-        binding.bnMain.menu.add(0,  R.id.inboxFragment, 3, R.string.label_inbox).setIcon(R.drawable.ic_inbox)
+        if(itemID==R.id.homeMerchantFragment) {
+            binding.bnMain.menu.add(0, R.id.inboxFragment, 3, R.string.notification)
+                .setIcon(R.drawable.ic_notifications)
+        }
+        else{
+            binding.bnMain.menu.add(0, R.id.inboxFragment, 3, R.string.label_inbox)
+                .setIcon(R.drawable.ic_inbox)
+        }
         binding.bnMain.menu.add(0,  R.id.accountFragment, 4, R.string.label_account).setIcon(R.drawable.ic_account)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeMerchantFragment, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
+                itemID, R.id.merchantReviewFragment, R.id.bookingFragment, R.id.inboxFragment, R.id.accountFragment -> binding.bnMain.visible()
                 else -> binding.bnMain.gone()
             }
         }
