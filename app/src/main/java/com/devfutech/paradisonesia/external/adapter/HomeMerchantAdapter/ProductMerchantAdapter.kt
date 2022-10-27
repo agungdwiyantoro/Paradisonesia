@@ -3,8 +3,10 @@ package com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.RatingBar
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,7 @@ import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.ItemMerchantTransactionBinding
 import com.devfutech.paradisonesia.domain.model.advance_filter.AdvanceFilter
 import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
+import com.devfutech.paradisonesia.external.extension.visible
 import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.bottomsheet.filter.FilterBottomSheet
 import com.google.android.material.slider.LabelFormatter
@@ -41,6 +44,31 @@ class ProductMerchantAdapter(
         holder.tvProductServiceName.text = list.get(position).productType
         holder.tvProductAddress.text = list.get(position).productAddress
         holder.tvTotal.text = FileUtils.convertToCurrency(list.get(position).productTotal)
+
+        holder.llCalendar.setOnClickListener{
+
+            if(holder.llDate.visibility==View.INVISIBLE) {
+                holder.llDate.visibility = View.VISIBLE
+                //loading our custom made animations
+
+                val animation =
+                    AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fade_in)
+                //starting the animation
+
+                holder.llDate.startAnimation(animation)
+            }
+            else{
+                holder.llDate.visibility = View.INVISIBLE
+                //loading our custom made animations
+
+                val animation =
+                    AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fade_out)
+                //starting the animation
+
+                holder.llDate.startAnimation(animation)
+            }
+
+        }
     }
 
     // Holds the views for adding it to image and text
@@ -49,6 +77,8 @@ class ProductMerchantAdapter(
         val tvProductServiceName : AppCompatTextView = itemView.findViewById(R.id.tv_service_name)
         val tvProductAddress : AppCompatTextView = itemView.findViewById(R.id.tv_address)
         val tvTotal : AppCompatTextView = itemView.findViewById(R.id.tv_total)
+        val llDate : LinearLayoutCompat = itemView.findViewById(R.id.ll_date)
+        val llCalendar : LinearLayoutCompat = itemView.findViewById(R.id.ll_calendar)
     }
 
     override fun getItemCount(): Int {

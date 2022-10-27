@@ -12,6 +12,7 @@ import com.devfutech.paradisonesia.databinding.HomeMerchantFragmentBinding
 import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.BannerAdapter
+import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.HomeMerchantViewPagerAdapter
 import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.ProductMerchantAdapter
 import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.TopHomeMerchantAdapter
 import com.devfutech.paradisonesia.external.extension.snackBar
@@ -47,6 +48,7 @@ class HomeMerchantFragment : BaseFragment() {
 
         Timber.tag("TOPHOMEKONTOL").d("KUNTUL X HOMEMERCHANTFRAGMENT" )
 
+
         setupView()
     }
 
@@ -72,6 +74,12 @@ class HomeMerchantFragment : BaseFragment() {
                     500000)
                 )
             )
+
+            binding.vpBanner.adapter = HomeMerchantViewPagerAdapter(supportFragmentManager, lifecycle)
+
+
+
+
         }
     }
 

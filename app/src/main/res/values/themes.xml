@@ -189,8 +189,16 @@
         <item name="android:textSize">@dimen/_14ssp</item>
     </style>
 
+    <style name="Text.ExtraLarge" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/_18ssp</item>
+    </style>
+
     <style name="Text.Big" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/_16ssp</item>
+    </style>
+
+    <style name="Text.ExtraSmall" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/_8ssp</item>
     </style>
 
     <style name="Text.Small.White" parent="Text.Small">
