@@ -5,23 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
         <include android:id="@+id/ly_merchant_transaction" layout="@layout/layout_merchant_transaction"/>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicator="@color/transparent"
+            app:tabBackground="@drawable/tab_merchant_pager_adapter"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/black" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_banner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            app:tabBackground="@drawable/tab_merchant_pager_adapter"
-            app:tabIndicator="@color/transparent" />
-
-        <include android:id="@+id/ly_merchant_list_item" layout="@layout/layout_merchant_list_item"/>
+        <!--<include android:id="@+id/ly_merchant_list_item" layout="@layout/layout_merchant_list_item"/>-->
 
 </androidx.appcompat.widget.LinearLayoutCompat>

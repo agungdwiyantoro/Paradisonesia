@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragments.TopHomeMerchantFragment
 import com.devfutech.paradisonesia.presentation.fragments.signin.SigninFragment
 import com.devfutech.paradisonesia.presentation.fragments.signup.SignupFragment
 
@@ -18,9 +19,9 @@ class HomeMerchantViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: 
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return SigninFragment()// CatFragment()
+            0 -> return TopHomeMerchantFragment()// CatFragment()
             1 -> return SignupFragment()
         }
-        return SigninFragment()
+        return TopHomeMerchantFragment()
     }
 }

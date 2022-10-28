@@ -13,6 +13,6 @@ data class HomeMerchant (
         val productType: String?,
         val productAddress: String?,
         val productDate: String?,
-        val productTotal: Int?
+        val productTotal: String?
     ) : Parcelable
 }

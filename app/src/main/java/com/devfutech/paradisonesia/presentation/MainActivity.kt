@@ -8,12 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.ActivityMainBinding
+import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.HomeMerchantViewPagerAdapter
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.toast
 import com.devfutech.paradisonesia.external.extension.visible
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -152,6 +156,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setupVpBannerTlBanner(viewPager: ViewPager2, tabLayout: TabLayout, animalsArray: Array<String>){
+        viewPager.adapter = HomeMerchantViewPagerAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = animalsArray[position]
+        }.attach()
+    }
     /*
        fun setupActionMerchant(item: Int, itemDes: Int) {
            binding.bnMain.menu.removeItem(item)

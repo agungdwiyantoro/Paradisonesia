@@ -1,4 +1,4 @@
-package com.devfutech.paradisonesia.presentation.fragments.home_merchant
+package com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragments
 
 import android.os.Bundle
 import android.os.FileUtils
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.HomeMerchantFragmentBinding
+import com.devfutech.paradisonesia.databinding.LayoutMerchantListItemBinding
 import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.BannerAdapter
@@ -19,14 +20,15 @@ import com.devfutech.paradisonesia.external.extension.snackBar
 import com.devfutech.paradisonesia.presentation.MainActivity
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerViewModel
+import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class HomeMerchantFragment : BaseFragment() {
+class ReceivedHomeMerchantFragment : BaseFragment() {
 
-    private val binding: HomeMerchantFragmentBinding by lazy {
-        HomeMerchantFragmentBinding.inflate(layoutInflater)
+    private val binding: LayoutMerchantListItemBinding by lazy {
+        LayoutMerchantListItemBinding.inflate(layoutInflater)
     }
 
     private val viewModel: HomeMerchantViewModel by viewModels()
@@ -34,12 +36,6 @@ class HomeMerchantFragment : BaseFragment() {
     private val topHomeMerchantAdapter by lazy {
        // TopHomeMerchantAdapter()
     }
-
-    val animalsArray = arrayOf(
-        "Accepted",
-        "Received",
-        "On the way"
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,12 +57,22 @@ class HomeMerchantFragment : BaseFragment() {
 
     private fun setupView(){
         binding.apply {
-            lyMerchantTransaction.root.adapter = TopHomeMerchantAdapter(mutableListOf(
-                HomeMerchant(getString(R.string.total_earnings), com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency(50000000) ),
-                HomeMerchant(getString(R.string.total_transaction_this_month),"200"),
-                HomeMerchant(getString(R.string.total_product_published), "600")))
-
-            (activity as MainActivity).setupVpBannerTlBanner(binding.vpBanner, binding.tlBanner, animalsArray )
+            rvMerchantListItem.adapter = ProductMerchantAdapter(mutableListOf(
+                HomeMerchant.MerchantProduct(
+                    "Daffam / Hotel",
+                    "Hotel",
+                "Jl. Malioboro Jl. Dagen No. 80",
+                "JKDk",
+                    com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency(300000)),
+                HomeMerchant.MerchantProduct(
+                    "Daffam / Hotel 2",
+                    "Hotel 2",
+                    "Jl. Malioboro Jl. Dagen No. 85",
+                    "JKDk",
+                    com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency(500000))
+                )
+            )
+           // (activity as MainActivity).setupVpBannerTlBanner(binding.vpBanner, binding.tlBanner, animalsArray )
 
         }
     }
