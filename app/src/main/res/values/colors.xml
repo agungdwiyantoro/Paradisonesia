@@ -5,7 +5,7 @@
     <color name="transparent">@android:color/transparent</color>
     <color name="grey">#dddddd</color>
 
-    <color name="backgroundGrey">#E5E5E5</color>
+    <color name="backgroundGrey">#F5F5F5</color>
     <color name="yellow_ffa216">#FFA216</color>
     <color name="trans_yellow_ffa216">#CCFFA216</color>
     <color name="blue_0063a7">#0063A7</color>

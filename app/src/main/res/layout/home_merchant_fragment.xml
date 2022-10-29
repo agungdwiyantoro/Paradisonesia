@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:background="@color/backgroundGrey"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_5sdp">
 
         <include android:id="@+id/ly_merchant_transaction" layout="@layout/layout_merchant_transaction"/>
 
@@ -11,10 +13,15 @@
             android:id="@+id/tl_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             app:tabIndicator="@color/transparent"
             app:tabBackground="@drawable/tab_merchant_pager_adapter"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/black" />
+            app:tabTextColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_banner"

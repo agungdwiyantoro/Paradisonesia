@@ -43,7 +43,7 @@ class ProductMerchantAdapter(
         holder.tvTitleProductMerchant.text = list.get(position).productName
         holder.tvProductServiceName.text = list.get(position).productType
         holder.tvProductAddress.text = list.get(position).productAddress
-        holder.tvTotal.text = FileUtils.convertToCurrency(list.get(position).productTotal?.toInt())
+        holder.tvTotal.text = holder.itemView.context.getString(R.string.final_price, FileUtils.convertToCurrency(list.get(position).productTotal))
 
         holder.llCalendar.setOnClickListener{
 

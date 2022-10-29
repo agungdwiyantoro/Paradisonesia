@@ -1,24 +1,18 @@
 package com.devfutech.paradisonesia.presentation.fragments.home_merchant
 
 import android.os.Bundle
-import android.os.FileUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.room.util.FileUtil
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.databinding.HomeMerchantFragmentBinding
-import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.external.Resource
-import com.devfutech.paradisonesia.external.adapter.BannerAdapter
-import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.HomeMerchantViewPagerAdapter
-import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.ProductMerchantAdapter
-import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.TopHomeMerchantAdapter
-import com.devfutech.paradisonesia.external.extension.snackBar
+import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.MainActivity
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
-import com.devfutech.paradisonesia.presentation.fragments.home_customer.HomeCustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -61,10 +55,9 @@ class HomeMerchantFragment : BaseFragment() {
 
     private fun setupView(){
         binding.apply {
-            lyMerchantTransaction.root.adapter = TopHomeMerchantAdapter(mutableListOf(
-                HomeMerchant(getString(R.string.total_earnings), com.devfutech.paradisonesia.external.utils.FileUtils.convertToCurrency(50000000) ),
-                HomeMerchant(getString(R.string.total_transaction_this_month),"200"),
-                HomeMerchant(getString(R.string.total_product_published), "600")))
+            lyMerchantTransaction.tvTotalEarningValue.text = resources.getString(R.string.final_price, FileUtils.convertToCurrency(15000000))
+            lyMerchantTransaction.tvTotalTransactionForThisMonthValue.text = "400"
+            lyMerchantTransaction.tvTotalProductPublishedValue.text = "700"
 
             (activity as MainActivity).setupVpBannerTlBanner(binding.vpBanner, binding.tlBanner, animalsArray )
 

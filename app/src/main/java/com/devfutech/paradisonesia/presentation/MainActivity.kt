@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -160,6 +162,17 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = HomeMerchantViewPagerAdapter(supportFragmentManager, lifecycle)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = animalsArray[position]
+
+            val tabs = tabLayout.getChildAt(0) as ViewGroup
+
+            for (i in 0 until tabs.childCount) {
+                val tabTemp = tabs.getChildAt(i)
+                val layoutParams = tabTemp.layoutParams as LinearLayout.LayoutParams
+                layoutParams.weight = 1f
+                layoutParams.marginEnd = 20
+                tabTemp.layoutParams = layoutParams
+                tabLayout.requestLayout()
+            }
         }.attach()
     }
     /*

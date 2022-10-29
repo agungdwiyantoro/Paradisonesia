@@ -4,8 +4,9 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 data class HomeMerchant (
-    val titleTopMerchant: String?,
-    val valueTopMerchant: String?
+    val valueTotalEarnings: Int?,
+    val valueTransactionForThisMonth: Int?,
+    val valueProductPublished: Int?
 ) {
     @Parcelize
     data class MerchantProduct(
@@ -13,6 +14,6 @@ data class HomeMerchant (
         val productType: String?,
         val productAddress: String?,
         val productDate: String?,
-        val productTotal: String?
+        val productTotal: Int?
     ) : Parcelable
 }
