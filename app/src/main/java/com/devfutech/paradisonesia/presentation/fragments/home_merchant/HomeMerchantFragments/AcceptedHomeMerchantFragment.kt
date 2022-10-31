@@ -14,6 +14,7 @@ import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.util.*
 
 @AndroidEntryPoint
 class AcceptedHomeMerchantFragment : BaseFragment() {
@@ -26,7 +27,7 @@ class AcceptedHomeMerchantFragment : BaseFragment() {
     private val viewModel: HomeMerchantViewModel by viewModels()
 
     private val topHomeMerchantAdapter by lazy {
-       // TopHomeMerchantAdapter()
+       // ProductMerchantAdapter()
     }
 
     override fun onCreateView(
@@ -51,18 +52,18 @@ class AcceptedHomeMerchantFragment : BaseFragment() {
         binding.apply {
             rvMerchantListItem.adapter = ProductMerchantAdapter(mutableListOf(
                 HomeMerchant.MerchantProduct(
-                    "Daffam / Hotel",
+                    "Accepted Product 1",
                     "Hotel",
                     "Jl. Malioboro Jl. Dagen No. 80",
-                    "JKDk",
+                    Date().toString(),
                   300000),
                 HomeMerchant.MerchantProduct(
-                    "Daffam / Hotel 2",
-                    "Hotel 2",
+                    "Accepted Product 2",
+                    "Hotel",
                     "Jl. Malioboro Jl. Dagen No. 85",
-                    "JKDk",
-                  300000)
-            ))
+                    Date().toString(),
+                  500000)
+            ), requireActivity())
            // (activity as MainActivity).setupVpBannerTlBanner(binding.vpBanner, binding.tlBanner, animalsArray )
 
         }
@@ -81,7 +82,7 @@ class AcceptedHomeMerchantFragment : BaseFragment() {
                    */
                     is Resource.Success -> {
                       //  binding.vfCategoryProduct.displayedChild = 1
-                      //  topHomeMerchantAdapter.submitList(mutableListOf(HomeMerchant(500000000, 100, 200)))
+                       //topHomeMerchantAdapter.submitList(mutableListOf(HomeMerchant(500000000, 100, 200)))
                     }
                     else -> {}
                 }

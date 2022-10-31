@@ -17,21 +17,19 @@ import android.text.TextWatcher
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.viewbinding.BuildConfig.DEBUG
-import com.devfutech.paradisonesia.R
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-
 import timber.log.Timber
 import java.io.File
 import java.io.FileFilter
 import java.io.IOException
-import java.net.URI
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -644,6 +642,14 @@ object FileUtils {
             }
         }
 
+    }
+
+    fun dateToCalendar(dateString: String) : Array<String> {
+        val month = dateString.substring(4,7)
+        val tgl = dateString.substring(8,10)
+        val time = dateString.substring(11, 16)
+
+        return arrayOf(time, tgl, month)
     }
 
 }

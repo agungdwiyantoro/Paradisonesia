@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragments.AcceptedHomeMerchantFragment
+import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragments.OnTheWayHomeMerchantFragment
+import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantFragments.ReceivedHomeMerchantFragment
 import com.devfutech.paradisonesia.presentation.fragments.signin.SigninFragment
 import com.devfutech.paradisonesia.presentation.fragments.signup.SignupFragment
 
@@ -20,8 +22,8 @@ class HomeMerchantViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: 
     override fun createFragment(position: Int): Fragment {
         when (position) {
             0 -> return AcceptedHomeMerchantFragment()// CatFragment()
-            1 -> return SignupFragment()
+            1 -> return ReceivedHomeMerchantFragment()
         }
-        return SigninFragment()
+        return OnTheWayHomeMerchantFragment()
     }
 }

@@ -33,4 +33,5 @@ interface CustomerService {
         @Field("player_id") player_id: String,
         @Field("is_email_verivied") is_email_verivied: String
     ): BaseResponse<CustomerAuthResponse>
+
 }

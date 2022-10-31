@@ -67,4 +67,12 @@ class RepositoryModule {
     ) : ReviewRepository {
         return ReviewSemuanyaRepositoryImpl(remoteDataSource)
     }
+
+    @Provides
+    @Singleton
+    fun provideLogoutRepository(
+        remoteDataSource: LogoutService
+    ) : LogoutRepository {
+        return LogoutRepositoryImpl(remoteDataSource)
+    }
 }

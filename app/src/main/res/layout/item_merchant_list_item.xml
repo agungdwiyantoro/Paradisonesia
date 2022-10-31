@@ -35,7 +35,6 @@
                     android:id="@+id/tv_item_clock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="13:00"
                     style="@style/Text.ExtraSmall"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -44,7 +43,6 @@
                     android:id="@+id/tv_item_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="01"
                     style="@style/Text.ExtraLarge"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -53,7 +51,6 @@
                     android:id="@+id/tv_item_month"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/address"
                     style="@style/Text.ExtraSmall"
                     android:textColor="@color/white"
                     android:gravity="center"/>

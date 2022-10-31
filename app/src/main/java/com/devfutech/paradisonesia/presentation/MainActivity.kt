@@ -6,7 +6,10 @@ import android.os.Handler
 import android.os.Looper
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,13 +17,20 @@ import androidx.viewpager2.widget.ViewPager2
 import com.devfutech.paradisonesia.R
 import com.devfutech.paradisonesia.data.local.preferences.IsMerchantPreference
 import com.devfutech.paradisonesia.databinding.ActivityMainBinding
+import com.devfutech.paradisonesia.domain.usecase.LogoutUseCase
+import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.HomeMerchantViewPagerAdapter
 import com.devfutech.paradisonesia.external.extension.gone
 import com.devfutech.paradisonesia.external.extension.toast
 import com.devfutech.paradisonesia.external.extension.visible
+import com.devfutech.paradisonesia.presentation.dialog.DialogMessageFragment
+import com.devfutech.paradisonesia.presentation.fragments.signin.SigninViewModel
+import com.devfutech.paradisonesia.presentation.fragments.signin.logoutViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -28,6 +38,8 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    private val viewModel: logoutViewModel by viewModels()
 
     private lateinit var navController: NavController
     private var doubleBackToExitPressedOnce = false
@@ -174,6 +186,24 @@ class MainActivity : AppCompatActivity() {
                 tabLayout.requestLayout()
             }
         }.attach()
+    }
+
+    fun showDialogMessage(){
+        DialogMessageFragment.newInstance("TITLE", "MESSAGE").show(supportFragmentManager, DialogMessageFragment.TAG)
+    }
+
+    fun logout(){
+        lifecycleScope.launchWhenStarted {
+            viewModel.logout.collect{ result ->
+                when(result){
+                    is Resource.Success -> {
+                        Timber.tag("Main Activity").d("is Logout " + result.data)
+                    }
+                    else -> {}
+                }
+
+            }
+        }
     }
     /*
        fun setupActionMerchant(item: Int, itemDes: Int) {

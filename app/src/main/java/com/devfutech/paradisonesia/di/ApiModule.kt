@@ -78,9 +78,13 @@ object ApiModule {
 
     @Provides
     @Singleton
+    fun provideLogoutService(retrofit: Retrofit) : LogoutService =
+        retrofit.create(LogoutService::class.java)
+
+    @Provides
+    @Singleton
     fun provideReviewLihatSemuaService(retrofit: Retrofit) : ReviewLihatSemuaService =
         retrofit.create(ReviewLihatSemuaService::class.java)
-
 
     @Provides
     @Singleton

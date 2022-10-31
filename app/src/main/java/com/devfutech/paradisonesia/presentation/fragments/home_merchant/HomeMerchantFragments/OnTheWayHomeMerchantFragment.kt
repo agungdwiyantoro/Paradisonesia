@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.room.util.FileUtil
 import com.devfutech.paradisonesia.databinding.LayoutMerchantListItemBinding
 import com.devfutech.paradisonesia.domain.model.merchant.homeMerchant.HomeMerchant
 import com.devfutech.paradisonesia.external.Resource
 import com.devfutech.paradisonesia.external.adapter.HomeMerchantAdapter.ProductMerchantAdapter
+import com.devfutech.paradisonesia.external.utils.FileUtils
 import com.devfutech.paradisonesia.presentation.base.BaseFragment
 import com.devfutech.paradisonesia.presentation.fragments.home_merchant.HomeMerchantViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +19,7 @@ import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
-class ReceivedHomeMerchantFragment : BaseFragment() {
+class OnTheWayHomeMerchantFragment : BaseFragment() {
 
     private val binding: LayoutMerchantListItemBinding by lazy {
         LayoutMerchantListItemBinding.inflate(layoutInflater)
@@ -51,27 +53,35 @@ class ReceivedHomeMerchantFragment : BaseFragment() {
         binding.apply {
             rvMerchantListItem.adapter = ProductMerchantAdapter(mutableListOf(
                 HomeMerchant.MerchantProduct(
-                    "Received Product 1",
+                    "On The Way Product 1",
                     "Hotel",
                 "Jl. Malioboro Jl. Dagen No. 80",
                     Date().toString(),
                    300000),
                 HomeMerchant.MerchantProduct(
-                    "Received Product 2",
+                    "On The Way Product 2",
                     "Hotel",
                     "Jl. Malioboro Jl. Dagen No. 85",
                     Date().toString(),
                    500000),
                 HomeMerchant.MerchantProduct(
-                    "Received Product 3",
+                    "On The Way Product 3",
                     "Hotel",
                     "Jl. Malioboro Jl. Dagen No. 90",
                     Date().toString(),
-                    700000)
+                    700000),
+                HomeMerchant.MerchantProduct(
+                    "On The Way Product 4",
+                    "Hotel",
+                    "Jl. Malioboro Jl. Dagen No. 100",
+                    Date().toString(),
+                    900000)
             ), requireActivity())
            // (activity as MainActivity).setupVpBannerTlBanner(binding.vpBanner, binding.tlBanner, animalsArray )
-
         }
+
+
+    // Timber.tag("OnTheWayHomeMerchantFragment").d("date " + FileUtils.dateToCalendar(Date()))
     }
 
     private fun getTopHomeMerchant() {

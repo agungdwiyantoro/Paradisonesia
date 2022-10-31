@@ -202,4 +202,7 @@
     <string name="product_type">Product Type</string>
     <string name="product_address">Product Address</string>
 
+    <!-- Dialog Message -->
+    <string name="session_has_expired">Your session has expired</string>
+
 </resources>
