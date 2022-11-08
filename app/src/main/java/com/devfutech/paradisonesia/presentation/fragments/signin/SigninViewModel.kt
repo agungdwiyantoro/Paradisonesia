@@ -52,9 +52,6 @@ class SigninViewModel @Inject constructor(
                         return@addOnCompleteListener
                     }
 
-                    Timber.tag("FUCKPUSSYLOOSE").d(task.user?.displayName.toString() +
-                        task.user?.email.toString() +
-                        task.user?.uid.toString())
 
                     authCustomer(
                         //task.user?.displayName.toString(),
@@ -90,9 +87,7 @@ class SigninViewModel @Inject constructor(
                     if (!fcm.isSuccessful) {
                         return@addOnCompleteListener
                     }
-                    Timber.tag("FUCKPUSSYLOOSE").d(task.user?.displayName.toString() +
-                            task.user?.email.toString() +
-                            task.user?.uid.toString())
+
 
                     authCustomer(
                         //task.user?.displayName.toString(),

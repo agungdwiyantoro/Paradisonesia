@@ -36,8 +36,6 @@ class ProductReviewAdapterLihatSemua: ListAdapter<Review, ProductReviewAdapterLi
                 }
 
                  */
-
-                Timber.tag("SUCKNIGGANEW").d("DICK " + item.review)
                 tvUsername.text = this@ProductViewHolder.itemView.context.resources.getString(R.string.anonymous)
                 rbTotalRatingReview.rating = item.rating?.toFloat()!!
                 tvReview.text = item.review

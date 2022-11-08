@@ -23,7 +23,6 @@ class BannerAdapter : ListAdapter<Banner, BannerAdapter.BannerViewHolder>(POST_C
             binding.apply {
             ivBanner.load(ltrim(item.image.toString())) {
                 crossfade(true)
-                Timber.tag("ASSSX").d(item.image.toString())
                 error(R.drawable.ic_image_not_available)
             }
 

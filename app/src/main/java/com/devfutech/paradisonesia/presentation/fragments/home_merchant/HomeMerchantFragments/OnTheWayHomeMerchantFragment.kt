@@ -42,10 +42,6 @@ class OnTheWayHomeMerchantFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
        // getTopHomeMerchant()
         //topHomeMerchantAdapter.submitList(mutableListOf(HomeMerchant(500000000, 100, 200)))
-
-        Timber.tag("TOPHOMEKONTOL").d("KUNTUL X HOMEMERCHANTFRAGMENT" )
-
-
         setupView()
     }
 

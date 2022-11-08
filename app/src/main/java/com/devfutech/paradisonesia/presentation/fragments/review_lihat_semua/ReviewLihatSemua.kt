@@ -50,7 +50,6 @@ class ReviewLihatSemua : BaseFragment() {
         val rating: ReviewLihatSemua = args.ratingAverageRatingCount
 
         binding.apply {
-            Timber.tag("reviewLihatJancuk").d("AFFOY" + rating.id)
             tvRatingNum.text = resources.getString(R.string.rb_rating_num, rating.ratingAverage, rating.ratingCount)
             rvChooseStar.visibility = View.VISIBLE
             rvChooseStar.adapter = ReviewLihatSemuaAdapter(mutableListOf("1","2","3","4","5"), rating.id!!, viewModel)

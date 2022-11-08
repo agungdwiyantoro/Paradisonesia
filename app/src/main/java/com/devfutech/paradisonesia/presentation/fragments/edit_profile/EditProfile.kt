@@ -88,8 +88,6 @@ class EditProfile : BaseFragment(){
 
             titleBar.ivBack.visibility = View.VISIBLE
             titleBar.tvTitle.setText(resources.getString(R.string.edit_profile_data))
-
-            Timber.tag("GORILLA").d("TO " + AuthPreference.TOKEN)
         }
     }
 
@@ -195,15 +193,14 @@ class EditProfile : BaseFragment(){
             viewModel.customerProfile.collect{ result ->
                 when(result){
                     is Resource.Failure -> {
-                        Timber.tag("KOLOT").d("KONJIL")
                         //refreshAccesToken()
                     }
                     is Resource.Success -> {
-                        Timber.tag("UserNameCok").d(result.data?.name.toString())
-                        Timber.tag("UserEmailCok").d(result.data?.email.toString())
-                        Timber.tag("UserPhoneCok").d(result.data?.phone.toString())
-                        Timber.tag("UserAddressCok").d(result.data?.profile?.address.toString())
-                        Timber.tag("UserBirthdayCok").d(result.data?.profile?.birth_date.toString())
+                        Timber.tag("UserName").d(result.data?.name.toString())
+                        Timber.tag("UserEmail").d(result.data?.email.toString())
+                        Timber.tag("UserPhone").d(result.data?.phone.toString())
+                        Timber.tag("UserAddress").d(result.data?.profile?.address.toString())
+                        Timber.tag("UserBirthday").d(result.data?.profile?.birth_date.toString())
                         Timber.tag("UserGender").d(result.data?.profile?.gender.toString())
                         binding.apply {
                             if(result.data!=null) {

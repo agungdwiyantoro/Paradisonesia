@@ -147,11 +147,9 @@ class ProductDetailViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _productDesc.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _productDesc.value = Resource.Success(it)
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -178,7 +176,6 @@ class ProductDetailViewModel @Inject constructor(
                     _productDetailSchedules.value = Resource.Failure(defaultError(error))
                 }.collect{
                     _productDetailSchedules.value = Resource.Success(it)
-                    Timber.tag("ProductSchedules").d("ProdSche" + it)
                 }
         }
     }
@@ -192,7 +189,6 @@ class ProductDetailViewModel @Inject constructor(
                     _productDetailSchedulesDays.value = Resource.Failure(defaultError(error))
                 }.collect{
                     _productDetailSchedulesDays.value = Resource.Success(it)
-                    Timber.tag("ProductSchedulesDays").d("ProdScheDays" + it)
                 }
         }
     }

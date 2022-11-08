@@ -68,11 +68,9 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _product.value = Resource.Success(it.sortedByDescending { it.rating_average })
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -85,13 +83,11 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
                         it.sub_category?.category?.id == index}.sortedByDescending { it.rating_average })
 
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -104,13 +100,11 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
                         it.sub_category?.id == index}.sortedByDescending { it.rating_average })
 
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -122,7 +116,6 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _product.value = Resource.Success(it)
@@ -132,7 +125,6 @@ class ProductViewModel @Inject constructor(
                     }
                     tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -144,7 +136,6 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
@@ -156,7 +147,6 @@ class ProductViewModel @Inject constructor(
                     tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
 
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -187,13 +177,11 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Error")
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
                         it.sub_category?.category?.id == priceID?.id
                     })
-                    Timber.tag("AnjingProduct").d("Success" + it)
                 }
         }
     }
@@ -205,7 +193,6 @@ class ProductViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _product.value = Resource.Failure(defaultError(error))
-                    Timber.tag("MapKontolProduct").d("MapError")
 
                 }.collect {
                     _product.value = Resource.Success(it.filter {
@@ -217,8 +204,6 @@ class ProductViewModel @Inject constructor(
                     }
                     tvResult.text = context.resources.getString(R.string.result, it.size, resultLanjutan.distinct().toString().removeSurrounding("[", "]"))
 
-
-                    Timber.tag("MapAnjingProduct").d("Success" + it)
                 }
         }
     }

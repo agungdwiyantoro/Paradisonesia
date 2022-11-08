@@ -529,8 +529,6 @@ class ProductDetailFragment : BaseFragment(){
 
             }
 
-            Timber.tag("GITLAB").d("PUSH")
-            Timber.tag("GITLAB2").d("PUSH")
           //  vpBanner.adapter = productDetailBannerAdapter
           //  vpBanner.isSaveEnabled = false
           //  TabLayoutMediator(tlBanner, vpBanner) { _, _ -> }.attach()

@@ -81,7 +81,6 @@ class ProductMerchantAdapter(
 
         holder.itemView.setOnClickListener{
             (activity as MainActivity).showDialogMessage()
-            Timber.tag("ProductMerchantAdapter").d("COXKNVV")
         }
     }
 

@@ -43,8 +43,6 @@ class FilterAdapterAdvance(
         var price = emptyList<Int>()
         val tempPrice = FilterBottomSheet.map.get("price")?.removeSurrounding("[", "]")?.replace(" ","")?.split(",")?.map { it.toInt() }
 
-        Timber.tag("KUNTUL").d("price " + tempPrice?.get(0))
-
         FileUtils.dateMask(holder.tieStartDate, holder.tlStartDate)
         FileUtils.dateMask(holder.tieEndDate, holder.tlEndDate)
 

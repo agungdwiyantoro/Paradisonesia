@@ -34,10 +34,8 @@ class ReviewLihatSemuaAdapter(private val mList: List<String>, private val index
 
         // sets the text to the textview from our itemHolder class
         holder.textView.text = ItemsViewModel
-        Timber.tag("rvChooseStarAdapter").d("bitchass")
         holder.textView.setOnClickListener{
             viewModel.ProductReviewsFilter(index.toString(), (position+1).toString())
-            Timber.tag("rvChooseStarAdapter").d("clicked " + (position+1))
         }
 
     }

@@ -40,11 +40,9 @@ class logoutViewModel @Inject constructor(
                 .catch { error->
                     onError(error)
                     _logout.value = Resource.Failure(defaultError(error))
-                    Timber.tag("KontolProduct").d("Gagal")
 
                 }.collect {
                     _logout.value = Resource.Success()
-                    Timber.tag("KontolProduct").d("Berhasil")
                 }
         }
     }

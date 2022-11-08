@@ -581,7 +581,6 @@ object FileUtils {
 
         for(i in 0.. (text.length-1)){
             if(text.get(i).toString().equals("S", true)){
-                Timber.tag("KUNTUL SEGER").d("JOXM " + text)
                 textResult = textResult.replace(text.get(i).toString(), "5", true)
             }
             if(text.get(i).toString().equals("I")){

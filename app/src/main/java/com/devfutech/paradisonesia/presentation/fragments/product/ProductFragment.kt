@@ -214,10 +214,6 @@ class ProductFragment : BaseFragment() {
                         "search_key" to tieSearch.text.toString()
                     )
                 }
-
-                Timber.tag("PRODUCTFRAGMENT").d("XMEE " + FilterBottomSheet.map)
-                Timber.tag("PRODUCTFRAGMENT2").d("XMEE2 " + FilterBottomSheet.map.get("sub_category_id"))
-
                 viewModel.getProductAllSearch(FilterBottomSheet.map, tvResult, requireContext())
             }
             /*
@@ -480,13 +476,11 @@ class ProductFragment : BaseFragment() {
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         //val totalPage = result.data?.size?.rem(10)
 
 
 
                         result.data?.filter {
-                            Timber.tag("PRODUCT ADAPTER").d("MAPiX " + it.product_sub_category_id)
                             tempID.add(it.product_sub_category_id)
                             tempSubCategoryName.add(it.sub_category?.name)
                         }
@@ -544,7 +538,6 @@ class ProductFragment : BaseFragment() {
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         //productAdapter.submitList(result.data)
                         //productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
 
@@ -566,7 +559,6 @@ class ProductFragment : BaseFragment() {
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         //productAdapter.submitList(result.data)
                         //productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
 
@@ -588,7 +580,6 @@ class ProductFragment : BaseFragment() {
                         binding.root.snackBar(result.error)
                     }
                     is Resource.Success -> {
-                        Timber.tag("FRAGMENT_DATA").d("sxy " + result.data)
                         //productAdapter.submitList(result.data)
                         //productAdapter.submitList(result.data?.sortedBy {it.price }?.asReversed())
 
@@ -619,8 +610,6 @@ class ProductFragment : BaseFragment() {
                     rvProduct.scrollToPosition(0)
                 }
             })
-            Timber.tag("NIGERITOS").d("XHIT " + args.categoryProductID)
-
 
 
             //else{
